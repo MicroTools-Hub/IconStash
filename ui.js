@@ -183,19 +183,12 @@
 
   function setupNetworkGate() {
     const gate = qs("#network-gate");
+    if (gate) gate.classList.add("hidden");
     const retry = qs("#network-retry");
-    const update = () => gate?.classList.toggle("hidden", navigator.onLine);
-    window.addEventListener("online", update);
-    window.addEventListener("offline", update);
     retry?.addEventListener("click", () => {
-      if (navigator.onLine) {
-        gate.classList.add("hidden");
-        toast("Connection restored", "success");
-      } else {
-        toast("Still offline", "error");
-      }
+      gate?.classList.add("hidden");
+      toast("IconVoid core files are bundled locally", "info");
     });
-    update();
   }
 
   function createSkeletonRows(container, rows = 4, cols = 8) {

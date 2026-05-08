@@ -407,6 +407,7 @@ body.sidebar-collapsed .sidebar-collapse svg { transform: rotate(180deg); }
   background: transparent;
   width: 100%;
   text-align: left;
+  text-decoration: none;
   color: var(--text-secondary);
   cursor: pointer;
   position: relative;
@@ -499,6 +500,7 @@ body.sidebar-collapsed .sidebar-collapse svg { transform: rotate(180deg); }
 
 #main-content { flex: 1 1 auto; min-width: 0; height: 100%; overflow: hidden; position: relative; }
 .route-view { height: 100%; overflow-y: auto; padding: 28px; }
+#virtual-grid-container:focus { outline: 0; }
 #homepage-view { padding-bottom: 90px; }
 .hero-section { min-height: 210px; display: flex; flex-direction: column; justify-content: center; }
 .hero-heading {
@@ -630,7 +632,7 @@ body.sidebar-collapsed .sidebar-collapse svg { transform: rotate(180deg); }
   overflow: auto;
   position: relative;
   padding-right: 4px;
-  contain: layout size;
+  contain: layout paint;
 }
 #virtual-grid-spacer { width: 1px; opacity: 0; }
 #icon-grid {

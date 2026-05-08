@@ -1,3 +1,15 @@
 {
-    "liveServer.settings.port": 5501
+  "liveServer.settings.port": 5501,
+  "files.watcherExclude": {
+    "**/icons/**": true,
+    "**/seo/**": true,
+    "**/sitemaps/**": true,
+    "**/data/pseo-keywords.json": true
+  },
+  "search.exclude": {
+    "**/icons/**": true,
+    "**/seo/**": true,
+    "**/sitemaps/**": true,
+    "**/data/pseo-keywords.json": true
+  }
 }

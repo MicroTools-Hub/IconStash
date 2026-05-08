@@ -1,5 +1,6 @@
 (function () {
   const VOID_NS = "http://www.w3.org/2000/svg";
+  let zipLibraryPromise = null;
 
   function escapeHtml(value) {
     return String(value ?? "")
@@ -138,6 +139,34 @@
     return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
   }
 
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector(`script[src="${src}"]`);
+      if (existing) {
+        if (typeof JSZip !== "undefined") resolve();
+        else {
+          existing.addEventListener("load", resolve, { once: true });
+          existing.addEventListener("error", reject, { once: true });
+        }
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = src;
+      script.defer = true;
+      script.onload = resolve;
+      script.onerror = () => reject(new Error(`Unable to load ${src}`));
+      document.head.appendChild(script);
+    });
+  }
+
+  async function ensureJSZip() {
+    if (typeof JSZip !== "undefined") return JSZip;
+    if (!zipLibraryPromise) zipLibraryPromise = loadScript("vendor/jszip.min.js");
+    await zipLibraryPromise;
+    if (typeof JSZip === "undefined") throw new Error("ZIP support could not be loaded.");
+    return JSZip;
+  }
+
   function svgToCanvas(svg, size) {
     return new Promise((resolve, reject) => {
       const canvas = document.createElement("canvas");
@@ -179,11 +208,9 @@
 
   async function exportZIP(icons, options = {}) {
     if (!icons || !icons.length) return;
-    if (typeof JSZip === "undefined") {
-      throw new Error("JSZip is not available. Check your internet connection.");
-    }
+    const Zip = await ensureJSZip();
     const capped = icons.slice(0, 200);
-    const zip = new JSZip();
+    const zip = new Zip();
     const folder = zip.folder("IconVoid");
     const sizes = options.pngSizes || [];
     for (const icon of capped) {

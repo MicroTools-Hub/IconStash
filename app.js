@@ -1,6 +1,4 @@
 (function () {
-  const TOP_TIER = ["lucide", "tabler", "heroicons"];
-  const REMOTE_BASE = "https://raw.githubusercontent.com/iconify/icon-sets/master/json/";
   const COLORS = ["#00c3ff", "#ff2d9b", "#00ff88", "#bf00ff", "#ff6a00", "#f5ff00", "#00ffd5", "#ff003c"];
   const CATEGORY_META = [
     ["Media", "Photography", "M12 5v14M5 12h14", "#00c3ff"],
@@ -100,6 +98,7 @@
   let backgroundFilterTimer = 0;
   let homeRenderTimer = 0;
   let categoryRenderTimer = 0;
+  let lazyLibraryLoad = null;
 
   function $(id) {
     return document.getElementById(id);
@@ -199,12 +198,7 @@
   }
 
   function request(url, options = {}) {
-    const separator = url.includes("?") ? "&" : "?";
-    return fetch(`${url}${separator}v=${Date.now()}`, {
-      cache: "no-store",
-      headers: { "Cache-Control": "no-store" },
-      ...options
-    });
+    return fetch(url, { cache: "force-cache", ...options });
   }
 
   async function loadIndex() {
@@ -275,11 +269,11 @@
 
   function renderSidebarLibraries() {
     const filter = (els.libSearch.value || "").toLowerCase();
-    const allRow = !filter ? `<button class="lib-row all-icons-row ${state.selectedLibraries.size === 0 && !state.activeCategory ? "active" : ""}" type="button" data-all-icons="true">
+    const allRow = !filter ? `<a class="lib-row all-icons-row ${state.selectedLibraries.size === 0 && !state.activeCategory ? "active" : ""}" href="#/search" data-all-icons="true">
       <span class="lib-badge">${libraryIconSvg("default")}</span>
       <span class="lib-name">All Icons</span>
       <span class="lib-count">${totalLibraryCount().toLocaleString()}</span>
-    </button>` : "";
+    </a>` : "";
     els.libList.innerHTML = allRow + state.libraries
       .filter((lib) => !filter || `${lib.name} ${lib.slug}`.toLowerCase().includes(filter))
       .map((lib, index) => {
@@ -372,36 +366,55 @@
     if (m2) m2.innerHTML = icons.slice().reverse().concat(icons).map((icon) => `<span class="mq-icon">${iconTools().renderSVG(icon)}</span>`).join("");
   }
 
-  async function loadTierOne() {
-    ui().createSkeletonRows(els.iconGrid, 4, 8);
-    await Promise.allSettled(TOP_TIER.map((slug) => loadLibrary(slug)));
-    applyFilters({ resetScroll: true });
-    renderHome();
-    loadAllLibrariesInBackground();
+  function nextUnloadedLibrary() {
+    return state.libraries.find((lib) => !state.loadedLibraries.has(lib.slug) && !state.failedLibraries.has(lib.slug));
   }
 
-  async function loadAllLibrariesInBackground() {
-    const remaining = state.libraries.map((lib) => lib.slug).filter((slug) => !state.loadedLibraries.has(slug));
-    for (const slug of remaining) {
-      await loadLibrary(slug);
-      if (!state.selectedLibraries.size || state.selectedLibraries.has(slug)) {
-        scheduleBackgroundFilter();
-      }
-      scheduleHomeRender();
-      generateSitemap();
-      await new Promise((resolve) => setTimeout(resolve, 40));
-    }
-    clearTimeout(categoryRenderTimer);
-    categoryRenderTimer = 0;
-    renderCategories();
-    clearTimeout(backgroundFilterTimer);
-    backgroundFilterTimer = 0;
-    if (!els.gridView.classList.contains("hidden")) applyFilters({ preserveLimit: true });
+  function canLazyLoadBrowseLibrary() {
+    if (els.gridView.classList.contains("hidden")) return false;
+    if (state.selectedLibraries.size > 0) return false;
+    return Boolean(nextUnloadedLibrary());
+  }
+
+  async function ensureInitialBrowseLibrary() {
+    if (state.loadedLibraries.size || state.loadingLibraries.size) return;
+    const lib = nextUnloadedLibrary();
+    if (!lib) return;
+    ui().createSkeletonRows(els.iconGrid, 2, Math.max(4, state.cols || 8));
+    await loadLibrary(lib.slug);
     renderHome();
-    els.loadStatus.textContent = `All ${state.icons.size.toLocaleString()} icons loaded`;
-    setTimeout(() => {
-      if (els.loadStatus.textContent.startsWith("All ")) els.loadStatus.textContent = "";
-    }, 3000);
+  }
+
+  async function loadNextLibraryForBrowse() {
+    if (!canLazyLoadBrowseLibrary()) return null;
+    if (lazyLibraryLoad) return lazyLibraryLoad;
+    const lib = nextUnloadedLibrary();
+    if (!lib) return null;
+    const previousVisibleLimit = state.visibleLimit;
+    const previousResultCount = state.filteredIcons.length;
+    els.loadingMore.classList.remove("hidden");
+    lazyLibraryLoad = (async () => {
+      await loadLibrary(lib.slug);
+      if (!els.gridView.classList.contains("hidden") && state.selectedLibraries.size === 0) {
+        applyFilters({ preserveLimit: true });
+        const nextLimit = Math.max(previousVisibleLimit + state.batchSize, previousResultCount + state.batchSize);
+        state.visibleLimit = Math.min(state.filteredIcons.length, nextLimit);
+        updateVirtualScroll(true);
+      }
+      renderHome();
+      generateSitemap();
+      if (!nextUnloadedLibrary()) {
+        els.loadStatus.textContent = `All ${state.libraries.reduce((total, item) => total + Number(item.count || 0), 0).toLocaleString()} icons are available`;
+        setTimeout(() => {
+          if (els.loadStatus.textContent.startsWith("All ")) els.loadStatus.textContent = "";
+        }, 2500);
+      }
+      return lib.slug;
+    })().finally(() => {
+      lazyLibraryLoad = null;
+      els.loadingMore.classList.add("hidden");
+    });
+    return lazyLibraryLoad;
   }
 
   async function loadLibrary(slug) {
@@ -413,7 +426,6 @@
       setLibraryLoading(slug, true);
       try {
         let icons = await loadLocalLibrary(lib);
-        if (!icons.length) icons = await loadRemoteLibrary(lib);
         icons = enrichVariants(icons);
         for (const icon of icons) state.icons.set(icon.id, icon);
         state.loadedLibraries.add(slug);
@@ -443,16 +455,6 @@
     const data = await response.json();
     if (Array.isArray(data)) return data.map((icon, index) => completeIcon(icon, lib, index));
     return normalizeIconifySet(lib, data);
-  }
-
-  async function loadRemoteLibrary(lib) {
-    const prefixes = String(lib.remotePrefix || lib.slug).split(",").map((item) => item.trim()).filter(Boolean);
-    const iconGroups = await Promise.all(prefixes.map(async (prefix) => {
-      const response = await request(`${REMOTE_BASE}${prefix}.json`);
-      if (!response.ok) throw new Error(`Remote JSON HTTP ${response.status}`);
-      return normalizeIconifySet(lib, await response.json(), prefix);
-    }));
-    return iconGroups.flat();
   }
 
   function completeIcon(icon, lib, index) {
@@ -753,6 +755,7 @@
       state.selectedLibraries.clear();
       state.activeCategory = "";
       renderSidebarLibraries();
+      await ensureInitialBrowseLibrary();
       applyFilters({ resetScroll: true });
       ensureDesktopDetail();
     } else if (hash.startsWith("#/library/")) {
@@ -764,7 +767,10 @@
       applyFilters({ resetScroll: true });
       ensureDesktopDetail();
     } else if (hash.startsWith("#/category/")) {
+      state.selectedLibraries.clear();
       state.activeCategory = decodeURIComponent(hash.split("/")[2] || "").replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
+      renderSidebarLibraries();
+      await ensureInitialBrowseLibrary();
       applyFilters({ resetScroll: true });
       ensureDesktopDetail();
     } else if (hash.startsWith("#/icon/")) {
@@ -785,6 +791,32 @@
       ensureDesktopDetail();
     }
     renderCategories();
+  }
+
+  function normalizeStartupRoute() {
+    const localDev = /^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/i.test(window.location.hostname);
+    if (!window.location.hash || (localDev && window.location.hash === "#/search")) {
+      history.replaceState(null, "", `${location.pathname}${location.search}#/`);
+    }
+  }
+
+  function currentRouteHash() {
+    return window.location.hash || "#/";
+  }
+
+  function slugForInitialRoute() {
+    const hash = currentRouteHash();
+    if (hash.startsWith("#/library/")) return decodeURIComponent(hash.split("/")[2] || "");
+    if (hash.startsWith("#/icon/")) return decodeURIComponent(hash.split("/")[2] || "").split("-")[0];
+    if (hash === "#/search" || hash === "#/all" || hash === "#/icons") return state.libraries[0]?.slug || "";
+    return "";
+  }
+
+  async function prepareInitialIconsForRoute() {
+    const slug = slugForInitialRoute();
+    if (!slug || state.loadedLibraries.has(slug)) return;
+    ui().createSkeletonRows(els.iconGrid, 3, Math.max(4, state.cols || 8));
+    await loadLibrary(slug);
   }
 
   function updateSeoHome() {
@@ -900,7 +932,7 @@
     openGridDetail(currentVisible ? state.currentIconId : state.filteredIcons[0].id);
   }
 
-  function showAllIcons() {
+  async function showAllIcons() {
     state.selectedLibraries.clear();
     state.activeCategory = "";
     state.activeStyle = "all";
@@ -913,6 +945,7 @@
     setRouteView("grid");
     document.body.classList.remove("sidebar-open");
     if (location.hash !== "#/search") history.replaceState(null, "", "#/search");
+    await ensureInitialBrowseLibrary();
     applyFilters({ resetScroll: true });
     ensureDesktopDetail();
   }
@@ -1130,20 +1163,29 @@
     els.search.addEventListener("blur", () => setTimeout(() => els.searchShell.classList.remove("focused"), 100));
     els.search.addEventListener("input", () => {
       clearTimeout(searchTimer);
-      searchTimer = setTimeout(() => {
+      searchTimer = setTimeout(async () => {
         state.searchQuery = els.search.value.trim();
         els.searchClear.classList.toggle("hidden", !state.searchQuery);
         if (state.searchQuery && (!location.hash || location.hash === "#/" || location.hash === "#")) history.replaceState(null, "", "#/search");
         renderAutocomplete();
-        setRouteView(state.searchQuery ? "grid" : (location.hash === "#/" ? "home" : "grid"));
-        applyFilters({ resetScroll: true });
+        const shouldShowGrid = Boolean(state.searchQuery) || (location.hash !== "#/" && location.hash !== "#");
+        setRouteView(shouldShowGrid ? "grid" : "home");
+        if (shouldShowGrid) {
+          await ensureInitialBrowseLibrary();
+          applyFilters({ resetScroll: true });
+          ensureDesktopDetail();
+        } else {
+          closeDetail(false);
+          updateSeoHome();
+        }
       }, 150);
     });
-    els.searchClear.addEventListener("click", () => {
+    els.searchClear.addEventListener("click", async () => {
       els.search.value = "";
       state.searchQuery = "";
       els.searchClear.classList.add("hidden");
       els.autocomplete.classList.add("hidden");
+      if (location.hash === "#/search" || location.hash === "#/all" || location.hash === "#/icons") await ensureInitialBrowseLibrary();
       applyFilters({ resetScroll: true });
     });
     els.logo.addEventListener("click", (event) => {
@@ -1169,13 +1211,15 @@
       document.body.classList.remove("sidebar-open");
     });
     els.libList.addEventListener("click", async (event) => {
-      const row = event.target.closest(".lib-row");
-      if (!row || event.target.matches("input")) return;
-      event.preventDefault();
-      if (row.dataset.allIcons === "true") {
-        showAllIcons();
+      const allRow = event.target.closest("[data-all-icons='true']");
+      if (allRow) {
+        event.preventDefault();
+        await showAllIcons();
         return;
       }
+      const row = event.target.closest("[data-slug]");
+      if (!row || event.target.matches("input")) return;
+      event.preventDefault();
       const input = row.querySelector("input");
       input.checked = !input.checked;
       input.dispatchEvent(new Event("change", { bubbles: true }));
@@ -1225,9 +1269,13 @@
     });
     els.gridContainer.addEventListener("scroll", () => {
       const nearBottom = els.gridContainer.scrollTop + els.gridContainer.clientHeight > els.gridContainer.scrollHeight - 900;
-      if (nearBottom && state.visibleLimit < state.filteredIcons.length) {
-        state.visibleLimit = Math.min(state.filteredIcons.length, state.visibleLimit + state.batchSize);
-        updateVirtualScroll(false);
+      if (nearBottom) {
+        if (state.visibleLimit < state.filteredIcons.length) {
+          state.visibleLimit = Math.min(state.filteredIcons.length, state.visibleLimit + state.batchSize);
+          updateVirtualScroll(false);
+        } else {
+          loadNextLibraryForBrowse();
+        }
       }
     }, { passive: true });
     window.addEventListener("resize", () => {
@@ -1648,9 +1696,11 @@
     setupEvents();
     calculateGrid();
     await loadIndex();
+    normalizeStartupRoute();
     renderSidebarLibraries();
     renderCategories();
-    await loadTierOne();
+    renderHome();
+    await prepareInitialIconsForRoute();
     generateSitemap();
     await handleRoute();
   }
