@@ -85,7 +85,7 @@
       return `<script>\n  export let size = ${options.size || 24};\n</script>\n${svg.replace(/width="[^"]+"/, 'width="{size}"').replace(/height="[^"]+"/, 'height="{size}"')}`;
     }
     if (format === "angular") {
-      return `<span class="iconvoid-icon" aria-hidden="true">${svg}</span>`;
+      return `<span class="iconstash-icon" aria-hidden="true">${svg}</span>`;
     }
     if (format === "html") {
       return `<img src="data:image/svg+xml,${encoded}" width="${options.size || icon.width || 24}" height="${options.size || icon.height || 24}" alt="${escapeHtml(icon.name)} icon">`;
@@ -211,7 +211,7 @@
     const Zip = await ensureJSZip();
     const capped = icons.slice(0, 200);
     const zip = new Zip();
-    const folder = zip.folder("IconVoid");
+    const folder = zip.folder("IconStash");
     const sizes = options.pngSizes || [];
     for (const icon of capped) {
       const base = `${slugFilePart(icon.librarySlug)}-${slugFilePart(icon.name)}`;
@@ -231,7 +231,7 @@
     }));
     folder.file("icons.json", JSON.stringify(manifest, null, 2));
     const blob = await zip.generateAsync({ type: "blob" });
-    downloadBlob(blob, options.filename || "IconVoid-icons.zip");
+    downloadBlob(blob, options.filename || "IconStash-icons.zip");
   }
 
   function createSprite(icons, options = {}) {
@@ -243,7 +243,7 @@
     return `<svg xmlns="${VOID_NS}" style="display:none" aria-hidden="true">\n${symbols}\n</svg>`;
   }
 
-  window.IconVoidIcons = {
+  window.IconStashIcons = {
     escapeHtml,
     slugFilePart,
     normalizeSvgBody,

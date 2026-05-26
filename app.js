@@ -237,11 +237,11 @@
   }
 
   function ui() {
-    return window.IconVoidUI;
+    return window.IconStashUI;
   }
 
   function iconTools() {
-    return window.IconVoidIcons;
+    return window.IconStashIcons;
   }
 
   function libraryBySlug(slug) {
@@ -613,7 +613,7 @@
   }
 
   function syncPrerenderFavoriteButtons() {
-    const allCollections = window.IconVoidCollections.all();
+    const allCollections = window.IconStashCollections.all();
     const collectedIds = new Set(allCollections.flatMap(col => col.icons));
     const btns = els.iconGrid.querySelectorAll(".card-favorite-btn");
     btns.forEach(btn => {
@@ -884,13 +884,13 @@
   function enrichVariants(icons) {
     const groups = new Map();
     for (const icon of icons) {
-      const base = window.IconVoidSearch.baseName(icon.name);
+      const base = window.IconStashSearch.baseName(icon.name);
       const list = groups.get(base) || [];
       list.push(icon.id);
       groups.set(base, list);
     }
     for (const icon of icons) {
-      const list = groups.get(window.IconVoidSearch.baseName(icon.name)) || [];
+      const list = groups.get(window.IconStashSearch.baseName(icon.name)) || [];
       icon.hasVariants = list.length > 1;
       icon.variantIds = list.slice(0, 14);
     }
@@ -943,7 +943,7 @@
     clearTimeout(searchIndexTimer);
     searchIndexTimer = setTimeout(() => {
       searchIndexTimer = 0;
-      const build = () => window.IconVoidSearch.buildSearchIndex(Array.from(state.icons.values()));
+      const build = () => window.IconStashSearch.buildSearchIndex(Array.from(state.icons.values()));
       if ("requestIdleCallback" in window) requestIdleCallback(build, { timeout: 1600 });
       else setTimeout(build, 0);
     }, 240);
@@ -987,7 +987,7 @@
       query: state.searchQuery,
       sort: state.sort
     };
-    state.filteredIcons = window.IconVoidSearch.filterAndSort(Array.from(state.icons.values()), filters);
+    state.filteredIcons = window.IconStashSearch.filterAndSort(Array.from(state.icons.values()), filters);
     if (isAllIconsGroupedMode()) sortAllIconsByLibrary();
     if (!options.preserveLimit) {
       state.visibleLimit = state.batchSize;
@@ -1118,7 +1118,7 @@
     const focused = state.filteredIcons[state.focusedIndex]?.id === icon.id;
     const delay = Math.min(400, visualIndex * 15);
     
-    const allCollections = window.IconVoidCollections.all();
+    const allCollections = window.IconStashCollections.all();
     const collectedIds = new Set(allCollections.flatMap(col => col.icons));
     const isCollected = collectedIds.has(icon.id);
     const fillAttr = isCollected ? 'fill="currentColor"' : 'fill="none"';
@@ -1250,7 +1250,7 @@
   }
 
   function updateSeoHome() {
-    document.title = "IconVoid - 134,000+ Icons | Premium SVG Search";
+    document.title = "IconStash - 134,000+ Icons | Premium SVG Search";
     setMeta("description", "Search, compare, customize, copy, and download 134,000+ SVG icons in a frontend-only design tool.");
     setCanonical("#/");
     removeJsonLd();
@@ -1265,16 +1265,16 @@
         els.seoHeader.classList.remove("hidden");
         els.seoTitle.textContent = `${lib.name} Icons`;
         els.seoDescription.textContent = `${lib.description}. ${Number(lib.count || 0).toLocaleString()} indexed records, version ${lib.version}.`;
-        document.title = `${lib.name} Icons - SVG Download | IconVoid`;
-        setMeta("description", `Browse, customize, copy, and export ${lib.name} SVG icons in IconVoid.`);
+        document.title = `${lib.name} Icons - SVG Download | IconStash`;
+        setMeta("description", `Browse, customize, copy, and export ${lib.name} SVG icons in IconStash.`);
         setCanonical(hash);
       }
     } else if (hash.startsWith("#/category/")) {
       els.seoHeader.classList.remove("hidden");
       els.seoTitle.textContent = `${state.activeCategory || "Category"} Icons`;
       els.seoDescription.textContent = `Filtered icon results for ${state.activeCategory || "this category"}.`;
-      document.title = `${state.activeCategory || "Category"} Icons - SVG Download | IconVoid`;
-      setMeta("description", `Browse and export ${state.activeCategory || "category"} SVG icons in IconVoid.`);
+      document.title = `${state.activeCategory || "Category"} Icons - SVG Download | IconStash`;
+      setMeta("description", `Browse and export ${state.activeCategory || "category"} SVG icons in IconStash.`);
       setCanonical(hash);
     } else {
       els.seoHeader.classList.add("hidden");
@@ -1282,8 +1282,8 @@
   }
 
   function updateSeoIcon(icon) {
-    document.title = `${icon.name} Icon - SVG Download | IconVoid`;
-    setMeta("description", `Download the ${icon.name} icon from ${icon.library}. Copy SVG, JSX, HTML, CSS, PNG, or ZIP from IconVoid.`);
+    document.title = `${icon.name} Icon - SVG Download | IconStash`;
+    setMeta("description", `Download the ${icon.name} icon from ${icon.library}. Copy SVG, JSX, HTML, CSS, PNG, or ZIP from IconStash.`);
     setMeta("og:title", `${icon.name} Icon - ${icon.library}`);
     setMeta("og:description", `SVG download for ${icon.name} from ${icon.library}.`);
     setCanonical(`#/icon/${icon.id}`);
@@ -1429,9 +1429,9 @@
   }
 
   function renderMatches(icon) {
-    const base = window.IconVoidSearch.baseName(icon.name);
+    const base = window.IconStashSearch.baseName(icon.name);
     const matches = Array.from(state.icons.values())
-      .filter((candidate) => candidate.id !== icon.id && window.IconVoidSearch.baseName(candidate.name) === base)
+      .filter((candidate) => candidate.id !== icon.id && window.IconStashSearch.baseName(candidate.name) === base)
       .slice(0, 8);
     els.dpMatches.innerHTML = matches.length ? matches.map((candidate, index) => `<button class="match-card" data-icon-id="${candidate.id}" title="${escapeHtml(candidate.library)}" style="animation-delay:${index * 40}ms">${iconTools().renderSVG(candidate)}</button>`).join("") : '<span class="muted">Load more libraries to reveal matches.</span>';
   }
@@ -1531,9 +1531,9 @@
   }
 
   function renderCollections() {
-    const collections = window.IconVoidCollections.all();
-    els.collectionBadge.textContent = String(window.IconVoidCollections.count());
-    els.collectionBadge.classList.toggle("hidden", window.IconVoidCollections.count() === 0);
+    const collections = window.IconStashCollections.all();
+    els.collectionBadge.textContent = String(window.IconStashCollections.count());
+    els.collectionBadge.classList.toggle("hidden", window.IconStashCollections.count() === 0);
     els.collectionsList.innerHTML = collections.map((collection) => {
       const previews = collection.icons.map((id) => state.icons.get(id)).filter(Boolean);
       return `<article class="collection-row" data-collection-id="${collection.id}">
@@ -1585,8 +1585,8 @@
     const toolbar = document.querySelector(".compare-toolbar");
     if (toolbar) toolbar.style.display = "flex";
     
-    const base = window.IconVoidSearch.baseName(icon.name);
-    const matches = Array.from(state.icons.values()).filter((candidate) => window.IconVoidSearch.baseName(candidate.name) === base).slice(0, 80);
+    const base = window.IconStashSearch.baseName(icon.name);
+    const matches = Array.from(state.icons.values()).filter((candidate) => window.IconStashSearch.baseName(candidate.name) === base).slice(0, 80);
     els.compareTitle.textContent = `${icon.name} - across ${matches.length} libraries`;
     els.compareGrid.innerHTML = matches.map((candidate) => `<button class="compare-item" data-icon-id="${candidate.id}">
       ${iconTools().renderSVG(candidate, { color: state.detail.color, strokeWidth: state.detail.strokeWidth })}
@@ -1688,7 +1688,7 @@
     const popover = document.createElement("div");
     popover.className = "collection-popover glass-panel";
     
-    const collections = window.IconVoidCollections.all();
+    const collections = window.IconStashCollections.all();
     
     let html = `<div class="popover-header">Add to Collection</div>`;
     
@@ -1742,8 +1742,8 @@
         if (item.classList.contains("create-new")) {
           const name = prompt("Enter new folder name:");
           if (name && name.trim()) {
-            const col = window.IconVoidCollections.create(name);
-            window.IconVoidCollections.addIcons(col.id, ids);
+            const col = window.IconStashCollections.create(name);
+            window.IconStashCollections.addIcons(col.id, ids);
             ui().toast(`Created "${col.name}" & added ${ids.length} icon(s)`, "success");
             renderCollections();
             if (onComplete) onComplete(col.id);
@@ -1751,9 +1751,9 @@
           }
         } else {
           const colId = item.dataset.id;
-          const col = window.IconVoidCollections.getCollection(colId);
+          const col = window.IconStashCollections.getCollection(colId);
           if (col) {
-            window.IconVoidCollections.addIcons(colId, ids);
+            window.IconStashCollections.addIcons(colId, ids);
             ui().toast(`Added ${ids.length} icon(s) to "${col.name}"`, "success");
             renderCollections();
             if (onComplete) onComplete(colId);
@@ -1992,7 +1992,7 @@
       state.searchQuery = chip.dataset.suggest;
       applyFilters({ resetScroll: true });
     });
-    window.addEventListener("iconvoid:collections-changed", () => {
+    window.addEventListener("iconstash:collections-changed", () => {
       renderCollections();
       syncPrerenderFavoriteButtons();
     });
@@ -2172,7 +2172,7 @@
       ui().openModal("collections-modal");
     });
     els.collectionCreate.addEventListener("click", () => {
-      window.IconVoidCollections.create(els.collectionNameInput.value);
+      window.IconStashCollections.create(els.collectionNameInput.value);
       els.collectionNameInput.value = "";
       renderCollections();
     });
@@ -2185,35 +2185,35 @@
         if (!row) return;
         const colId = row.dataset.collectionId;
         const iconId = removeBtn.dataset.iconId;
-        window.IconVoidCollections.removeIcon(colId, iconId);
+        window.IconStashCollections.removeIcon(colId, iconId);
         ui().toast("Removed from collection", "success");
         return;
       }
       const row = event.target.closest("[data-collection-id]");
       const action = event.target.closest("[data-collection-action]")?.dataset.collectionAction;
       if (!row || !action) return;
-      const collection = window.IconVoidCollections.getCollection(row.dataset.collectionId);
+      const collection = window.IconStashCollections.getCollection(row.dataset.collectionId);
       if (!collection) return;
       const icons = collection.icons.map((id) => state.icons.get(id)).filter(Boolean);
       if (action === "rename") {
         const name = prompt("Collection name", collection.name);
-        if (name) window.IconVoidCollections.rename(collection.id, name);
+        if (name) window.IconStashCollections.rename(collection.id, name);
       } else if (action === "delete") {
-        window.IconVoidCollections.remove(collection.id);
+        window.IconStashCollections.remove(collection.id);
       } else if (action === "json") {
-        window.IconVoidCollections.exportJSON(collection);
+        window.IconStashCollections.exportJSON(collection);
       } else if (action === "css") {
-        window.IconVoidCollections.exportCSSSprite(collection, state.icons);
+        window.IconStashCollections.exportCSSSprite(collection, state.icons);
       } else if (action === "react") {
-        window.IconVoidCollections.exportReact(collection, state.icons);
+        window.IconStashCollections.exportReact(collection, state.icons);
       } else if (action === "vue") {
-        window.IconVoidCollections.exportVue(collection, state.icons);
+        window.IconStashCollections.exportVue(collection, state.icons);
       } else if (action === "sprite") {
-        window.IconVoidCollections.exportSpriteSVG(collection, state.icons);
+        window.IconStashCollections.exportSpriteSVG(collection, state.icons);
       } else if (action === "zip") {
         await downloadZip(icons);
       } else if (action === "png-zip") {
-        await downloadZip(icons, { pngSizes: [16, 32, 48, 64, 128, 256, 512], filename: `${window.IconVoidCollections.slugFilePart(collection.name)}-png.zip` });
+        await downloadZip(icons, { pngSizes: [16, 32, 48, 64, 128, 256, 512], filename: `${window.IconStashCollections.slugFilePart(collection.name)}-png.zip` });
       }
       renderCollections();
     });
@@ -2287,7 +2287,7 @@
       } else if (event.key.toLowerCase() === "f" && !editing) {
         const icon = focusedIcon();
         if (icon) {
-          window.IconVoidCollections.addIcon("favorites", icon.id);
+          window.IconStashCollections.addIcon("favorites", icon.id);
           ui().toast("Saved to Favorites", "success");
         }
       }
@@ -2299,7 +2299,7 @@
       els.autocomplete.classList.add("hidden");
       return;
     }
-    const matches = window.IconVoidSearch.suggestions(state.icons.values(), state.searchQuery, 5);
+    const matches = window.IconStashSearch.suggestions(state.icons.values(), state.searchQuery, 5);
     if (!matches.length) {
       els.autocomplete.classList.add("hidden");
       return;
@@ -2443,7 +2443,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     init().catch((error) => {
       console.error(error);
-      ui().toast(`IconVoid failed to start: ${error.message}`, "error", 6000);
+      ui().toast(`IconStash failed to start: ${error.message}`, "error", 6000);
     });
   });
 })();

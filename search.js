@@ -118,7 +118,7 @@
     return matches;
   }
 
-  window.IconVoidSearch = {
+  window.IconStashSearch = {
     baseName,
     tokenize,
     buildSearchIndex,

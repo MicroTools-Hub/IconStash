@@ -188,7 +188,7 @@
     const retry = qs("#network-retry");
     retry?.addEventListener("click", () => {
       gate?.classList.add("hidden");
-      toast("IconVoid core files are bundled locally", "info");
+      toast("IconStash core files are bundled locally", "info");
     });
   }
 
@@ -209,7 +209,7 @@
     setupNetworkGate();
   }
 
-  window.IconVoidUI = {
+  window.IconStashUI = {
     qs,
     qsa,
     toast,

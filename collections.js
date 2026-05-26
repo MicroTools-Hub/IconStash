@@ -7,7 +7,7 @@
 
   // Restore collections from localStorage on startup
   try {
-    const saved = localStorage.getItem("iconvoid-collections");
+    const saved = localStorage.getItem("iconstash-collections");
     if (saved) {
       const parsed = JSON.parse(saved);
       if (Array.isArray(parsed)) {
@@ -24,7 +24,7 @@
   }
 
   function makeId(name) {
-    return (window.IconVoidIcons?.slugFilePart(name) || "collection") + "-" + Math.random().toString(36).slice(2, 7);
+    return (window.IconStashIcons?.slugFilePart(name) || "collection") + "-" + Math.random().toString(36).slice(2, 7);
   }
 
   function getCollection(id) {
@@ -99,16 +99,16 @@
 
   function notify() {
     try {
-      localStorage.setItem("iconvoid-collections", JSON.stringify(state.collections));
+      localStorage.setItem("iconstash-collections", JSON.stringify(state.collections));
     } catch (e) {
       console.error("Failed to save collections:", e);
     }
-    window.dispatchEvent(new CustomEvent("iconvoid:collections-changed", { detail: state.collections }));
+    window.dispatchEvent(new CustomEvent("iconstash:collections-changed", { detail: state.collections }));
   }
 
   function exportJSON(collection) {
     const blob = new Blob([JSON.stringify(collection, null, 2)], { type: "application/json;charset=utf-8" });
-    window.IconVoidIcons.downloadBlob(blob, `${window.IconVoidIcons.slugFilePart(collection.name)}.json`);
+    window.IconStashIcons.downloadBlob(blob, `${window.IconStashIcons.slugFilePart(collection.name)}.json`);
   }
 
   function exportCSSSprite(collection, iconMap) {
@@ -116,11 +116,11 @@
       .map((id) => iconMap.get(id))
       .filter(Boolean)
       .map((icon) => {
-        const svg = window.IconVoidIcons.renderSVG(icon);
-        return `.icon-${window.IconVoidIcons.slugFilePart(icon.id)} {\n  display:inline-block;\n  width:1em;\n  height:1em;\n  background-color:currentColor;\n  mask:url("data:image/svg+xml,${encodeURIComponent(svg)}") center / contain no-repeat;\n}`;
+        const svg = window.IconStashIcons.renderSVG(icon);
+        return `.icon-${window.IconStashIcons.slugFilePart(icon.id)} {\n  display:inline-block;\n  width:1em;\n  height:1em;\n  background-color:currentColor;\n  mask:url("data:image/svg+xml,${encodeURIComponent(svg)}") center / contain no-repeat;\n}`;
       })
       .join("\n\n");
-    window.IconVoidIcons.downloadBlob(new Blob([rules], { type: "text/css;charset=utf-8" }), `${window.IconVoidIcons.slugFilePart(collection.name)}.css`);
+    window.IconStashIcons.downloadBlob(new Blob([rules], { type: "text/css;charset=utf-8" }), `${window.IconStashIcons.slugFilePart(collection.name)}.css`);
   }
 
   function exportReact(collection, iconMap) {
@@ -129,28 +129,28 @@
       .filter(Boolean)
       .map((icon) => {
         const name = icon.name.split(/[-_\s]+/).filter(Boolean).map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join("");
-        return `export const ${name || "Icon"} = (props) => (${window.IconVoidIcons.renderSVG(icon).replace("<svg ", "<svg {...props} ")});`;
+        return `export const ${name || "Icon"} = (props) => (${window.IconStashIcons.renderSVG(icon).replace("<svg ", "<svg {...props} ")});`;
       })
       .join("\n\n");
-    window.IconVoidIcons.downloadBlob(new Blob([imports], { type: "text/javascript;charset=utf-8" }), `${window.IconVoidIcons.slugFilePart(collection.name)}.jsx`);
+    window.IconStashIcons.downloadBlob(new Blob([imports], { type: "text/javascript;charset=utf-8" }), `${window.IconStashIcons.slugFilePart(collection.name)}.jsx`);
   }
 
   function exportVue(collection, iconMap) {
     const icons = collection.icons
       .map((id) => iconMap.get(id))
       .filter(Boolean)
-      .map((icon) => `<template id="${icon.id}">\n  ${window.IconVoidIcons.renderSVG(icon)}\n</template>`)
+      .map((icon) => `<template id="${icon.id}">\n  ${window.IconStashIcons.renderSVG(icon)}\n</template>`)
       .join("\n\n");
-    window.IconVoidIcons.downloadBlob(new Blob([icons], { type: "text/plain;charset=utf-8" }), `${window.IconVoidIcons.slugFilePart(collection.name)}.vue-snippets`);
+    window.IconStashIcons.downloadBlob(new Blob([icons], { type: "text/plain;charset=utf-8" }), `${window.IconStashIcons.slugFilePart(collection.name)}.vue-snippets`);
   }
 
   function exportSpriteSVG(collection, iconMap) {
     const icons = collection.icons.map((id) => iconMap.get(id)).filter(Boolean);
-    const sprite = window.IconVoidIcons.createSprite(icons);
-    window.IconVoidIcons.downloadBlob(new Blob([sprite], { type: "image/svg+xml;charset=utf-8" }), `${window.IconVoidIcons.slugFilePart(collection.name)}-sprite.svg`);
+    const sprite = window.IconStashIcons.createSprite(icons);
+    window.IconStashIcons.downloadBlob(new Blob([sprite], { type: "image/svg+xml;charset=utf-8" }), `${window.IconStashIcons.slugFilePart(collection.name)}-sprite.svg`);
   }
 
-  window.IconVoidCollections = {
+  window.IconStashCollections = {
     state,
     all: () => state.collections,
     getCollection,

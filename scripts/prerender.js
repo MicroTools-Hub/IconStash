@@ -5,7 +5,7 @@ const path = require("node:path");
 const ROOT = path.resolve(__dirname, "..");
 const DATA_DIR = path.join(ROOT, "data");
 const OUT_DIR = path.join(DATA_DIR, "prerender");
-const CHUNK_SIZE = Number(process.env.ICONVOID_CHUNK_SIZE || 160);
+const CHUNK_SIZE = Number(process.env.ICONSTASH_CHUNK_SIZE || 160);
 
 const CATEGORY_META = [
   ["Media", "Photography", "M12 5v14M5 12h14", "#00c3ff"],

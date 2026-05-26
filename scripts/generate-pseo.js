@@ -10,7 +10,7 @@ const OUT_DIR = path.join(ROOT, "icons");
 const SITEMAP_DIR = path.join(ROOT, "sitemaps");
 const HTML_SITEMAP_DIR = path.join(ROOT, "seo");
 const KEYWORD_DB = path.join(DATA_DIR, "pseo-keywords.json");
-const SITE_URL = (process.env.SITE_URL || "https://iconvoid.com").replace(/\/+$/, "");
+const SITE_URL = (process.env.SITE_URL || "https://iconstash.io").replace(/\/+$/, "");
 const PAGE_LIMIT = Math.max(1, Number(process.env.PSEO_LIMIT || 60000));
 const TODAY = new Date().toISOString().slice(0, 10);
 
@@ -268,16 +268,16 @@ function buildKeywords(icons) {
 
 function seoTitle(keyword) {
   const base = titleCase(keyword);
-  const suffix = " | IconVoid";
+  const suffix = " | IconStash";
   if ((base + suffix).length <= 60 && (base + suffix).length >= 48) return base + suffix;
-  const download = `${base} Download | IconVoid`;
+  const download = `${base} Download | IconStash`;
   if (download.length <= 60) return download;
   return `${base.slice(0, Math.max(42, 59 - suffix.length)).replace(/\s+\S*$/, "")}${suffix}`;
 }
 
 function metaDescription(row, icon) {
   const format = row.format === "react" ? "React-ready SVG" : row.format.toUpperCase();
-  const text = `Download or copy the ${row.keyword} from IconVoid. Customize color, size, stroke, and export ${format} files with no login.`;
+  const text = `Download or copy the ${row.keyword} from IconStash. Customize color, size, stroke, and export ${format} files with no login.`;
   return text.length > 160 ? `${text.slice(0, 157).replace(/\s+\S*$/, "")}...` : text;
 }
 
@@ -312,7 +312,7 @@ function pageHtml(row, icon, related) {
   const faq = [
     {
       q: `Can I download the ${row.keyword}?`,
-      a: `Yes. Open the ${icon.displayName} icon in IconVoid to copy SVG code or export PNG and ZIP files.`
+      a: `Yes. Open the ${icon.displayName} icon in IconStash to copy SVG code or export PNG and ZIP files.`
     },
     {
       q: `Can I customize this ${icon.displayName} icon?`,
@@ -320,7 +320,7 @@ function pageHtml(row, icon, related) {
     },
     {
       q: `What formats are available for ${row.keyword}?`,
-      a: `IconVoid supports SVG, PNG exports, JSX snippets, HTML image code, CSS masks, and Base64 output.`
+      a: `IconStash supports SVG, PNG exports, JSX snippets, HTML image code, CSS masks, and Base64 output.`
     }
   ];
   const schema = [
@@ -328,7 +328,7 @@ function pageHtml(row, icon, related) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "IconVoid", item: `${SITE_URL}/` },
+        { "@type": "ListItem", position: 1, name: "IconStash", item: `${SITE_URL}/` },
         { "@type": "ListItem", position: 2, name: icon.library, item: `${SITE_URL}/#/library/${icon.librarySlug}` },
         { "@type": "ListItem", position: 3, name: h1, item: url }
       ]
@@ -374,13 +374,13 @@ function pageHtml(row, icon, related) {
 <body>
   <main class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="/">IconVoid</a><span>/</span><a href="/#/library/${escapeHtml(icon.librarySlug)}">${escapeHtml(icon.library)}</a><span>/</span><span>${escapeHtml(icon.displayName)}</span>
+      <a href="/">IconStash</a><span>/</span><a href="/#/library/${escapeHtml(icon.librarySlug)}">${escapeHtml(icon.library)}</a><span>/</span><span>${escapeHtml(icon.displayName)}</span>
     </nav>
     <section class="hero">
       <div class="preview">${renderSvg(icon, 96)}</div>
       <div>
         <h1>${escapeHtml(h1)}</h1>
-        <p class="lead">${escapeHtml(row.keyword)} is available in IconVoid for fast SVG copying, PNG export, and UI-ready customization.</p>
+        <p class="lead">${escapeHtml(row.keyword)} is available in IconStash for fast SVG copying, PNG export, and UI-ready customization.</p>
         <div class="cta">
           <a class="btn primary" href="${escapeHtml(appUrl)}">Open editor</a>
           <a class="btn" href="/#/library/${escapeHtml(icon.librarySlug)}">Browse ${escapeHtml(icon.library)}</a>
@@ -391,7 +391,7 @@ function pageHtml(row, icon, related) {
       <article class="card">
         <h2>Use this ${escapeHtml(icon.displayName)} icon</h2>
         <p>The ${escapeHtml(row.keyword)} works well in ${escapeHtml(icon.category.toLowerCase())} interfaces, product dashboards, websites, mobile apps, documentation, and design systems.</p>
-        <p class="muted">Open it in IconVoid to adjust color, exact size, preview background, and stroke width before exporting.</p>
+        <p class="muted">Open it in IconStash to adjust color, exact size, preview background, and stroke width before exporting.</p>
       </article>
       <article class="card">
         <h2>Export formats</h2>
@@ -411,7 +411,7 @@ function pageHtml(row, icon, related) {
       ${faq.map((item) => `<article class="card"><h2>${escapeHtml(item.q)}</h2><p>${escapeHtml(item.a)}</p></article>`).join("")}
     </section>
     <footer>
-      IconVoid is a frontend-only icon search and export tool. Check each source library's terms before redistributing icon artwork as a standalone pack.
+      IconStash is a frontend-only icon search and export tool. Check each source library's terms before redistributing icon artwork as a standalone pack.
     </footer>
   </main>
 </body>
@@ -449,12 +449,12 @@ function writeHtmlSitemap(keywords) {
   for (let i = 0; i < keywords.length; i += perPage) pages.push(keywords.slice(i, i + perPage));
   const indexLinks = pages.map((_, index) => `<a href="/seo/sitemap-${index + 1}/">Sitemap ${index + 1}</a>`).join("");
   ensureDir(HTML_SITEMAP_DIR);
-  fs.writeFileSync(path.join(HTML_SITEMAP_DIR, "index.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>IconVoid HTML Sitemap</title><meta name="description" content="Browse IconVoid icon landing pages."><style>body{font:15px/1.6 system-ui;margin:32px;background:#07070d;color:#f5f7fb}a{display:inline-block;margin:6px 10px 6px 0;color:#8ab4ff}</style></head><body><h1>IconVoid HTML Sitemap</h1><p>${keywords.length.toLocaleString("en-US")} icon landing pages.</p>${indexLinks}</body></html>`);
+  fs.writeFileSync(path.join(HTML_SITEMAP_DIR, "index.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>IconStash HTML Sitemap</title><meta name="description" content="Browse IconStash icon landing pages."><style>body{font:15px/1.6 system-ui;margin:32px;background:#07070d;color:#f5f7fb}a{display:inline-block;margin:6px 10px 6px 0;color:#8ab4ff}</style></head><body><h1>IconStash HTML Sitemap</h1><p>${keywords.length.toLocaleString("en-US")} icon landing pages.</p>${indexLinks}</body></html>`);
   pages.forEach((chunk, index) => {
     const dir = path.join(HTML_SITEMAP_DIR, `sitemap-${index + 1}`);
     ensureDir(dir);
     const links = chunk.map((row) => `<li><a href="${row.url}">${escapeHtml(row.keyword)}</a></li>`).join("");
-    fs.writeFileSync(path.join(dir, "index.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>IconVoid Sitemap ${index + 1}</title><meta name="description" content="IconVoid SEO landing page links."><style>body{font:15px/1.6 system-ui;margin:32px;background:#07070d;color:#f5f7fb}a{color:#8ab4ff}li{margin:4px 0}</style></head><body><h1>IconVoid Sitemap ${index + 1}</h1><ul>${links}</ul></body></html>`);
+    fs.writeFileSync(path.join(dir, "index.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>IconStash Sitemap ${index + 1}</title><meta name="description" content="IconStash SEO landing page links."><style>body{font:15px/1.6 system-ui;margin:32px;background:#07070d;color:#f5f7fb}a{color:#8ab4ff}li{margin:4px 0}</style></head><body><h1>IconStash Sitemap ${index + 1}</h1><ul>${links}</ul></body></html>`);
   });
 }
 
