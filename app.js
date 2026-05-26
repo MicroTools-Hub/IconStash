@@ -1557,7 +1557,7 @@
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
               <span>Download ZIP</span>
             </button>
-            <button class="gradient-btn text-btn" data-collection-action="png-zip" style="background: var(--grad-cyber, linear-gradient(135deg, #bf00ff, #ff2d9b));">
+            <button class="gradient-btn text-btn" data-collection-action="png-zip">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
               <span>Download PNG ZIP</span>
             </button>
