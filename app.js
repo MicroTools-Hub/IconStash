@@ -88,7 +88,8 @@
       chunkIndex: -1,
       slug: "",
       loading: false,
-      initialDomUsed: false
+      initialDomUsed: false,
+      chunkCache: new Map()
     },
     backgroundSyncStarted: false,
     customColor: "",
@@ -587,6 +588,8 @@
     // Sync the favorites hearts to show active heart states instantly
     syncPrerenderFavoriteButtons();
 
+    prefetchNextChunks(lib.slug, 0);
+
     checkViewportFill();
 
     return true;
@@ -623,6 +626,7 @@
         
         // Sync favorite states on the newly appended chunk nodes
         syncPrerenderFavoriteButtons();
+        prefetchNextChunks(lib.slug, nextChunk);
         success = true;
       }
     } finally {
@@ -650,12 +654,68 @@
     });
   }
 
+  async function fetchPrerenderChunk(slug, chunkIndex) {
+    const inline = inlinePrerenderChunk(slug, chunkIndex);
+    if (inline) return inline;
+    const lib = prerenderLibraryBySlug(slug);
+    if (!lib || chunkIndex < 0 || chunkIndex >= lib.chunks) return "";
+
+    const key = `${slug}_${chunkIndex}`;
+    if (state.prerender.chunkCache.has(key)) {
+      return state.prerender.chunkCache.get(key);
+    }
+
+    const response = await request("data/prerender/libraries/" + encodeURIComponent(slug) + "/chunk-" + chunkIndex + ".html");
+    if (!response.ok) return "";
+    const text = await response.text();
+    state.prerender.chunkCache.set(key, text);
+    return text;
+  }
+
+  function prefetchNextChunks(slug, chunkIndex) {
+    const manifest = state.prerender.manifest;
+    if (!manifest?.libraries?.length) return;
+    
+    let libIndex = manifest.libraries.findIndex((l) => l.slug === slug);
+    if (libIndex === -1) return;
+    
+    let currentLib = manifest.libraries[libIndex];
+    let prefetchedCount = 0;
+    let tempLibIndex = libIndex;
+    let tempChunkIndex = chunkIndex;
+    let tempLib = currentLib;
+    
+    while (prefetchedCount < 3) {
+      tempChunkIndex += 1;
+      if (tempChunkIndex >= tempLib.chunks) {
+        if (state.prerender.mode === "library") break;
+        tempLibIndex += 1;
+        tempLib = manifest.libraries[tempLibIndex];
+        if (!tempLib) break;
+        tempChunkIndex = 0;
+      }
+      
+      const key = `${tempLib.slug}_${tempChunkIndex}`;
+      if (!state.prerender.chunkCache.has(key)) {
+        const fetchPromise = (async () => {
+          try {
+            const response = await request("data/prerender/libraries/" + encodeURIComponent(tempLib.slug) + "/chunk-" + tempChunkIndex + ".html");
+            if (response.ok) return await response.text();
+          } catch (_) {}
+          return "";
+        })();
+        state.prerender.chunkCache.set(key, fetchPromise);
+      }
+      prefetchedCount++;
+    }
+  }
+
   function checkViewportFill() {
     if (els.gridView.classList.contains("hidden")) return;
     const container = els.gridContainer;
     if (!container) return;
     
-    const nearBottom = container.scrollTop + container.clientHeight > container.scrollHeight - 900;
+    const nearBottom = container.scrollTop + container.clientHeight > container.scrollHeight - 1800;
     if (!nearBottom) return;
 
     if (state.prerender.active) {
@@ -1171,11 +1231,13 @@
       const start = state.renderedCount;
       const end = Math.min(state.visibleLimit, state.filteredIcons.length);
       const parts = [];
+      const allCollections = window.IconStashCollections.all();
+      const collectedIds = new Set(allCollections.flatMap(col => col.icons));
       for (let index = start; index < end; index += 1) {
         if (isAllIconsGroupedMode() && shouldRenderLibraryHeader(index)) {
           parts.push(renderLibraryHeader(state.filteredIcons[index]));
         }
-        parts.push(renderCard(state.filteredIcons[index], index));
+        parts.push(renderCard(state.filteredIcons[index], index, collectedIds));
       }
       if (parts.length) els.iconGrid.insertAdjacentHTML("beforeend", parts.join(""));
       state.renderedCount = end;
@@ -1202,14 +1264,13 @@
     </div>`;
   }
 
-  function renderCard(icon, visualIndex) {
+  function renderCard(icon, visualIndex, collectedIds) {
     const selected = state.selectedIcons.has(icon.id);
     const focused = state.filteredIcons[state.focusedIndex]?.id === icon.id;
     const delay = Math.min(400, visualIndex * 15);
     
-    const allCollections = window.IconStashCollections.all();
-    const collectedIds = new Set(allCollections.flatMap(col => col.icons));
-    const isCollected = collectedIds.has(icon.id);
+    const set = collectedIds || new Set(window.IconStashCollections.all().flatMap(col => col.icons));
+    const isCollected = set.has(icon.id);
     const fillAttr = isCollected ? 'fill="currentColor"' : 'fill="none"';
     const collectedClass = isCollected ? "collected" : "";
 
@@ -2056,7 +2117,7 @@
       if (icon) window.location.hash = `#/icon/${icon.dataset.iconId}`;
     });
     els.gridContainer.addEventListener("scroll", () => {
-      const nearBottom = els.gridContainer.scrollTop + els.gridContainer.clientHeight > els.gridContainer.scrollHeight - 900;
+      const nearBottom = els.gridContainer.scrollTop + els.gridContainer.clientHeight > els.gridContainer.scrollHeight - 1800;
       if (nearBottom) {
         if (state.prerender.active) {
           appendNextPrerenderChunk();
