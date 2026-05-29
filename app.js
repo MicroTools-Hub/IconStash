@@ -482,14 +482,38 @@
     try {
       if (window.__PRERENDER_MANIFEST__) {
         state.prerender.manifest = window.__PRERENDER_MANIFEST__;
+        prefetchAllChunkZeros();
         return;
       }
       const response = await request("data/prerender/manifest.json");
       if (!response.ok) return;
       state.prerender.manifest = await response.json();
+      prefetchAllChunkZeros();
     } catch (_error) {
       state.prerender.manifest = null;
     }
+  }
+
+  function prefetchAllChunkZeros() {
+    const manifest = state.prerender.manifest;
+    if (!manifest?.libraries?.length) return;
+    manifest.libraries.forEach((lib) => {
+      const key = `${lib.slug}_0`;
+      if (!state.prerender.chunkCache.has(key)) {
+        const fetchPromise = (async () => {
+          try {
+            const response = await request("data/prerender/libraries/" + encodeURIComponent(lib.slug) + "/chunk-0.html");
+            if (response.ok) {
+              const text = await response.text();
+              state.prerender.chunkCache.set(key, text);
+              return text;
+            }
+          } catch (_) {}
+          return "";
+        })();
+        state.prerender.chunkCache.set(key, fetchPromise);
+      }
+    });
   }
 
   function prerenderLibraryBySlug(slug) {
