@@ -89,6 +89,9 @@
       slug: "",
       loading: false
     },
+    backgroundSyncStarted: false,
+    customColor: "",
+    customStrokeWidth: "",
     rowHeight: 88,
     cardMin: 80,
     cols: 8,
@@ -206,7 +209,12 @@
       bulkCollect: $("bulk-collect"),
       bulkClear: $("bulk-clear"),
       bulkColor: $("bulk-color"),
-      sitemap: $("sitemap-download")
+      sitemap: $("sitemap-download"),
+      custColorHex: $("cust-color-hex"),
+      custColorWheel: $("cust-color-wheel"),
+      custStrokeLabel: $("cust-stroke-label"),
+      custStrokeSlider: $("cust-stroke-slider"),
+      custResetBtn: $("cust-reset-btn")
     });
   }
 
@@ -509,7 +517,11 @@
     if (els.resultCount) {
       els.resultCount.classList.toggle("hidden", val === 0 || state.route === "#/" || state.route === "#");
     }
-    els.gridStatus.innerHTML = "<strong>" + escapeHtml(label) + "</strong> <span>" + val.toLocaleString() + " icons</span>";
+    if (state.searchQuery) {
+      els.gridStatus.textContent = `Search results: ${val.toLocaleString()} icons`;
+    } else {
+      els.gridStatus.textContent = `All icons: ${val.toLocaleString()}`;
+    }
     updateFilterCounters();
   }
 
@@ -789,6 +801,36 @@
     return task;
   }
 
+  function triggerBackgroundSync() {
+    if (state.backgroundSyncStarted) return;
+    state.backgroundSyncStarted = true;
+    
+    // Set initial loadStatus when sync starts
+    const loadedCount = state.loadedLibraries.size;
+    const totalCount = state.libraries.length;
+    els.loadStatus.textContent = `Syncing libraries: ${loadedCount}/${totalCount} loaded...`;
+    
+    loadAllLibrariesInBackground();
+  }
+
+  function sanitizeQuery(query) {
+    if (!query) return "";
+    // Strip all HTML tags completely
+    let sanitized = query.replace(/<[^>]*>/g, "");
+    // Strip JavaScript (e.g. javascript:, script tags)
+    sanitized = sanitized.replace(/javascript:/gi, "");
+    sanitized = sanitized.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
+    // Remove all special characters except letters, numbers, spaces, hyphens, and underscores
+    sanitized = sanitized.replace(/[^a-zA-Z0-9\s\-_]/g, "");
+    // Limit query length to maximum 100 characters
+    return sanitized.slice(0, 100);
+  }
+
+  function getQueryParam(queryString, param) {
+    const params = new URLSearchParams(queryString);
+    return params.get(param) || "";
+  }
+
   async function loadAllLibrariesInBackground() {
     // Wait a brief moment to let the main UI settle down
     await new Promise((resolve) => setTimeout(resolve, 800));
@@ -921,7 +963,11 @@
     const loadedCount = state.loadedLibraries.size;
     const totalCount = state.libraries.length;
     if (loadedCount < totalCount) {
-      els.loadStatus.textContent = `Syncing libraries: ${loadedCount}/${totalCount} loaded...`;
+      if (state.backgroundSyncStarted) {
+        els.loadStatus.textContent = `Syncing libraries: ${loadedCount}/${totalCount} loaded...`;
+      } else {
+        els.loadStatus.textContent = "";
+      }
     } else {
       els.loadStatus.textContent = `All ${totalLibraryCount().toLocaleString()} icons are available`;
       setTimeout(() => {
@@ -1016,10 +1062,11 @@
     if (els.resultCount) {
       els.resultCount.classList.toggle("hidden", count === 0 || state.route === "#/" || state.route === "#");
     }
-    const label = state.selectedLibraries.size === 1
-      ? `${libraryBySlug(Array.from(state.selectedLibraries)[0])?.name || "Library"}`
-      : state.activeCategory || "All icons";
-    els.gridStatus.innerHTML = `<strong>${escapeHtml(label)}</strong> <span>${count.toLocaleString()} icons</span>`;
+    if (state.searchQuery) {
+      els.gridStatus.textContent = `Search results: ${count.toLocaleString()} icons`;
+    } else {
+      els.gridStatus.textContent = `All icons: ${count.toLocaleString()}`;
+    }
     updateFilterCounters();
   }
 
@@ -1160,16 +1207,43 @@
   async function handleRoute() {
     state.route = window.location.hash || "#/";
     const hash = state.route;
+    
+    const hashParts = hash.split("?");
+    const basePath = hashParts[0];
+    const queryString = hashParts[1] || "";
+
+    // Parse and sanitize query parameters strictly (CRITICAL SECURITY REQUIREMENT)
+    const urlQuery = getQueryParam(queryString, "query");
+    const sanitized = sanitizeQuery(urlQuery);
+    if (sanitized) {
+      if (sanitized !== state.searchQuery) {
+        state.searchQuery = sanitized;
+        els.search.value = sanitized;
+        els.searchClear.classList.remove("hidden");
+        triggerBackgroundSync();
+      }
+    } else if (basePath === "#/search" && state.searchQuery) {
+      // Clear search query if URL hash says #/search but has no query parameter
+      state.searchQuery = "";
+      els.search.value = "";
+      els.searchClear.classList.add("hidden");
+    }
+
+    // Auto-start sync if deep-linking into category, icon, or search with active query on page load
+    if (hash.startsWith("#/category/") || hash.startsWith("#/icon/") || state.searchQuery) {
+      triggerBackgroundSync();
+    }
+    
     els.autocomplete.classList.add("hidden");
     hideLibraryError();
-    if (hash === "#/" || hash === "#") {
+    if (basePath === "#/" || basePath === "#") {
       setRouteView("home");
       closeDetail(false);
       updateSeoHome();
       return;
     }
     setRouteView("grid");
-    if (hash === "#/search" || hash === "#/all" || hash === "#/icons") {
+    if (basePath === "#/search" || basePath === "#/all" || basePath === "#/icons") {
       state.selectedLibraries.clear();
       state.activeCategory = "";
       renderSidebarLibraries();
@@ -1181,8 +1255,8 @@
       await ensureInitialBrowseLibrary();
       applyFilters({ resetScroll: true });
       ensureDesktopDetail();
-    } else if (hash.startsWith("#/library/")) {
-      const slug = decodeURIComponent(hash.split("/")[2] || "");
+    } else if (basePath.startsWith("#/library/")) {
+      const slug = decodeURIComponent(basePath.split("/")[2] || "");
       state.selectedLibraries = new Set([slug]);
       state.activeCategory = "";
       renderSidebarLibraries();
@@ -1194,15 +1268,15 @@
       await loadLibrary(slug);
       applyFilters({ resetScroll: true });
       ensureDesktopDetail();
-    } else if (hash.startsWith("#/category/")) {
+    } else if (basePath.startsWith("#/category/")) {
       state.selectedLibraries.clear();
-      state.activeCategory = decodeURIComponent(hash.split("/")[2] || "").replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
+      state.activeCategory = decodeURIComponent(basePath.split("/")[2] || "").replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
       renderSidebarLibraries();
       await ensureInitialBrowseLibrary();
       applyFilters({ resetScroll: true });
       ensureDesktopDetail();
-    } else if (hash.startsWith("#/icon/")) {
-      const id = decodeURIComponent(hash.split("/")[2] || "");
+    } else if (basePath.startsWith("#/icon/")) {
+      const id = decodeURIComponent(basePath.split("/")[2] || "");
       const slug = id.split("-")[0];
       if (!state.icons.has(id) && libraryBySlug(slug)) await loadLibrary(slug);
       state.currentIconId = id;
@@ -1211,7 +1285,7 @@
         applyFilters({ preserveLimit: true });
       }
       openDetail(id);
-    } else if (hash.startsWith("#/collections")) {
+    } else if (basePath.startsWith("#/collections")) {
       setRouteView("grid");
       applyFilters();
       ensureDesktopDetail();
@@ -1436,7 +1510,14 @@
     const matches = Array.from(state.icons.values())
       .filter((candidate) => candidate.id !== icon.id && window.IconStashSearch.baseName(candidate.name) === base)
       .slice(0, 8);
-    els.dpMatches.innerHTML = matches.length ? matches.map((candidate, index) => `<button class="match-card" data-icon-id="${candidate.id}" title="${escapeHtml(candidate.library)}" style="animation-delay:${index * 40}ms">${iconTools().renderSVG(candidate)}</button>`).join("") : '<span class="muted">No similar icons in other libraries.</span>';
+    els.dpMatches.innerHTML = matches.length ? matches.map((candidate, index) => `
+      <div class="match-card-wrapper" style="display: flex; flex-direction: column; gap: 4px; align-items: center; min-width: 0;">
+        <button class="match-card" data-icon-id="${candidate.id}" title="${escapeHtml(candidate.library)}" style="animation-delay:${index * 40}ms; width: 100%; margin: 0;">
+          ${iconTools().renderSVG(candidate)}
+        </button>
+        <span style="color: var(--text-muted); font-size: 11px; text-align: center; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%;" title="${escapeHtml(candidate.library)}">${escapeHtml(candidate.library)}</span>
+      </div>
+    `).join("") : '<span class="muted">No similar icons in other libraries.</span>';
   }
 
   function renderCodePreview() {
@@ -1781,14 +1862,25 @@
   }
 
   function setupEvents() {
-    els.search.addEventListener("focus", () => els.searchShell.classList.add("focused"));
+    els.search.addEventListener("focus", () => {
+      els.searchShell.classList.add("focused");
+      triggerBackgroundSync();
+    });
     els.search.addEventListener("blur", () => setTimeout(() => els.searchShell.classList.remove("focused"), 100));
     els.search.addEventListener("input", () => {
+      triggerBackgroundSync();
       clearTimeout(searchTimer);
       searchTimer = setTimeout(async () => {
         state.searchQuery = els.search.value.trim();
         els.searchClear.classList.toggle("hidden", !state.searchQuery);
-        if (state.searchQuery && (!location.hash || location.hash === "#/" || location.hash === "#")) history.replaceState(null, "", "#/search");
+        
+        // Automatically update the URL hash to reflect the search term
+        if (state.searchQuery) {
+          history.replaceState(null, "", `#/search?query=${encodeURIComponent(state.searchQuery)}`);
+        } else {
+          history.replaceState(null, "", "#/search");
+        }
+        
         renderAutocomplete();
         const shouldShowGrid = Boolean(state.searchQuery) || (location.hash !== "#/" && location.hash !== "#");
         setRouteView(shouldShowGrid ? "grid" : "home");
@@ -1800,14 +1892,16 @@
           closeDetail(false);
           updateSeoHome();
         }
-      }, 150);
+      }, 300);
     });
     els.searchClear.addEventListener("click", async () => {
       els.search.value = "";
       state.searchQuery = "";
       els.searchClear.classList.add("hidden");
       els.autocomplete.classList.add("hidden");
-      if (location.hash === "#/search" || location.hash === "#/all" || location.hash === "#/icons") await ensureInitialBrowseLibrary();
+      history.replaceState(null, "", "#/search");
+      const basePath = location.hash.split("?")[0];
+      if (basePath === "#/search" || basePath === "#/all" || basePath === "#/icons") await ensureInitialBrowseLibrary();
       applyFilters({ resetScroll: true });
     });
     els.logo.addEventListener("click", (event) => {
@@ -1818,6 +1912,7 @@
     });
     els.libSearch.addEventListener("input", renderSidebarLibraries);
     els.libList.addEventListener("change", async (event) => {
+      triggerBackgroundSync();
       const input = event.target.closest(".lib-check");
       if (!input) return;
       const slug = input.value;
@@ -1868,6 +1963,7 @@
     els.stylePills.addEventListener("click", (event) => {
       const pill = event.target.closest(".style-pill");
       if (!pill) return;
+      triggerBackgroundSync();
       state.activeStyle = pill.dataset.style;
       ui().qsa(".style-pill", els.stylePills).forEach((node) => node.classList.toggle("active", node === pill));
       applyFilters({ resetScroll: true });
@@ -1880,6 +1976,7 @@
     els.categoryList.addEventListener("click", (event) => {
       const item = event.target.closest("[data-category]");
       if (!item) return;
+      triggerBackgroundSync();
       state.activeCategory = item.dataset.category === state.activeCategory ? "" : item.dataset.category;
       if (state.activeCategory) window.location.hash = `#/category/${state.activeCategory.toLowerCase().replace(/\s+/g, "-")}`;
       else applyFilters({ resetScroll: true });
@@ -1895,6 +1992,7 @@
       });
     });
     els.sortSelect.addEventListener("change", () => {
+      triggerBackgroundSync();
       state.sort = els.sortSelect.value;
       applyFilters({ resetScroll: true });
     });
@@ -1991,6 +2089,7 @@
     els.suggestionChips.addEventListener("click", (event) => {
       const chip = event.target.closest("[data-suggest]");
       if (!chip) return;
+      triggerBackgroundSync();
       els.search.value = chip.dataset.suggest;
       state.searchQuery = chip.dataset.suggest;
       applyFilters({ resetScroll: true });
@@ -2000,6 +2099,86 @@
       syncPrerenderFavoriteButtons();
     });
     window.addEventListener("hashchange", handleRoute);
+
+    // Collapsible Customize Preview Sidebar Section Toggle
+    if (els.custColorHex) {
+      const custToggle = $("customize-toggle");
+      const custSection = $("customize-section");
+      const custContent = $("customize-content");
+      if (custToggle && custSection && custContent) {
+        custToggle.addEventListener("click", () => {
+          const isOpen = custSection.classList.toggle("open");
+          custToggle.setAttribute("aria-expanded", String(isOpen));
+          const chevron = custToggle.querySelector(".chevron");
+          if (isOpen) {
+            custContent.style.maxHeight = "200px";
+            if (chevron) chevron.style.transform = "rotate(90deg)";
+          } else {
+            custContent.style.maxHeight = "0";
+            if (chevron) chevron.style.transform = "rotate(0deg)";
+          }
+        });
+      }
+
+      // Live Color Customization sync (hex input + color wheel button)
+      const applyColor = (color) => {
+        if (!color) {
+          state.customColor = "";
+          els.iconGrid.style.removeProperty("--custom-icon-color");
+          els.iconGrid.classList.remove("customized-preview-color");
+          return;
+        }
+        state.customColor = color;
+        els.iconGrid.style.setProperty("--custom-icon-color", color);
+        els.iconGrid.classList.add("customized-preview-color");
+      };
+
+      els.custColorWheel.addEventListener("input", () => {
+        const color = els.custColorWheel.value;
+        els.custColorHex.value = color;
+        applyColor(color);
+      });
+
+      els.custColorHex.addEventListener("input", () => {
+        let val = els.custColorHex.value.trim();
+        if (/^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(val)) {
+          if (!val.startsWith("#")) val = "#" + val;
+          els.custColorWheel.value = val;
+          applyColor(val);
+        } else if (val === "") {
+          applyColor("");
+        }
+      });
+
+      // Live Stroke Width Customization sync
+      const applyStroke = (stroke) => {
+        if (!stroke) {
+          state.customStrokeWidth = "";
+          els.iconGrid.style.removeProperty("--custom-stroke-width");
+          els.iconGrid.classList.remove("customized-preview-stroke");
+          return;
+        }
+        state.customStrokeWidth = stroke;
+        els.iconGrid.style.setProperty("--custom-stroke-width", stroke + "px");
+        els.iconGrid.classList.add("customized-preview-stroke");
+      };
+
+      els.custStrokeSlider.addEventListener("input", () => {
+        const val = els.custStrokeSlider.value;
+        els.custStrokeLabel.textContent = `${Number(val).toFixed(1)}px`;
+        applyStroke(val);
+      });
+
+      // Reset button
+      els.custResetBtn.addEventListener("click", () => {
+        els.custColorHex.value = "";
+        els.custColorWheel.value = "#2563eb";
+        els.custStrokeSlider.value = "2.0";
+        els.custStrokeLabel.textContent = "2.0px";
+        applyColor("");
+        applyStroke("");
+      });
+    }
   }
 
   async function handleGridClick(event) {
@@ -2126,7 +2305,7 @@
       if (!tag) return;
       els.search.value = tag.dataset.tag;
       state.searchQuery = tag.dataset.tag;
-      window.location.hash = "#/search";
+      window.location.hash = `#/search?query=${encodeURIComponent(tag.dataset.tag)}`;
       applyFilters({ resetScroll: true });
     });
     els.dpIconId.addEventListener("click", async () => {
@@ -2269,6 +2448,7 @@
         else if (state.searchQuery) {
           els.search.value = "";
           state.searchQuery = "";
+          history.replaceState(null, "", "#/search");
           applyFilters({ resetScroll: true });
         }
       } else if (event.key === "?" && !editing) {
@@ -2448,7 +2628,6 @@
     await prepareInitialIconsForRoute();
     generateSitemap();
     await handleRoute();
-    loadAllLibrariesInBackground();
   }
 
   document.addEventListener("DOMContentLoaded", () => {
