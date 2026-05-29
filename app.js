@@ -120,6 +120,37 @@
     return document.getElementById(id);
   }
 
+  function ensureCustomizePreviewSection() {
+    if ($("customize-section")) return;
+    const sortSection = $("sort-select")?.closest(".filter-section");
+    if (!sortSection) return;
+    sortSection.insertAdjacentHTML("afterend", `
+          <section class="filter-section expandable" id="customize-section">
+            <button class="filter-header category-toggle" id="customize-toggle" aria-expanded="false">
+              <h2>Customize Preview</h2>
+              <svg class="chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <div class="category-list customize-preview-controls" id="customize-content">
+              <div class="customize-field">
+                <div>Fill Color</div>
+                <div class="customize-color-row">
+                  <input type="text" id="cust-color-hex" class="mini-search" placeholder="#ffffff" value="#ffffff" />
+                  <button type="button" id="cust-color-btn" class="color-wheel-btn" aria-label="Choose fill color"></button>
+                  <input type="color" id="cust-color-wheel" class="hidden-color-input" value="#ffffff" tabindex="-1">
+                </div>
+              </div>
+              <div class="customize-field">
+                <div class="customize-stroke-row">
+                  <span>Stroke Width</span>
+                  <span id="cust-stroke-label">1.5px</span>
+                </div>
+                <input type="range" id="cust-stroke-slider" class="neon-slider" min="0.5" max="3" step="0.5" value="1.5">
+              </div>
+              <button id="cust-reset-btn" class="outlined-neon-btn custom-preview-reset">Reset</button>
+            </div>
+          </section>`);
+  }
+
   function cacheElements() {
     Object.assign(els, {
       html: document.documentElement,
@@ -2840,6 +2871,7 @@
   }
 
   async function init() {
+    ensureCustomizePreviewSection();
     cacheElements();
     initTheme();
     ui().init();
