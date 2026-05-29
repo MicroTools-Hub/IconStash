@@ -213,6 +213,7 @@
       bulkColor: $("bulk-color"),
       sitemap: $("sitemap-download"),
       custColorHex: $("cust-color-hex"),
+      custColorBtn: $("cust-color-btn"),
       custColorWheel: $("cust-color-wheel"),
       custStrokeLabel: $("cust-stroke-label"),
       custStrokeSlider: $("cust-stroke-slider"),
@@ -1293,7 +1294,8 @@
       state.rowHeight = 88;
     }
     state.cols = Math.max(1, Math.floor((width + 8) / (state.cardMin + 8)));
-    els.iconGrid.className = `density-${state.density} incremental-grid`;
+    els.iconGrid.classList.remove("density-compact", "density-default", "density-comfortable");
+    els.iconGrid.classList.add(`density-${state.density}`, "incremental-grid");
     els.iconGrid.style.setProperty("--cols", state.cols);
     document.documentElement.style.setProperty("--card-row-height", `${state.rowHeight}px`);
   }
@@ -2336,19 +2338,32 @@
         els.iconGrid.classList.add("customized-preview-color");
       };
 
+      els.custColorBtn.addEventListener("click", () => {
+        els.custColorWheel.click();
+      });
+
       els.custColorWheel.addEventListener("input", () => {
         const color = els.custColorWheel.value;
         els.custColorHex.value = color;
         applyColor(color);
       });
 
+      const normalizeHex = (value) => {
+        let val = String(value || "").trim();
+        if (/^#?[A-Fa-f0-9]{3}$/.test(val)) {
+          val = val.replace("#", "").split("").map((char) => char + char).join("");
+        } else if (!/^#?[A-Fa-f0-9]{6}$/.test(val)) {
+          return "";
+        }
+        return (val.startsWith("#") ? val : "#" + val).toLowerCase();
+      };
+
       els.custColorHex.addEventListener("input", () => {
-        let val = els.custColorHex.value.trim();
-        if (/^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(val)) {
-          if (!val.startsWith("#")) val = "#" + val;
+        const val = normalizeHex(els.custColorHex.value);
+        if (val) {
           els.custColorWheel.value = val;
           applyColor(val);
-        } else if (val === "") {
+        } else if (els.custColorHex.value.trim() === "") {
           applyColor("");
         }
       });

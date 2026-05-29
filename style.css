@@ -521,6 +521,22 @@ body.sidebar-collapsed .sidebar-collapse svg { transform: rotate(180deg); }
 .expandable.open .category-toggle .chevron { transform: rotate(90deg); }
 .category-list { overflow: hidden; max-height: 720px; transition: max-height 250ms ease-in-out; display: flex; flex-direction: column; gap: 4px; }
 .expandable:not(.open) .category-list { max-height: 0; }
+.customize-preview-controls { gap: 12px; padding-top: 6px; }
+.customize-field { display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--text-secondary); }
+.customize-color-row { display: flex; gap: 8px; align-items: center; }
+.customize-color-row .mini-search { flex: 1; }
+.color-wheel-btn {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-button);
+  background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red);
+  cursor: pointer;
+}
+.hidden-color-input { position: absolute; opacity: 0; pointer-events: none; width: 1px; height: 1px; }
+.customize-stroke-row { display: flex; justify-content: space-between; }
+.custom-preview-reset { min-height: 30px; font-size: 12px; width: 100%; }
 .category-item {
   display: grid;
   grid-template-columns: 10px minmax(0,1fr) auto;
@@ -763,11 +779,11 @@ body.sidebar-collapsed .sidebar-collapse svg { transform: rotate(180deg); }
 .icon-card:hover::before, .icon-card.selected::before, .icon-card.focused::before { opacity: 0; animation: none; }
 .icon-card.selected { background: var(--glass-4); }
 .icon-card.selected { border-color: var(--control-blue); }
-#icon-grid.customized-preview-color svg {
+#icon-grid.customized-preview-color .icon-wrap svg {
   color: var(--custom-icon-color) !important;
 }
-#icon-grid.customized-preview-stroke svg,
-#icon-grid.customized-preview-stroke svg * {
+#icon-grid.customized-preview-stroke .icon-wrap svg,
+#icon-grid.customized-preview-stroke .icon-wrap svg * {
   stroke-width: var(--custom-stroke-width) !important;
 }
 .icon-wrap { display: grid; place-items: center; color: var(--icon-color); transition: color 100ms ease; }
