@@ -700,7 +700,11 @@
         const fetchPromise = (async () => {
           try {
             const response = await request("data/prerender/libraries/" + encodeURIComponent(tempLib.slug) + "/chunk-" + tempChunkIndex + ".html");
-            if (response.ok) return await response.text();
+            if (response.ok) {
+              const text = await response.text();
+              state.prerender.chunkCache.set(key, text);
+              return text;
+            }
           } catch (_) {}
           return "";
         })();
@@ -710,33 +714,91 @@
     }
   }
 
+  function getPrerenderChunkSync(slug, chunkIndex) {
+    const inline = inlinePrerenderChunk(slug, chunkIndex);
+    if (inline) return inline;
+    const key = `${slug}_${chunkIndex}`;
+    const cached = state.prerender.chunkCache.get(key);
+    if (typeof cached === "string") return cached;
+    return "";
+  }
+
   function checkViewportFill() {
     if (els.gridView.classList.contains("hidden")) return;
     const container = els.gridContainer;
     if (!container) return;
     
-    const nearBottom = container.scrollTop + container.clientHeight > container.scrollHeight - 1800;
+    let nearBottom = container.scrollTop + container.clientHeight > container.scrollHeight - 1800;
     if (!nearBottom) return;
 
     if (state.prerender.active) {
       if (state.prerender.loading) return;
       const manifest = state.prerender.manifest;
       if (!manifest?.libraries?.length) return;
-      let libIndex = state.prerender.libraryIndex;
-      let lib = manifest.libraries[libIndex];
-      if (!lib) return;
-      let nextChunk = state.prerender.chunkIndex + 1;
-      const hasMoreChunks = nextChunk < lib.chunks || (state.prerender.mode !== "library" && libIndex + 1 < manifest.libraries.length);
-      if (hasMoreChunks) {
-        appendNextPrerenderChunk();
+      
+      while (nearBottom && !state.prerender.loading) {
+        let libIndex = state.prerender.libraryIndex;
+        let lib = manifest.libraries[libIndex];
+        if (!lib) break;
+        
+        let nextChunk = state.prerender.chunkIndex + 1;
+        if (nextChunk >= lib.chunks) {
+          if (state.prerender.mode === "library") break;
+          libIndex += 1;
+          lib = manifest.libraries[libIndex];
+          if (!lib) break;
+          nextChunk = 0;
+        }
+        
+        const cachedHtml = getPrerenderChunkSync(lib.slug, nextChunk);
+        if (cachedHtml) {
+          els.iconGrid.insertAdjacentHTML("beforeend", cachedHtml);
+          state.prerender.libraryIndex = libIndex;
+          state.prerender.slug = lib.slug;
+          state.prerender.chunkIndex = nextChunk;
+          
+          ui().qsa(".icon-wrap", els.iconGrid).forEach((wrap) => {
+            wrap.style.width = state.previewSize + "px";
+            wrap.style.height = state.previewSize + "px";
+          });
+          
+          syncPrerenderFavoriteButtons();
+          prefetchNextChunks(lib.slug, nextChunk);
+          
+          nearBottom = container.scrollTop + container.clientHeight > container.scrollHeight - 1800;
+        } else {
+          appendNextPrerenderChunk();
+          break;
+        }
       }
     } else {
-      if (state.visibleLimit < state.filteredIcons.length) {
-        state.visibleLimit = Math.min(state.filteredIcons.length, state.visibleLimit + state.batchSize);
-        updateVirtualScroll(false);
-      } else if (canLazyLoadBrowseLibrary() && !lazyLibraryLoad) {
-        loadNextLibraryForBrowse();
+      while (nearBottom) {
+        if (state.visibleLimit < state.filteredIcons.length) {
+          state.visibleLimit = Math.min(state.filteredIcons.length, state.visibleLimit + state.batchSize);
+          
+          const start = state.renderedCount;
+          const end = Math.min(state.visibleLimit, state.filteredIcons.length);
+          const parts = [];
+          const allCollections = window.IconStashCollections.all();
+          const collectedIds = new Set(allCollections.flatMap(col => col.icons));
+          for (let index = start; index < end; index += 1) {
+            if (isAllIconsGroupedMode() && shouldRenderLibraryHeader(index)) {
+              parts.push(renderLibraryHeader(state.filteredIcons[index]));
+            }
+            parts.push(renderCard(state.filteredIcons[index], index, collectedIds));
+          }
+          if (parts.length) els.iconGrid.insertAdjacentHTML("beforeend", parts.join(""));
+          state.renderedCount = end;
+          
+          nearBottom = container.scrollTop + container.clientHeight > container.scrollHeight - 1800;
+        } else if (canLazyLoadBrowseLibrary() && !lazyLibraryLoad) {
+          loadNextLibraryForBrowse();
+          break;
+        } else {
+          break;
+        }
       }
+      els.loadingMore.classList.add("hidden");
     }
   }
 
