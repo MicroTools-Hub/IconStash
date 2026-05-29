@@ -1,0 +1,6 @@
+IconStash deploy check
+Generated: 2026-05-29
+Marker: customize-preview-vps-root-check-20260529
+
+If you can read this at https://iconstash.io/deploy-check.txt, this folder is the live document root.
+If you cannot, the VPS is serving a different folder or a server/cache layer is blocking the update.
