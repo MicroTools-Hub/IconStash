@@ -2276,8 +2276,15 @@
       const row = event.target.closest("[data-slug]");
       if (!row || event.target.matches("input")) return;
       event.preventDefault();
+      const slug = row.dataset.slug;
       const input = row.querySelector("input");
-      input.checked = !input.checked;
+      if (state.selectedLibraries.has(slug) && state.selectedLibraries.size === 1) {
+        input.checked = true;
+        if (window.location.hash !== `#/library/${slug}`) window.location.hash = `#/library/${slug}`;
+        renderSidebarLibraries();
+        return;
+      }
+      input.checked = true;
       input.dispatchEvent(new Event("change", { bubbles: true }));
     });
     els.stylePills.addEventListener("click", (event) => {
