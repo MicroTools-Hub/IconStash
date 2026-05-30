@@ -92,7 +92,7 @@
       chunkCache: new Map()
     },
     backgroundSyncStarted: false,
-    customColor: "#ffffff",
+    customColor: "",
     customStrokeWidth: "1.5",
     rowHeight: 88,
     cardMin: 80,
@@ -2357,16 +2357,31 @@
       }
 
       // Live Color Customization sync (hex input + color wheel button)
+      const themePreviewColor = () => (
+        document.documentElement.dataset.theme === "light" ? "#000000" : "#ffffff"
+      );
+
+      const applyAutoColor = () => {
+        state.customColor = "";
+        els.iconGrid.style.setProperty("--custom-icon-color", themePreviewColor());
+        els.iconGrid.classList.add("customized-preview-color");
+      };
+
       const applyColor = (color) => {
         if (!color) {
-          state.customColor = "";
-          els.iconGrid.style.removeProperty("--custom-icon-color");
-          els.iconGrid.classList.remove("customized-preview-color");
+          applyAutoColor();
           return;
         }
         state.customColor = color;
         els.iconGrid.style.setProperty("--custom-icon-color", color);
         els.iconGrid.classList.add("customized-preview-color");
+      };
+
+      const syncDefaultColorInput = () => {
+        if (state.customColor) return;
+        const color = themePreviewColor();
+        els.custColorHex.value = color;
+        els.custColorWheel.value = color;
       };
 
       els.custColorBtn.addEventListener("click", () => {
@@ -2420,20 +2435,18 @@
 
       // Reset button
       els.custResetBtn.addEventListener("click", () => {
-        els.custColorHex.value = "#ffffff";
-        els.custColorWheel.value = "#ffffff";
+        applyAutoColor();
+        syncDefaultColorInput();
         els.custStrokeSlider.value = "1.5";
         els.custStrokeLabel.textContent = "1.5px";
-        applyColor("#ffffff");
         applyStroke("1.5");
       });
 
       // Initialize inputs and apply defaults on startup
-      els.custColorHex.value = state.customColor;
-      els.custColorWheel.value = state.customColor;
+      syncDefaultColorInput();
       els.custStrokeSlider.value = state.customStrokeWidth;
       els.custStrokeLabel.textContent = `${Number(state.customStrokeWidth).toFixed(1)}px`;
-      applyColor(state.customColor);
+      applyAutoColor();
       applyStroke(state.customStrokeWidth);
     }
   }
@@ -2789,6 +2802,13 @@
     const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
     document.documentElement.dataset.theme = next;
     localStorage.setItem("iconvault-theme", next);
+    if (!state.customColor && els.custColorHex && els.custColorWheel) {
+      const color = next === "light" ? "#000000" : "#ffffff";
+      els.custColorHex.value = color;
+      els.custColorWheel.value = color;
+      els.iconGrid?.style.setProperty("--custom-icon-color", color);
+      els.iconGrid?.classList.add("customized-preview-color");
+    }
   }
 
   function initTheme() {
