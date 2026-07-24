@@ -1,0 +1,57 @@
+# IconStash
+
+> IconStash is a free, open-source, browser-based icon search engine that unifies 28 open-source icon libraries — 134,701 SVG icons — into a single instant-search interface with live customization and one-click export to SVG, PNG, and React JSX. No login, no API key, and no attribution required for 94.5% of icons.
+
+IconStash (https://iconstash.io) is a 100% client-side web app built by Great Software Company. Users search across all 28 libraries at once, preview and recolor icons live, compare the same icon across libraries, and export to SVG, PNG (16–512px), React/JSX, Vue, CSS, HTML, or an SVG sprite. Every icon comes from a curated open-source library; 127,291 of 134,701 icons (94.5%) are MIT, Apache 2.0, ISC, or CC0 licensed and require zero attribution.
+
+## Key Facts
+- Total icons indexed: 134,701
+- Icon libraries: 28 (all open source)
+- Zero-attribution icons: 127,291 (94.5%) — MIT, Apache 2.0, ISC, CC0
+- Only attribution-required set: Solar Icons (CC BY 4.0, 7,410 icons)
+- Pre-rendered landing pages: 146,000+
+- Cost: free forever — no login, no premium tier, no API key
+- Rendering: 100% client-side (works offline after first load)
+- Export formats: SVG, PNG (16–512px), React JSX, Vue, CSS, HTML, SVG sprite
+- Data snapshot: 2026-05-05
+
+## Largest Libraries
+- Fluent UI Icons — 20,170 (MIT, Microsoft)
+- Material Symbols — 18,547 (Apache 2.0, Google)
+- Material Symbols Light — 15,969 (Apache 2.0, Google)
+- Material Design Icons — 14,001 (Apache 2.0, Pictogrammers)
+- Phosphor — 9,198 (MIT)
+- Solar Icons — 7,410 (CC BY 4.0)
+- Tabler Icons — 6,324 (MIT)
+- Lucide — 1,979 (ISC)
+
+## Open Data & Statistics
+- [Icon Library Statistics 2026](https://iconstash.io/stats/): Open dataset (CC BY 4.0) — per-library icon counts, versions, and licenses for all 28 libraries, plus aggregate and license breakdowns.
+
+## Documentation & Guides
+- [React Icons: Complete Developer Guide 2026](https://iconstash.io/articles/react-icons-complete-guide-2026/)
+- [37 Best Free Icon Sets for Developers 2026](https://iconstash.io/Listicles/best-free-icon-sets-2026/)
+- [Icon & SVG Glossary (50+ terms)](https://iconstash.io/Glossary/icon-svg-terminology/)
+- [Free SVG Icons for Commercial Use](https://iconstash.io/articles/free-svg-icons-commercial-use-2026/)
+- [Lucide vs Feather Icons](https://iconstash.io/articles/lucide-vs-feather-icons-2026/)
+- [How to Build a Scalable Icon System](https://iconstash.io/articles/how-to-build-scalable-icon-system/)
+- [All articles](https://iconstash.io/articles/)
+
+## Comparisons
+- IconStash vs Flaticon: Flaticon requires attribution or a paid plan; IconStash is free with zero attribution because every icon is open source.
+- IconStash vs Iconify: Iconify is a runtime delivery framework (loads icons via API/components); IconStash is a visual discovery and export tool.
+- IconStash vs SVGRepo: SVGRepo mixes licenses across uploads; IconStash uses only curated open-source libraries with clear, documented per-library licenses.
+- IconStash vs Font Awesome: Font Awesome gates many icons behind a Pro plan; IconStash is fully free.
+
+## Common Questions
+Q: Is IconStash free? A: Yes — 100% free, no login, no premium tier, no API key.
+Q: Do I need to give attribution? A: No for 94.5% of icons (MIT/Apache/ISC/CC0). Only Solar Icons (CC BY 4.0) requests attribution.
+Q: Which library has the most icons? A: Fluent UI Icons (Microsoft), with 20,170 icons.
+Q: Can I use the icons commercially? A: Yes — 127,291 icons are free for commercial use with no attribution.
+
+## About
+- Publisher: IconStash, a project by Great Software Company (https://greatsoftwarecompany.com)
+- Source / GitHub: https://github.com/OG-Huzzi/IconStash
+- Reuse of the data in this file: CC BY 4.0 — please attribute "IconStash, https://iconstash.io".
+
+Last updated: 2026-07-19

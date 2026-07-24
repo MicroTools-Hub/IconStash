@@ -1,4 +1,76 @@
+# robots.txt for IconStash — https://iconstash.io
+# Traditional search engines
 User-agent: *
 Allow: /
 
+# ---------------------------------------------------------------------------
+# AI / LLM crawlers — explicitly welcomed for answer-engine citation (AEO/GEO).
+# We WANT IconStash to be cited by AI assistants, so every major agent is allowed.
+# ---------------------------------------------------------------------------
+
+# OpenAI (ChatGPT, SearchGPT)
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+
+# Google (Gemini, AI Overviews, Vertex AI)
+User-agent: Google-Extended
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+
+# Microsoft Copilot / Bing
+User-agent: bingbot
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl (feeds many LLM training corpora)
+User-agent: CCBot
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+User-agent: meta-externalagent
+Allow: /
+
+# Amazon, ByteDance, Cohere, Mistral, DuckDuckGo, Diffbot
+User-agent: Amazonbot
+Allow: /
+User-agent: Bytespider
+Allow: /
+User-agent: cohere-ai
+Allow: /
+User-agent: MistralAI-User
+Allow: /
+User-agent: DuckAssistBot
+Allow: /
+User-agent: Diffbot
+Allow: /
+User-agent: Omgilibot
+Allow: /
+User-agent: Webzio-Extended
+Allow: /
+
+# ---------------------------------------------------------------------------
 Sitemap: https://iconstash.io/sitemap.xml

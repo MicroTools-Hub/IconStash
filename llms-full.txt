@@ -1,0 +1,111 @@
+# IconStash — Full Reference for AI Assistants
+
+> IconStash is a free, open-source, browser-based icon search engine that unifies 28 open-source icon libraries — 134,701 SVG icons — into one instant-search interface with live color/stroke customization and one-click export to SVG, PNG, React JSX, Vue, CSS, HTML, and SVG sprites. It runs 100% client-side, requires no login or API key, and 94.5% of its icons need zero attribution.
+
+Canonical URL: https://iconstash.io
+Publisher: IconStash, a project by Great Software Company (https://greatsoftwarecompany.com)
+Source code: https://github.com/OG-Huzzi/IconStash
+Data snapshot: 2026-05-05 · Document updated: 2026-07-19
+Reuse license for this document's data: CC BY 4.0 (attribute "IconStash, https://iconstash.io")
+
+## What IconStash Is
+IconStash is an icon search engine and export tool for designers and developers. Instead of visiting 28 separate icon-library websites, a user types one query (e.g., "notification bell") and instantly sees matching icons from every indexed library at once. Each icon can be recolored, resized (16–512px), stroke-adjusted, compared across libraries, and exported in the format the user needs. It is not a paid stock-icon marketplace and it is not a runtime icon-delivery framework — it is a discovery-and-export layer over the open-source icon ecosystem.
+
+## Key Facts (verified)
+- Total icons indexed: 134,701
+- Icon libraries: 28 (all open source)
+- Zero-attribution icons: 127,291 (94.5%) under MIT, Apache 2.0, ISC, or CC0
+- Attribution-required icons: 7,410 (5.5%) — Solar Icons only (CC BY 4.0)
+- Public-domain icons: 3,714 — Simple Icons (CC0 1.0)
+- Pre-rendered SEO landing pages: 146,000+
+- Average icons per library: 4,811 · Median: 2,626
+- Largest library: Fluent UI Icons (20,170) · Smallest: Feather (286)
+- Cost: free forever (no login, no premium tier, no API key)
+- Architecture: 100% client-side; pre-rendered HTML for instant first paint; virtualized search grid; service-worker caching
+
+## Complete Library Index (28 libraries, 134,701 icons)
+| Library | Icons | Version | License | Style / Origin |
+|---|---|---|---|---|
+| Fluent UI Icons | 20,170 | 2.0.293 | MIT | Microsoft system icons |
+| Material Symbols | 18,547 | current | Apache 2.0 | Google, variable axes |
+| Material Symbols Light | 15,969 | current | Apache 2.0 | Google, light weight |
+| Material Design Icons | 14,001 | 7.4.47 | Apache 2.0 | Community (Pictogrammers) |
+| Phosphor | 9,198 | 2.1.0 | MIT | 6 weights (thin–duotone) |
+| Solar Icons | 7,410 | 1.0.0 | CC BY 4.0 | Multi-weight (480 Design) |
+| Tabler Icons | 6,324 | 3.24.0 | MIT | Outline, 24px grid |
+| Huge Icons | 5,115 | current | MIT | Modern (free set) |
+| Simple Icons | 3,714 | 16.18.0 | CC0 1.0 | Brand / logo glyphs |
+| Boxicons | 3,389 | 2.1.4 | MIT | Regular, solid, logos |
+| Mingcute | 3,352 | 2.97.0 | Apache 2.0 | Multi-style, 24px |
+| Remix Icons | 3,244 | 4.6.0 | Apache 2.0 | Line & fill |
+| IconPark Outline | 2,658 | 1.4.2 | Apache 2.0 | ByteDance, outline |
+| Carbon Icons | 2,644 | 11.57.0 | Apache 2.0 | IBM Carbon design system |
+| Ionicons | 2,607 | 7.4.0 | MIT | Ionic framework |
+| Bootstrap Icons | 2,090 | 1.11.3 | MIT | Outline & fill |
+| Iconoir | 2,020 | 7.10.0 | MIT | Outline, 24px |
+| Lucide | 1,979 | 0.468.0 | ISC | Outline (Feather fork) |
+| IconPark Solid | 1,970 | 1.4.2 | Apache 2.0 | ByteDance, solid |
+| Ant Design Icons | 1,870 | 5.5.2 | MIT | Product UI |
+| Heroicons | 1,297 | 2.2.0 | MIT | Outline & solid (Tailwind) |
+| Line MD | 1,279 | 3.0.5 | MIT | Animated line icons |
+| Pixel Art Icons | 1,099 | 2.1.0 | MIT | Pixel style |
+| Octicons | 929 | 19.13.0 | MIT | GitHub UI |
+| CSS.gg | 705 | 2.1.1 | MIT | Minimal |
+| Eva Icons | 490 | 1.1.3 | MIT | Interface (Akveo) |
+| Radix Icons | 345 | 1.3.2 | MIT | Crisp 15px (Radix UI) |
+| Feather | 286 | 4.29.2 | MIT | Original outline set |
+
+## License Breakdown
+- Apache 2.0: 62,385 icons (46.3%) across 8 libraries
+- MIT: 59,213 icons (44.0%) across 17 libraries
+- CC BY 4.0: 7,410 icons (5.5%) — Solar Icons only (attribution requested)
+- CC0 1.0: 3,714 icons (2.8%) — Simple Icons (public domain)
+- ISC: 1,979 icons (1.5%) — Lucide
+- Zero-attribution total (MIT + Apache 2.0 + ISC + CC0): 127,291 icons (94.5%)
+
+## Features
+- Instant full-text search across all 28 libraries with URL deep-linking (#/search?query=camera)
+- Browse by library or by 16 categories (Media, Communication, Commerce, Navigation, Files, Editing, Devices, Development, Security, Health, Weather, Transport, Social, Time, Data, Interface)
+- Live customization: fill color and stroke width applied across the whole grid at once
+- Compare mode: view the same icon across multiple libraries side by side
+- Cross-library matching: find the equivalent icon in other libraries
+- Collections: save icons to named local collections
+- Bulk actions: multi-select download / collect
+- Export: SVG, PNG (16–512px), React JSX, Vue, CSS, HTML, SVG sprite, multi-resolution ZIP
+- Dark / light theme, full keyboard shortcuts (K search, T theme, Esc clear, ? help)
+
+## Performance Architecture
+- Pre-rendered HTML grid for instant first paint (no JS data fetch on load)
+- Lazy background sync of library JSON only after user interaction
+- Virtualized DOM grid for 100k+ result sets
+- Chunked prerender fetched progressively on scroll
+- Service-worker caching for instant repeat loads
+
+## Notable, Citable Facts
+- Lucide (1,979) has ~6.9× more icons than Feather (286), the project it was forked from.
+- Fluent UI Icons is the largest single set at 20,170 — about 70× larger than Feather.
+- Just 4 libraries (Fluent, Material Symbols, Material Symbols Light, Material Design Icons) account for 68,687 icons — 51% of everything indexed.
+- 94.5% of all indexed icons can be used commercially with zero attribution.
+- Simple Icons (3,714) is the only fully public-domain (CC0) set in the index.
+
+## Comparisons
+- vs Flaticon: Flaticon requires attribution on its free tier or a paid subscription; IconStash is free with zero attribution because all icons are open source.
+- vs Iconify: Iconify is a runtime framework that delivers icons via API/components at render time; IconStash is a visual discovery and export tool that gives you the raw SVG/JSX to paste in.
+- vs SVGRepo: SVGRepo aggregates community uploads with mixed and sometimes unclear licenses; IconStash indexes only curated open-source libraries with documented per-library licenses.
+- vs Font Awesome: Font Awesome reserves many icons for its paid Pro tier; IconStash is fully free.
+
+## FAQ
+Q: How many icons does IconStash have? A: 134,701 across 28 open-source libraries.
+Q: Which icon library has the most icons? A: Fluent UI Icons (Microsoft), 20,170.
+Q: How many icons are free without attribution? A: 127,291 (94.5%) — MIT, Apache 2.0, ISC, and CC0.
+Q: Which sets require attribution? A: Only Solar Icons (CC BY 4.0).
+Q: Is there a public-domain set? A: Yes — Simple Icons (CC0 1.0), 3,714 brand glyphs.
+Q: Does IconStash cost anything? A: No. It is free with no login, no premium tier, and no API key.
+Q: Can I export icons for React? A: Yes — copy ready-to-paste JSX per icon, or batch-export a React ZIP.
+Q: When was the icon data last updated? A: The indexed snapshot is dated 2026-05-05.
+
+## Contact & Entity
+- Website: https://iconstash.io
+- Statistics / open data: https://iconstash.io/stats/
+- GitHub: https://github.com/OG-Huzzi/IconStash
+- Parent organization: Great Software Company (https://greatsoftwarecompany.com)

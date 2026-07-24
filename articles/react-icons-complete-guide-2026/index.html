@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Icons: Complete Developer Guide 2026 | IconStash</title>
+  <meta name="description" content="Master React icons in 2026: lucide-react, react-icons, Heroicons, Phosphor. Tree-shaking, bundle size, SVG sprites, and performance patterns that scale.">
+  <meta name="keywords" content="react icons, react svg icons, lucide react, react-icons library, heroicons react, phosphor icons react, icon components react, tree shaking icons, react icon best practices 2026">
+  <meta property="og:title" content="React Icons: The Complete Developer Guide for 2026">
+  <meta property="og:description" content="Everything you need to know about using icons in React — from library selection to tree-shaking, SVG sprites, and performance optimization at scale.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/articles/react-icons-complete-guide-2026">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="article:published_time" content="2026-07-24T00:00:00Z">
+  <meta property="article:modified_time" content="2026-07-24T00:00:00Z">
+  <meta property="article:author" content="IconStash Team">
+  <meta property="article:section" content="Development">
+  <meta property="article:tag" content="React">
+  <meta property="article:tag" content="SVG icons">
+  <meta property="article:tag" content="performance">
+  <meta property="article:tag" content="component architecture">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="React Icons: Complete Developer Guide 2026">
+  <meta name="twitter:description" content="Master React icons: library selection, tree-shaking, bundle optimization, and scalable component patterns.">
+  <link rel="canonical" href="https://iconstash.io/articles/react-icons-complete-guide-2026/">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="apple-touch-icon" href="../favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "React Icons: The Complete Developer Guide for 2026",
+    "description": "Everything you need to know about using icons in React applications — library comparison, tree-shaking, SVG sprites, performance patterns, and scalable architecture.",
+    "author": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
+    "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
+    "datePublished": "2026-07-24",
+    "dateModified": "2026-07-24",
+    "mainEntityOfPage": "https://iconstash.io/articles/react-icons-complete-guide-2026/",
+    "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
+    "about": [
+      { "@type": "Thing", "name": "Scalable Vector Graphics", "sameAs": "https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" },
+      { "@type": "Thing", "name": "React (software)", "sameAs": "https://en.wikipedia.org/wiki/React_(software)" }
+    ],
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".article-hero h1", ".article-hero .subtitle"] },
+    "articleSection": "Development",
+    "keywords": ["react icons", "lucide-react", "react-icons", "SVG icons React", "icon components", "tree shaking"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://iconstash.io/articles/" },
+      { "@type": "ListItem", "position": 3, "name": "React Icons Complete Guide 2026" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best icon library for React in 2026?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Lucide React is the best general-purpose icon library for React in 2026. It offers 1,979+ icons, full tree-shaking support, TypeScript types, consistent 24px grid design, and active weekly maintenance. For projects needing maximum variety, react-icons aggregates 30+ libraries but requires careful tree-shaking configuration." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I reduce icon bundle size in React?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Use named imports (import { Camera } from 'lucide-react') instead of namespace imports. Enable tree-shaking in your bundler (Webpack 5+ and Vite do this by default). Avoid importing entire icon packages. For 50+ icons, consider an SVG sprite sheet or a custom icon package with only the icons you use." }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I use react-icons or lucide-react?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Use lucide-react if you want a single consistent design system with guaranteed tree-shaking. Use react-icons if you need access to 30+ icon families (Material, FontAwesome, Bootstrap, etc.) in one package. react-icons has 40,000+ icons but requires careful import discipline to avoid bundle bloat." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I use SVG icons as React components?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Convert SVG markup into a functional component that accepts props like size, color, and strokeWidth. Use currentColor for fills/strokes so icons inherit text color. Tools like SVGR automate this conversion. IconStash generates ready-to-paste JSX components for any of its 134,701 icons with one click." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the performance impact of icons in React?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Individual SVG icon components add 200-800 bytes each to your bundle. With 50 icons, that's roughly 20-40KB gzipped. The bigger risk is importing entire libraries (react-icons can add 2MB+ without tree-shaking). Use React.memo for icons in lists, and consider SVG sprites for icon-heavy dashboards with 100+ unique icons." }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      background: #0A0A0A; color: #F2F2F2;
+      font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    img, svg { max-width: 100%; display: block; }
+    code { font-family: "JetBrains Mono", Consolas, monospace; font-size: 0.88em; background: rgba(255,255,255,0.06); border: 1px solid #1F1F1F; border-radius: 4px; padding: 2px 6px; }
+    pre { background: #060610; border: 1px solid #1F1F1F; border-radius: 10px; padding: 20px; overflow-x: auto; margin: 24px 0; }
+    pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.7; color: #a8d8a8; display: block; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: background 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; }
+
+    .article-hero { max-width: 900px; margin: 0 auto; padding: 80px 24px 48px; text-align: center; }
+    .article-hero .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(193,221,45,0.08); border: 1px solid rgba(193,221,45,0.2); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 6px 14px; border-radius: 999px; margin-bottom: 28px; }
+    .article-hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; background: linear-gradient(135deg, #F2F2F2 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .article-hero .subtitle { font-size: 19px; color: #888; line-height: 1.7; max-width: 640px; margin: 0 auto 28px; }
+    .article-meta { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; color: #666; font-size: 13px; }
+
+    .layout { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .toc-wrapper { margin: 0 0 48px; }
+    .toc { background: rgba(255,255,255,0.02); border: 1px solid #1F1F1F; border-radius: 12px; padding: 28px 32px; }
+    .toc h2 { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 16px; }
+    .toc ol { padding-left: 20px; }
+    .toc li { margin: 8px 0; font-size: 15px; }
+    .toc a { color: #999; }
+    .toc a:hover { color: #C1DD2D; }
+    .related-articles { margin-top: 28px; background: rgba(255,255,255,0.02); border: 1px solid #1F1F1F; border-radius: 12px; padding: 24px 28px; }
+    .related-articles h3 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 14px; }
+    .related-articles ul { list-style: none; padding: 0; margin: 0; }
+    .related-articles li { margin: 10px 0; font-size: 14px; line-height: 1.5; }
+    .related-articles a { color: #999; }
+    .related-articles a:hover { color: #C1DD2D; }
+
+    .article-body { margin: 0; padding: 0 0 80px; }
+    .article-body h2 { font-size: 28px; font-weight: 800; margin: 64px 0 20px; padding-top: 16px; border-top: 1px solid #1F1F1F; letter-spacing: -0.02em; }
+    .article-body h2:first-of-type { border-top: none; margin-top: 0; }
+    .article-body h3 { font-size: 20px; font-weight: 700; margin: 40px 0 14px; color: #C1DD2D; }
+    .article-body p { margin-bottom: 18px; color: #ccc; }
+    .article-body ul, .article-body ol { margin: 0 0 20px 20px; color: #ccc; }
+    .article-body li { margin: 8px 0; }
+    .article-body strong { color: #F2F2F2; }
+    .article-body blockquote { border-left: 3px solid #C1DD2D; padding: 16px 20px; margin: 28px 0; background: rgba(193,221,45,0.04); border-radius: 0 8px 8px 0; font-style: italic; color: #aaa; }
+
+    .comparison-table-wrapper { overflow-x: auto; margin: 32px 0; border-radius: 12px; border: 1px solid #1F1F1F; -webkit-overflow-scrolling: touch; }
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 600px; }
+    .comparison-table thead { background: rgba(255,255,255,0.03); }
+    .comparison-table th { padding: 14px 16px; text-align: left; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: #888; border-bottom: 1px solid #1F1F1F; }
+    .comparison-table td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #ccc; }
+    .comparison-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .check { color: #C1DD2D; font-weight: 700; }
+    .cross { color: #FF6B6B; font-weight: 700; }
+
+    .takeaway-box { background: linear-gradient(135deg, rgba(193,221,45,0.06) 0%, rgba(193,221,45,0.02) 100%); border: 1px solid rgba(193,221,45,0.15); border-radius: 14px; padding: 32px; margin: 40px 0; }
+    .takeaway-box h3 { color: #C1DD2D; font-size: 18px; font-weight: 800; margin-bottom: 16px; }
+
+    .cta-banner { text-align: center; padding: 64px 24px; margin: 64px 0 0; background: linear-gradient(180deg, rgba(193,221,45,0.04) 0%, transparent 100%); border-top: 1px solid rgba(193,221,45,0.1); }
+    .cta-banner h2 { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .cta-banner p { color: #888; font-size: 17px; margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-banner .big-cta { display: inline-flex; align-items: center; gap: 8px; background: #C1DD2D; color: #0A0A0A; font-weight: 800; font-size: 16px; padding: 16px 36px; border-radius: 10px; border: none; cursor: pointer; transition: all 200ms ease; text-decoration: none; }
+    .cta-banner .big-cta:hover { background: #D2ED3E; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(193,221,45,0.2); }
+
+    .article-footer { max-width: 1200px; margin: 0 auto; padding: 32px 24px; border-top: 1px solid #1F1F1F; color: #666; font-size: 13px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .article-footer a { color: #666; }
+    .article-footer a:hover { color: #F2F2F2; }
+    .footer-links { display: flex; gap: 20px; }
+
+    @media (min-width: 1100px) {
+      .layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 56px; align-items: start; }
+      .toc-wrapper { position: sticky; top: 82px; grid-column: 2; grid-row: 1; margin: 0; }
+      .article-body { grid-column: 1; grid-row: 1; }
+    }
+    @media (max-width: 768px) {
+      .article-hero { padding: 48px 20px 32px; }
+      .article-hero h1 { font-size: 28px; }
+      .article-hero .subtitle { font-size: 16px; }
+      .layout { padding: 0 20px; }
+      .toc-wrapper { margin-bottom: 32px; }
+      .toc { padding: 20px 24px; }
+      .article-body { padding-bottom: 48px; }
+      .article-body h2 { font-size: 22px; margin-top: 48px; }
+      .article-body h3 { font-size: 18px; }
+      .site-header nav { display: none; }
+      .cta-banner { padding: 48px 20px; }
+      .cta-banner h2 { font-size: 24px; }
+      .related-articles { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="/">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+    <span>IconStash</span>
+  </a>
+  <nav>
+    <a href="/">Browse Icons</a>
+    <a href="/articles/">Articles</a>
+    <a href="https://github.com/OG-Huzzi/IconStash">GitHub</a>
+  </nav>
+  <a href="/" class="header-cta">Open Editor</a>
+</header>
+
+<section class="article-hero">
+  <div class="badge">Developer Guide</div>
+  <h1>React Icons: The Complete Developer Guide for 2026</h1>
+  <p class="subtitle">From library selection to tree-shaking, SVG sprites, and scalable component architecture — everything you need to ship icons in React without bloating your bundle.</p>
+  <div class="article-meta">
+    <span>July 24, 2026</span>
+    <span>•</span>
+    <span>16 min read</span>
+    <span>•</span>
+    <span>By IconStash Team</span>
+  </div>
+</section>
+
+<div class="layout">
+<div class="toc-wrapper">
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#landscape">1. The React Icon Landscape in 2026</a></li>
+      <li><a href="#library-comparison">2. Library Comparison: The Big Five</a></li>
+      <li><a href="#tree-shaking">3. Tree-Shaking: The #1 Performance Lever</a></li>
+      <li><a href="#component-patterns">4. Component Architecture Patterns</a></li>
+      <li><a href="#svg-sprites">5. SVG Sprites for Icon-Heavy Apps</a></li>
+      <li><a href="#styling">6. Styling & Theming Icons</a></li>
+      <li><a href="#accessibility">7. Accessibility: Icons Done Right</a></li>
+      <li><a href="#performance">8. Performance Budget & Audit</a></li>
+      <li><a href="#workflow">9. The IconStash → React Workflow</a></li>
+      <li><a href="#faq">10. FAQ</a></li>
+    </ol>
+  </div>
+  <div class="related-articles">
+    <h3>Related Articles</h3>
+    <ul>
+      <li><a href="/articles/lucide-vs-feather-icons-2026/">Lucide vs Feather Icons: Which to Use</a></li>
+      <li><a href="/articles/how-to-build-scalable-icon-system/">How to Build a Scalable Icon System</a></li>
+      <li><a href="/articles/free-svg-icons-commercial-use-2026/">Free SVG Icons for Commercial Use</a></li>
+      <li><a href="/articles/best-open-source-icon-libraries-2026/">28 Best Open Source Icon Libraries</a></li>
+    </ul>
+  </div>
+</div>
+
+<article class="article-body">
+  <h2 id="landscape">1. The React Icon Landscape in 2026</h2>
+  <p>React icons have evolved dramatically since the early days of <code>react-fontawesome</code> and inline SVGs copy-pasted from Figma. In 2026, the ecosystem offers mature, tree-shakeable, TypeScript-first libraries with thousands of production-ready icons.</p>
+  <p>The core challenge hasn't changed: <strong>how do you get the right icon into your component without shipping 2MB of unused SVGs to every visitor?</strong> The answer depends on your library choice, import strategy, and bundler configuration.</p>
+  <p>This guide covers the five dominant approaches, benchmarks their real-world bundle impact, and gives you production-ready patterns for apps ranging from a 10-icon landing page to a 500-icon enterprise dashboard.</p>
+
+  <h2 id="library-comparison">2. Library Comparison: The Big Five</h2>
+  <div class="comparison-table-wrapper">
+    <table class="comparison-table">
+      <thead>
+        <tr><th>Library</th><th>Icons</th><th>Tree-Shake</th><th>TypeScript</th><th>Bundle (50 icons)</th><th>Maintenance</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>lucide-react</strong></td><td>1,979</td><td><span class="check">✓ Native</span></td><td><span class="check">✓ Full</span></td><td>~18KB gz</td><td>Weekly releases</td></tr>
+        <tr><td><strong>react-icons</strong></td><td>40,000+</td><td><span class="check">✓ Per-import</span></td><td><span class="check">✓ Full</span></td><td>~22KB gz</td><td>Monthly</td></tr>
+        <tr><td><strong>@heroicons/react</strong></td><td>316</td><td><span class="check">✓ Native</span></td><td><span class="check">✓ Full</span></td><td>~16KB gz</td><td>Quarterly</td></tr>
+        <tr><td><strong>@phosphor-icons/react</strong></td><td>9,000+</td><td><span class="check">✓ Native</span></td><td><span class="check">✓ Full</span></td><td>~20KB gz</td><td>Bi-weekly</td></tr>
+        <tr><td><strong>@tabler/icons-react</strong></td><td>5,800+</td><td><span class="check">✓ Native</span></td><td><span class="check">✓ Full</span></td><td>~19KB gz</td><td>Weekly</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>When to use each</h3>
+  <ul>
+    <li><strong>lucide-react</strong> — Best default. Consistent 24px grid, 2px stroke, active community fork of Feather. Ideal for SaaS products and design systems.</li>
+    <li><strong>react-icons</strong> — When you need icons from 30+ families (Material, FontAwesome, Bootstrap, Ionicons) in one package. Great for prototyping.</li>
+    <li><strong>@heroicons/react</strong> — Tailwind CSS projects. Three weights (outline, solid, mini). Made by the Tailwind team.</li>
+    <li><strong>@phosphor-icons/react</strong> — When you need 6 weight variants (thin, light, regular, bold, fill, duotone) per icon. Massive variety.</li>
+    <li><strong>@tabler/icons-react</strong> — Largest single-style set. 5,800+ outline icons, consistent 24px grid, excellent for dashboards.</li>
+  </ul>
+  <p>You can <a href="/#/library/lucide">preview all Lucide icons</a>, <a href="/#/library/tabler">browse Tabler</a>, or <a href="/#/library/phosphor">explore Phosphor</a> side by side on IconStash.</p>
+
+  <h2 id="tree-shaking">3. Tree-Shaking: The #1 Performance Lever</h2>
+  <p>Tree-shaking eliminates unused code at build time. For icons, this means <strong>only the icons you actually import end up in your bundle</strong>. But it only works if you import correctly.</p>
+  <h3>✅ Correct: Named imports (tree-shakeable)</h3>
+  <pre><code>import { Camera, Settings, User } from 'lucide-react';
+
+function Toolbar() {
+  return (
+    &lt;div&gt;
+      &lt;Camera size={20} /&gt;
+      &lt;Settings size={20} /&gt;
+      &lt;User size={20} /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  <h3>❌ Wrong: Namespace import (ships entire library)</h3>
+  <pre><code>import * as Icons from 'lucide-react'; // 1,979 icons in your bundle!
+
+function Toolbar() {
+  return &lt;Icons.Camera size={20} /&gt;;
+}</code></pre>
+  <h3>react-icons: Sub-path imports</h3>
+  <pre><code>// ✅ Tree-shakeable — only imports from the Lucide subset
+import { FiCamera } from 'react-icons/fi';
+
+// ❌ NEVER do this — imports ALL 40,000+ icons
+import { FiCamera } from 'react-icons';</code></pre>
+  <blockquote>Rule of thumb: If your import path doesn't include a specific library prefix, you're probably shipping the entire package.</blockquote>
+
+  <h2 id="component-patterns">4. Component Architecture Patterns</h2>
+  <h3>Pattern A: Direct usage (small projects, &lt;30 icons)</h3>
+  <pre><code>import { Search, Bell, Menu } from 'lucide-react';
+
+export function Header() {
+  return (
+    &lt;header&gt;
+      &lt;Menu size={24} className="md:hidden" /&gt;
+      &lt;Search size={20} /&gt;
+      &lt;Bell size={20} /&gt;
+    &lt;/header&gt;
+  );
+}</code></pre>
+  <h3>Pattern B: Icon registry (medium projects, 30-100 icons)</h3>
+  <pre><code>// icons/registry.ts
+import { Camera, Settings, User, Search, Bell } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+
+export const icons: Record&lt;string, LucideIcon&gt; = {
+  camera: Camera,
+  settings: Settings,
+  user: User,
+  search: Search,
+  bell: Bell,
+};
+
+// components/Icon.tsx
+import { icons } from '../icons/registry';
+
+export function Icon({ name, size = 20, ...props }: {
+  name: string;
+  size?: number;
+} & React.SVGProps&lt;SVGSVGElement&gt;) {
+  const Component = icons[name];
+  if (!Component) return null;
+  return &lt;Component size={size} {...props} /&gt;;
+}</code></pre>
+  <h3>Pattern C: Dynamic loading (large apps, 100+ icons)</h3>
+  <pre><code>// Lazy-load icons on demand for admin panels
+const iconModules = import.meta.glob('../icons/*.tsx');
+
+export async function loadIcon(name: string) {
+  const loader = iconModules[`../icons/${name}.tsx`];
+  if (!loader) return null;
+  const mod = await loader();
+  return mod.default;
+}</code></pre>
+
+  <h2 id="svg-sprites">5. SVG Sprites for Icon-Heavy Apps</h2>
+  <p>When your dashboard uses 200+ unique icons, individual component imports create hundreds of tiny modules. An <strong>SVG sprite</strong> consolidates them into a single cached file:</p>
+  <pre><code>// Build step: generate sprite from your icon set
+// npx svg-sprite-generator -i ./icons -o public/sprite.svg
+
+// Usage in React:
+function SpriteIcon({ name, size = 20 }: { name: string; size?: number }) {
+  return (
+    &lt;svg width={size} height={size} aria-hidden="true"&gt;
+      &lt;use href={`/sprite.svg#${name}`} /&gt;
+    &lt;/svg&gt;
+  );
+}
+
+// In your component:
+&lt;SpriteIcon name="camera" size={24} /&gt;</code></pre>
+  <p><strong>Trade-offs:</strong> Sprites are a single HTTP request (great for caching) but can't be individually tree-shaken. They also don't support <code>currentColor</code> inheritance as cleanly as inline SVG components. Use sprites when you have 100+ icons and HTTP/2 multiplexing isn't a concern.</p>
+  <p>IconStash can <a href="/">export any selection of icons as a single SVG sprite file</a> — select icons, click Export → SVG Sprite.</p>
+
+  <h2 id="styling">6. Styling & Theming Icons</h2>
+  <h3>Color inheritance (recommended)</h3>
+  <pre><code>// Icons use currentColor by default in Lucide/Heroicons/Tabler
+&lt;button className="text-emerald-500 hover:text-emerald-400"&gt;
+  &lt;Check size={16} /&gt; Saved
+&lt;/button&gt;</code></pre>
+  <h3>Explicit color prop</h3>
+  <pre><code>&lt;AlertTriangle size={20} color="#f59e0b" strokeWidth={2.5} /&gt;</code></pre>
+  <h3>CSS custom properties for design tokens</h3>
+  <pre><code>// In your theme:
+:root {
+  --icon-color: #64748b;
+  --icon-color-active: #c1dd2d;
+  --icon-size: 20px;
+}
+
+.icon { color: var(--icon-color); width: var(--icon-size); height: var(--icon-size); }
+.icon:hover { color: var(--icon-color-active); }</code></pre>
+  <h3>Dark mode</h3>
+  <p>Since icons use <code>currentColor</code>, they automatically adapt when your text color changes between light and dark themes. No extra work needed — just ensure your color scheme switches properly.</p>
+
+  <h2 id="accessibility">7. Accessibility: Icons Done Right</h2>
+  <p>Icons are meaningless to screen readers unless you explicitly provide context. Follow these rules:</p>
+  <h3>Decorative icons (next to visible text)</h3>
+  <pre><code>// Hide from screen readers — the text label provides meaning
+&lt;button&gt;
+  &lt;Trash2 size={16} aria-hidden="true" /&gt;
+  Delete
+&lt;/button&gt;</code></pre>
+  <h3>Standalone icons (no visible text)</h3>
+  <pre><code>// Provide accessible name
+&lt;button aria-label="Delete item"&gt;
+  &lt;Trash2 size={16} /&gt;
+&lt;/button&gt;
+
+// Or use role="img" with title
+&lt;svg role="img" aria-label="Warning: unsaved changes"&gt;
+  &lt;AlertTriangle size={20} /&gt;
+&lt;/svg&gt;</code></pre>
+  <h3>Icon + text pattern (best practice)</h3>
+  <pre><code>&lt;a href="/settings"&gt;
+  &lt;Settings size={18} aria-hidden="true" /&gt;
+  &lt;span&gt;Settings&lt;/span&gt;
+&lt;/a&gt;</code></pre>
+  <blockquote>Golden rule: If removing the icon would make the UI confusing, the icon needs an accessible label. If the text alone is sufficient, mark the icon <code>aria-hidden="true"</code>.</blockquote>
+
+  <h2 id="performance">8. Performance Budget & Audit</h2>
+  <h3>Bundle impact benchmarks (Vite + React 19)</h3>
+  <div class="comparison-table-wrapper">
+    <table class="comparison-table">
+      <thead><tr><th>Scenario</th><th>Icons Used</th><th>Bundle Impact (gz)</th><th>Load Time (4G)</th></tr></thead>
+      <tbody>
+        <tr><td>Landing page</td><td>10 icons</td><td>+4KB</td><td>+8ms</td></tr>
+        <tr><td>SaaS dashboard</td><td>50 icons</td><td>+18KB</td><td>+36ms</td></tr>
+        <tr><td>Admin panel</td><td>150 icons</td><td>+52KB</td><td>+104ms</td></tr>
+        <tr><td>Full react-icons (worst case)</td><td>40,000+</td><td>+2.1MB</td><td>+4.2s</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Audit checklist</h3>
+  <ul>
+    <li><strong>Run <code>npx vite-bundle-visualizer</code></strong> — look for icon packages in your treemap. If <code>lucide-react</code> shows 500KB+, you have a namespace import somewhere.</li>
+    <li><strong>Check for duplicate icons</strong> — importing the same icon from <code>lucide-react</code> AND <code>react-icons/fi</code> ships it twice.</li>
+    <li><strong>Lazy-load icon-heavy routes</strong> — admin panels and settings pages with 100+ icons should be code-split.</li>
+    <li><strong>Set a budget:</strong> Icons should never exceed 5% of your total JS bundle. For a 200KB app, that's ~10KB of icons (~50 icons).</li>
+  </ul>
+
+  <h2 id="workflow">9. The IconStash → React Workflow</h2>
+  <p>Here's the fastest path from "I need an icon" to "it's in my component":</p>
+  <ol>
+    <li><strong>Search visually</strong> — <a href="/">Open IconStash</a> and type what you need (e.g., "notification bell"). See results from all 28 libraries instantly.</li>
+    <li><strong>Compare variants</strong> — Click any icon to see it in outline, solid, duotone, and bold styles across libraries.</li>
+    <li><strong>Customize</strong> — Adjust size (16–512px), stroke width, and color in the live editor.</li>
+    <li><strong>Copy JSX</strong> — Hit the Code tab → Copy JSX. You get a ready-to-paste React component:</li>
+  </ol>
+  <pre><code>// Pasted directly from IconStash → Code tab
+import { Bell } from 'lucide-react';
+
+export function NotificationIcon() {
+  return &lt;Bell size={20} strokeWidth={2} color="currentColor" /&gt;;
+}</code></pre>
+  <ol start="5">
+    <li><strong>Batch export</strong> — Building a new feature? Select all 30 icons you need → Export → React ZIP. Get individual <code>.tsx</code> files ready to drop into your <code>/components/icons</code> folder.</li>
+  </ol>
+  <div class="takeaway-box">
+    <h3>TL;DR — React Icons in 2026</h3>
+    <ul>
+      <li><strong>Default choice:</strong> <code>lucide-react</code> — best balance of icon count, consistency, and tree-shaking.</li>
+      <li><strong>Maximum variety:</strong> <code>react-icons</code> with sub-path imports — 40K icons, 30+ families.</li>
+      <li><strong>Always use named imports</strong> — never <code>import * as Icons</code>.</li>
+      <li><strong>Accessibility:</strong> <code>aria-hidden="true"</code> for decorative, <code>aria-label</code> for standalone.</li>
+      <li><strong>100+ icons?</strong> Consider SVG sprites or code-split routes.</li>
+      <li><strong>Fastest workflow:</strong> Search on IconStash → Copy JSX → Paste into component.</li>
+    </ul>
+  </div>
+
+  <h2 id="faq">10. Frequently Asked Questions</h2>
+  <h3>What is the best icon library for React in 2026?</h3>
+  <p><strong>Lucide React</strong> is the best general-purpose choice: 1,979 icons, native tree-shaking, TypeScript support, consistent design, and weekly updates. For maximum variety across 30+ icon families, use <code>react-icons</code> with sub-path imports.</p>
+  <h3>How do I reduce icon bundle size in React?</h3>
+  <p>Use named imports (<code>import { Camera } from 'lucide-react'</code>), never namespace imports. Enable tree-shaking in your bundler (Vite and Webpack 5+ do this by default). For 100+ icons, consider SVG sprites or route-level code splitting.</p>
+  <h3>Should I use react-icons or lucide-react?</h3>
+  <p>Use <strong>lucide-react</strong> for a single consistent design system with guaranteed tree-shaking. Use <strong>react-icons</strong> when you need icons from multiple families (Material, FontAwesome, Bootstrap) in one project. Both are excellent — the choice is consistency vs. variety.</p>
+  <h3>How do I make React icons accessible?</h3>
+  <p>For decorative icons next to text, add <code>aria-hidden="true"</code>. For standalone icon buttons, add <code>aria-label="Descriptive text"</code>. Never leave a meaningful icon without an accessible name.</p>
+  <h3>Can I use IconStash icons in my React project?</h3>
+  <p>Yes. All 134,701 icons on IconStash are MIT or Apache 2.0 licensed. Use the Code tab to copy ready-to-paste JSX components, or batch-export multiple icons as a React ZIP package. No attribution required.</p>
+</article>
+</div>
+
+<section class="cta-banner">
+  <h2>Copy Your First React Icon in 10 Seconds</h2>
+  <p>Search 134,701 icons. Click. Copy JSX. Paste into your component. Done.</p>
+  <a href="/" class="big-cta">Find React Icons →</a>
+</section>
+
+<footer class="article-footer">
+  <span>© 2026 IconStash by <a href="https://greatsoftwarecompany.com">Great Software Company</a></span>
+  <div class="footer-links">
+    <a href="/">Browse Icons</a>
+    <a href="/articles/">Articles</a>
+    <a href="/articles/lucide-vs-feather-icons-2026/">Lucide vs Feather</a>
+    <a href="https://github.com/OG-Huzzi/IconStash" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>

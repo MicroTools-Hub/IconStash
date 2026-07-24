@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icon &amp; SVG Glossary: 50+ Terms Explained | IconStash</title>
+  <meta name="description" content="50+ icon and SVG terms explained in plain English. From viewBox to tree-shaking, stroke to sprite — the definitive glossary for developers and designers.">
+  <meta name="keywords" content="svg glossary, icon terminology, what is viewbox, what is svg sprite, icon design terms, svg path explained, tree shaking icons, icon grid definition, stroke vs fill icons">
+  <meta property="og:title" content="Icon & SVG Glossary: 50+ Terms Every Developer Should Know">
+  <meta property="og:description" content="From viewBox to tree-shaking, stroke to sprite — every icon and SVG term explained in plain English with practical examples.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/Glossary/icon-svg-terminology">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="article:published_time" content="2026-07-24T00:00:00Z">
+  <meta property="article:modified_time" content="2026-07-24T00:00:00Z">
+  <meta property="article:author" content="IconStash Team">
+  <meta property="article:section" content="Reference">
+  <meta property="article:tag" content="SVG">
+  <meta property="article:tag" content="glossary">
+  <meta property="article:tag" content="icon design">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Icon & SVG Glossary: 50+ Terms Explained">
+  <meta name="twitter:description" content="Every icon and SVG term explained in plain English. The definitive reference for developers and designers.">
+  <link rel="canonical" href="https://iconstash.io/Glossary/icon-svg-terminology/">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="apple-touch-icon" href="../favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Icon & SVG Glossary: 50+ Terms Every Developer Should Know",
+    "description": "A comprehensive glossary of icon design and SVG terminology explained in plain English with practical examples for developers and designers.",
+    "author": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
+    "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
+    "datePublished": "2026-07-24",
+    "dateModified": "2026-07-24",
+    "mainEntityOfPage": "https://iconstash.io/Glossary/icon-svg-terminology/"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Glossary", "item": "https://iconstash.io/Glossary/" },
+      { "@type": "ListItem", "position": 3, "name": "Icon & SVG Terminology" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "name": "Icon & SVG Glossary",
+    "description": "50+ icon design and SVG terminology definitions for developers and designers.",
+    "hasDefinedTerm": [
+      { "@type": "DefinedTerm", "name": "viewBox", "description": "The SVG coordinate system that defines the internal drawing space. A viewBox of '0 0 24 24' means the icon is drawn on a 24×24 unit canvas regardless of its rendered pixel size." },
+      { "@type": "DefinedTerm", "name": "SVG Sprite", "description": "A single SVG file containing multiple icon symbols. Icons are referenced via <use href='#icon-name'>, reducing HTTP requests and enabling browser caching of all icons in one request." },
+      { "@type": "DefinedTerm", "name": "Tree-Shaking", "description": "A build-time optimization that eliminates unused code from your bundle. For icon libraries, it means only the icons you actually import are included in the final JavaScript output." },
+      { "@type": "DefinedTerm", "name": "Stroke", "description": "The outline path of an icon, defined by its width (usually 1.5px or 2px) and color. Stroke-based icons use lines rather than filled shapes, creating a lighter, more minimal aesthetic." },
+      { "@type": "DefinedTerm", "name": "Icon Grid", "description": "The underlying pixel grid (typically 16px, 20px, or 24px) that all icons in a library are designed on. Ensures optical consistency when icons are displayed side by side." }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is an SVG viewBox?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The viewBox is an SVG attribute that defines the internal coordinate system. A viewBox of '0 0 24 24' means the icon is drawn on a 24×24 unit canvas. The icon scales to any rendered size while maintaining proportions — a 24-unit icon displayed at 48px simply doubles all coordinates." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between stroke and fill icons?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Stroke icons use outlined paths (like drawing with a pen) — they appear as thin lines. Fill icons use solid shapes (like painting with a brush) — they appear as solid silhouettes. Stroke icons feel lighter and more modern; fill icons feel bolder and work better at very small sizes." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is an SVG sprite?",
+        "acceptedAnswer": { "@type": "Answer", "text": "An SVG sprite is a single file containing multiple icon definitions as <symbol> elements. You reference individual icons using <use href='#icon-name'>. Benefits: one HTTP request for all icons, browser caching, and no JavaScript required. Trade-off: you can't tree-shake unused icons from a sprite." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does tree-shaking mean for icons?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Tree-shaking is a build optimization that removes unused code. For icon libraries like lucide-react (1,979 icons), tree-shaking ensures only the 20 icons you actually import end up in your bundle — not all 1,979. It requires named imports and a compatible bundler (Vite, Webpack 5+)." }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    code { font-family: "JetBrains Mono", Consolas, monospace; font-size: 0.88em; background: rgba(255,255,255,0.06); border: 1px solid #1F1F1F; border-radius: 4px; padding: 2px 6px; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: background 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; }
+
+    .article-hero { max-width: 900px; margin: 0 auto; padding: 80px 24px 48px; text-align: center; }
+    .article-hero .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(193,221,45,0.08); border: 1px solid rgba(193,221,45,0.2); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 6px 14px; border-radius: 999px; margin-bottom: 28px; }
+    .article-hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; background: linear-gradient(135deg, #F2F2F2 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .article-hero .subtitle { font-size: 19px; color: #888; line-height: 1.7; max-width: 640px; margin: 0 auto 28px; }
+    .article-meta { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; color: #666; font-size: 13px; }
+
+    .layout { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .sidebar { display: none; }
+    .sidebar-box { background: rgba(255,255,255,0.02); border: 1px solid #1F1F1F; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; }
+    .sidebar-box h3 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 14px; }
+    .sidebar-box ul { list-style: none; padding: 0; margin: 0; }
+    .sidebar-box li { margin: 10px 0; font-size: 14px; line-height: 1.5; }
+    .sidebar-box a { color: #999; }
+    .sidebar-box a:hover { color: #C1DD2D; }
+    .alpha-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .alpha-nav a { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 6px; background: rgba(255,255,255,0.03); border: 1px solid #1F1F1F; color: #888; font-size: 12px; font-weight: 700; }
+    .alpha-nav a:hover { color: #C1DD2D; border-color: rgba(193,221,45,0.3); }
+
+    .article-body { margin: 0; padding: 0 0 80px; }
+    .article-body h2 { font-size: 24px; font-weight: 800; margin: 56px 0 20px; padding-top: 16px; border-top: 1px solid #1F1F1F; letter-spacing: -0.02em; color: #C1DD2D; }
+    .article-body h2:first-of-type { border-top: none; margin-top: 0; }
+    .article-body p { margin-bottom: 18px; color: #ccc; }
+    .article-body strong { color: #F2F2F2; }
+
+    .term { background: rgba(255,255,255,0.02); border: 1px solid #1F1F1F; border-radius: 12px; padding: 22px 26px; margin: 16px 0; }
+    .term dt { font-size: 17px; font-weight: 800; color: #F2F2F2; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+    .term dt code { font-size: 14px; color: #C1DD2D; }
+    .term dd { font-size: 15px; color: #aaa; line-height: 1.7; margin: 0; }
+    .term dd + dd { margin-top: 8px; font-size: 13px; color: #666; font-style: italic; }
+
+    .cta-banner { text-align: center; padding: 64px 24px; margin: 64px 0 0; background: linear-gradient(180deg, rgba(193,221,45,0.04) 0%, transparent 100%); border-top: 1px solid rgba(193,221,45,0.1); }
+    .cta-banner h2 { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .cta-banner p { color: #888; font-size: 17px; margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-banner .big-cta { display: inline-flex; align-items: center; gap: 8px; background: #C1DD2D; color: #0A0A0A; font-weight: 800; font-size: 16px; padding: 16px 36px; border-radius: 10px; border: none; cursor: pointer; transition: all 200ms ease; text-decoration: none; }
+    .cta-banner .big-cta:hover { background: #D2ED3E; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(193,221,45,0.2); }
+
+    .article-footer { max-width: 1200px; margin: 0 auto; padding: 32px 24px; border-top: 1px solid #1F1F1F; color: #666; font-size: 13px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .article-footer a { color: #666; }
+    .article-footer a:hover { color: #F2F2F2; }
+    .footer-links { display: flex; gap: 20px; }
+
+    @media (min-width: 1100px) {
+      .layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 56px; align-items: start; }
+      .article-body { grid-column: 1; grid-row: 1; }
+      .sidebar { display: block; grid-column: 2; grid-row: 1; position: sticky; top: 82px; }
+    }
+    @media (max-width: 768px) {
+      .article-hero { padding: 48px 20px 32px; }
+      .article-hero h1 { font-size: 28px; }
+      .article-hero .subtitle { font-size: 16px; }
+      .layout { padding: 0 20px; }
+      .article-body { padding-bottom: 48px; }
+      .article-body h2 { font-size: 20px; margin-top: 44px; }
+      .site-header nav { display: none; }
+      .cta-banner { padding: 48px 20px; }
+      .cta-banner h2 { font-size: 24px; }
+      .term { padding: 18px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="/">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+    <span>IconStash</span>
+  </a>
+  <nav>
+    <a href="/">Browse Icons</a>
+    <a href="/articles/">Articles</a>
+    <a href="https://github.com/OG-Huzzi/IconStash">GitHub</a>
+  </nav>
+  <a href="/" class="header-cta">Open Editor</a>
+</header>
+
+<section class="article-hero">
+  <div class="badge">Reference</div>
+  <h1>The Icon &amp; SVG Glossary: 50+ Terms Explained</h1>
+  <p class="subtitle">Every icon design and SVG term you'll encounter as a developer or designer — explained in plain English with practical context. No jargon without explanation.</p>
+  <div class="article-meta">
+    <span>July 24, 2026</span>
+    <span>•</span>
+    <span>12 min read</span>
+    <span>•</span>
+    <span>By IconStash Team</span>
+  </div>
+</section>
+
+<div class="layout">
+<article class="article-body">
+  <p>This glossary covers the terminology you'll encounter when working with icons in web development — from SVG internals to icon design principles to build optimization. Use it as a reference when reading documentation, reviewing icon libraries, or discussing icon systems with your team.</p>
+
+  <h2 id="a">A</h2>
+  <dl>
+    <div class="term"><dt>Accessibility (a11y) <code>aria-*</code></dt><dd>The practice of making icons perceivable to screen readers. Decorative icons get <code>aria-hidden="true"</code>; meaningful standalone icons get <code>aria-label="description"</code>. Without this, icons are invisible or confusing to assistive technology users.</dd><dd>Example: &lt;button aria-label="Delete"&gt;&lt;TrashIcon /&gt;&lt;/button&gt;</dd></div>
+    <div class="term"><dt>Aspect Ratio</dt><dd>The proportional relationship between an icon's width and height. UI icons are almost always 1:1 (square). Brand logos may be wider (e.g., 3:1). Maintaining aspect ratio prevents distortion when scaling.</dd></div>
+    <div class="term"><dt>Artboard</dt><dd>The canvas boundary in design tools (Figma, Illustrator, Sketch) where an icon is drawn. Typically matches the icon grid size (e.g., 24×24px). Exported artboards become the SVG's width/height attributes.</dd></div>
+  </dl>
+
+  <h2 id="b">B</h2>
+  <dl>
+    <div class="term"><dt>Bézier Curve</dt><dd>A mathematical curve defined by control points, used to create smooth paths in SVGs. The <code>C</code> (cubic) and <code>Q</code> (quadratic) commands in SVG path data define Bézier curves. Most icon curves are cubic Béziers with two control points.</dd><dd>Example: M 4 12 C 4 7.6 7.6 4 12 4 (a quarter-circle arc)</dd></div>
+    <div class="term"><dt>Bounding Box</dt><dd>The smallest rectangle that completely contains an icon's visual elements. Used for optical alignment — icons with different shapes but the same bounding box appear consistently sized when placed side by side.</dd></div>
+    <div class="term"><dt>Bundle Size</dt><dd>The total file weight of JavaScript/CSS delivered to the browser. Icons contribute to bundle size — 50 tree-shaken Lucide icons add ~18KB gzipped. Without tree-shaking, the same library could add 200KB+.</dd></div>
+  </dl>
+
+  <h2 id="c">C</h2>
+  <dl>
+    <div class="term"><dt>Cap (stroke-linecap)</dt><dd>How the ends of open paths are rendered. <code>round</code> adds a semicircle cap (friendly), <code>butt</code> cuts flat (technical), <code>square</code> extends past the endpoint (bold). Most icon libraries use <code>round</code> caps.</dd></div>
+    <div class="term"><dt>currentColor</dt><dd>A CSS keyword that inherits the element's <code>color</code> property. When an SVG uses <code>fill="currentColor"</code> or <code>stroke="currentColor"</code>, it automatically matches the surrounding text color — enabling dark mode and theming without extra CSS.</dd><dd>Example: &lt;svg stroke="currentColor"&gt; inherits color from parent's CSS</dd></div>
+    <div class="term"><dt>Code Splitting</dt><dd>Splitting your JavaScript bundle into smaller chunks loaded on demand. Icon-heavy routes (admin panels with 200+ icons) should be code-split so visitors to your landing page don't download admin icons they'll never see.</dd></div>
+  </dl>
+
+  <h2 id="d">D</h2>
+  <dl>
+    <div class="term"><dt>Design Token</dt><dd>A named variable representing a design decision (e.g., <code>--icon-size: 20px</code>, <code>--icon-color: #64748b</code>). Tokens decouple icon styling from implementation, enabling theme switching and design system consistency.</dd></div>
+    <div class="term"><dt>Duotone</dt><dd>An icon style using two tones: a primary stroke/fill and a secondary semi-transparent fill. Creates visual depth without full color. Phosphor Icons and Heroicons (v3) offer duotone variants.</dd></div>
+    <div class="term"><dt>DPI (Dots Per Inch)</dt><dd>Screen pixel density. SVG icons are resolution-independent — they render crisply at any DPI (1x, 2x Retina, 3x). This is the primary advantage of SVG over PNG icons, which blur on high-DPI screens.</dd></div>
+  </dl>
+
+  <h2 id="f">F</h2>
+  <dl>
+    <div class="term"><dt>Fill</dt><dd>The interior color of an SVG shape. <code>fill="none"</code> means transparent interior (outline icon). <code>fill="currentColor"</code> means solid shape matching text color. Fill-based icons appear bolder than stroke-based ones.</dd></div>
+    <div class="term"><dt>Figma Component</dt><dd>A reusable design element in Figma. Icon libraries distribute Figma components so designers can drag-and-drop icons into mockups. IconStash links each icon to its source library's Figma file.</dd></div>
+    <div class="term"><dt>Font Icon (Icon Font)</dt><dd>Icons packaged as glyphs in a custom font file (e.g., FontAwesome's .woff2). Legacy approach — renders as text, can't be multi-colored, causes FOUT (flash of unstyled text). SVG components are the modern replacement.</dd></div>
+  </dl>
+
+  <h2 id="g">G</h2>
+  <dl>
+    <div class="term"><dt>Grid (Icon Grid)</dt><dd>The underlying pixel matrix (16px, 20px, or 24px) that all icons in a library are designed on. The grid ensures optical consistency — a circle icon and a square icon on the same grid appear the same visual weight.</dd><dd>Example: Lucide uses a 24×24 grid with 2px padding (20px live area)</dd></div>
+    <div class="term"><dt>Glyph</dt><dd>A single visual representation of a character or symbol. In icon fonts, each icon is a glyph mapped to a Unicode codepoint. In SVG, each icon is a standalone vector graphic — no font rendering involved.</dd></div>
+  </dl>
+
+  <h2 id="i">I</h2>
+  <dl>
+    <div class="term"><dt>Icon Component</dt><dd>A framework-specific wrapper (React, Vue, Svelte) that renders an SVG as a reusable component with props for size, color, and stroke width. Example: <code>&lt;Camera size={20} color="red" /&gt;</code> in React.</dd></div>
+    <div class="term"><dt>Icon System</dt><dd>A comprehensive set of standards governing icon usage in a product: grid size, stroke weight, corner radius, naming conventions, file format, and distribution method. A design system's icon subsystem.</dd></div>
+    <div class="term"><dt>Inline SVG</dt><dd>SVG markup placed directly in HTML rather than loaded as an external file. Enables CSS styling, JavaScript interaction, and currentColor inheritance. Trade-off: increases HTML size and can't be cached separately.</dd></div>
+  </dl>
+
+  <h2 id="j">J</h2>
+  <dl>
+    <div class="term"><dt>JSX (JavaScript XML)</dt><dd>React's syntax extension allowing HTML-like markup in JavaScript. Icon libraries ship JSX components: <code>import { Camera } from 'lucide-react'</code> gives you a ready-to-use <code>&lt;Camera /&gt;</code> component.</dd></div>
+    <div class="term"><dt>Join (stroke-linejoin)</dt><dd>How corners between path segments are rendered. <code>round</code> creates smooth corners (most icon libraries), <code>miter</code> creates sharp points, <code>bevel</code> creates flat cuts. Affects the icon's perceived friendliness.</dd></div>
+  </dl>
+
+  <h2 id="l">L</h2>
+  <dl>
+    <div class="term"><dt>Lazy Loading</dt><dd>Deferring icon loading until they're needed (e.g., when scrolled into view or when a route is visited). Reduces initial page weight. Implemented via <code>React.lazy()</code>, <code>loading="lazy"</code>, or Intersection Observer.</dd></div>
+    <div class="term"><dt>Live Area</dt><dd>The drawable region within an icon's artboard, excluding padding. On a 24px grid with 2px padding, the live area is 20×20px. Icons should stay within the live area to maintain consistent visual spacing.</dd></div>
+    <div class="term"><dt>LTR / RTL</dt><dd>Left-to-Right / Right-to-Left text direction. Directional icons (arrows, navigation) must be mirrored for RTL languages (Arabic, Hebrew). Non-directional icons (search, settings) stay the same.</dd></div>
+  </dl>
+
+  <h2 id="m">M</h2>
+  <dl>
+    <div class="term"><dt>Monochrome</dt><dd>Single-color icons that use only one hue (usually currentColor). The vast majority of UI icon libraries are monochrome — they inherit text color and adapt to themes automatically. Opposite of multi-color/polychrome icons.</dd></div>
+    <div class="term"><dt>MIT License</dt><dd>The most permissive open-source license. Allows unlimited commercial use, modification, and distribution with zero attribution requirements. All IconStash-indexed libraries use MIT or Apache 2.0.</dd></div>
+  </dl>
+
+  <h2 id="n">N</h2>
+  <dl>
+    <div class="term"><dt>Named Import</dt><dd>Importing specific icons by name: <code>import { Camera, User } from 'lucide-react'</code>. Enables tree-shaking. Opposite of namespace import (<code>import * as Icons</code>) which ships the entire library.</dd></div>
+    <div class="term"><dt>NPM Package</dt><dd>The distribution format for icon libraries in JavaScript ecosystems. Install via <code>npm install lucide-react</code>. Packages include SVG source, framework components, TypeScript types, and tree-shaking metadata.</dd></div>
+  </dl>
+
+  <h2 id="o">O</h2>
+  <dl>
+    <div class="term"><dt>Optical Alignment</dt><dd>Adjusting icon positioning to appear visually centered rather than mathematically centered. A play button (triangle) needs to shift right to look centered in a circle. Icon libraries pre-compensate for this.</dd></div>
+    <div class="term"><dt>Optical Size</dt><dd>Adjusting icon proportions for different display sizes. At 16px, icons need thicker strokes and simpler shapes. At 48px, they can be more detailed. Material Symbols has a variable optical size axis.</dd></div>
+    <div class="term"><dt>Outline (Stroke) Style</dt><dd>Icons drawn with strokes (lines) rather than fills (solid shapes). Creates a lighter, more modern aesthetic. Examples: Lucide, Tabler, Heroicons Outline, Feather. Typically 1.5px or 2px stroke width.</dd></div>
+  </dl>
+
+  <h2 id="p">P</h2>
+  <dl>
+    <div class="term"><dt>Path (SVG &lt;path&gt;)</dt><dd>The fundamental SVG drawing element. Uses a mini-language of commands: M (move), L (line), C (curve), Z (close). Every icon is composed of one or more paths. Example: <code>&lt;path d="M12 2L2 7v10l10 5 10-5V7z"/&gt;</code></dd></div>
+    <div class="term"><dt>Pixel Grid (Pixel Fitting)</dt><dd>Aligning path coordinates to whole pixels so edges render crisply at 1x resolution. A 2px stroke on a 24px grid should sit on integer coordinates. Sub-pixel positioning causes anti-aliasing blur.</dd></div>
+    <div class="term"><dt>PNG Export</dt><dd>Rasterizing SVG icons to PNG for contexts that don't support SVG (email clients, some native apps, favicons). Export at 2x or 3x resolution for Retina displays. IconStash exports PNGs at any size from 16–512px.</dd></div>
+  </dl>
+
+  <h2 id="s">S</h2>
+  <dl>
+    <div class="term"><dt>Solid (Fill) Style</dt><dd>Icons drawn as filled shapes rather than outlines. Bolder, higher contrast, better at very small sizes (12–16px). Examples: Heroicons Solid, Phosphor Fill, Material Filled. Often paired with outline variants.</dd></div>
+    <div class="term"><dt>Sprite (SVG Sprite)</dt><dd>A single SVG file containing multiple <code>&lt;symbol&gt;</code> definitions. Referenced via <code>&lt;use href="#icon-name"&gt;</code>. Benefits: one HTTP request, browser caching, no JS required. Trade-off: no tree-shaking, no per-icon code splitting.</dd><dd>Example: &lt;svg&gt;&lt;use href="/sprite.svg#camera" /&gt;&lt;/svg&gt;</dd></div>
+    <div class="term"><dt>Stroke Width</dt><dd>The thickness of an icon's outline paths, measured in grid units. Standard values: 1.5px (elegant), 2px (standard — Lucide, Tabler, Feather), 2.5px (bold). Consistent stroke width across a library ensures visual harmony.</dd></div>
+    <div class="term"><dt>SVG (Scalable Vector Graphics)</dt><dd>An XML-based vector image format for the web. Resolution-independent (crisp at any size), styleable with CSS, scriptable with JavaScript, and typically 50-80% smaller than equivalent PNGs for icons. The standard format for web icons in 2026.</dd></div>
+    <div class="term"><dt>SVGO</dt><dd>The standard SVG optimization tool. Removes metadata, editor artifacts, redundant attributes, and optimizes path data. Reduces icon file size by 20-60% without visual changes. Run on every icon before shipping.</dd></div>
+    <div class="term"><dt>SVGR</dt><dd>A build tool that transforms SVG files into optimized React components. Converts <code>camera.svg</code> into a <code>&lt;Camera /&gt;</code> component with props for size, color, and title. Integrates with Webpack, Vite, and Babel.</dd></div>
+    <div class="term"><dt>Symbol (&lt;symbol&gt;)</dt><dd>An SVG element that defines a reusable graphic without rendering it. Used inside sprites: define once with <code>&lt;symbol id="camera"&gt;</code>, use many times with <code>&lt;use href="#camera"&gt;</code>. Supports its own viewBox independent of the parent SVG.</dd></div>
+  </dl>
+
+  <h2 id="t">T</h2>
+  <dl>
+    <div class="term"><dt>Tree-Shaking</dt><dd>A build-time dead-code elimination technique. For icon libraries, it removes unused icons from your bundle. Requires: ES module imports, named imports (not namespace), and a compatible bundler (Vite, Webpack 5+, Rollup). Reduces a 1,979-icon library to just the 20 you use.</dd><dd>Example: import { Camera } from 'lucide-react' → only Camera in bundle</dd></div>
+    <div class="term"><dt>Two-Tone</dt><dd>An icon style combining a primary stroke with a secondary lighter fill. Creates visual hierarchy within a single icon. Ant Design and Phosphor offer two-tone variants. More expressive than pure outline, lighter than full solid.</dd></div>
+    <div class="term"><dt>TypeScript Types</dt><dd>Type definitions (.d.ts files) that provide autocomplete and type-checking for icon components. Ensures you can't misspell an icon name or pass invalid props. All major 2026 icon libraries ship TypeScript-first.</dd></div>
+  </dl>
+
+  <h2 id="v">V</h2>
+  <dl>
+    <div class="term"><dt>viewBox</dt><dd>An SVG attribute defining the internal coordinate system: <code>viewBox="min-x min-y width height"</code>. A <code>viewBox="0 0 24 24"</code> means the icon is drawn on a 24×24 unit canvas. The rendered size (width/height attributes or CSS) scales this coordinate system proportionally.</dd><dd>Example: viewBox="0 0 24 24" + width="48" = icon drawn at 24 units, displayed at 48px</dd></div>
+    <div class="term"><dt>Vector</dt><dd>A graphic defined by mathematical paths (points, lines, curves) rather than pixels. Infinitely scalable without quality loss. SVG is the web's vector format. Opposite of raster (PNG, JPEG) which is pixel-based and blurs when enlarged.</dd></div>
+    <div class="term"><dt>Visual Weight</dt><dd>The perceived "heaviness" of an icon relative to others. A filled circle has more visual weight than an outlined circle. Consistent visual weight across an icon set ensures no single icon dominates when displayed alongside others.</dd></div>
+  </dl>
+
+  <h2 id="w">W</h2>
+  <dl>
+    <div class="term"><dt>Web Component</dt><dd>A framework-agnostic custom HTML element. Some icon libraries (Ionicons, Material Symbols) ship as Web Components: <code>&lt;ion-icon name="camera"&gt;&lt;/ion-icon&gt;</code>. Works in any framework or no framework.</dd></div>
+    <div class="term"><dt>Weight (Icon Weight)</dt><dd>The visual thickness of an icon's strokes or fills. Phosphor offers 6 weights (thin, light, regular, bold, fill, duotone). Material Symbols has a variable weight axis (100–700). Heavier weights suit bold UIs; lighter weights suit elegant interfaces.</dd></div>
+  </dl>
+
+  <h2 id="x">X</h2>
+  <dl>
+    <div class="term"><dt>XML Namespace</dt><dd>The <code>xmlns="http://www.w3.org/2000/svg"</code> declaration required in standalone SVG files. Tells the browser to interpret the markup as SVG rather than HTML. Not needed for inline SVG in HTML5 documents.</dd></div>
+  </dl>
+
+  <h2 id="z">Z</h2>
+  <dl>
+    <div class="term"><dt>ZIP Export</dt><dd>Batch downloading multiple icons as a compressed archive. IconStash offers multi-resolution ZIP packs (16, 24, 32, 48, 64, 128, 256, 512px PNGs) for teams that need raster versions at every size.</dd></div>
+  </dl>
+</article>
+
+<aside class="sidebar">
+  <div class="sidebar-box">
+    <h3>Jump to Letter</h3>
+    <div class="alpha-nav">
+      <a href="#a">A</a><a href="#b">B</a><a href="#c">C</a><a href="#d">D</a><a href="#f">F</a><a href="#g">G</a><a href="#i">I</a><a href="#j">J</a><a href="#l">L</a><a href="#m">M</a><a href="#n">N</a><a href="#o">O</a><a href="#p">P</a><a href="#s">S</a><a href="#t">T</a><a href="#v">V</a><a href="#w">W</a><a href="#x">X</a><a href="#z">Z</a>
+    </div>
+  </div>
+  <div class="sidebar-box">
+    <h3>Related Articles</h3>
+    <ul>
+      <li><a href="/articles/react-icons-complete-guide-2026/">React Icons: Complete Guide</a></li>
+      <li><a href="/articles/how-to-build-scalable-icon-system/">Build a Scalable Icon System</a></li>
+      <li><a href="/articles/free-svg-icons-commercial-use-2026/">Free SVG Icons for Commercial Use</a></li>
+      <li><a href="/Listicles/best-free-icon-sets-2026/">37 Best Free Icon Sets 2026</a></li>
+    </ul>
+  </div>
+  <div class="sidebar-box">
+    <h3>Comparisons</h3>
+    <ul>
+      <li><a href="/articles/iconstash-vs-flaticon/">IconStash vs Flaticon</a></li>
+      <li><a href="/articles/iconstash-vs-iconify/">IconStash vs Iconify</a></li>
+      <li><a href="/articles/lucide-vs-feather-icons-2026/">Lucide vs Feather Icons</a></li>
+    </ul>
+  </div>
+</aside>
+</div>
+
+<section class="cta-banner">
+  <h2>See These Concepts in Action</h2>
+  <p>Browse 134,701 icons across 28 libraries. Inspect viewBox, stroke, and path data live.</p>
+  <a href="/" class="big-cta">Explore Icons →</a>
+</section>
+
+<footer class="article-footer">
+  <span>© 2026 IconStash by <a href="https://greatsoftwarecompany.com">Great Software Company</a></span>
+  <div class="footer-links">
+    <a href="/">Browse Icons</a>
+    <a href="/articles/">Articles</a>
+    <a href="/Listicles/best-free-icon-sets-2026/">Best Icon Sets</a>
+    <a href="https://github.com/OG-Huzzi/IconStash" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>
