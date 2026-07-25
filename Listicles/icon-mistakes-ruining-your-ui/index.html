@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>15 Icon Mistakes Ruining Your UI in 2026 | IconStash</title>
+  <meta name="description" content="The 15 most common icon mistakes in web and product UI — mixed stroke weights, broken dark mode, missing ARIA, bundle bloat — each with a concrete fix.">
+  <meta name="keywords" content="icon mistakes, ui icon best practices, icon accessibility mistakes, svg icon errors, icon design mistakes, tree shaking icons, icon fonts bad, dark mode icons broken, icon touch target size">
+  <meta property="og:title" content="15 Icon Mistakes That Are Quietly Ruining Your UI (2026)">
+  <meta property="og:description" content="From mixed stroke weights to missing aria-labels — the 15 icon mistakes we see in almost every codebase, ranked by damage, each with a copy-paste fix.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/Listicles/icon-mistakes-ruining-your-ui/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/logo.png">
+  <meta property="article:published_time" content="2026-07-24T00:00:00Z">
+  <meta property="article:modified_time" content="2026-07-24T00:00:00Z">
+  <meta property="article:author" content="IconStash Team">
+  <meta property="article:section" content="Best Practices">
+  <meta property="article:tag" content="icon design">
+  <meta property="article:tag" content="UI mistakes">
+  <meta property="article:tag" content="accessibility">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="15 Icon Mistakes Ruining Your UI in 2026">
+  <meta name="twitter:description" content="Ranked by damage. Each with a concrete fix. How many is your product making right now?">
+  <meta name="twitter:image" content="https://iconstash.io/logo.png">
+  <link rel="canonical" href="https://iconstash.io/Listicles/icon-mistakes-ruining-your-ui/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "15 Icon Mistakes That Are Quietly Ruining Your UI (2026)",
+    "description": "The 15 most common icon mistakes in web and product UI, ranked by damage — visual inconsistency, accessibility failures, performance bloat, and licensing risk — each with a concrete fix.",
+    "author": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
+    "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io", "logo": { "@type": "ImageObject", "url": "https://iconstash.io/logo.png" } },
+    "datePublished": "2026-07-24",
+    "dateModified": "2026-07-24",
+    "mainEntityOfPage": "https://iconstash.io/Listicles/icon-mistakes-ruining-your-ui/",
+    "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
+    "articleSection": "Best Practices",
+    "about": [
+      { "@type": "Thing", "name": "Icon (computing)", "sameAs": "https://en.wikipedia.org/wiki/Icon_(computing)" },
+      { "@type": "Thing", "name": "User interface design", "sameAs": "https://en.wikipedia.org/wiki/User_interface_design" }
+    ],
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".article-hero h1", ".article-hero .subtitle"] },
+    "keywords": ["icon mistakes", "UI design", "SVG icons", "accessibility", "web performance", "icon systems"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Listicles", "item": "https://iconstash.io/Listicles/" },
+      { "@type": "ListItem", "position": 3, "name": "15 Icon Mistakes Ruining Your UI" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "15 Icon Mistakes That Are Quietly Ruining Your UI",
+    "numberOfItems": 15,
+    "itemListOrder": "https://schema.org/ItemListOrderDescending",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Mixing icons from multiple libraries" },
+      { "@type": "ListItem", "position": 2, "name": "Missing ARIA on meaningful icons" },
+      { "@type": "ListItem", "position": 3, "name": "Hardcoded colors that break dark mode" },
+      { "@type": "ListItem", "position": 4, "name": "Namespace imports that kill tree-shaking" },
+      { "@type": "ListItem", "position": 5, "name": "Still shipping icon fonts in 2026" },
+      { "@type": "ListItem", "position": 6, "name": "Icon-only buttons for ambiguous actions" },
+      { "@type": "ListItem", "position": 7, "name": "Touch targets smaller than 44px" },
+      { "@type": "ListItem", "position": 8, "name": "Off-grid sizing that causes sub-pixel blur" },
+      { "@type": "ListItem", "position": 9, "name": "Unoptimized SVG exports straight from design tools" },
+      { "@type": "ListItem", "position": 10, "name": "Inconsistent metaphors for the same action" },
+      { "@type": "ListItem", "position": 11, "name": "No hover, focus, or active states on icon buttons" },
+      { "@type": "ListItem", "position": 12, "name": "PNG icons on high-DPI screens" },
+      { "@type": "ListItem", "position": 13, "name": "Ignoring RTL mirroring for directional icons" },
+      { "@type": "ListItem", "position": 14, "name": "Decorative icon overload" },
+      { "@type": "ListItem", "position": 15, "name": "Shipping icons with unverified licenses" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the most common icon mistake in UI design?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Mixing icons from multiple libraries with different grids and stroke weights. A 24px/2px-stroke Lucide icon next to a 20px/1.5px-stroke icon from another set creates visible inconsistency that users perceive as 'unpolished' even when they can't name the cause. The fix is standardizing on one primary library, or sourcing from an aggregator where you can compare styles side by side before committing." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do icon-only buttons hurt usability?",
+        "acceptedAnswer": { "@type": "Answer", "text": "For ambiguous actions, yes. Research consistently shows that only universally learned icons (search, close, play, home) work reliably without labels. Actions like 'export', 'archive', or 'sync' need a text label or at minimum a tooltip plus aria-label. If your team debates what an icon means, your users will too." }
+      },
+      {
+        "@type": "Question",
+        "name": "How big should icon touch targets be?",
+        "acceptedAnswer": { "@type": "Answer", "text": "At least 44×44 CSS pixels per Apple's HIG, 48×48dp per Material Design, and 24×24px minimum per WCAG 2.2 (AA, criterion 2.5.8). The icon itself can stay 20–24px — pad the interactive area with padding on the button, not the SVG." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do my icons look blurry?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Usually sub-pixel rendering: displaying a 24px-grid icon at 18px (a non-integer 0.75 scale) places strokes between physical pixels, forcing anti-aliasing blur. Render icons at their native grid size (16, 20, 24, 32, 48px) or clean multiples, and keep width/height in whole pixels." }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    code { font-family: "JetBrains Mono", Consolas, monospace; font-size: 0.88em; background: rgba(255,255,255,0.06); border: 1px solid #1F1F1F; border-radius: 4px; padding: 2px 6px; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: background 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; }
+
+    .article-hero { max-width: 900px; margin: 0 auto; padding: 80px 24px 48px; text-align: center; }
+    .article-hero .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(193,221,45,0.08); border: 1px solid rgba(193,221,45,0.2); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 6px 14px; border-radius: 999px; margin-bottom: 28px; }
+    .article-hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; background: linear-gradient(135deg, #F2F2F2 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .article-hero .subtitle { font-size: 19px; color: #888; line-height: 1.7; max-width: 660px; margin: 0 auto 28px; }
+    .article-meta { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; color: #666; font-size: 13px; }
+
+    .layout { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .sidebar { display: none; }
+    .sidebar-box { background: rgba(255,255,255,0.02); border: 1px solid #1F1F1F; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; }
+    .sidebar-box h3 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 14px; }
+    .sidebar-box ul { list-style: none; padding: 0; margin: 0; }
+    .sidebar-box li { margin: 10px 0; font-size: 14px; line-height: 1.5; }
+    .sidebar-box a { color: #999; }
+    .sidebar-box a:hover { color: #C1DD2D; }
+
+    .article-body { margin: 0; padding: 0 0 80px; }
+    .article-body h2 { font-size: 28px; font-weight: 800; margin: 64px 0 20px; padding-top: 16px; border-top: 1px solid #1F1F1F; letter-spacing: -0.02em; }
+    .article-body h2:first-of-type { border-top: none; margin-top: 0; }
+    .article-body h3 { font-size: 20px; font-weight: 700; margin: 40px 0 14px; color: #C1DD2D; }
+    .article-body p { margin-bottom: 18px; color: #ccc; }
+    .article-body ul, .article-body ol { margin: 0 0 20px 20px; color: #ccc; }
+    .article-body li { margin: 8px 0; }
+    .article-body strong { color: #F2F2F2; }
+    .article-body blockquote { border-left: 3px solid #C1DD2D; padding: 16px 20px; margin: 28px 0; background: rgba(193,221,45,0.04); border-radius: 0 8px 8px 0; font-style: italic; color: #aaa; }
+
+    .mistake-card { background: rgba(255,255,255,0.02); border: 1px solid #1F1F1F; border-radius: 14px; padding: 28px 32px; margin: 28px 0; transition: border-color 200ms ease; }
+    .mistake-card:hover { border-color: rgba(193,221,45,0.3); }
+    .mistake-card .rank { display: inline-flex; align-items: center; justify-content: center; min-width: 32px; height: 32px; padding: 0 10px; background: rgba(224,93,93,0.1); border: 1px solid rgba(224,93,93,0.25); border-radius: 8px; color: #E05D5D; font-weight: 800; font-size: 13px; margin-bottom: 14px; letter-spacing: 0.04em; }
+    .mistake-card h3 { font-size: 20px; font-weight: 800; margin: 0 0 10px; color: #F2F2F2; }
+    .mistake-card p { margin: 0 0 12px; font-size: 15px; color: #aaa; }
+    .mistake-card p:last-child { margin-bottom: 0; }
+    .mistake-card .fix { display: flex; gap: 10px; align-items: flex-start; background: rgba(193,221,45,0.05); border: 1px solid rgba(193,221,45,0.15); border-radius: 10px; padding: 14px 16px; font-size: 14.5px; color: #ccc; }
+    .mistake-card .fix strong { color: #C1DD2D; white-space: nowrap; }
+    .mistake-card .severity { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 999px; margin-left: 8px; vertical-align: middle; }
+    .sev-high { background: rgba(224,93,93,0.1); border: 1px solid rgba(224,93,93,0.25); color: #E05D5D; }
+    .sev-med { background: rgba(245,197,66,0.08); border: 1px solid rgba(245,197,66,0.22); color: #F5C542; }
+    .sev-low { background: rgba(255,255,255,0.04); border: 1px solid #2a2a2a; color: #999; }
+
+    .takeaway-box { background: linear-gradient(135deg, rgba(193,221,45,0.06) 0%, rgba(193,221,45,0.02) 100%); border: 1px solid rgba(193,221,45,0.15); border-radius: 14px; padding: 32px; margin: 40px 0; }
+    .takeaway-box h3 { color: #C1DD2D; font-size: 18px; font-weight: 800; margin: 0 0 16px; }
+
+    .cta-banner { text-align: center; padding: 64px 24px; margin: 64px 0 0; background: linear-gradient(180deg, rgba(193,221,45,0.04) 0%, transparent 100%); border-top: 1px solid rgba(193,221,45,0.1); }
+    .cta-banner h2 { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .cta-banner p { color: #888; font-size: 17px; margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-banner .big-cta { display: inline-flex; align-items: center; gap: 8px; background: #C1DD2D; color: #0A0A0A; font-weight: 800; font-size: 16px; padding: 16px 36px; border-radius: 10px; border: none; cursor: pointer; transition: all 200ms ease; text-decoration: none; }
+    .cta-banner .big-cta:hover { background: #D2ED3E; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(193,221,45,0.2); }
+
+    .article-footer { max-width: 1200px; margin: 0 auto; padding: 32px 24px; border-top: 1px solid #1F1F1F; color: #666; font-size: 13px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .article-footer a { color: #666; }
+    .article-footer a:hover { color: #F2F2F2; }
+    .footer-links { display: flex; gap: 20px; }
+
+    @media (min-width: 1100px) {
+      .layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 56px; align-items: start; }
+      .article-body { grid-column: 1; grid-row: 1; }
+      .sidebar { display: block; grid-column: 2; grid-row: 1; position: sticky; top: 82px; }
+    }
+    @media (max-width: 768px) {
+      .article-hero { padding: 48px 20px 32px; }
+      .article-hero h1 { font-size: 28px; }
+      .article-hero .subtitle { font-size: 16px; }
+      .layout { padding: 0 20px; }
+      .article-body { padding-bottom: 48px; }
+      .article-body h2 { font-size: 22px; margin-top: 48px; }
+      .article-body h3 { font-size: 18px; }
+      .site-header nav { display: none; }
+      .cta-banner { padding: 48px 20px; }
+      .cta-banner h2 { font-size: 24px; }
+      .mistake-card { padding: 20px 22px; }
+      .takeaway-box { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="/">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+    <span>IconStash</span>
+  </a>
+  <nav>
+    <a href="/">Browse Icons</a>
+    <a href="/articles/">Articles</a>
+    <a href="/stats/">Stats</a>
+    <a href="https://github.com/OG-Huzzi/IconStash">GitHub</a>
+  </nav>
+  <a href="/" class="header-cta">Open Editor</a>
+</header>
+
+<section class="article-hero">
+  <div class="badge">Ranked List</div>
+  <h1>15 Icon Mistakes That Are Quietly Ruining Your UI</h1>
+  <p class="subtitle">Ranked by how much damage they do — from "users can't name it but feel it" to "your bundle is 200KB heavier than it should be." Each mistake comes with a concrete, copy-paste-level fix.</p>
+  <div class="article-meta">
+    <span>July 24, 2026</span>
+    <span>•</span>
+    <span>13 min read</span>
+    <span>•</span>
+    <span>By IconStash Team</span>
+  </div>
+</section>
+
+<div class="layout">
+<article class="article-body">
+  <h2 id="why-icons-fail">Why Icons Fail Silently</h2>
+  <p>Icon problems almost never show up in bug reports. Nobody files a ticket saying "the stroke weight on the settings icon is 0.5px heavier than the search icon." Instead, users describe the product as <em>"a bit off"</em>, <em>"cluttered"</em>, or <em>"cheap-looking"</em> — and accessibility audits, Lighthouse scores, and bundle analyzers quietly get worse.</p>
+  <p>After indexing <strong>134,701 icons across 28 libraries</strong> and watching how thousands of developers search, compare, and export them, we've catalogued the failure patterns that appear in almost every codebase. Here are the fifteen that matter, ranked by damage.</p>
+
+  <h2 id="the-list">The 15 Mistakes, Ranked</h2>
+
+  <div class="mistake-card" id="m1">
+    <div class="rank">#1</div>
+    <h3>Mixing icons from multiple libraries <span class="severity sev-high">Visual damage: high</span></h3>
+    <p>A Lucide icon (24px grid, 2px stroke, rounded caps) next to a Material icon (20px optical size, filled) next to a random Dribbble SVG. Every library has its own grid, stroke weight, corner radius, and metaphor language — mixing them is the fastest way to make a polished layout feel amateur, and users feel it even when they can't articulate it.</p>
+    <p class="fix"><strong>Fix:</strong><span>Standardize on one primary library for UI chrome and allow one secondary set for a well-defined niche (e.g., brand logos). Before committing, compare candidates side by side on <a href="/">IconStash</a> — search one concept and see how every library draws it.</span></p>
+  </div>
+
+  <div class="mistake-card" id="m2">
+    <div class="rank">#2</div>
+    <h3>Missing ARIA on meaningful icons <span class="severity sev-high">A11y damage: high</span></h3>
+    <p>An icon-only delete button with no accessible name is announced by screen readers as just "button" — or worse, reads out raw path garbage. Meanwhile, decorative icons that <em>aren't</em> hidden add noise to every element they decorate. This is the single most common accessibility failure involving icons.</p>
+    <p class="fix"><strong>Fix:</strong><span>Two rules cover 99% of cases: decorative icons get <code>aria-hidden="true"</code>; standalone meaningful icons get an <code>aria-label</code> on the interactive parent. Full patterns in our <a href="/articles/designing-accessible-svg-icons/">accessible SVG icons guide</a>.</span></p>
+  </div>
+
+  <div class="mistake-card" id="m3">
+    <div class="rank">#3</div>
+    <h3>Hardcoded colors that break dark mode <span class="severity sev-high">Theming damage: high</span></h3>
+    <p>SVGs exported with <code>fill="#000000"</code> baked in render as invisible black shapes on a dark background. Teams then "fix" it with CSS filters or duplicate icon sets per theme — doubling maintenance for a problem that shouldn't exist.</p>
+    <p class="fix"><strong>Fix:</strong><span>Strip literal colors and use <code>fill="currentColor"</code> / <code>stroke="currentColor"</code> so icons inherit text color automatically. One icon file, every theme. Details in our <a href="/articles/dark-mode-svg-icons-theming/">dark mode icon guide</a>.</span></p>
+  </div>
+
+  <div class="mistake-card" id="m4">
+    <div class="rank">#4</div>
+    <h3>Namespace imports that kill tree-shaking <span class="severity sev-high">Perf damage: high</span></h3>
+    <p><code>import * as Icons from 'lucide-react'</code> — and your bundle now contains all 1,979 icons instead of the 20 you use. The same happens with dynamic icon lookups like <code>Icons[iconName]</code>, which force bundlers to keep everything. This one line can add 200KB+ of dead JavaScript.</p>
+    <p class="fix"><strong>Fix:</strong><span>Use named imports only: <code>import { Trash2, Search } from 'lucide-react'</code>. If you need dynamic icons, build an explicit map of the icons you actually use. See the <a href="/articles/react-icons-complete-guide-2026/">React icons guide</a>.</span></p>
+  </div>
+
+  <div class="mistake-card" id="m5">
+    <div class="rank">#5</div>
+    <h3>Still shipping icon fonts in 2026 <span class="severity sev-med">Perf + a11y damage</span></h3>
+    <p>Icon fonts block rendering, flash invisible or tofu (□) characters while loading, can't be multi-colored, blur on sub-pixel boundaries, and are announced unpredictably by screen readers. Every major design system migrated to SVG years ago — the technical debate is over.</p>
+    <p class="fix"><strong>Fix:</strong><span>Migrate to inline SVG or SVG components. The migration path and the receipts are in <a href="/articles/svg-icons-vs-icon-fonts-in-2026/">SVG icons vs icon fonts in 2026</a>.</span></p>
+  </div>
+
+  <div class="mistake-card" id="m6">
+    <div class="rank">#6</div>
+    <h3>Icon-only buttons for ambiguous actions <span class="severity sev-med">UX damage</span></h3>
+    <p>Search, close, play, home — universally learned, fine without labels. But "export"? "Archive"? "Sync"? Usability research has shown for a decade that unlabeled icons for non-universal actions force users to guess, hover-hunt, or click to find out. If your team debated what the icon means, your users lose that debate daily.</p>
+    <p class="fix"><strong>Fix:</strong><span>Pair ambiguous actions with visible text labels. Where space truly forbids it, add a tooltip <em>and</em> an <code>aria-label</code> — and watch your support tickets drop.</span></p>
+  </div>
+
+  <div class="mistake-card" id="m7">
+    <div class="rank">#7</div>
+    <h3>Touch targets smaller than 44px <span class="severity sev-med">Mobile damage</span></h3>
+    <p>A 20px icon inside a 20px button is a precision test, not a control. Apple's HIG says 44×44pt minimum, Material says 48×48dp, and WCAG 2.2 (criterion 2.5.8, AA) now mandates 24×24px as an absolute floor. Small targets punish mobile users, motor-impaired users, and anyone on a train.</p>
+    <p class="fix"><strong>Fix:</strong><span>Keep the glyph at 20–24px but pad the interactive element to ≥44×44px: <code>button { padding: 12px; }</code>. Hit area is a button property, not an icon property.</span></p>
+  </div>
+
+  <div class="mistake-card" id="m8">
+    <div class="rank">#8</div>
+    <h3>Off-grid sizing that causes sub-pixel blur <span class="severity sev-med">Visual damage</span></h3>
+    <p>Rendering a 24px-grid icon at 18px scales every coordinate by 0.75 — strokes land between physical pixels and the browser anti-aliases them into mush. That "slightly fuzzy" look on 1x displays is almost always this.</p>
+    <p class="fix"><strong>Fix:</strong><span>Display icons at their native grid size (16, 20, 24, 32, 48) or integer multiples. If your design calls for 18px icons, pick a library drawn on an 18px or 20px grid instead of squeezing a 24px one. Deep dive: <a href="/articles/pixel-perfect-svg-grids-and-scaling/">pixel-perfect SVG icons</a>.</span></p>
+  </div>
+
+  <div class="mistake-card" id="m9">
+    <div class="rank">#9</div>
+    <h3>Unoptimized SVG exports straight from design tools <span class="severity sev-med">Perf damage</span></h3>
+    <p>Raw Figma/Illustrator exports carry editor metadata, empty groups, 6-decimal coordinates, and inline <code>&lt;style&gt;</code> blocks. Individually small; across 80 icons it's tens of kilobytes of pure waste — and unscoped IDs in multiple inlined SVGs can even collide and corrupt each other's gradients and clips.</p>
+    <p class="fix"><strong>Fix:</strong><span>Run every icon through SVGO (or SVGOMG for one-offs) in your build or export pipeline. Typical savings: 20–60% per file. Our <a href="/articles/how-to-optimize-svg-icons-for-web-performance/">SVG performance guide</a> has a ready-made config.</span></p>
+  </div>
+
+  <div class="mistake-card" id="m10">
+    <div class="rank">#10</div>
+    <h3>Inconsistent metaphors for the same action <span class="severity sev-med">UX damage</span></h3>
+    <p>A trash can deletes on one screen; an ✕ deletes on another; a minus-circle deletes in settings. Or "settings" is a gear here and sliders there. Each inconsistency forces users to re-learn your interface, screen by screen.</p>
+    <p class="fix"><strong>Fix:</strong><span>Maintain an action→icon registry as part of your design system: one action, one icon, everywhere. Our guide to <a href="/articles/designing-consistent-icon-systems-for-saas-ui/">consistent icon systems for SaaS UI</a> shows how to enforce it in code review.</span></p>
+  </div>
+
+  <div class="mistake-card" id="m11">
+    <div class="rank">#11</div>
+    <h3>No hover, focus, or active states on icon buttons <span class="severity sev-med">UX + a11y damage</span></h3>
+    <p>Static icons that don't respond to hover feel dead; worse, removing focus outlines (<code>outline: none</code> with no replacement) makes keyboard navigation literally invisible. Icon buttons are buttons — they need the full interactive state set.</p>
+    <p class="fix"><strong>Fix:</strong><span>Give icon buttons a hover background (not just a color shift), a <code>:focus-visible</code> ring, and an active state. 8 lines of CSS, applied globally to one <code>.icon-btn</code> class.</span></p>
+  </div>
+
+  <div class="mistake-card" id="m12">
+    <div class="rank">#12</div>
+    <h3>PNG icons on high-DPI screens <span class="severity sev-low">Visual damage</span></h3>
+    <p>A 24px PNG renders from 24 physical pixels stretched across 48–72 on Retina and 3x displays — visibly soft next to crisp text. PNGs also can't inherit <code>currentColor</code>, so theming means re-exporting assets.</p>
+    <p class="fix"><strong>Fix:</strong><span>Use SVG for all UI icons; it's resolution-independent and usually smaller than the PNG anyway. Reserve raster strictly for contexts that can't render SVG (some email clients, legacy favicons) — and export those at 2x.</span></p>
+  </div>
+
+  <div class="mistake-card" id="m13">
+    <div class="rank">#13</div>
+    <h3>Ignoring RTL mirroring for directional icons <span class="severity sev-low">i18n damage</span></h3>
+    <p>In Arabic or Hebrew locales, a "back" arrow pointing left now points <em>forward</em>. Directional icons (arrows, chevrons, undo/redo, send) must flip in right-to-left layouts; symmetric icons (search, settings) must not.</p>
+    <p class="fix"><strong>Fix:</strong><span>Tag directional icons in your system and mirror them with <code>[dir="rtl"] .icon-directional { transform: scaleX(-1); }</code>. Never flip icons containing text, clocks, or checkmarks.</span></p>
+  </div>
+
+  <div class="mistake-card" id="m14">
+    <div class="rank">#14</div>
+    <h3>Decorative icon overload <span class="severity sev-low">Visual damage</span></h3>
+    <p>An icon in front of every nav item, every list row, every heading, every button. When everything has an icon, icons stop carrying information — they become texture, and the genuinely important ones (warnings, errors) lose their power to interrupt.</p>
+    <p class="fix"><strong>Fix:</strong><span>Apply the newspaper test: if removing the icon loses zero meaning, remove it. Reserve icons for navigation anchors, status signals, and actions — and let text be text.</span></p>
+  </div>
+
+  <div class="mistake-card" id="m15">
+    <div class="rank">#15</div>
+    <h3>Shipping icons with unverified licenses <span class="severity sev-high">Legal damage: rare but severe</span></h3>
+    <p>The icon a teammate grabbed from a random "free icons" site in 2023 may be "free for personal use" only — a proprietary license that prohibits commercial products. It ranks last because it's the least frequent, but when it bites, it bites in legal, not in design review.</p>
+    <p class="fix"><strong>Fix:</strong><span>Only ship icons under standard open licenses — MIT, Apache 2.0, ISC, CC0, or CC BY (with its one credit line). 94.5% of the 134,701 icons on IconStash require no attribution at all; the full breakdown is in our <a href="/articles/icon-licensing-explained-mit-apache-cc/">icon licensing guide</a>.</span></p>
+  </div>
+
+  <h2 id="checklist">The 60-Second Icon Audit</h2>
+  <div class="takeaway-box">
+    <h3>Run this against your product today</h3>
+    <ul>
+      <li><strong>Consistency:</strong> One library? One stroke weight? One action→icon mapping?</li>
+      <li><strong>Accessibility:</strong> Decorative icons hidden? Icon buttons labeled? Focus rings visible?</li>
+      <li><strong>Theming:</strong> Grep your icons for <code>fill="#</code> — every hit is a dark-mode bug waiting.</li>
+      <li><strong>Performance:</strong> Any <code>import *</code> from an icon package? Any un-SVGO'd exports?</li>
+      <li><strong>Ergonomics:</strong> Every tappable icon ≥44×44px? Directional icons mirrored in RTL?</li>
+      <li><strong>Legal:</strong> Can you name the license of every icon you ship?</li>
+    </ul>
+    <p style="margin:14px 0 0;">Score 6/6 and your icons are quietly doing their job — which is exactly what great icons do.</p>
+  </div>
+
+  <h2 id="faq">Frequently Asked Questions</h2>
+  <h3>What is the most common icon mistake?</h3>
+  <p>Mixing icons from multiple libraries with different grids and stroke weights. It's the most visible inconsistency to users and the least visible to the developers introducing it one icon at a time. Standardize on one library — compare candidates side by side on <a href="/">IconStash</a> before you commit.</p>
+  <h3>Are icon-only buttons bad UX?</h3>
+  <p>Only for non-universal actions. Search, close, play, and home work unlabeled; export, archive, and sync don't. When in doubt, add the label — text is the cheapest usability upgrade in existence.</p>
+  <h3>How big should icon touch targets be?</h3>
+  <p>44×44 CSS pixels minimum (Apple HIG), 48×48dp (Material), and never below WCAG 2.2's 24×24px floor. Pad the button, not the SVG.</p>
+  <h3>Why do my SVG icons look blurry?</h3>
+  <p>Almost always off-grid rendering — a 24px icon displayed at 18px puts strokes between physical pixels. Stick to native grid sizes or integer multiples, and blur disappears.</p>
+</article>
+
+<aside class="sidebar">
+  <div class="sidebar-box">
+    <h3>The 15 Mistakes</h3>
+    <ul>
+      <li><a href="#m1">1. Mixing libraries</a></li>
+      <li><a href="#m2">2. Missing ARIA</a></li>
+      <li><a href="#m3">3. Hardcoded colors</a></li>
+      <li><a href="#m4">4. Killed tree-shaking</a></li>
+      <li><a href="#m5">5. Icon fonts in 2026</a></li>
+      <li><a href="#m6">6. Ambiguous icon-only buttons</a></li>
+      <li><a href="#m7">7. Tiny touch targets</a></li>
+      <li><a href="#m8">8. Sub-pixel blur</a></li>
+      <li><a href="#m9">9. Unoptimized exports</a></li>
+      <li><a href="#m10">10. Inconsistent metaphors</a></li>
+      <li><a href="#m11">11. No interactive states</a></li>
+      <li><a href="#m12">12. PNGs on Retina</a></li>
+      <li><a href="#m13">13. No RTL mirroring</a></li>
+      <li><a href="#m14">14. Icon overload</a></li>
+      <li><a href="#m15">15. Unverified licenses</a></li>
+    </ul>
+  </div>
+  <div class="sidebar-box">
+    <h3>Related Resources</h3>
+    <ul>
+      <li><a href="/articles/designing-accessible-svg-icons/">Designing Accessible SVG Icons</a></li>
+      <li><a href="/articles/how-to-optimize-svg-icons-for-web-performance/">Optimizing SVG Performance</a></li>
+      <li><a href="/articles/icon-licensing-explained-mit-apache-cc/">Icon Licenses Explained</a></li>
+      <li><a href="/Listicles/best-free-icon-sets-2026/">37 Best Free Icon Sets 2026</a></li>
+      <li><a href="/Glossary/svg-attributes-glossary/">SVG Attributes Glossary</a></li>
+    </ul>
+  </div>
+</aside>
+</div>
+
+<section class="cta-banner">
+  <h2>Fix Mistake #1 Right Now</h2>
+  <p>Compare how all 28 libraries draw the same icon — side by side, in one search. 134,701 icons, zero cost.</p>
+  <a href="/" class="big-cta">Compare Icons Side by Side →</a>
+</section>
+
+<footer class="article-footer">
+  <span>© 2026 IconStash by <a href="https://greatsoftwarecompany.com">Great Software Company</a></span>
+  <div class="footer-links">
+    <a href="/">Browse Icons</a>
+    <a href="/articles/">Articles</a>
+    <a href="/Glossary/icon-svg-terminology/">Icon Glossary</a>
+    <a href="https://github.com/OG-Huzzi/IconStash" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>

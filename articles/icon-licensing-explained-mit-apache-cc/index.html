@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icon Licenses Explained: MIT vs Apache vs CC | IconStash</title>
+  <meta name="description" content="MIT, Apache 2.0, ISC, CC0, and CC BY icon licenses explained with real data from 134,701 icons. What you must include, what you can skip, and what to avoid.">
+  <meta name="keywords" content="icon license explained, mit license icons, apache 2.0 icons, cc by icons attribution, cc0 icons, can i use icons commercially, icon license comparison, svg icon licensing, open source icon licenses">
+  <meta property="og:title" content="Icon Licenses Explained: MIT vs Apache 2.0 vs CC BY vs CC0 (2026)">
+  <meta property="og:description" content="The definitive developer guide to icon licensing, backed by license data from 134,701 real icons. Attribution rules, patent grants, and compliance checklists.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/articles/icon-licensing-explained-mit-apache-cc/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/logo.png">
+  <meta property="article:published_time" content="2026-07-24T00:00:00Z">
+  <meta property="article:modified_time" content="2026-07-24T00:00:00Z">
+  <meta property="article:author" content="IconStash Team">
+  <meta property="article:section" content="Licensing">
+  <meta property="article:tag" content="icon licensing">
+  <meta property="article:tag" content="MIT license">
+  <meta property="article:tag" content="Apache 2.0">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Icon Licenses Explained: MIT vs Apache 2.0 vs CC BY vs CC0">
+  <meta name="twitter:description" content="What every icon license actually requires — with real license data from 134,701 icons across 28 libraries.">
+  <meta name="twitter:image" content="https://iconstash.io/logo.png">
+  <link rel="canonical" href="https://iconstash.io/articles/icon-licensing-explained-mit-apache-cc/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Icon Licenses Explained: MIT vs Apache 2.0 vs CC BY vs CC0 (2026)",
+    "description": "The definitive developer guide to icon licensing. MIT, Apache 2.0, ISC, CC0, and CC BY 4.0 explained with real license data from 134,701 icons across 28 open-source libraries.",
+    "author": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
+    "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io", "logo": { "@type": "ImageObject", "url": "https://iconstash.io/logo.png" } },
+    "datePublished": "2026-07-24",
+    "dateModified": "2026-07-24",
+    "mainEntityOfPage": "https://iconstash.io/articles/icon-licensing-explained-mit-apache-cc/",
+    "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
+    "articleSection": "Licensing",
+    "about": [
+      { "@type": "Thing", "name": "MIT License", "sameAs": "https://en.wikipedia.org/wiki/MIT_License" },
+      { "@type": "Thing", "name": "Apache License", "sameAs": "https://en.wikipedia.org/wiki/Apache_License" },
+      { "@type": "Thing", "name": "Creative Commons license", "sameAs": "https://en.wikipedia.org/wiki/Creative_Commons_license" }
+    ],
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".article-hero h1", ".article-hero .subtitle"] },
+    "keywords": ["icon licensing", "MIT license", "Apache 2.0", "CC BY 4.0", "CC0", "ISC license", "commercial use icons"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://iconstash.io/articles/" },
+      { "@type": "ListItem", "position": 3, "name": "Icon Licenses Explained" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I use MIT-licensed icons in a commercial product?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. MIT-licensed icons can be used, modified, and sold in commercial products with no payment and no visible attribution in your UI. The only requirement is preserving the copyright notice and license text when you redistribute the icon source itself — which your bundler output and app UI do not trigger in practice for icon usage." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between MIT and Apache 2.0 for icons?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Both are permissive and free for commercial use without UI attribution. The practical difference: Apache 2.0 includes an explicit patent grant and requires you to state significant changes if you modify and redistribute the files; MIT is shorter and has no patent clause. For consuming icons in an app, the developer experience is identical. Across 134,701 icons indexed by IconStash, Apache 2.0 covers 46.3% and MIT covers 44.0%." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do CC0 icons require attribution?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. CC0 is a public-domain dedication — the author waives all copyright. You can use, modify, and sell CC0 icons with zero attribution and zero conditions. It is the most permissive option that exists. Note: CC0 does not waive trademark rights, which matters for brand logo sets like Simple Icons." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I attribute CC BY 4.0 icons correctly?",
+        "acceptedAnswer": { "@type": "Answer", "text": "CC BY 4.0 requires reasonable attribution: the icon set name, author, a link to the license, and an indication if you changed the icons. For apps and websites, a line in your About page, footer, or settings screen such as 'Icons by Solar Icons, licensed under CC BY 4.0' satisfies the requirement. It does not need to appear next to every icon." }
+      },
+      {
+        "@type": "Question",
+        "name": "What percentage of open-source icons are free to use without attribution?",
+        "acceptedAnswer": { "@type": "Answer", "text": "94.5% — based on the IconStash dataset of 134,701 icons across 28 open-source libraries, 127,291 icons are licensed under MIT, Apache 2.0, ISC, or CC0 and require no attribution in your product. Only 5.5% (Solar Icons, CC BY 4.0) request attribution." }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    code { font-family: "JetBrains Mono", Consolas, monospace; font-size: 0.88em; background: rgba(255,255,255,0.06); border: 1px solid #1F1F1F; border-radius: 4px; padding: 2px 6px; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: background 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; }
+
+    .article-hero { max-width: 900px; margin: 0 auto; padding: 80px 24px 48px; text-align: center; }
+    .article-hero .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(193,221,45,0.08); border: 1px solid rgba(193,221,45,0.2); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 6px 14px; border-radius: 999px; margin-bottom: 28px; }
+    .article-hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; background: linear-gradient(135deg, #F2F2F2 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .article-hero .subtitle { font-size: 19px; color: #888; line-height: 1.7; max-width: 680px; margin: 0 auto 28px; }
+    .article-meta { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; color: #666; font-size: 13px; }
+
+    .layout { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .sidebar { display: none; }
+    .sidebar-box { background: rgba(255,255,255,0.02); border: 1px solid #1F1F1F; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; }
+    .sidebar-box h3 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 14px; }
+    .sidebar-box ul { list-style: none; padding: 0; margin: 0; }
+    .sidebar-box li { margin: 10px 0; font-size: 14px; line-height: 1.5; }
+    .sidebar-box a { color: #999; }
+    .sidebar-box a:hover { color: #C1DD2D; }
+
+    .article-body { margin: 0; padding: 0 0 80px; }
+    .article-body h2 { font-size: 28px; font-weight: 800; margin: 64px 0 20px; padding-top: 16px; border-top: 1px solid #1F1F1F; letter-spacing: -0.02em; }
+    .article-body h2:first-of-type { border-top: none; margin-top: 0; }
+    .article-body h3 { font-size: 20px; font-weight: 700; margin: 40px 0 14px; color: #C1DD2D; }
+    .article-body p { margin-bottom: 18px; color: #ccc; }
+    .article-body ul, .article-body ol { margin: 0 0 20px 20px; color: #ccc; }
+    .article-body li { margin: 8px 0; }
+    .article-body strong { color: #F2F2F2; }
+    .article-body blockquote { border-left: 3px solid #C1DD2D; padding: 16px 20px; margin: 28px 0; background: rgba(193,221,45,0.04); border-radius: 0 8px 8px 0; font-style: italic; color: #aaa; }
+
+    .table-wrap { overflow-x: auto; margin: 28px 0; border: 1px solid #1F1F1F; border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px; }
+    thead th { text-align: left; padding: 14px 16px; background: rgba(255,255,255,0.03); color: #888; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid #1F1F1F; white-space: nowrap; }
+    tbody td { padding: 13px 16px; border-bottom: 1px solid #161616; color: #ccc; vertical-align: top; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: rgba(193,221,45,0.02); }
+    td .lic { font-family: "JetBrains Mono", monospace; font-size: 13px; color: #C1DD2D; white-space: nowrap; }
+    .yes { color: #7BC96F; font-weight: 600; }
+    .no { color: #E05D5D; font-weight: 600; }
+    .warn { color: #F5C542; font-weight: 600; }
+
+    .takeaway-box { background: linear-gradient(135deg, rgba(193,221,45,0.06) 0%, rgba(193,221,45,0.02) 100%); border: 1px solid rgba(193,221,45,0.15); border-radius: 14px; padding: 32px; margin: 40px 0; }
+    .takeaway-box h3 { color: #C1DD2D; font-size: 18px; font-weight: 800; margin: 0 0 16px; }
+
+    .cta-banner { text-align: center; padding: 64px 24px; margin: 64px 0 0; background: linear-gradient(180deg, rgba(193,221,45,0.04) 0%, transparent 100%); border-top: 1px solid rgba(193,221,45,0.1); }
+    .cta-banner h2 { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .cta-banner p { color: #888; font-size: 17px; margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-banner .big-cta { display: inline-flex; align-items: center; gap: 8px; background: #C1DD2D; color: #0A0A0A; font-weight: 800; font-size: 16px; padding: 16px 36px; border-radius: 10px; border: none; cursor: pointer; transition: all 200ms ease; text-decoration: none; }
+    .cta-banner .big-cta:hover { background: #D2ED3E; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(193,221,45,0.2); }
+
+    .article-footer { max-width: 1200px; margin: 0 auto; padding: 32px 24px; border-top: 1px solid #1F1F1F; color: #666; font-size: 13px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .article-footer a { color: #666; }
+    .article-footer a:hover { color: #F2F2F2; }
+    .footer-links { display: flex; gap: 20px; }
+
+    @media (min-width: 1100px) {
+      .layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 56px; align-items: start; }
+      .article-body { grid-column: 1; grid-row: 1; }
+      .sidebar { display: block; grid-column: 2; grid-row: 1; position: sticky; top: 82px; }
+    }
+    @media (max-width: 768px) {
+      .article-hero { padding: 48px 20px 32px; }
+      .article-hero h1 { font-size: 28px; }
+      .article-hero .subtitle { font-size: 16px; }
+      .layout { padding: 0 20px; }
+      .article-body { padding-bottom: 48px; }
+      .article-body h2 { font-size: 22px; margin-top: 48px; }
+      .article-body h3 { font-size: 18px; }
+      .site-header nav { display: none; }
+      .cta-banner { padding: 48px 20px; }
+      .cta-banner h2 { font-size: 24px; }
+      .takeaway-box { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="/">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+    <span>IconStash</span>
+  </a>
+  <nav>
+    <a href="/">Browse Icons</a>
+    <a href="/articles/">Articles</a>
+    <a href="/stats/">Stats</a>
+    <a href="https://github.com/OG-Huzzi/IconStash">GitHub</a>
+  </nav>
+  <a href="/" class="header-cta">Open Editor</a>
+</header>
+
+<section class="article-hero">
+  <div class="badge">Licensing Guide</div>
+  <h1>Icon Licenses Explained: MIT vs Apache 2.0 vs CC BY vs CC0</h1>
+  <p class="subtitle">Every open-source icon license decoded for developers — what you must include, what you can skip, and where teams actually get burned. Backed by license data from 134,701 real icons across 28 libraries.</p>
+  <div class="article-meta">
+    <span>July 24, 2026</span>
+    <span>•</span>
+    <span>14 min read</span>
+    <span>•</span>
+    <span>By IconStash Team</span>
+  </div>
+</section>
+
+<div class="layout">
+<article class="article-body">
+
+  <h2 id="tldr">The 30-Second Answer</h2>
+  <div class="takeaway-box">
+    <h3>TL;DR — Icon licensing in five sentences</h3>
+    <p><strong>MIT, Apache 2.0, ISC, and CC0 icons are free for commercial use with no attribution in your UI.</strong> Together those four licenses cover <strong>127,291 of the 134,701 icons (94.5%)</strong> in the <a href="/stats/">IconStash dataset</a>. <strong>CC BY 4.0</strong> icons (5.5% of the dataset) additionally require a credit line — one sentence on your About page is enough. The practical difference between MIT and Apache 2.0 is that Apache adds an explicit <strong>patent grant</strong>; for icon consumption they behave identically. The licenses that actually get teams in trouble are not these — they're "free for personal use" pseudo-licenses and stock-site EULAs, which are not open source at all.</p>
+  </div>
+  <p>This is not legal advice — it's an engineering field guide. But unlike most articles on this topic, every number here comes from a real, verifiable dataset: the license metadata of all 134,701 icons indexed by IconStash, published as open data (CC BY 4.0) on our <a href="/stats/">statistics page</a>.</p>
+
+  <h2 id="what-a-license-governs">What an Icon License Actually Governs</h2>
+  <p>An icon license answers four questions, and only four:</p>
+  <ul>
+    <li><strong>Use</strong> — can you ship the icon in a product, including a commercial one?</li>
+    <li><strong>Modification</strong> — can you recolor, resize, restyle, or combine it?</li>
+    <li><strong>Redistribution</strong> — can you pass the icon files on to others (in a template, a library, a design kit)?</li>
+    <li><strong>Conditions</strong> — what do you owe in return: attribution, license text, change notices, nothing?</li>
+  </ul>
+  <p>Everything else — pricing, API limits, "premium" tiers — is a business model, not a license. Keep those two ideas separate and 90% of icon-licensing confusion disappears.</p>
+
+  <h2 id="the-data">The License Landscape, Measured</h2>
+  <p>Most licensing articles speak in generalities. Here is the actual distribution across every icon in the IconStash index (snapshot 2026-05-05):</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>License</th><th>Icons</th><th>Share</th><th>Attribution in UI?</th><th>Notable libraries</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="lic">Apache 2.0</span></td><td>62,385</td><td>46.3%</td><td><span class="yes">Not required</span></td><td>Material Symbols, Material Design Icons, Remix Icon</td></tr>
+        <tr><td><span class="lic">MIT</span></td><td>59,213</td><td>44.0%</td><td><span class="yes">Not required</span></td><td>Fluent UI, Tabler, Phosphor, Heroicons</td></tr>
+        <tr><td><span class="lic">CC BY 4.0</span></td><td>7,410</td><td>5.5%</td><td><span class="warn">Required (one line)</span></td><td>Solar Icons</td></tr>
+        <tr><td><span class="lic">CC0 1.0</span></td><td>3,714</td><td>2.8%</td><td><span class="yes">Not required</span></td><td>Simple Icons</td></tr>
+        <tr><td><span class="lic">ISC</span></td><td>1,979</td><td>1.5%</td><td><span class="yes">Not required</span></td><td>Lucide</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <blockquote>94.5% of the open-source icon ecosystem requires nothing from you at runtime. The license fear that keeps teams paying for stock icons is, statistically, unfounded.</blockquote>
+
+  <h2 id="mit">MIT: The Default of the Ecosystem</h2>
+  <p>The MIT License is ~170 words long. It grants unrestricted use, modification, merging, publishing, distribution, sublicensing, and sale. Its single condition: <strong>the copyright notice and license text must accompany "all copies or substantial portions of the Software."</strong></p>
+  <h3>What that means for icons, concretely</h3>
+  <ul>
+    <li><strong>Using icons in your app or site:</strong> nothing to do. Rendered icons in a UI are output, not a redistribution of "the Software."</li>
+    <li><strong>Bundling via npm:</strong> nothing extra to do — the license file ships inside <code>node_modules</code>, and standard tooling (e.g., license-extraction plugins) already satisfies compliance for minified bundles.</li>
+    <li><strong>Redistributing the SVG files themselves</strong> (a UI kit, a forked icon set, a Figma template you sell): include the original LICENSE file. That's the whole obligation.</li>
+  </ul>
+  <p>MIT covers 59,213 icons (44.0%) in our index — including Microsoft's Fluent UI Icons (20,170 icons, the single largest library we index), <a href="/#/library/tabler">Tabler</a>, <a href="/#/library/phosphor">Phosphor</a>, and <a href="/#/library/heroicons">Heroicons</a>.</p>
+
+  <h2 id="apache">Apache 2.0: MIT Plus a Patent Shield</h2>
+  <p>Apache 2.0 grants the same freedoms as MIT, with two additions that matter to large organizations:</p>
+  <ul>
+    <li><strong>Explicit patent grant:</strong> every contributor licenses any patents their contribution embodies. If someone later sues you over a patent in the work, their license terminates. MIT is silent on patents; Apache 2.0 closes that gap in writing.</li>
+    <li><strong>Change notices:</strong> if you modify and redistribute the <em>files</em>, you must state that you changed them. Recoloring an icon inside your app doesn't trigger this; republishing an edited icon set does.</li>
+  </ul>
+  <p>This is why Google standardizes on it: Material Symbols, Material Symbols Light, and Material Design Icons — 48,517 icons across the three Material families — are all Apache 2.0. That single corporate decision is the main reason Apache 2.0 is the #1 license by icon volume at 46.3%.</p>
+  <blockquote>Rule of thumb: as an icon <em>consumer</em>, MIT and Apache 2.0 are interchangeable. As an icon <em>redistributor</em>, Apache 2.0 asks for one extra courtesy — a note that you changed things.</blockquote>
+
+  <h2 id="isc">ISC: MIT with Fewer Words</h2>
+  <p>The ISC license is functionally identical to MIT — same permissions, same single attribution-in-source condition — just written more concisely. It's the license of <a href="/#/library/lucide">Lucide</a> (1,979 icons), the community successor to Feather and one of the most-shipped icon sets in modern SaaS. If your legal team has approved MIT, ISC is the same conversation.</p>
+
+  <h2 id="cc0">CC0: The Public-Domain Dedication</h2>
+  <p>CC0 isn't a license with conditions — it's a <strong>waiver</strong>. The author dedicates the work to the public domain and gives up copyright entirely. You may use, modify, sell, and redistribute CC0 icons with <strong>zero</strong> obligations. No notice, no credit, no license file.</p>
+  <h3>The one trap: trademarks survive CC0</h3>
+  <p>CC0 waives <em>copyright</em>, not <em>trademark</em>. This matters enormously for <a href="/#/library/simple-icons">Simple Icons</a> (3,714 icons in our index) — the definitive brand-logo set. The SVG path data is CC0, but the GitHub logo still belongs to GitHub and the Visa mark still belongs to Visa. You can render them to link to your GitHub repo; you cannot use them to imply endorsement or brand your own product. That restriction comes from trademark law, and no icon license can remove it.</p>
+
+  <h2 id="ccby">CC BY 4.0: Free, but Say Thank You in Writing</h2>
+  <p>CC BY 4.0 grants full commercial use and modification rights, on one condition: <strong>reasonable attribution</strong>. In our dataset this is <a href="/#/library/solar">Solar Icons</a> — 7,410 icons, 5.5% of the index, and the only attribution-bearing license among all 28 libraries.</p>
+  <h3>What "reasonable attribution" actually requires</h3>
+  <p>Per the license, attribution must identify the work, the creator, the license (with link), and whether you made changes — "in any reasonable manner based on the medium." For software, this satisfies it:</p>
+  <ul>
+    <li><strong>Websites:</strong> one line in the footer or an <code>/about</code> or <code>/credits</code> page — <em>"Icons by Solar Icons, licensed under CC BY 4.0."</em></li>
+    <li><strong>Mobile apps:</strong> an entry in the open-source licenses screen (the one you already have for your npm/Gradle dependencies).</li>
+    <li><strong>Not required:</strong> a caption next to every icon, a splash-screen credit, or a link in your navigation.</li>
+  </ul>
+
+  <h2 id="comparison">Side-by-Side: What Each License Demands</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Obligation</th><th>MIT / ISC</th><th>Apache 2.0</th><th>CC0</th><th>CC BY 4.0</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Commercial use</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Modify / restyle</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Attribution in your UI</td><td class="yes">No</td><td class="yes">No</td><td class="yes">No</td><td class="warn">Yes — one credit line</td></tr>
+        <tr><td>License text when redistributing files</td><td class="warn">Yes</td><td class="warn">Yes</td><td class="yes">No</td><td class="warn">Yes (license link)</td></tr>
+        <tr><td>State changes on redistribution</td><td class="yes">No</td><td class="warn">Yes</td><td class="yes">No</td><td class="warn">Yes</td></tr>
+        <tr><td>Explicit patent grant</td><td class="no">No</td><td class="yes">Yes</td><td class="no">N/A</td><td class="no">No</td></tr>
+        <tr><td>Waives trademark rights</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="danger">The Licenses That Actually Burn Teams</h2>
+  <p>None of the five licenses above has ever been the source of an icon-licensing dispute we could find. The real risks live outside open source:</p>
+  <ul>
+    <li><strong>"Free for personal use"</strong> — this is a proprietary license with the word "free" in it. It prohibits exactly the thing developers do: shipping products. Common on font/icon download sites.</li>
+    <li><strong>Stock-site EULAs with attribution tiers</strong> — e.g., free tiers requiring a visible credit link per icon, with back-billing if you miss one. Read the EULA, not the marketing page.</li>
+    <li><strong>Relicensed scrapes</strong> — icon packs on marketplaces that repackage MIT sets under a paid "extended license." The original license already gave you those rights for free.</li>
+    <li><strong>AI-generated icon packs with no license at all</strong> — no license means <em>all rights reserved</em> by default. Absence of a license is the most restrictive license.</li>
+  </ul>
+  <blockquote>The safest icon strategy in 2026 is also the cheapest one: use icons whose license is a standard, court-tested open-source text — MIT, Apache 2.0, ISC, CC0, or CC BY.</blockquote>
+
+  <h2 id="checklist">The 60-Second Compliance Checklist</h2>
+  <div class="takeaway-box">
+    <h3>Before you ship</h3>
+    <ul>
+      <li><strong>1. Know your sources.</strong> List which icon libraries your product uses (your <code>package.json</code> already knows).</li>
+      <li><strong>2. MIT / Apache / ISC / CC0?</strong> You're done. npm + standard build tooling handles notice preservation.</li>
+      <li><strong>3. Any CC BY icons?</strong> Add one credit line to your About/credits/licenses page. Done.</li>
+      <li><strong>4. Redistributing icon files themselves?</strong> Include the upstream LICENSE file next to them.</li>
+      <li><strong>5. Using brand logos?</strong> Copyright is cleared (CC0), but respect trademark: identify, don't imply endorsement.</li>
+      <li><strong>6. Avoid anything "free for personal use."</strong> It is not free for you.</li>
+    </ul>
+  </div>
+
+  <h2 id="faq">Frequently Asked Questions</h2>
+  <h3>Can I use MIT-licensed icons in a commercial product?</h3>
+  <p>Yes — use, modify, and sell freely, with no visible attribution in your UI. The MIT notice-preservation rule applies when you redistribute the icon source files themselves, not when you render icons in a product.</p>
+  <h3>What's the real difference between MIT and Apache 2.0 for icons?</h3>
+  <p>For consuming icons: none in practice. Apache 2.0 adds an explicit patent grant and a requirement to note changes when redistributing modified files. Across our 134,701-icon dataset, Apache 2.0 covers 46.3% of icons and MIT 44.0% — together, nine out of ten open-source icons.</p>
+  <h3>Do CC0 icons require attribution?</h3>
+  <p>No. CC0 waives copyright entirely — zero conditions. The only caveat is trademark law: brand logos (like those in Simple Icons) remain trademarks of their owners regardless of the CC0 dedication.</p>
+  <h3>How do I attribute CC BY 4.0 icons correctly?</h3>
+  <p>One reasonable credit — set name, author, license link, and a note if you modified the icons — placed in your footer, About page, or licenses screen. Per-icon captions are not required.</p>
+  <h3>Where does this data come from?</h3>
+  <p>From the <a href="/stats/">IconStash Icon Library Statistics 2026</a> dataset: verified per-library icon counts and license metadata for all 28 libraries we index, published as open data under CC BY 4.0. Cite it freely.</p>
+</article>
+
+<aside class="sidebar">
+  <div class="sidebar-box">
+    <h3>On This Page</h3>
+    <ul>
+      <li><a href="#tldr">The 30-second answer</a></li>
+      <li><a href="#the-data">The license landscape, measured</a></li>
+      <li><a href="#mit">MIT</a></li>
+      <li><a href="#apache">Apache 2.0</a></li>
+      <li><a href="#isc">ISC</a></li>
+      <li><a href="#cc0">CC0</a></li>
+      <li><a href="#ccby">CC BY 4.0</a></li>
+      <li><a href="#comparison">Side-by-side table</a></li>
+      <li><a href="#danger">Licenses that burn teams</a></li>
+      <li><a href="#checklist">Compliance checklist</a></li>
+    </ul>
+  </div>
+  <div class="sidebar-box">
+    <h3>Related Resources</h3>
+    <ul>
+      <li><a href="/stats/">Icon Library Statistics 2026</a></li>
+      <li><a href="/articles/free-svg-icons-commercial-use-2026/">Free SVG Icons for Commercial Use</a></li>
+      <li><a href="/articles/best-open-source-icon-libraries-2026/">28 Best Open Source Icon Libraries</a></li>
+      <li><a href="/Listicles/best-free-icon-sets-2026/">37 Best Free Icon Sets 2026</a></li>
+      <li><a href="/Glossary/icon-svg-terminology/">Icon &amp; SVG Glossary</a></li>
+    </ul>
+  </div>
+</aside>
+</div>
+
+<section class="cta-banner">
+  <h2>134,701 Icons. Every License Verified.</h2>
+  <p>Search all 28 libraries in one place — each icon labeled with its exact license. Export SVG, PNG, or JSX.</p>
+  <a href="/" class="big-cta">Browse Licensed Icons →</a>
+</section>
+
+<footer class="article-footer">
+  <span>© 2026 IconStash by <a href="https://greatsoftwarecompany.com">Great Software Company</a></span>
+  <div class="footer-links">
+    <a href="/">Browse Icons</a>
+    <a href="/articles/">Articles</a>
+    <a href="/stats/">Stats</a>
+    <a href="https://github.com/OG-Huzzi/IconStash" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>

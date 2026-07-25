@@ -31,7 +31,10 @@ IconStash (https://iconstash.io) is a 100% client-side web app built by Great So
 ## Documentation & Guides
 - [React Icons: Complete Developer Guide 2026](https://iconstash.io/articles/react-icons-complete-guide-2026/)
 - [37 Best Free Icon Sets for Developers 2026](https://iconstash.io/Listicles/best-free-icon-sets-2026/)
+- [15 Icon Mistakes Ruining Your UI (ranked, with fixes)](https://iconstash.io/Listicles/icon-mistakes-ruining-your-ui/)
 - [Icon & SVG Glossary (50+ terms)](https://iconstash.io/Glossary/icon-svg-terminology/)
+- [SVG Attributes & CSS Properties Glossary (45+ attributes)](https://iconstash.io/Glossary/svg-attributes-glossary/)
+- [Icon Licenses Explained: MIT vs Apache 2.0 vs CC BY vs CC0](https://iconstash.io/articles/icon-licensing-explained-mit-apache-cc/)
 - [Free SVG Icons for Commercial Use](https://iconstash.io/articles/free-svg-icons-commercial-use-2026/)
 - [Lucide vs Feather Icons](https://iconstash.io/articles/lucide-vs-feather-icons-2026/)
 - [How to Build a Scalable Icon System](https://iconstash.io/articles/how-to-build-scalable-icon-system/)
