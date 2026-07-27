@@ -5,3 +5,11 @@ data/pseo-keywords.json
 .well-known/
 # deploy.php is our server webhook containing the secret token, so it MUST be ignored locally!
 deploy.php
+
+# OpenSEO & MCP configuration and credentials
+.openseo/
+openseo.json
+.openseo-credentials
+.mcp/
+mcp.json
+mcp_config.json
