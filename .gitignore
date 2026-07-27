@@ -10,6 +10,7 @@ deploy.php
 .openseo/
 openseo.json
 .openseo-credentials
+_tmp_openseo/
 .mcp/
 mcp.json
 mcp_config.json
