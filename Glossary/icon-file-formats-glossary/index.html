@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icon File Formats Glossary: SVG, PNG, ICO | IconStash</title>
+  <meta name="description" content="Every icon file format explained in one glossary: SVG, PNG, ICO, ICNS, WebP, AVIF, Lottie, icon fonts, Android VectorDrawable and 25+ more — with when to use each.">
+  <meta name="keywords" content="icon file formats, svg vs png icons, ico file format, icns format, webp icons, avif icons, lottie json, icon font formats, vectordrawable android, apple touch icon format, svg sprite, data uri icons, favicon format">
+  <meta property="og:title" content="Icon File Formats Glossary: SVG, PNG, ICO, WebP & 25+ More Explained">
+  <meta property="og:description" content="The complete reference to every file format icons ship in — vector, raster, containers, fonts, platform formats, and animation formats — with a decision table for choosing the right one.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/Glossary/icon-file-formats-glossary/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/logo.png">
+  <meta property="article:published_time" content="2026-07-25T00:00:00Z">
+  <meta property="article:modified_time" content="2026-07-25T00:00:00Z">
+  <meta property="article:author" content="IconStash Team">
+  <meta property="article:section" content="Glossary">
+  <meta property="article:tag" content="file formats">
+  <meta property="article:tag" content="SVG">
+  <meta property="article:tag" content="icons">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Icon File Formats Glossary: SVG, PNG, ICO, WebP & More">
+  <meta name="twitter:description" content="Every file format icons ship in, explained — with a decision table for choosing the right one.">
+  <meta name="twitter:image" content="https://iconstash.io/logo.png">
+  <link rel="canonical" href="https://iconstash.io/Glossary/icon-file-formats-glossary/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Icon File Formats Glossary: SVG, PNG, ICO, WebP & 25+ More Explained",
+    "description": "A complete reference glossary of every file format used for icons: vector formats, raster formats, icon containers, font delivery formats, platform-specific formats, and animation formats — with guidance on when to use each.",
+    "author": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
+    "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io", "logo": { "@type": "ImageObject", "url": "https://iconstash.io/logo.png" } },
+    "datePublished": "2026-07-25",
+    "dateModified": "2026-07-25",
+    "mainEntityOfPage": "https://iconstash.io/Glossary/icon-file-formats-glossary/",
+    "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
+    "articleSection": "Glossary",
+    "about": [
+      { "@type": "Thing", "name": "Scalable Vector Graphics", "sameAs": "https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" },
+      { "@type": "Thing", "name": "Image file format", "sameAs": "https://en.wikipedia.org/wiki/Image_file_format" }
+    ],
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".article-hero h1", ".article-hero .subtitle"] },
+    "keywords": ["icon file formats", "SVG", "PNG", "ICO", "WebP", "AVIF", "Lottie", "icon fonts"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://iconstash.io/articles/" },
+      { "@type": "ListItem", "position": 3, "name": "Icon File Formats Glossary" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "@id": "https://iconstash.io/Glossary/icon-file-formats-glossary/#termset",
+    "name": "Icon File Formats Glossary",
+    "description": "Definitions of 25+ file formats used to store and deliver icons.",
+    "hasDefinedTerm": [
+      { "@type": "DefinedTerm", "name": "SVG", "description": "Scalable Vector Graphics — an XML-based vector format that renders sharply at any size and can be styled with CSS. The standard format for UI icons on the web.", "url": "https://iconstash.io/Glossary/icon-file-formats-glossary/#svg" },
+      { "@type": "DefinedTerm", "name": "PNG", "description": "Portable Network Graphics — a lossless raster format with full alpha transparency. The standard raster fallback for icons at fixed sizes.", "url": "https://iconstash.io/Glossary/icon-file-formats-glossary/#png" },
+      { "@type": "DefinedTerm", "name": "ICO", "description": "Windows Icon format — a container holding multiple raster sizes in one file, used for favicons and Windows application icons.", "url": "https://iconstash.io/Glossary/icon-file-formats-glossary/#ico" },
+      { "@type": "DefinedTerm", "name": "ICNS", "description": "Apple Icon Image format — macOS's icon container, storing multiple resolutions including Retina variants for app icons.", "url": "https://iconstash.io/Glossary/icon-file-formats-glossary/#icns" },
+      { "@type": "DefinedTerm", "name": "WebP", "description": "A modern raster format from Google with lossy and lossless modes, alpha transparency, and animation — typically 25–35% smaller than PNG.", "url": "https://iconstash.io/Glossary/icon-file-formats-glossary/#webp" },
+      { "@type": "DefinedTerm", "name": "AVIF", "description": "AV1 Image File Format — the newest widely supported raster format, with the best compression of any web image format plus alpha and HDR support.", "url": "https://iconstash.io/Glossary/icon-file-formats-glossary/#avif" },
+      { "@type": "DefinedTerm", "name": "Lottie", "description": "A JSON-based animation format exported from After Effects, rendered natively at runtime — the standard for complex animated icons.", "url": "https://iconstash.io/Glossary/icon-file-formats-glossary/#lottie" },
+      { "@type": "DefinedTerm", "name": "Data URI", "description": "A technique for embedding an icon file directly in HTML or CSS as a base64 or URL-encoded string, eliminating an HTTP request.", "url": "https://iconstash.io/Glossary/icon-file-formats-glossary/#data-uri" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Should I use SVG or PNG for icons?",
+        "acceptedAnswer": { "@type": "Answer", "text": "SVG for UI icons, almost always: it stays sharp at every size and pixel density, recolors with CSS, and is usually smaller than PNG for simple shapes. Use PNG only where SVG isn't accepted (app store assets, apple-touch-icon, email clients) or for photographic imagery." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the ICO format still needed?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only for one file: /favicon.ico. Many browsers, crawlers, and tools still request it by convention. A single 32×32 ICO plus an SVG favicon covers every modern browser. ICO is otherwise obsolete for web use." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is WebP or AVIF good for icons?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Rarely. WebP and AVIF excel at compressing photographs, but flat-color icon artwork compresses excellently as PNG and even better as SVG. For icons, the practical hierarchy is SVG first, PNG second; WebP/AVIF only when a pipeline already emits them." }
+      },
+      {
+        "@type": "Question",
+        "name": "What format do app icons use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Platform-specific: iOS app icons are PNGs compiled into an asset catalog, macOS uses ICNS, Windows uses ICO, and Android uses adaptive icons defined in XML with VectorDrawable or PNG layers. Web app icons are PNGs (192 and 512 px) referenced from a web app manifest." }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    code { font-family: "JetBrains Mono", Consolas, monospace; font-size: 0.88em; background: rgba(255,255,255,0.06); border: 1px solid #1F1F1F; border-radius: 4px; padding: 2px 6px; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: background 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; }
+
+    .article-hero { max-width: 900px; margin: 0 auto; padding: 80px 24px 48px; text-align: center; }
+    .article-hero .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(193,221,45,0.08); border: 1px solid rgba(193,221,45,0.2); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 6px 14px; border-radius: 999px; margin-bottom: 28px; }
+    .article-hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; background: linear-gradient(135deg, #F2F2F2 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .article-hero .subtitle { font-size: 19px; color: #888; line-height: 1.7; max-width: 680px; margin: 0 auto 28px; }
+    .article-meta { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; color: #666; font-size: 13px; }
+
+    .layout { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .sidebar { display: none; }
+    .sidebar-box { background: rgba(255,255,255,0.02); border: 1px solid #1F1F1F; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; }
+    .sidebar-box h3 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 14px; }
+    .sidebar-box ul { list-style: none; padding: 0; margin: 0; }
+    .sidebar-box li { margin: 10px 0; font-size: 14px; line-height: 1.5; }
+    .sidebar-box a { color: #999; }
+    .sidebar-box a:hover { color: #C1DD2D; }
+
+    .article-body { margin: 0; padding: 0 0 80px; }
+    .article-body h2 { font-size: 26px; font-weight: 800; margin: 56px 0 8px; padding-top: 16px; border-top: 1px solid #1F1F1F; letter-spacing: -0.02em; color: #C1DD2D; }
+    .article-body h2:first-of-type { border-top: none; margin-top: 0; }
+    .article-body .section-desc { color: #888; font-size: 15px; margin-bottom: 24px; }
+    .article-body p { margin-bottom: 18px; color: #ccc; }
+    .article-body strong { color: #F2F2F2; }
+
+    .term { background: rgba(255,255,255,0.02); border: 1px solid #1F1F1F; border-radius: 12px; padding: 22px 26px; margin: 14px 0; transition: border-color 200ms ease; }
+    .term:hover { border-color: rgba(193,221,45,0.3); }
+    .term dt { font-size: 18px; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .term dt .ext { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 500; color: #C1DD2D; background: rgba(193,221,45,0.08); border: 1px solid rgba(193,221,45,0.2); border-radius: 5px; padding: 3px 8px; }
+    .term dd { color: #bbb; font-size: 15.5px; line-height: 1.75; margin: 0; }
+    .term dd a { font-weight: 600; }
+
+    .table-wrap { overflow-x: auto; margin: 28px 0; border: 1px solid #1F1F1F; border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px; }
+    thead th { text-align: left; padding: 14px 16px; background: rgba(255,255,255,0.03); color: #888; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid #1F1F1F; white-space: nowrap; }
+    tbody td { padding: 13px 16px; border-bottom: 1px solid #161616; color: #ccc; vertical-align: top; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: rgba(193,221,45,0.02); }
+    .yes { color: #7BC96F; font-weight: 600; }
+    .no { color: #E05D5D; font-weight: 600; }
+    .warn { color: #F5C542; font-weight: 600; }
+
+    .takeaway-box { background: linear-gradient(135deg, rgba(193,221,45,0.06) 0%, rgba(193,221,45,0.02) 100%); border: 1px solid rgba(193,221,45,0.15); border-radius: 14px; padding: 32px; margin: 40px 0; }
+    .takeaway-box h3 { color: #C1DD2D; font-size: 18px; font-weight: 800; margin: 0 0 16px; }
+
+    .cta-banner { text-align: center; padding: 64px 24px; margin: 64px 0 0; background: linear-gradient(180deg, rgba(193,221,45,0.04) 0%, transparent 100%); border-top: 1px solid rgba(193,221,45,0.1); }
+    .cta-banner h2 { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .cta-banner p { color: #888; font-size: 17px; margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-banner .big-cta { display: inline-flex; align-items: center; gap: 8px; background: #C1DD2D; color: #0A0A0A; font-weight: 800; font-size: 16px; padding: 16px 36px; border-radius: 10px; border: none; cursor: pointer; transition: all 200ms ease; text-decoration: none; }
+    .cta-banner .big-cta:hover { background: #D2ED3E; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(193,221,45,0.2); }
+
+    .article-footer { max-width: 1200px; margin: 0 auto; padding: 32px 24px; border-top: 1px solid #1F1F1F; color: #666; font-size: 13px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .article-footer a { color: #666; }
+    .article-footer a:hover { color: #F2F2F2; }
+    .footer-links { display: flex; gap: 20px; }
+
+    @media (min-width: 1100px) {
+      .layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 56px; align-items: start; }
+      .article-body { grid-column: 1; grid-row: 1; }
+      .sidebar { display: block; grid-column: 2; grid-row: 1; position: sticky; top: 82px; }
+    }
+    @media (max-width: 768px) {
+      .article-hero { padding: 48px 20px 32px; }
+      .article-hero h1 { font-size: 28px; }
+      .article-hero .subtitle { font-size: 16px; }
+      .layout { padding: 0 20px; }
+      .article-body { padding-bottom: 48px; }
+      .article-body h2 { font-size: 21px; margin-top: 40px; }
+      .term { padding: 18px 20px; }
+      .site-header nav { display: none; }
+      .cta-banner { padding: 48px 20px; }
+      .cta-banner h2 { font-size: 24px; }
+      .takeaway-box { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="/">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+    <span>IconStash</span>
+  </a>
+  <nav>
+    <a href="/">Browse Icons</a>
+    <a href="/articles/">Articles</a>
+    <a href="/stats/">Stats</a>
+    <a href="https://github.com/OG-Huzzi/IconStash">GitHub</a>
+  </nav>
+  <a href="/" class="header-cta">Open Editor</a>
+</header>
+
+<section class="article-hero">
+  <div class="badge">Glossary · Reference</div>
+  <h1>Icon File Formats Glossary: SVG, PNG, ICO, WebP &amp; 25+ More</h1>
+  <p class="subtitle">Every format an icon can ship in — vector, raster, containers, fonts, platform formats, and animation — explained in plain language, with a decision table for choosing the right one. Companion to our <a href="/Glossary/icon-svg-terminology/">Icon &amp; SVG Terminology Glossary</a> and <a href="/Glossary/svg-attributes-glossary/">SVG Attributes Glossary</a>.</p>
+  <div class="article-meta">
+    <span>July 25, 2026</span>
+    <span>•</span>
+    <span>28 formats defined</span>
+    <span>•</span>
+    <span>Updated for 2026</span>
+  </div>
+</section>
+
+<div class="layout">
+<article class="article-body">
+
+  <div class="takeaway-box">
+    <h3>The 10-second decision</h3>
+    <p><strong>UI icons on the web → SVG.</strong> Fixed-size fallbacks and platform assets → <strong>PNG</strong>. Favicons → <strong>SVG + one 32×32 ICO</strong>. Complex animation → <strong>Lottie</strong>. Everything else in this glossary exists for a specific platform, pipeline, or legacy reason — defined below so you know exactly when (and when not) to reach for it.</p>
+  </div>
+
+  <h2 id="vector">Vector Formats</h2>
+  <p class="section-desc">Shapes described mathematically — infinitely scalable, resolution-independent.</p>
+  <dl>
+    <div class="term" id="svg">
+      <dt>SVG <span class="ext">.svg</span></dt>
+      <dd><strong>Scalable Vector Graphics</strong> — the W3C's XML-based vector format and the undisputed standard for UI icons. Sharp at every size and pixel density, styleable with CSS (including <code>currentColor</code> inheritance), animatable, accessible, and typically smaller than PNG for flat artwork. All 134,701 icons on <a href="/">IconStash</a> export as SVG. See <a href="/articles/how-to-use-svg-icons-in-web-development/">our complete SVG usage guide</a>.</dd>
+    </div>
+    <div class="term" id="svgz">
+      <dt>SVGZ <span class="ext">.svgz</span></dt>
+      <dd>A gzip-compressed SVG. Largely obsolete on the web: servers already compress SVG responses with gzip or Brotli on the fly, and SVGZ files break when served without the correct <code>Content-Encoding</code> header. Prefer plain SVG plus server compression.</dd>
+    </div>
+    <div class="term" id="eps">
+      <dt>EPS <span class="ext">.eps</span></dt>
+      <dd><strong>Encapsulated PostScript</strong> — a legacy print-industry vector format. Still requested for merchandise, signage, and vinyl cutting; never used in software UIs. Convert from SVG only when a print vendor demands it.</dd>
+    </div>
+    <div class="term" id="ai">
+      <dt>AI <span class="ext">.ai</span></dt>
+      <dd>Adobe Illustrator's native source format. A working file, not a delivery format — it holds editable layers, artboards, and effects. Icon libraries distribute SVG; the AI file stays with the designer.</dd>
+    </div>
+    <div class="term" id="pdf-vector">
+      <dt>PDF (vector) <span class="ext">.pdf</span></dt>
+      <dd>Before SF Symbols, Apple's Xcode accepted single-scale <strong>vector PDFs</strong> for iOS/macOS icon assets, and PDF remains a valid vector interchange format in Apple toolchains. On the web it plays no icon role.</dd>
+    </div>
+  </dl>
+
+  <h2 id="raster">Raster Formats</h2>
+  <p class="section-desc">Fixed grids of pixels — exact control at one size, blur at every other.</p>
+  <dl>
+    <div class="term" id="png">
+      <dt>PNG <span class="ext">.png</span></dt>
+      <dd><strong>Portable Network Graphics</strong> — lossless compression with full 8-bit alpha transparency. The standard raster format for icons: app store assets, <a href="/articles/favicon-complete-guide-2026/">apple-touch-icons and manifest icons</a>, email clients, and anywhere SVG isn't accepted. IconStash exports PNG at any size up to 2048px.</dd>
+    </div>
+    <div class="term" id="apng">
+      <dt>APNG <span class="ext">.png</span></dt>
+      <dd><strong>Animated PNG</strong> — PNG's frame-based animation extension, supported by all modern browsers. Delivers lossless animated icons with alpha, but file sizes grow fast; <a href="#lottie">Lottie</a> or <a href="/articles/dynamic-svg-animations-css-javascript/">CSS-animated SVG</a> are usually leaner.</dd>
+    </div>
+    <div class="term" id="jpeg">
+      <dt>JPEG <span class="ext">.jpg</span></dt>
+      <dd>Lossy photographic compression with <strong>no transparency</strong> — the two properties that disqualify it for icons. Flat-color artwork also develops visible ringing artifacts around JPEG edges. For icons, JPEG is always the wrong answer.</dd>
+    </div>
+    <div class="term" id="gif">
+      <dt>GIF <span class="ext">.gif</span></dt>
+      <dd>The 1987 format that refuses to die: 256 colors, 1-bit transparency (jagged edges), frame animation. Only historical icon relevance; every use case is served better by PNG, APNG, or video formats.</dd>
+    </div>
+    <div class="term" id="webp">
+      <dt>WebP <span class="ext">.webp</span></dt>
+      <dd>Google's modern raster format: lossy and lossless modes, alpha, and animation, typically <strong>25–35% smaller than PNG</strong>. Universally supported since 2020. Great for content images; for flat icon artwork the savings over optimized PNG are modest, and SVG beats both.</dd>
+    </div>
+    <div class="term" id="avif">
+      <dt>AVIF <span class="ext">.avif</span></dt>
+      <dd><strong>AV1 Image File Format</strong> — the best compression ratio of any broadly supported web format, with alpha, HDR, and wide gamut. Like WebP, its advantage shows on photographs; icons stay in SVG/PNG territory unless your image pipeline already emits AVIF everywhere.</dd>
+    </div>
+    <div class="term" id="bmp">
+      <dt>BMP <span class="ext">.bmp</span></dt>
+      <dd>Windows Bitmap — mostly uncompressed pixels. Historically the payload <em>inside</em> <a href="#ico">ICO</a> files (favicon bitmaps are BMP-structured). Never shipped standalone on the web today.</dd>
+    </div>
+    <div class="term" id="tiff">
+      <dt>TIFF <span class="ext">.tiff</span></dt>
+      <dd>A high-fidelity print and archival raster format. Appears in icon work only as design-source exports for print; browsers don't even display it.</dd>
+    </div>
+  </dl>
+
+  <h2 id="containers">Icon Container Formats</h2>
+  <p class="section-desc">One file, many sizes — the OS picks the best match.</p>
+  <dl>
+    <div class="term" id="ico">
+      <dt>ICO <span class="ext">.ico</span></dt>
+      <dd>The <strong>Windows Icon</strong> container: multiple raster images (16×16 up to 256×256) packed into one file so the OS can pick the right size. On the web it survives as exactly one file — <code>/favicon.ico</code> — which crawlers and legacy tools request by convention. A single 32×32 entry is sufficient in 2026; see the <a href="/articles/favicon-complete-guide-2026/">favicon guide</a>.</dd>
+    </div>
+    <div class="term" id="icns">
+      <dt>ICNS <span class="ext">.icns</span></dt>
+      <dd><strong>Apple Icon Image</strong> — macOS's equivalent container, storing sizes from 16×16 through 1024×1024 including @2x Retina variants. Required for macOS app bundles; irrelevant to the web.</dd>
+    </div>
+    <div class="term" id="cur">
+      <dt>CUR <span class="ext">.cur</span></dt>
+      <dd>The Windows <strong>cursor</strong> format — structurally an ICO with an added hotspot coordinate (the pixel that "points"). Still valid in CSS via <code>cursor: url(pointer.cur)</code> for custom cursors.</dd>
+    </div>
+  </dl>
+
+  <h2 id="fonts">Font Delivery Formats</h2>
+  <p class="section-desc">Icons smuggled into typefaces — the dominant pattern of the 2010s.</p>
+  <dl>
+    <div class="term" id="icon-font">
+      <dt>Icon font <span class="ext">concept</span></dt>
+      <dd>A typeface whose glyphs are icons instead of letters (Font Awesome, Material Icons font). Icons render via CSS classes and inherit text color — but suffer anti-aliasing blur, FOUT, accessibility problems, and all-or-nothing loading. Modern verdict: <a href="/articles/svg-icons-vs-icon-fonts-in-2026/">SVG wins on every axis</a>.</dd>
+    </div>
+    <div class="term" id="ttf-otf">
+      <dt>TTF / OTF <span class="ext">.ttf .otf</span></dt>
+      <dd>TrueType and OpenType — the raw font formats icon fonts are authored in. Shipped to browsers only as a legacy fallback; modern sites serve <a href="#woff2">WOFF2</a> exclusively.</dd>
+    </div>
+    <div class="term" id="woff2">
+      <dt>WOFF2 <span class="ext">.woff2</span></dt>
+      <dd><strong>Web Open Font Format 2</strong> — Brotli-compressed font packaging, ~30% smaller than WOFF. If you must ship an icon font, WOFF2 is the only format worth serving; every current browser supports it.</dd>
+    </div>
+  </dl>
+
+  <h2 id="platform">Platform-Specific Formats</h2>
+  <p class="section-desc">What icons look like inside native app pipelines.</p>
+  <dl>
+    <div class="term" id="vectordrawable">
+      <dt>VectorDrawable <span class="ext">.xml</span></dt>
+      <dd>Android's native vector format — an XML dialect that mirrors a subset of SVG path syntax. Android Studio imports SVG and converts automatically; complex SVG features (filters, masks, text) don't survive the trip. The reason "export clean paths" matters when <a href="/articles/how-to-optimize-svg-icons-for-web-performance/">optimizing icons</a>.</dd>
+    </div>
+    <div class="term" id="adaptive-icon">
+      <dt>Adaptive icon <span class="ext">android</span></dt>
+      <dd>Android's launcher icon system (API 26+): a foreground layer plus a background layer, each 108×108dp, which the OS masks into circles, squircles, or rounded squares per device. Layers can be VectorDrawables or PNGs.</dd>
+    </div>
+    <div class="term" id="sf-symbols">
+      <dt>SF Symbols <span class="ext">apple</span></dt>
+      <dd>Apple's system icon library — 6,000+ glyphs that behave like text: they scale with Dynamic Type, align to font baselines, and support variable weights and rendering modes. Distributed as a macOS app and consumed by name in SwiftUI/UIKit, not as loose files.</dd>
+    </div>
+    <div class="term" id="asset-catalog">
+      <dt>Asset catalog <span class="ext">.xcassets</span></dt>
+      <dd>Xcode's container for iOS/macOS image assets, including app icons (PNG at mandated sizes) and vector assets (PDF/SVG with "Preserve Vector Data"). The build system compiles it into optimized binary form.</dd>
+    </div>
+    <div class="term" id="manifest-icons">
+      <dt>Web app manifest icons <span class="ext">.webmanifest</span></dt>
+      <dd>The PNG set (192×192 and 512×512, plus optional <code>maskable</code> variants) declared in a site's <code>manifest.webmanifest</code>. Android and desktop PWA installs pull home-screen icons and splash screens from here — the fourth pillar of the <a href="/articles/favicon-complete-guide-2026/">modern favicon setup</a>.</dd>
+    </div>
+  </dl>
+
+  <h2 id="animation">Animation &amp; Data Formats</h2>
+  <p class="section-desc">Icons as data — animated, spritesheeted, or inlined.</p>
+  <dl>
+    <div class="term" id="lottie">
+      <dt>Lottie <span class="ext">.json</span></dt>
+      <dd>An animation format exported from After Effects (via Bodymovin) as JSON describing vector shapes and keyframes, rendered at runtime by lightweight players on web, iOS, and Android. The industry standard for complex animated icons; for simple micro-interactions, <a href="/articles/dynamic-svg-animations-css-javascript/">CSS-animated SVG</a> is lighter still.</dd>
+    </div>
+    <div class="term" id="iconify-json">
+      <dt>Iconify JSON <span class="ext">.json</span></dt>
+      <dd>A packaging format that stores an entire icon set's path data in one JSON file, letting frameworks render any icon on demand without shipping thousands of SVG files. Powers unified icon pipelines like unplugin-icons.</dd>
+    </div>
+    <div class="term" id="svg-sprite">
+      <dt>SVG sprite <span class="ext">.svg</span></dt>
+      <dd>Many icons combined into one SVG as <code>&lt;symbol&gt;</code> elements, each rendered where needed via <code>&lt;use href="#id"&gt;</code>. One cached request, DOM-light instances, full CSS styling — the standard delivery pattern for <a href="/articles/how-to-build-scalable-icon-system/">scalable icon systems</a>.</dd>
+    </div>
+    <div class="term" id="data-uri">
+      <dt>Data URI <span class="ext">base64</span></dt>
+      <dd>An icon embedded directly into HTML or CSS as a <code>data:image/svg+xml,...</code> (URL-encoded) or base64 string — zero extra HTTP requests, but the icon bloats every stylesheet copy and can't be cached independently. Best reserved for tiny, critical, single-use icons.</dd>
+    </div>
+    <div class="term" id="css-mask">
+      <dt>CSS mask icon <span class="ext">technique</span></dt>
+      <dd>Not a file format but a delivery technique: an SVG applied via <code>mask-image</code>, with the visible color supplied by <code>background-color</code>. Gives external SVG files the recolorability of inline SVG — one line of CSS, fully cacheable.</dd>
+    </div>
+  </dl>
+
+  <h2 id="comparison">Format Decision Table</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Format</th><th>Scales losslessly</th><th>Transparency</th><th>Animation</th><th>Best for</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>SVG</strong></td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes (CSS/SMIL)</td><td>All UI icons on the web</td></tr>
+        <tr><td><strong>PNG</strong></td><td class="no">No</td><td class="yes">Yes</td><td class="warn">APNG only</td><td>Fixed-size assets, platform icons</td></tr>
+        <tr><td><strong>ICO</strong></td><td class="no">No</td><td class="yes">Yes</td><td class="no">No</td><td>/favicon.ico, Windows apps</td></tr>
+        <tr><td><strong>ICNS</strong></td><td class="no">No</td><td class="yes">Yes</td><td class="no">No</td><td>macOS app icons</td></tr>
+        <tr><td><strong>WebP</strong></td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td><td>Content images, not icons</td></tr>
+        <tr><td><strong>AVIF</strong></td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td><td>Photographic imagery</td></tr>
+        <tr><td><strong>Lottie</strong></td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes (native)</td><td>Complex animated icons</td></tr>
+        <tr><td><strong>Icon font (WOFF2)</strong></td><td class="warn">Blurry at small sizes</td><td class="yes">Inherits</td><td class="no">No</td><td>Legacy codebases only</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="faq">Frequently Asked Questions</h2>
+  <div class="term">
+    <dt>Should I use SVG or PNG for icons?</dt>
+    <dd>SVG, almost always: sharp at every size, CSS-recolorable, usually smaller for flat shapes. PNG only where SVG isn't accepted — app stores, apple-touch-icon, email.</dd>
+  </div>
+  <div class="term">
+    <dt>Is ICO still needed?</dt>
+    <dd>For one file only: <code>/favicon.ico</code> at the site root, because countless tools request it blindly. Everything else moved on.</dd>
+  </div>
+  <div class="term">
+    <dt>Are WebP or AVIF good icon formats?</dt>
+    <dd>Rarely — their compression advantage shows on photos. Flat icon art is already tiny as optimized PNG and tinier as SVG.</dd>
+  </div>
+  <div class="term">
+    <dt>What format do app icons use?</dt>
+    <dd>iOS: PNG in an asset catalog. macOS: ICNS. Windows: ICO. Android: adaptive icons (XML + VectorDrawable/PNG layers). Web/PWA: 192 &amp; 512 PNGs in the manifest.</dd>
+  </div>
+</article>
+
+<aside class="sidebar">
+  <div class="sidebar-box">
+    <h3>Jump to Category</h3>
+    <ul>
+      <li><a href="#vector">Vector formats</a></li>
+      <li><a href="#raster">Raster formats</a></li>
+      <li><a href="#containers">Icon containers</a></li>
+      <li><a href="#fonts">Font delivery</a></li>
+      <li><a href="#platform">Platform formats</a></li>
+      <li><a href="#animation">Animation &amp; data</a></li>
+      <li><a href="#comparison">Decision table</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </div>
+  <div class="sidebar-box">
+    <h3>Related Resources</h3>
+    <ul>
+      <li><a href="/Glossary/icon-svg-terminology/">Icon &amp; SVG Terminology Glossary</a></li>
+      <li><a href="/Glossary/svg-attributes-glossary/">SVG Attributes Glossary</a></li>
+      <li><a href="/articles/favicon-complete-guide-2026/">Favicon Guide 2026</a></li>
+      <li><a href="/articles/svg-icons-vs-icon-fonts-in-2026/">SVG Icons vs Icon Fonts</a></li>
+      <li><a href="/articles/how-to-optimize-svg-icons-for-web-performance/">SVG Optimization Guide</a></li>
+    </ul>
+  </div>
+</aside>
+</div>
+
+<section class="cta-banner">
+  <h2>Every Format, One Export Button</h2>
+  <p>Search 134,701 open-source icons, customize live, and export as SVG or PNG at any size — free, no signup.</p>
+  <a href="/" class="big-cta">Browse 134,701 Icons →</a>
+</section>
+
+<footer class="article-footer">
+  <span>© 2026 IconStash by <a href="https://greatsoftwarecompany.com">Great Software Company</a></span>
+  <div class="footer-links">
+    <a href="/">Browse Icons</a>
+    <a href="/articles/">Articles</a>
+    <a href="/stats/">Stats</a>
+    <a href="https://github.com/OG-Huzzi/IconStash" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>

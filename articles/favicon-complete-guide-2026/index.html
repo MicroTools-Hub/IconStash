@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favicon Guide 2026: Sizes, SVG &amp; Dark Mode | IconStash</title>
+  <meta name="description" content="The definitive 2026 favicon guide: the 4-file setup that covers every browser, exact sizes, SVG favicons with dark mode, and Google search result requirements.">
+  <meta name="keywords" content="favicon guide 2026, favicon size, svg favicon, favicon dark mode, favicon.ico, apple touch icon size, web app manifest icons, favicon generator, google search favicon requirements, how to make a favicon">
+  <meta property="og:title" content="The Favicon Guide 2026: Sizes, SVG Favicons & Dark Mode">
+  <meta property="og:description" content="Four files. Five link tags. Every browser, every device, dark mode included. The modern favicon setup, explained end to end — no 20-file legacy dumps.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/articles/favicon-complete-guide-2026/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/logo.png">
+  <meta property="article:published_time" content="2026-07-25T00:00:00Z">
+  <meta property="article:modified_time" content="2026-07-25T00:00:00Z">
+  <meta property="article:author" content="IconStash Team">
+  <meta property="article:section" content="Guides">
+  <meta property="article:tag" content="favicon">
+  <meta property="article:tag" content="SVG">
+  <meta property="article:tag" content="web development">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Favicon Guide 2026: Sizes, SVG & Dark Mode">
+  <meta name="twitter:description" content="The modern 4-file favicon setup that covers every browser and device — with dark mode support and Google SERP requirements.">
+  <meta name="twitter:image" content="https://iconstash.io/logo.png">
+  <link rel="canonical" href="https://iconstash.io/articles/favicon-complete-guide-2026/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "The Favicon Guide 2026: Sizes, SVG Favicons & Dark Mode",
+    "description": "The definitive modern favicon setup: four files and five link tags that cover every browser and device, SVG favicons that adapt to dark mode, exact size requirements, and Google search result favicon rules.",
+    "author": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
+    "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io", "logo": { "@type": "ImageObject", "url": "https://iconstash.io/logo.png" } },
+    "datePublished": "2026-07-25",
+    "dateModified": "2026-07-25",
+    "mainEntityOfPage": "https://iconstash.io/articles/favicon-complete-guide-2026/",
+    "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
+    "articleSection": "Guides",
+    "proficiencyLevel": "Beginner",
+    "about": [
+      { "@type": "Thing", "name": "Favicon", "sameAs": "https://en.wikipedia.org/wiki/Favicon" },
+      { "@type": "Thing", "name": "Scalable Vector Graphics", "sameAs": "https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" }
+    ],
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".article-hero h1", ".article-hero .subtitle"] },
+    "keywords": ["favicon", "favicon size", "SVG favicon", "dark mode favicon", "apple-touch-icon", "web app manifest"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://iconstash.io/articles/" },
+      { "@type": "ListItem", "position": 3, "name": "Favicon Guide 2026" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What favicon sizes do I need in 2026?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Four files cover everything: favicon.ico (32×32) for legacy browsers and tooling, an SVG favicon for modern browsers, apple-touch-icon.png at 180×180 for iOS, and two PNGs (192×192 and 512×512) referenced from a web app manifest for Android and PWA installs. The old practice of generating 15–20 PNG sizes has been obsolete for years." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do SVG favicons work in all browsers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "SVG favicons work in Chrome, Edge, Firefox, and Opera. Safari's support remains unreliable, which is why the modern setup always keeps a favicon.ico fallback — browsers that understand SVG pick the SVG, everything else falls back to the ICO automatically." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I make a favicon change with dark mode?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Use an SVG favicon with an embedded CSS media query: a <style> block inside the SVG containing @media (prefers-color-scheme: dark) rules that recolor the icon. Chromium browsers and Firefox re-render the favicon when the OS theme changes. ICO and PNG favicons cannot do this." }
+      },
+      {
+        "@type": "Question",
+        "name": "What are Google's favicon requirements for search results?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Google shows favicons next to search results when: the favicon is a multiple of 48×48 pixels (or an SVG), the same icon is used across the whole site, and both the favicon file and the homepage are crawlable by Googlebot. Icons smaller than 8×8 are ignored, and Google recommends at least 48×48." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is favicon.ico still required?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Practically, yes. Safari's SVG support is unreliable, many crawlers, RSS readers, and dev tools request /favicon.ico by convention without reading your HTML, and a single 32×32 ICO costs about 1–4 KB. Keep it at the site root." }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    code { font-family: "JetBrains Mono", Consolas, monospace; font-size: 0.88em; background: rgba(255,255,255,0.06); border: 1px solid #1F1F1F; border-radius: 4px; padding: 2px 6px; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: background 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; }
+
+    .article-hero { max-width: 900px; margin: 0 auto; padding: 80px 24px 48px; text-align: center; }
+    .article-hero .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(193,221,45,0.08); border: 1px solid rgba(193,221,45,0.2); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 6px 14px; border-radius: 999px; margin-bottom: 28px; }
+    .article-hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; background: linear-gradient(135deg, #F2F2F2 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .article-hero .subtitle { font-size: 19px; color: #888; line-height: 1.7; max-width: 680px; margin: 0 auto 28px; }
+    .article-meta { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; color: #666; font-size: 13px; }
+
+    .layout { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .sidebar { display: none; }
+    .sidebar-box { background: rgba(255,255,255,0.02); border: 1px solid #1F1F1F; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; }
+    .sidebar-box h3 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 14px; }
+    .sidebar-box ul { list-style: none; padding: 0; margin: 0; }
+    .sidebar-box li { margin: 10px 0; font-size: 14px; line-height: 1.5; }
+    .sidebar-box a { color: #999; }
+    .sidebar-box a:hover { color: #C1DD2D; }
+
+    .article-body { margin: 0; padding: 0 0 80px; }
+    .article-body h2 { font-size: 28px; font-weight: 800; margin: 64px 0 20px; padding-top: 16px; border-top: 1px solid #1F1F1F; letter-spacing: -0.02em; }
+    .article-body h2:first-of-type { border-top: none; margin-top: 0; }
+    .article-body h3 { font-size: 20px; font-weight: 700; margin: 40px 0 14px; color: #C1DD2D; }
+    .article-body p { margin-bottom: 18px; color: #ccc; }
+    .article-body ul, .article-body ol { margin: 0 0 20px 20px; color: #ccc; }
+    .article-body li { margin: 8px 0; }
+    .article-body strong { color: #F2F2F2; }
+    .article-body blockquote { border-left: 3px solid #C1DD2D; padding: 16px 20px; margin: 28px 0; background: rgba(193,221,45,0.04); border-radius: 0 8px 8px 0; font-style: italic; color: #aaa; }
+    .article-body pre { background: #0F0F0F; border: 1px solid #1F1F1F; border-radius: 10px; padding: 18px 20px; overflow-x: auto; margin: 0 0 22px; }
+    .article-body pre code { background: none; border: none; padding: 0; font-size: 13.5px; line-height: 1.7; color: #ddd; display: block; }
+
+    .table-wrap { overflow-x: auto; margin: 28px 0; border: 1px solid #1F1F1F; border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px; }
+    thead th { text-align: left; padding: 14px 16px; background: rgba(255,255,255,0.03); color: #888; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid #1F1F1F; white-space: nowrap; }
+    tbody td { padding: 13px 16px; border-bottom: 1px solid #161616; color: #ccc; vertical-align: top; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: rgba(193,221,45,0.02); }
+    td code { white-space: nowrap; }
+    .yes { color: #7BC96F; font-weight: 600; }
+    .no { color: #E05D5D; font-weight: 600; }
+    .warn { color: #F5C542; font-weight: 600; }
+
+    .takeaway-box { background: linear-gradient(135deg, rgba(193,221,45,0.06) 0%, rgba(193,221,45,0.02) 100%); border: 1px solid rgba(193,221,45,0.15); border-radius: 14px; padding: 32px; margin: 40px 0; }
+    .takeaway-box h3 { color: #C1DD2D; font-size: 18px; font-weight: 800; margin: 0 0 16px; }
+
+    .cta-banner { text-align: center; padding: 64px 24px; margin: 64px 0 0; background: linear-gradient(180deg, rgba(193,221,45,0.04) 0%, transparent 100%); border-top: 1px solid rgba(193,221,45,0.1); }
+    .cta-banner h2 { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .cta-banner p { color: #888; font-size: 17px; margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-banner .big-cta { display: inline-flex; align-items: center; gap: 8px; background: #C1DD2D; color: #0A0A0A; font-weight: 800; font-size: 16px; padding: 16px 36px; border-radius: 10px; border: none; cursor: pointer; transition: all 200ms ease; text-decoration: none; }
+    .cta-banner .big-cta:hover { background: #D2ED3E; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(193,221,45,0.2); }
+
+    .article-footer { max-width: 1200px; margin: 0 auto; padding: 32px 24px; border-top: 1px solid #1F1F1F; color: #666; font-size: 13px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .article-footer a { color: #666; }
+    .article-footer a:hover { color: #F2F2F2; }
+    .footer-links { display: flex; gap: 20px; }
+
+    @media (min-width: 1100px) {
+      .layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 56px; align-items: start; }
+      .article-body { grid-column: 1; grid-row: 1; }
+      .sidebar { display: block; grid-column: 2; grid-row: 1; position: sticky; top: 82px; }
+    }
+    @media (max-width: 768px) {
+      .article-hero { padding: 48px 20px 32px; }
+      .article-hero h1 { font-size: 28px; }
+      .article-hero .subtitle { font-size: 16px; }
+      .layout { padding: 0 20px; }
+      .article-body { padding-bottom: 48px; }
+      .article-body h2 { font-size: 22px; margin-top: 48px; }
+      .article-body h3 { font-size: 18px; }
+      .site-header nav { display: none; }
+      .cta-banner { padding: 48px 20px; }
+      .cta-banner h2 { font-size: 24px; }
+      .takeaway-box { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="/">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+    <span>IconStash</span>
+  </a>
+  <nav>
+    <a href="/">Browse Icons</a>
+    <a href="/articles/">Articles</a>
+    <a href="/stats/">Stats</a>
+    <a href="https://github.com/OG-Huzzi/IconStash">GitHub</a>
+  </nav>
+  <a href="/" class="header-cta">Open Editor</a>
+</header>
+
+<section class="article-hero">
+  <div class="badge">Complete Guide</div>
+  <h1>The Favicon Guide 2026: Sizes, SVG Favicons &amp; Dark Mode</h1>
+  <p class="subtitle">Four files. Five link tags. Every browser, every device, every OS theme — covered. This is the modern favicon setup, end to end, with zero legacy cargo cult and zero 20-file generator dumps.</p>
+  <div class="article-meta">
+    <span>July 25, 2026</span>
+    <span>•</span>
+    <span>12 min read</span>
+    <span>•</span>
+    <span>By IconStash Team</span>
+  </div>
+</section>
+
+<div class="layout">
+<article class="article-body">
+
+  <h2 id="tldr">The Modern Setup in 30 Seconds</h2>
+  <div class="takeaway-box">
+    <h3>TL;DR — the complete 2026 favicon kit</h3>
+    <p>You need exactly <strong>four image files and one manifest</strong>: <code>favicon.ico</code> (32×32, at the site root), <code>icon.svg</code> (scalable, dark-mode aware), <code>apple-touch-icon.png</code> (180×180), and two manifest PNGs (192×192 and 512×512). Everything else — the 16-size PNG dumps, <code>msapplication</code> tiles, <code>browserconfig.xml</code>, pinned-tab <code>mask-icon</code> — is legacy weight that no current browser needs.</p>
+  </div>
+  <p>Here is the entire HTML:</p>
+  <pre><code>&lt;!-- Modern favicon setup, 2026 --&gt;
+&lt;link rel="icon" href="/favicon.ico" sizes="32x32"&gt;
+&lt;link rel="icon" href="/icon.svg" type="image/svg+xml"&gt;
+&lt;link rel="apple-touch-icon" href="/apple-touch-icon.png"&gt;
+&lt;link rel="manifest" href="/manifest.webmanifest"&gt;</code></pre>
+  <p>And the manifest:</p>
+  <pre><code>{
+  "icons": [
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}</code></pre>
+  <p>The rest of this guide explains <em>why</em> each piece exists, the exact size rules, how the SVG dark-mode trick works, and what Google requires before it will show your favicon in search results.</p>
+
+  <h2 id="why-four">Why These Four Files (and Not Twenty)</h2>
+  <p>Favicon advice fossilized around 2015, when you genuinely needed a pile of PNGs for Windows tiles, old iOS versions, and pre-HiDPI desktops. Browsers have long since converged. Each remaining file has one precise job:</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>File</th><th>Size</th><th>Who uses it</th><th>Why it survives</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>favicon.ico</code></td><td>32×32</td><td>Legacy browsers, crawlers, RSS readers, dev tools</td><td>Countless tools request <code>/favicon.ico</code> by convention without ever parsing your HTML. ~1–4&nbsp;KB of insurance.</td></tr>
+        <tr><td><code>icon.svg</code></td><td>Any (vector)</td><td>Chrome, Edge, Firefox, Opera</td><td>One crisp file at every size and pixel density — and the only format that can adapt to dark mode.</td></tr>
+        <tr><td><code>apple-touch-icon.png</code></td><td>180×180</td><td>iOS/iPadOS home screen, Safari bookmarks, macOS dock (web apps)</td><td>Apple ignores SVG here and letterboxes transparency onto black — ship an opaque 180×180 PNG.</td></tr>
+        <tr><td><code>icon-192.png</code> / <code>icon-512.png</code></td><td>192×192, 512×512</td><td>Android home screen, PWA install, splash screens</td><td>Referenced from the web app manifest; 512 is used for install dialogs and splash generation.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <blockquote>Order matters: keep the <code>.ico</code> link <em>before</em> the SVG link. Browsers that understand <code>type="image/svg+xml"</code> pick the SVG; everything else silently takes the ICO. No JavaScript, no sniffing.</blockquote>
+
+  <h2 id="svg-favicon">SVG Favicons: One File, Every Size</h2>
+  <p>An SVG favicon is just a normal SVG served with <code>type="image/svg+xml"</code>. Because it's vector, the same file is pixel-perfect in a 16px tab, a 32px bookmark bar, and a 96px new-tab tile — the exact property that makes <a href="/articles/how-to-use-svg-icons-in-web-development/">SVG the standard for UI icons</a>.</p>
+  <p>Two practical rules make or break SVG favicons:</p>
+  <ul>
+    <li><strong>Design for 16px first.</strong> Your logo's fine detail will vanish in a tab. Simplify to one bold shape — the same discipline as <a href="/articles/pixel-perfect-svg-grids-and-scaling/">pixel-perfect icon grids</a>. If your mark needs a wordmark, drop it; ship the glyph alone.</li>
+    <li><strong>Keep a square viewBox.</strong> Browsers letterbox non-square favicons unpredictably. <code>viewBox="0 0 24 24"</code> or <code>0 0 512 512</code> — square, always.</li>
+  </ul>
+  <h3>Browser support, honestly</h3>
+  <p>Chrome, Edge, Opera, and Firefox handle SVG favicons flawlessly. <strong>Safari remains the holdout</strong> — its SVG favicon rendering is unreliable across versions, which is precisely why the ICO fallback stays in the setup. You never need to choose: declare both and every browser self-selects.</p>
+
+  <h2 id="dark-mode">The Dark Mode Favicon Trick</h2>
+  <p>A dark logo disappears against Chrome's dark tab bar. ICO and PNG can't fix this — but SVG can, because SVG carries its own CSS. Embed a media query <em>inside</em> the icon:</p>
+  <pre><code>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"&gt;
+  &lt;style&gt;
+    path { fill: #0A0A0A; }
+    @media (prefers-color-scheme: dark) {
+      path { fill: #F2F2F2; }
+    }
+  &lt;/style&gt;
+  &lt;path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/&gt;
+&lt;/svg&gt;</code></pre>
+  <p>Chromium browsers and Firefox re-evaluate the query when the OS theme flips — your favicon follows the theme with zero JavaScript. Three refinements from production experience:</p>
+  <ul>
+    <li>The media query reflects the <strong>OS theme</strong>, not your site's theme toggle. There is no API to sync a favicon with an in-page theme switch (short of swapping <code>link</code> tags in JS).</li>
+    <li>Test both themes at 16px — a hairline that works in light mode can smear in dark mode. The same <a href="/articles/dark-mode-svg-icons-theming/">contrast rules as dark-mode UI icons</a> apply.</li>
+    <li>A third option beats both single-color variants: give the glyph a <strong>self-contained background shape</strong> (a filled rounded square), making it theme-proof everywhere — including Safari and search results.</li>
+  </ul>
+
+  <h2 id="google">Google Search Result Favicons: The Actual Rules</h2>
+  <p>Since favicons appear next to every result on mobile and desktop, this is now an SEO surface. Google's documented requirements:</p>
+  <ul>
+    <li><strong>Size:</strong> any square icon of at least 8×8px is eligible, but Google recommends <strong>48×48 or a multiple of it</strong> (96, 144…) — or an SVG. Your 32×32 ICO alone is <em>not</em> ideal here; the SVG or a 48×48+ icon satisfies it.</li>
+    <li><strong>Crawlability:</strong> both the favicon file and your homepage must not be blocked by robots.txt. A favicon behind a blocked <code>/assets/</code> path silently never appears.</li>
+    <li><strong>Consistency:</strong> one favicon across the whole site — per-section favicons confuse the crawler and can delay updates.</li>
+    <li><strong>Appropriateness:</strong> generic placeholders (the default server globe, a CMS logo) get replaced with a neutral fallback icon in results.</li>
+  </ul>
+  <p>Favicon changes take days to weeks to propagate in search results; Googlebot refreshes favicons far less often than pages. Don't panic-redeploy after a rebrand.</p>
+
+  <h2 id="mistakes">The Five Favicon Mistakes We See Everywhere</h2>
+  <ul>
+    <li><strong>1. Transparent apple-touch-icon.</strong> iOS composites transparency onto a black tile. Always export the 180×180 with an opaque background.</li>
+    <li><strong>2. Generator dumps.</strong> 20 link tags from a 2014-era favicon generator add HTTP requests and maintenance surface for zero benefit. Four files. That's the setup.</li>
+    <li><strong>3. Full logo at 16px.</strong> Wordmarks and detailed marks turn to noise in a tab. Glyph only — simplify like you would any <a href="/articles/pixel-perfect-svg-grids-and-scaling/">small-size icon</a>.</li>
+    <li><strong>4. Unoptimized SVG favicons.</strong> The favicon is requested on effectively every page load. Run it through SVGO like every other icon — our <a href="/articles/how-to-optimize-svg-icons-for-web-performance/">SVG optimization guide</a> covers the config.</li>
+    <li><strong>5. Forgetting the manifest icons.</strong> Without 192/512 PNGs, Android installs fall back to a screenshot-quality shrunken favicon, and PWA install prompts may not fire at all.</li>
+  </ul>
+
+  <h2 id="workflow">A 10-Minute Favicon Workflow</h2>
+  <ol>
+    <li><strong>Pick or design the glyph.</strong> Need a base mark? Search 134,701 open-source icons on <a href="/">IconStash</a>, customize the color, and export as SVG — <a href="/articles/icon-licensing-explained-mit-apache-cc/">94.5% require zero attribution</a>, favicons included.</li>
+    <li><strong>Make it square and bold.</strong> Square viewBox, one shape, optional filled background for theme-proofing.</li>
+    <li><strong>Add the dark-mode <code>&lt;style&gt;</code> block</strong> (or skip it if you used a background shape).</li>
+    <li><strong>Export the rasters:</strong> 32×32 ICO, 180×180 opaque PNG, 192 and 512 PNGs. Any raster editor or a one-line ImageMagick/sharp script does it.</li>
+    <li><strong>Drop in the five lines of HTML + manifest</strong>, put <code>favicon.ico</code> at the root, and verify in one Chromium browser, Firefox, Safari, and a Lighthouse PWA audit.</li>
+  </ol>
+
+  <h2 id="faq">Frequently Asked Questions</h2>
+  <h3>What favicon sizes do I need in 2026?</h3>
+  <p>Four files: 32×32 <code>favicon.ico</code>, a scalable SVG, a 180×180 <code>apple-touch-icon.png</code>, and 192×192 + 512×512 manifest PNGs. Nothing else.</p>
+  <h3>Do SVG favicons work in all browsers?</h3>
+  <p>Chrome, Edge, Firefox, and Opera: yes. Safari: unreliable — which the ICO fallback covers automatically. Declare both link tags and every browser picks its best option.</p>
+  <h3>How do I make my favicon adapt to dark mode?</h3>
+  <p>Embed <code>@media (prefers-color-scheme: dark)</code> rules in a <code>&lt;style&gt;</code> block inside the SVG favicon. Only SVG can do this — it's the strongest single reason to adopt SVG favicons.</p>
+  <h3>Is favicon.ico still required?</h3>
+  <p>Keep it. Safari, crawlers, RSS readers, and countless tools request <code>/favicon.ico</code> blindly. It costs a few kilobytes and prevents a class of 404s you'd otherwise see in your logs forever.</p>
+  <h3>Why doesn't my favicon show in Google search results?</h3>
+  <p>Usually one of three things: the icon isn't 48×48-multiple or SVG, the file or homepage is blocked from crawling, or the change simply hasn't propagated yet — favicon recrawls lag page recrawls by days to weeks.</p>
+</article>
+
+<aside class="sidebar">
+  <div class="sidebar-box">
+    <h3>On This Page</h3>
+    <ul>
+      <li><a href="#tldr">The modern setup (TL;DR)</a></li>
+      <li><a href="#why-four">Why these four files</a></li>
+      <li><a href="#svg-favicon">SVG favicons</a></li>
+      <li><a href="#dark-mode">The dark mode trick</a></li>
+      <li><a href="#google">Google SERP rules</a></li>
+      <li><a href="#mistakes">Five common mistakes</a></li>
+      <li><a href="#workflow">10-minute workflow</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </div>
+  <div class="sidebar-box">
+    <h3>Related Resources</h3>
+    <ul>
+      <li><a href="/Glossary/icon-file-formats-glossary/">Icon File Formats Glossary</a></li>
+      <li><a href="/articles/how-to-optimize-svg-icons-for-web-performance/">Optimizing SVG Performance</a></li>
+      <li><a href="/articles/dark-mode-svg-icons-theming/">Dark Mode SVG Icons Guide</a></li>
+      <li><a href="/articles/pixel-perfect-svg-grids-and-scaling/">Pixel-Perfect SVG Icons</a></li>
+      <li><a href="/articles/icon-licensing-explained-mit-apache-cc/">Icon Licenses Explained</a></li>
+    </ul>
+  </div>
+</aside>
+</div>
+
+<section class="cta-banner">
+  <h2>Need a Favicon-Ready Glyph?</h2>
+  <p>Search 134,701 open-source icons, recolor live, and export as SVG or PNG at any size — free, no attribution for 94.5%.</p>
+  <a href="/" class="big-cta">Find Your Glyph →</a>
+</section>
+
+<footer class="article-footer">
+  <span>© 2026 IconStash by <a href="https://greatsoftwarecompany.com">Great Software Company</a></span>
+  <div class="footer-links">
+    <a href="/">Browse Icons</a>
+    <a href="/articles/">Articles</a>
+    <a href="/stats/">Stats</a>
+    <a href="https://github.com/OG-Huzzi/IconStash" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>
