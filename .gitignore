@@ -14,3 +14,15 @@ _tmp_openseo/
 .mcp/
 mcp.json
 mcp_config.json
+
+# SEO skill/plugin artifacts (seomator-seo-audit, claude-seo, marketing-seo-skills, addyosmani-seo)
+# The plugins themselves live under ~/.qoder/plugins (outside this repo); the patterns
+# below ignore only the output these tools can drop INTO the project when run here.
+.qoder/
+# SEOmator: `seomator init` config + locally-saved reports
+seomator.toml
+.seomator/
+# claude-seo: audits write a "{domain}-audit/" folder (reports, findings, screenshots, PDFs)
+*-audit/
+# claude-seo: any local cache/baseline created in-tree (global cache lives in ~/.cache/claude-seo)
+.claude-seo/
