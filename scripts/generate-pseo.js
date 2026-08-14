@@ -1442,18 +1442,34 @@ function writePages(keywords, icons) {
   }
 }
 
-/* ─── Write sitemaps (unchanged) ─────────────────────────────────────────── */
+/* ─── Write sitemaps (safe 45k limit) ─────────────────────────────────── */
 function writeSitemaps(keywords) {
-  const staticUrls = ["/", "/seo/"].concat(keywords.map((row) => row.url));
+  const MAX_PER_SITEMAP = 45000;
+  const urlSet = new Set(["/", "/seo/"]);
+  keywords.forEach((row) => { if (row.url) urlSet.add(row.url); });
+  const allUrls = Array.from(urlSet);
+
   const chunks = [];
-  for (let i = 0; i < staticUrls.length; i += 50000) chunks.push(staticUrls.slice(i, i + 50000));
+  for (let i = 0; i < allUrls.length; i += MAX_PER_SITEMAP) {
+    chunks.push(allUrls.slice(i, i + MAX_PER_SITEMAP));
+  }
+
   chunks.forEach((chunk, index) => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${chunk.map((url) => `  <url><loc>${SITE_URL}${url}</loc><lastmod>${TODAY}</lastmod></url>`).join("\n")}\n</urlset>\n`;
     writeFileWithRetry(path.join(SITEMAP_DIR, `sitemap-${index + 1}.xml`), xml);
   });
-  const indexXml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${chunks.map((_, index) => `  <sitemap><loc>${SITE_URL}/sitemaps/sitemap-${index + 1}.xml</loc><lastmod>${TODAY}</lastmod></sitemap>`).join("\n")}\n</sitemapindex>\n`;
+
+  const articlesSitemapPath = path.join(ROOT, "articles-sitemap.xml");
+  const sitemapEntries = [];
+  if (fs.existsSync(articlesSitemapPath)) {
+    sitemapEntries.push(`  <sitemap><loc>${SITE_URL}/articles-sitemap.xml</loc><lastmod>${TODAY}</lastmod></sitemap>`);
+  }
+  chunks.forEach((_, index) => {
+    sitemapEntries.push(`  <sitemap><loc>${SITE_URL}/sitemaps/sitemap-${index + 1}.xml</loc><lastmod>${TODAY}</lastmod></sitemap>`);
+  });
+
+  const indexXml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapEntries.join("\n")}\n</sitemapindex>\n`;
   writeFileWithRetry(path.join(ROOT, "sitemap.xml"), indexXml);
-  writeFileWithRetry(path.join(ROOT, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 }
 
 /* ─── Write HTML sitemap (unchanged) ─────────────────────────────────────── */

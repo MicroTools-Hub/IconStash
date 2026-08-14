@@ -2,6 +2,7 @@ data/pseo-keywords.json
 .agents/
 .vscode/
 .well-known/
+.freebuff/
 # deploy.php is our server webhook containing the secret token, so it MUST be ignored locally!
 deploy.php
 
