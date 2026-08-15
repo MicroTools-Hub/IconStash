@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service | IconStash</title>
+  <meta name="description" content="IconStash terms of service, open-source licensing guidelines, and usage terms for developers and designers.">
+  <meta name="keywords" content="iconstash terms of service, svg icons licensing terms, open source icon usage agreement">
+  <meta property="og:title" content="Terms of Service — IconStash">
+  <meta property="og:description" content="Usage terms, fair use standards, and open-source license attribution guidelines for IconStash.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://iconstash.io/terms/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Terms of Service | IconStash">
+  <meta name="twitter:description" content="Open-source licensing terms and fair usage guidelines for IconStash.">
+  <meta name="twitter:image" content="https://iconstash.io/logo.png">
+  <link rel="canonical" href="https://iconstash.io/terms/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Terms of Service",
+    "url": "https://iconstash.io/terms/",
+    "description": "Terms of service and open-source licensing guidelines for IconStash."
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Terms of Service" }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    svg { max-width: 100%; display: block; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: all 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    .theme-toggle-btn { background: transparent; border: 1px solid #262626; color: #A3A3A3; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms ease; }
+    .theme-toggle-btn:hover { border-color: #404040; color: #F2F2F2; }
+
+    .page-wrap { max-width: 820px; margin: 0 auto; padding: 56px 24px 100px; }
+    .breadcrumb { display: flex; gap: 8px; font-size: 13px; color: #666; margin-bottom: 24px; align-items: center; }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #C1DD2D; }
+    .breadcrumb .sep { color: #444; }
+
+    .hero-header { margin-bottom: 40px; border-bottom: 1px solid #1A1A1A; padding-bottom: 32px; }
+    .hero-header .tag { display: inline-block; background: rgba(193,221,45,0.12); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(193,221,45,0.25); }
+    .hero-header h1 { font-size: clamp(32px, 5vw, 44px); font-weight: 900; line-height: 1.15; color: #FFF; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .hero-header .lead { font-size: 19px; color: #A3A3A3; line-height: 1.6; font-weight: 400; }
+
+    .terms-card { background: #121212; border: 1px solid #1F1F1F; border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+    .terms-card h2 { font-size: 20px; font-weight: 800; color: #FFF; margin: 0 0 12px; border: none; padding: 0; }
+    .terms-card p { font-size: 15px; color: #D4D4D4; line-height: 1.7; margin-bottom: 12px; }
+    .terms-card ul { margin: 0 0 12px 24px; color: #D4D4D4; font-size: 14.5px; }
+    .terms-card li { margin-bottom: 8px; line-height: 1.6; }
+
+    .last-updated { font-size: 13px; color: #737373; margin-top: 32px; }
+
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 48px 24px; background: #0A0A0A; text-align: center; font-size: 14px; color: #666; margin-top: 80px; }
+    .site-footer a { color: #888; }
+    .site-footer a:hover { color: #C1DD2D; }
+
+    /* Light Theme */
+    html[data-theme="light"] body { background: #FAFAFA; color: #171717; }
+    html[data-theme="light"] .site-header { background: rgba(250,250,250,0.88); border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .site-header .logo { color: #171717; }
+    html[data-theme="light"] .site-header nav a { color: #525252; }
+    html[data-theme="light"] .hero-header h1 { color: #0A0A0A; }
+    html[data-theme="light"] .hero-header .lead { color: #525252; }
+    html[data-theme="light"] .terms-card { background: #FFF; border-color: #E5E5E5; }
+    html[data-theme="light"] .terms-card h2 { color: #0A0A0A; }
+    html[data-theme="light"] .terms-card p, html[data-theme="light"] .terms-card ul { color: #383838; }
+    html[data-theme="light"] a { color: #6D8200; }
+    html[data-theme="light"] .site-footer { background: #FAFAFA; border-top-color: #E5E5E5; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      IconStash
+    </a>
+    <nav>
+      <a href="/#/">Search 134K+ Icons</a>
+      <a href="/articles/">Articles</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/stats/">Stats</a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="/#/" class="header-cta">Open App</a>
+    </nav>
+  </header>
+
+  <main class="page-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <span>Terms of Service</span>
+    </nav>
+
+    <header class="hero-header">
+      <span class="tag">Legal &amp; Licensing</span>
+      <h1>Terms of Service</h1>
+      <p class="lead">Clear, developer-friendly terms governing the use of the IconStash search engine and open-source vector assets.</p>
+    </header>
+
+    <div class="terms-card">
+      <h2>1. Overview &amp; Acceptance</h2>
+      <p>By accessing or using IconStash (https://iconstash.io), you agree to these Terms of Service. If you disagree with any portion of these terms, please discontinue use of the platform.</p>
+    </div>
+
+    <div class="terms-card">
+      <h2>2. Open Source Icon Licensing</h2>
+      <p>IconStash serves as a search engine, customization tool, and discovery index for third-party open-source icon repositories. When you export or use vector icons:</p>
+      <ul>
+        <li>Each individual icon family remains governed by its respective open-source license (such as MIT, Apache 2.0, ISC, CC BY 4.0, or CC0) granted by its original creators.</li>
+        <li>Over 94.5% of indexed icons require zero attribution for commercial or personal applications.</li>
+        <li>For attribution-required sets (e.g. Solar Icons under CC BY 4.0), users are responsible for complying with the upstream license requirements.</li>
+      </ul>
+      <p>Detailed breakdowns of every library's upstream license and repository links are available in our <a href="/stats/">open dataset</a>.</p>
+    </div>
+
+    <div class="terms-card">
+      <h2>3. Permitted &amp; Prohibited Use</h2>
+      <p>You are free to search, preview, customize, and export icons for any personal, commercial, educational, or open-source software project.</p>
+      <p>You agree not to engage in malicious activities against the platform, including denial-of-service attacks, automated abuse that degrades service stability, or attempts to bypass rate limits.</p>
+    </div>
+
+    <div class="terms-card">
+      <h2>4. Disclaimer of Warranties</h2>
+      <p>IconStash and its vector search tools are provided on an "as is" and "as available" basis without warranties of any kind, whether express or implied. We do not guarantee uninterrupted availability or that all third-party vector markup is error-free.</p>
+    </div>
+
+    <div class="terms-card">
+      <h2>5. Questions &amp; Support</h2>
+      <p>For questions concerning these terms or open-source license attribution, please contact us at <a href="mailto:contact@iconstash.io">contact@iconstash.io</a>.</p>
+    </div>
+
+    <div class="last-updated">Last Modified: August 15, 2026</div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
+    <p style="margin-top: 8px;">
+      <a href="/about/">About</a> &bull;
+      <a href="/contact/">Contact</a> &bull;
+      <a href="/privacy/">Privacy Policy</a> &bull;
+      <a href="/terms/">Terms of Service</a> &bull;
+      <a href="/articles/">Articles</a> &bull;
+      <a href="/stats/">Stats</a>
+    </p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    toggleBtn.addEventListener('click', () => {
+      const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+  </script>
+</body>
+</html>

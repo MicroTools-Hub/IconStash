@@ -61,9 +61,13 @@ Q: Do I need to give attribution? A: No for 94.5% of icons (MIT/Apache/ISC/CC0).
 Q: Which library has the most icons? A: Fluent UI Icons (Microsoft), with 20,170 icons.
 Q: Can I use the icons commercially? A: Yes — 127,291 icons are free for commercial use with no attribution.
 
-## About
+## About & Trust
+- [About IconStash](https://iconstash.io/about/)
+- [Contact & Support](https://iconstash.io/contact/)
+- [Privacy Policy](https://iconstash.io/privacy/)
+- [Terms of Service](https://iconstash.io/terms/)
 - Publisher: IconStash, a project by Great Software Company (https://greatsoftwarecompany.com)
 - Source / GitHub: https://github.com/OG-Huzzi/IconStash
 - Reuse of the data in this file: CC BY 4.0 — please attribute "IconStash, https://iconstash.io".
 
-Last updated: 2026-07-19
+Last updated: 2026-08-15
