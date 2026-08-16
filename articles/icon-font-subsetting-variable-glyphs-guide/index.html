@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icon Font Subsetting &amp; Variable Glyphs 2026 | IconStash</title>
+  <meta name="description" content="The 2026 guide to modern icon fonts: WOFF2 automated subsetting, Unicode Private Use Area mapping, variable font axes, and zero FOUC.">
+  <meta name="keywords" content="icon font subsetting 2026, woff2 icon font generation, variable icon font axes, unicode private use area icons, fantasticon build step, prevent icon font fouc, svg vs icon font 2026">
+  <meta property="og:title" content="Icon Font Subsetting & Variable Glyphs in 2026: The Modern Guide">
+  <meta property="og:description" content="How to build ultra-lean WOFF2 icon fonts with variable weights, automated build-time subsetting, and zero layout shift.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/articles/icon-font-subsetting-variable-glyphs-guide/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/logo.png">
+  <meta property="article:published_time" content="2026-08-16T00:00:00Z">
+  <meta property="article:modified_time" content="2026-08-16T00:00:00Z">
+  <meta property="article:author" content="IconStash Engineering">
+  <meta property="article:section" content="Technical Guides">
+  <meta property="article:tag" content="Icon Fonts">
+  <meta property="article:tag" content="Web Performance">
+  <meta property="article:tag" content="Typography">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Icon Font Subsetting & Variable Glyphs 2026">
+  <meta name="twitter:description" content="Automated WOFF2 subsetting, Unicode PUA mapping, and variable weight axes for modern web applications.">
+  <meta name="twitter:image" content="https://iconstash.io/logo.png">
+  <link rel="canonical" href="https://iconstash.io/articles/icon-font-subsetting-variable-glyphs-guide/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Icon Font Subsetting & Variable Glyphs in 2026: The Modern Engineering Guide",
+    "description": "An advanced engineering guide detailing how to build ultra-optimized WOFF2 icon fonts in 2026. Covers build-time glyph subsetting, Unicode Private Use Area (PUA) mapping, variable font axes (wght, FILL, GRAD), and CSS font-display strategies to eliminate FOUC/FOIT.",
+    "author": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
+    "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io", "logo": { "@type": "ImageObject", "url": "https://iconstash.io/logo.png" } },
+    "datePublished": "2026-08-16",
+    "dateModified": "2026-08-16",
+    "mainEntityOfPage": "https://iconstash.io/articles/icon-font-subsetting-variable-glyphs-guide/",
+    "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
+    "articleSection": "Technical Guides",
+    "proficiencyLevel": "Advanced",
+    "about": [
+      { "@type": "Thing", "name": "Web typography", "sameAs": "https://en.wikipedia.org/wiki/Web_typography" },
+      { "@type": "Thing", "name": "WOFF", "sameAs": "https://en.wikipedia.org/wiki/Web_Open_Font_Format" }
+    ],
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".article-hero h1", ".article-hero .subtitle"] },
+    "keywords": ["icon fonts", "WOFF2 subsetting", "variable fonts", "Unicode PUA", "Fantasticon", "web performance typography"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://iconstash.io/articles/" },
+      { "@type": "ListItem", "position": 3, "name": "Icon Font Subsetting & Variable Glyphs" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why would anyone still use icon fonts over SVGs in 2026?",
+        "answer": { "@type": "Answer", "text": "Icon fonts excel in dense text-heavy interfaces (such as code editors, spreadsheet cells, and rich-text toolbars) where thousands of glyphs render inline with text. In these scenarios, the browser's typography layout engine processes glyphs faster than thousands of discrete SVG DOM nodes." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does automated icon font subsetting work?",
+        "answer": { "@type": "Answer", "text": "Subsetting tools parse your production codebase at build time, identify the exact Unicode glyphs referenced in your HTML/JS, and compile a tailored WOFF2 font containing only those icons. This shrinks full 2 MB font files down to 6 KB." }
+      },
+      {
+        "@type": "Question",
+        "name": "What are variable font axes in icon typography?",
+        "answer": { "@type": "Answer", "text": "Variable icon fonts allow continuous interpolation along design axes like weight (wght 100-700), optical size (opsz), and fill (FILL 0 to 1) from a single font file, eliminating the need to load separate outline and solid font files." }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    svg { max-width: 100%; display: block; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: all 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    .theme-toggle-btn { background: transparent; border: 1px solid #262626; color: #A3A3A3; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms ease; }
+    .theme-toggle-btn:hover { border-color: #404040; color: #F2F2F2; }
+
+    .article-wrap { max-width: 820px; margin: 0 auto; padding: 56px 24px 100px; }
+    .breadcrumb { display: flex; gap: 8px; font-size: 13px; color: #666; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #C1DD2D; }
+    .breadcrumb .sep { color: #444; }
+
+    .article-hero { margin-bottom: 48px; border-bottom: 1px solid #1A1A1A; padding-bottom: 40px; }
+    .article-hero .tag { display: inline-block; background: rgba(193,221,45,0.12); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(193,221,45,0.25); }
+    .article-hero h1 { font-size: clamp(32px, 5vw, 44px); font-weight: 900; line-height: 1.15; color: #FFF; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .article-hero .subtitle { font-size: 20px; color: #A3A3A3; line-height: 1.5; margin-bottom: 24px; font-weight: 400; }
+    .article-meta { display: flex; gap: 20px; font-size: 13px; color: #737373; align-items: center; flex-wrap: wrap; }
+    .article-meta span { display: flex; align-items: center; gap: 6px; }
+
+    .tldr-box { background: linear-gradient(180deg, #141414 0%, #0E0E0E 100%); border: 1px solid #262626; border-left: 4px solid #C1DD2D; border-radius: 10px; padding: 24px 28px; margin: 36px 0; }
+    .tldr-box h3 { color: #C1DD2D; font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+    .tldr-box p { font-size: 15px; line-height: 1.7; color: #D4D4D4; margin: 0; }
+
+    h2 { font-size: 26px; font-weight: 800; color: #FFF; letter-spacing: -0.02em; margin: 52px 0 20px; padding-top: 20px; border-top: 1px solid #1F1F1F; }
+    h3 { font-size: 20px; font-weight: 700; color: #E5E5E5; margin: 32px 0 14px; }
+    p { margin-bottom: 22px; color: #D4D4D4; }
+    strong { color: #FFF; }
+    ul, ol { margin: 0 0 24px 28px; color: #D4D4D4; }
+    li { margin-bottom: 10px; line-height: 1.7; }
+
+    pre { background: #121212; border: 1px solid #222; border-radius: 8px; padding: 20px; overflow-x: auto; margin: 24px 0; font-family: "JetBrains Mono", monospace; font-size: 13.5px; line-height: 1.6; color: #E5E5E5; }
+    code { font-family: "JetBrains Mono", monospace; font-size: 0.9em; background: #1A1A1A; padding: 2px 6px; border-radius: 4px; color: #C1DD2D; }
+    pre code { background: transparent; padding: 0; color: inherit; }
+
+    .callout { background: #141414; border: 1px solid #262626; border-radius: 8px; padding: 20px 24px; margin: 28px 0; }
+    .callout-title { font-weight: 700; color: #FFF; margin-bottom: 8px; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+
+    .faq-item { background: #121212; border: 1px solid #222; border-radius: 8px; margin-bottom: 14px; padding: 18px 22px; }
+    .faq-q { font-weight: 700; color: #FFF; font-size: 16px; margin-bottom: 8px; }
+    .faq-a { color: #A3A3A3; font-size: 14.5px; line-height: 1.7; margin: 0; }
+
+    .cta-banner { background: linear-gradient(135deg, #181C0B 0%, #111406 100%); border: 1px solid rgba(193,221,45,0.3); border-radius: 12px; padding: 36px; text-align: center; margin: 60px 0 20px; }
+    .cta-banner h3 { color: #FFF; font-size: 24px; margin-bottom: 10px; font-weight: 800; }
+    .cta-banner p { color: #A3A3A3; max-width: 540px; margin: 0 auto 20px; font-size: 15px; }
+
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 48px 24px; background: #0A0A0A; text-align: center; font-size: 14px; color: #666; margin-top: 80px; }
+    .site-footer a { color: #888; }
+    .site-footer a:hover { color: #C1DD2D; }
+
+    /* Light Theme */
+    html[data-theme="light"] body { background: #FAFAFA; color: #171717; }
+    html[data-theme="light"] .site-header { background: rgba(250,250,250,0.88); border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .site-header .logo { color: #171717; }
+    html[data-theme="light"] .site-header nav a { color: #525252; }
+    html[data-theme="light"] .article-hero h1 { color: #0A0A0A; }
+    html[data-theme="light"] .article-hero .subtitle { color: #525252; }
+    html[data-theme="light"] h2 { color: #0A0A0A; border-top-color: #E5E5E5; }
+    html[data-theme="light"] h3 { color: #171717; }
+    html[data-theme="light"] p, html[data-theme="light"] ul, html[data-theme="light"] ol { color: #383838; }
+    html[data-theme="light"] strong { color: #0A0A0A; }
+    html[data-theme="light"] .tldr-box { background: #F4F4F5; border-color: #E4E4E7; border-left-color: #849E00; }
+    html[data-theme="light"] .tldr-box p { color: #27272A; }
+    html[data-theme="light"] pre { background: #F4F4F5; border-color: #E4E4E7; color: #18181B; }
+    html[data-theme="light"] code { background: #E4E4E7; color: #4D6300; }
+    html[data-theme="light"] .callout, html[data-theme="light"] .faq-item { background: #FFF; border-color: #E5E5E5; }
+    html[data-theme="light"] .faq-q { color: #0A0A0A; }
+    html[data-theme="light"] .faq-a { color: #525252; }
+    html[data-theme="light"] a { color: #6D8200; }
+    html[data-theme="light"] .cta-banner { background: #F8FAEE; border-color: #CCD895; }
+    html[data-theme="light"] .cta-banner h3 { color: #0A0A0A; }
+    html[data-theme="light"] .cta-banner p { color: #525252; }
+    html[data-theme="light"] .site-footer { background: #FAFAFA; border-top-color: #E5E5E5; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      IconStash
+    </a>
+    <nav>
+      <a href="/#/">Search 134K+ Icons</a>
+      <a href="/articles/">Articles &amp; Guides</a>
+      <a href="/Listicles/best-free-icon-sets-2026/">Best Sets</a>
+      <a href="/Glossary/icon-svg-terminology/">Glossary</a>
+      <a href="/stats/">Statistics</a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="/#/" class="header-cta">Open App</a>
+    </nav>
+  </header>
+
+  <main class="article-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/articles/">Articles</a>
+      <span class="sep">/</span>
+      <span>Icon Font Subsetting &amp; Variable Glyphs</span>
+    </nav>
+
+    <header class="article-hero">
+      <span class="tag">Advanced Typography</span>
+      <h1>Icon Font Subsetting &amp; Variable Glyphs in 2026</h1>
+      <p class="subtitle">How modern engineering teams generate ultra-lean WOFF2 icon fonts, map Unicode Private Use Areas (PUA), leverage variable font axes, and eliminate FOUC entirely.</p>
+      <div class="article-meta">
+        <span><strong>Published:</strong> August 16, 2026</span>
+        <span><strong>Author:</strong> IconStash Typography Engineering</span>
+        <span><strong>Reading Time:</strong> 11 min read</span>
+      </div>
+    </header>
+
+    <div class="tldr-box">
+      <h3>TL;DR — The 2026 Icon Font Playbook</h3>
+      <p><strong>Never ship full 2MB icon fonts:</strong> Use automated build-time subsetting (via <code>fantasticon</code> or <code>glyphhanger</code>) to output tailored <strong>WOFF2-only</strong> font files under 10 KB. Always map glyphs to the Unicode Private Use Area (<code>U+E000</code> to <code>U+F8FF</code>) to avoid corrupting standard character readers. Leverage Google Material Symbols Variable Font axes (<code>font-variation-settings: 'FILL' 1, 'wght' 600</code>) for continuous weight adjustments.</p>
+    </div>
+
+    <section>
+      <h2>The Re-Emergence of Icon Fonts in Modern Engineering</h2>
+      <p>For years, frontend dogma proclaimed that SVG had completely replaced icon fonts. While inline SVGs and SVG sprites are ideal for standard dashboards and interactive micro-interactions, icon fonts have experienced a massive renaissance for <strong>high-density, text-anchored user interfaces</strong>.</p>
+      <p>Applications like code editors (VS Code / Monaco), financial terminals (Bloomberg / TradingView), and spreadsheet software (Google Sheets / Airtable) frequently render <strong>5,000+ inline icons alongside text lines</strong>. Rendering 5,000 SVG DOM elements overwhelms browser garbage collectors, whereas the browser's hardware-accelerated text layout engine renders 5,000 font glyphs with near-zero overhead.</p>
+    </section>
+
+    <section>
+      <h2>1. The Unicode Private Use Area (PUA) Standard</h2>
+      <p>The cardinal sin of legacy icon fonts was mapping icons to standard Latin letters (e.g. typing "A" to show a home icon). When screen readers or translators read the page, they pronounced gibberish. Modern icon fonts strictly map glyphs to the <strong>Unicode Private Use Area (PUA)</strong> (Range: <code>\E000</code> – <code>\F8FF</code>):</p>
+      <pre><code>/* Mapping icons to safe PUA Unicode points */
+.icon-home::before    { content: "\E001"; }
+.icon-search::before  { content: "\E002"; }
+.icon-settings::before{ content: "\E003"; }
+.icon-user::before    { content: "\E004"; }</code></pre>
+      <p>Screen readers simply skip unmapped PUA characters when paired with <code>aria-hidden="true"</code>, ensuring zero accessibility regression.</p>
+    </section>
+
+    <section>
+      <h2>2. Automated Build-Time Subsetting with Fantasticon</h2>
+      <p>Rather than relying on manual web upload tools, modern CI/CD pipelines generate WOFF2 icon fonts automatically from raw SVG folders during build:</p>
+      <pre><code>// fantasticon.config.js
+module.exports = {
+  inputDir: './src/assets/icons', // Raw SVG icons from IconStash
+  outputDir: './public/fonts',
+  fontTypes: ['woff2'],          // WOFF2 is 100% baseline supported in 2026
+  assetTypes: ['css', 'json'],
+  name: 'app-icons',
+  prefix: 'icon',
+  codepoints: {
+    'home': 0xe001,
+    'search': 0xe002
+  },
+  formatOptions: {
+    woff2: {
+      max_aspect_ratio: 2.5
+    }
+  }
+};</code></pre>
+      <p>In your <code>package.json</code>, running <code>npx fantasticon</code> compiles 40 SVGs into a single <strong>4.2 KB WOFF2 font</strong> with an automatically generated CSS helper file.</p>
+    </section>
+
+    <section>
+      <h2>3. Variable Icon Fonts: The Google Material Symbols Paradigm</h2>
+      <p>Variable icon fonts represent the biggest leap in icon typography. A single WOFF2 file provides 4 continuous design axes without loading separate solid, outline, or bold font files:</p>
+      <pre><code>@font-face {
+  font-family: 'Material Symbols Variable';
+  font-style: normal;
+  font-weight: 100 700;
+  src: url('/fonts/material-symbols.woff2') format('woff2');
+  font-display: block;
+}
+
+.icon-custom {
+  font-family: 'Material Symbols Variable';
+  font-variation-settings: 
+    'FILL' 0,      /* 0 = Outline, 1 = Solid Fill */
+    'wght' 500,    /* Continuous Stroke Weight: 100 to 700 */
+    'GRAD' 0.25,   /* Optical Grade Adjustment */
+    'opsz' 24;     /* Optical Sizing: 20px, 24px, 40px, 48px */
+}</code></pre>
+      <div class="callout">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C1DD2D" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Why Optical Size (opsz) Matters
+        </div>
+        <p>At <code>opsz 20</code>, variable fonts automatically thicken delicate interior strokes and widen gaps so the icon remains razor-sharp in small dropdown menus and table cells on standard non-Retina displays.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Eliminating FOUC &amp; Layout Shift (font-display: block)</h2>
+      <p>Flash of Unstyled Content (FOUC) happens when browsers show text or empty boxes while the font downloads. To eliminate layout shifts and pass Google's Cumulative Layout Shift (CLS) Core Web Vital:</p>
+      <ol>
+        <li><strong>Preload the WOFF2 file in your <code>&lt;head&gt;</code>:</strong>
+          <pre><code>&lt;link rel="preload" href="/fonts/app-icons.woff2" as="font" type="font/woff2" crossorigin&gt;</code></pre>
+        </li>
+        <li><strong>Set <code>font-display: block;</code>:</strong> This instructs the browser to briefly block rendering for up to 50ms rather than rendering an unsightly fallback box.</li>
+        <li><strong>Lock dimensions with explicit CSS:</strong> Set <code>display: inline-block; width: 1em; height: 1em; line-height: 1;</code> to prevent inline text jitter.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-q">Should I still generate TTF, EOT, or SVG font formats?</div>
+        <p class="faq-a">No. WOFF2 has 100% global browser support across all modern desktop and mobile browsers. Legacy formats (EOT, TTF, SVG fonts) are completely obsolete and waste bandwidth.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I download open-source SVGs from IconStash to compile my own icon font?</div>
+        <p class="faq-a">Yes. You can select and download SVGs across any of the 28 open-source libraries indexed on IconStash (like Tabler, Phosphor, or Lucide) and run them directly through Fantasticon to produce a custom, ultra-lightweight WOFF2 font.</p>
+      </div>
+    </section>
+
+    <div class="cta-banner">
+      <h3>Ready to Build Your Custom Icon Font?</h3>
+      <p>Search 134,000+ open-source SVG icons across 28 curated libraries on IconStash. Fast, clean, and 100% open source.</p>
+      <a href="/#/" class="header-cta" style="font-size: 15px; padding: 12px 28px;">Search All 134K+ Icons &rarr;</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
+    <p style="margin-top: 8px;">
+      <a href="/about/">About</a> &bull;
+      <a href="/contact/">Contact</a> &bull;
+      <a href="/privacy/">Privacy Policy</a> &bull;
+      <a href="/terms/">Terms of Service</a> &bull;
+      <a href="/articles/">Articles</a> &bull;
+      <a href="/stats/">Stats</a>
+    </p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    toggleBtn.addEventListener('click', () => {
+      const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+  </script>
+</body>
+</html>
