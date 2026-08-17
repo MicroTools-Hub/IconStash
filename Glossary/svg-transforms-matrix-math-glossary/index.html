@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Transforms &amp; Matrix Math Glossary | IconStash</title>
+  <meta name="description" content="Comprehensive glossary of 30+ SVG transform, coordinate system, and matrix math terms: viewBox, CTM, affine matrix, and getScreenCTM.">
+  <meta name="keywords" content="svg matrix math glossary, svg transforms 2026, getScreenCTM svg, viewBox preserveAspectRatio, affine transformation matrix 2d, transform-origin svg, svg coordinate systems">
+  <meta property="og:title" content="SVG Transforms & Matrix Math Glossary">
+  <meta property="og:description" content="Master 30+ mathematical terms in SVG coordinate systems, affine transformations, matrix math, and DOM matrix APIs.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/Glossary/svg-transforms-matrix-math-glossary/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/logo.png">
+  <meta property="article:published_time" content="2026-08-17T00:00:00Z">
+  <meta property="article:modified_time" content="2026-08-17T00:00:00Z">
+  <meta property="article:author" content="IconStash Graphics Engineering">
+  <meta property="article:section" content="Glossary">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SVG Transforms & Matrix Math Glossary">
+  <meta name="twitter:description" content="30+ core definitions for mastering vector math, affine transformations, and SVG DOM coordinate APIs.">
+  <meta name="twitter:image" content="https://iconstash.io/logo.png">
+  <link rel="canonical" href="https://iconstash.io/Glossary/svg-transforms-matrix-math-glossary/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "name": "SVG Transforms, Coordinate Systems & Matrix Math Glossary",
+    "description": "An exhaustive mathematical glossary defining 30+ crucial terms in SVG coordinate spaces, affine transformation matrices, transformation order, and SVG DOM calculation APIs.",
+    "url": "https://iconstash.io/Glossary/svg-transforms-matrix-math-glossary/",
+    "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Glossary", "item": "https://iconstash.io/Glossary/icon-svg-terminology/" },
+      { "@type": "ListItem", "position": 3, "name": "SVG Transforms & Matrix Math Glossary" }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    svg { max-width: 100%; display: block; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: all 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    .theme-toggle-btn { background: transparent; border: 1px solid #262626; color: #A3A3A3; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms ease; }
+    .theme-toggle-btn:hover { border-color: #404040; color: #F2F2F2; }
+
+    .glossary-wrap { max-width: 860px; margin: 0 auto; padding: 56px 24px 100px; }
+    .breadcrumb { display: flex; gap: 8px; font-size: 13px; color: #666; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #C1DD2D; }
+    .breadcrumb .sep { color: #444; }
+
+    .glossary-hero { margin-bottom: 40px; border-bottom: 1px solid #1A1A1A; padding-bottom: 32px; }
+    .glossary-hero .tag { display: inline-block; background: rgba(193,221,45,0.12); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(193,221,45,0.25); }
+    .glossary-hero h1 { font-size: clamp(32px, 5vw, 44px); font-weight: 900; line-height: 1.15; color: #FFF; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .glossary-hero .subtitle { font-size: 19px; color: #A3A3A3; line-height: 1.6; font-weight: 400; }
+
+    .search-filter-box { margin: 32px 0 40px; }
+    .search-filter-input { width: 100%; background: #121212; border: 1px solid #262626; color: #FFF; font-size: 16px; padding: 14px 20px; border-radius: 8px; font-family: inherit; outline: none; transition: border-color 150ms ease; }
+    .search-filter-input:focus { border-color: #C1DD2D; }
+    .search-filter-input::placeholder { color: #666; }
+
+    .cat-heading { font-size: 22px; font-weight: 800; color: #FFF; margin: 48px 0 20px; padding-bottom: 8px; border-bottom: 1px solid #222; display: flex; align-items: center; justify-content: space-between; }
+    .cat-heading .badge { font-size: 12px; font-weight: 700; color: #C1DD2D; background: rgba(193,221,45,0.1); padding: 3px 10px; border-radius: 4px; text-transform: uppercase; }
+
+    .term-card { background: #121212; border: 1px solid #1F1F1F; border-radius: 10px; padding: 22px 26px; margin-bottom: 16px; transition: all 150ms ease; }
+    .term-card:hover { border-color: #333; }
+    .term-title { font-size: 19px; font-weight: 700; color: #FFF; margin-bottom: 8px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .term-title code { font-size: 15px; color: #C1DD2D; font-family: "JetBrains Mono", monospace; background: rgba(193,221,45,0.08); padding: 2px 8px; border-radius: 4px; }
+    .term-desc { font-size: 15px; color: #B3B3B3; line-height: 1.7; margin: 0; }
+    .term-desc strong { color: #F2F2F2; }
+
+    .code-snippet { background: #0E0E0E; border: 1px solid #222; border-radius: 6px; padding: 10px 14px; margin-top: 10px; font-family: "JetBrains Mono", monospace; font-size: 13px; color: #A3A3A3; overflow-x: auto; }
+
+    .cta-banner { background: linear-gradient(135deg, #181C0B 0%, #111406 100%); border: 1px solid rgba(193,221,45,0.3); border-radius: 12px; padding: 36px; text-align: center; margin: 60px 0 20px; }
+    .cta-banner h3 { color: #FFF; font-size: 24px; margin-bottom: 10px; font-weight: 800; }
+    .cta-banner p { color: #A3A3A3; max-width: 540px; margin: 0 auto 20px; font-size: 15px; }
+
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 48px 24px; background: #0A0A0A; text-align: center; font-size: 14px; color: #666; margin-top: 80px; }
+    .site-footer a { color: #888; }
+    .site-footer a:hover { color: #C1DD2D; }
+
+    /* Light Theme */
+    html[data-theme="light"] body { background: #FAFAFA; color: #171717; }
+    html[data-theme="light"] .site-header { background: rgba(250,250,250,0.88); border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .site-header .logo { color: #171717; }
+    html[data-theme="light"] .site-header nav a { color: #525252; }
+    html[data-theme="light"] .glossary-hero h1 { color: #0A0A0A; }
+    html[data-theme="light"] .glossary-hero .subtitle { color: #525252; }
+    html[data-theme="light"] .search-filter-input { background: #FFF; border-color: #E5E5E5; color: #0A0A0A; }
+    html[data-theme="light"] .cat-heading { color: #0A0A0A; border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .term-card { background: #FFF; border-color: #E5E5E5; }
+    html[data-theme="light"] .term-title { color: #0A0A0A; }
+    html[data-theme="light"] .term-title code { background: #F0F4D8; color: #5C6E00; }
+    html[data-theme="light"] .term-desc { color: #525252; }
+    html[data-theme="light"] .term-desc strong { color: #171717; }
+    html[data-theme="light"] .code-snippet { background: #F4F4F5; border-color: #E5E5E5; color: #27272A; }
+    html[data-theme="light"] a { color: #6D8200; }
+    html[data-theme="light"] .cta-banner { background: #F8FAEE; border-color: #CCD895; }
+    html[data-theme="light"] .cta-banner h3 { color: #0A0A0A; }
+    html[data-theme="light"] .cta-banner p { color: #525252; }
+    html[data-theme="light"] .site-footer { background: #FAFAFA; border-top-color: #E5E5E5; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      IconStash
+    </a>
+    <nav>
+      <a href="/#/">Search 134K+ Icons</a>
+      <a href="/articles/">Articles &amp; Guides</a>
+      <a href="/Listicles/best-free-icon-sets-2026/">Best Sets</a>
+      <a href="/Glossary/icon-svg-terminology/">Glossary Hub</a>
+      <a href="/stats/">Statistics</a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="/#/" class="header-cta">Open App</a>
+    </nav>
+  </header>
+
+  <main class="glossary-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/Glossary/icon-svg-terminology/">Glossaries</a>
+      <span class="sep">/</span>
+      <span>SVG Transforms &amp; Matrix Math</span>
+    </nav>
+
+    <header class="glossary-hero">
+      <span class="tag">Mathematical Reference</span>
+      <h1>SVG Coordinate Systems, Transforms &amp; Matrix Math Glossary</h1>
+      <p class="subtitle">A master engineering glossary of 30+ terms covering 2D affine transformation matrices, homogeneous coordinates, coordinate mapping, and SVG DOM calculation APIs.</p>
+    </header>
+
+    <div class="search-filter-box">
+      <input type="text" id="termFilter" class="search-filter-input" placeholder="Filter 30+ math & transform terms (e.g., matrix, getCTM, viewBox, affine)...">
+    </div>
+
+    <!-- Category 1: Coordinate Spaces & Viewports -->
+    <div class="category-block">
+      <div class="cat-heading">
+        <span>1. Coordinate Spaces &amp; Viewports</span>
+        <span class="badge">Spaces</span>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>User Coordinate System (User Space)</span></div>
+        <p class="term-desc">The internal infinite coordinate grid in which SVG geometry points, paths, and primitives are defined. It starts at <code>(0,0)</code> at the top-left and extends indefinitely rightwards (+X) and downwards (+Y).</p>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>Viewport Coordinate System</span></div>
+        <p class="term-desc">The physical CSS pixel grid determined by the SVG element's <code>width</code> and <code>height</code> in the host HTML document layout.</p>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>viewBox</span> <code>viewBox="minX minY width height"</code></div>
+        <p class="term-desc">The 4-value mapping function that defines the specific rectangle in <strong>User Space</strong> to scale and display inside the HTML Viewport.</p>
+        <div class="code-snippet">&lt;svg viewBox="0 0 24 24" width="48" height="48"&gt; &lt;!-- 2x magnification --&gt;</div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>preserveAspectRatio</span> <code>preserveAspectRatio="xMidYMid meet"</code></div>
+        <p class="term-desc">Controls uniform aspect ratio scaling when the viewBox proportions differ from the viewport container. Options include <code>meet</code> (letterboxing), <code>slice</code> (cropping), and <code>none</code> (distortion).</p>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>Current Transformation Matrix (CTM)</span></div>
+        <p class="term-desc">The cumulative \(3 \times 3\) affine transformation matrix that maps an SVG element's local user coordinates directly into the viewport's screen space.</p>
+      </div>
+    </div>
+
+    <!-- Category 2: Basic 2D Transformations -->
+    <div class="category-block">
+      <div class="cat-heading">
+        <span>2. Transformation Functions</span>
+        <span class="badge">Transforms</span>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>translate(tx, [ty])</span> <code>transform="translate(10, 20)"</code></div>
+        <p class="term-desc">Shifts the coordinate space origin by \(t_x\) units horizontally and \(t_y\) units vertically without rotating or resizing.</p>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>scale(sx, [sy])</span> <code>transform="scale(1.5)"</code></div>
+        <p class="term-desc">Multiplies all coordinate points by scaling factors \(s_x\) and \(s_y\). If \(s_y\) is omitted, it defaults to \(s_x\) (uniform scaling).</p>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>rotate(deg, [cx, cy])</span> <code>transform="rotate(45, 12, 12)"</code></div>
+        <p class="term-desc">Rotates the user coordinate system by a given angle in degrees clockwise around the origin <code>(0,0)</code> or an optional explicit center point <code>(cx, cy)</code>.</p>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>skewX(deg) &amp; skewY(deg)</span> <code>transform="skewX(15)"</code></div>
+        <p class="term-desc">Distorts the coordinate system along the X or Y axis by a specified angle, transforming rectangles into parallelograms.</p>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>transform-origin</span></div>
+        <p class="term-desc">The anchor point about which scale, rotate, and skew transforms are calculated. In SVG 2 and modern CSS, defaults to <code>center</code> or <code>50% 50%</code> when using CSS transforms.</p>
+      </div>
+    </div>
+
+    <!-- Category 3: Matrix Math & 2D Affine Spaces -->
+    <div class="category-block">
+      <div class="cat-heading">
+        <span>3. Matrix Mathematics &amp; Affine Spaces</span>
+        <span class="badge">Math</span>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>matrix(a, b, c, d, e, f)</span> <code>matrix(...)</code></div>
+        <p class="term-desc">The fundamental 6-parameter affine transformation matrix representing the \(3 \times 3\) homogeneous matrix:
+        $$\begin{bmatrix} a & c & e \\ b & d & f \\ 0 & 0 & 1 \end{bmatrix}$$
+        where \(a, d\) represent scaling, \(b, c\) represent skewing/rotation, and \(e, f\) represent translation.</p>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>Affine Transformation</span></div>
+        <p class="term-desc">A geometric mapping that preserves collinearity (all points lying on a line still lie on a line after transformation) and ratios of distances between points.</p>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>Homogeneous Coordinates</span></div>
+        <p class="term-desc">The representation of a 2D point \((x, y)\) as a 3D vector \([x, y, 1]^T\), allowing translations to be computed using standard matrix multiplication.</p>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>Matrix Multiplication Order (Composition)</span></div>
+        <p class="term-desc">Transformations in SVG execute from right to left in post-multiplication order: <code>transform="translate(10) rotate(45)"</code> translates first, then rotates the translated grid.</p>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>Inverse Matrix (Matrix Inversion)</span></div>
+        <p class="term-desc">The mathematical inverse \(M^{-1}\) of a transformation matrix \(M\). Used to unproject screen mouse clicks back into local SVG path coordinates.</p>
+      </div>
+    </div>
+
+    <!-- Category 4: SVG DOM Calculation APIs -->
+    <div class="category-block">
+      <div class="cat-heading">
+        <span>4. SVG DOM Calculation APIs</span>
+        <span class="badge">JavaScript API</span>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>getScreenCTM()</span> <code>element.getScreenCTM()</code></div>
+        <p class="term-desc">Returns a <code>DOMMatrix</code> mapping local SVG element coordinate points directly to the browser window's physical client screen coordinates.</p>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>getCTM()</span> <code>element.getCTM()</code></div>
+        <p class="term-desc">Returns the transformation matrix mapping an element's coordinate space to the coordinate space of the nearest viewport ancestor.</p>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>getBBox()</span> <code>element.getBBox()</code></div>
+        <p class="term-desc">Computes the tightest bounding box rectangle (<code>x, y, width, height</code>) enclosing all rendered vector geometry in current user coordinates.</p>
+      </div>
+
+      <div class="term-card">
+        <div class="term-title"><span>matrixTransform()</span> <code>point.matrixTransform(matrix)</code></div>
+        <p class="term-desc">Multiplies a <code>DOMPoint</code> by a <code>DOMMatrix</code>, converting points between coordinate frames in real-time interactive vector canvases.</p>
+        <div class="code-snippet">const svgPoint = clientPoint.matrixTransform(svg.getScreenCTM().inverse());</div>
+      </div>
+    </div>
+
+    <div class="cta-banner">
+      <h3>Ready to Explore Precise Vector Icons?</h3>
+      <p>Search 134,000+ open-source SVG icons across 28 curated libraries on IconStash. Fast, clean, and 100% open source.</p>
+      <a href="/#/" class="header-cta" style="font-size: 15px; padding: 12px 28px;">Search All 134K+ Icons &rarr;</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
+    <p style="margin-top: 8px;">
+      <a href="/about/">About</a> &bull;
+      <a href="/contact/">Contact</a> &bull;
+      <a href="/privacy/">Privacy Policy</a> &bull;
+      <a href="/terms/">Terms of Service</a> &bull;
+      <a href="/articles/">Articles</a> &bull;
+      <a href="/stats/">Stats</a>
+    </p>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const toggleBtn = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    toggleBtn.addEventListener('click', () => {
+      const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+
+    // Instant term filter
+    const filterInput = document.getElementById('termFilter');
+    const cards = document.querySelectorAll('.term-card');
+    filterInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(q) ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

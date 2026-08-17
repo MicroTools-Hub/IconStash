@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Clipping, Masking &amp; Blend Modes Guide | IconStash</title>
+  <meta name="description" content="Master SVG clipping (<clipPath>), luminance masking (<mask>), and CSS mix-blend-mode for dynamic vector icon badges, cutouts, and shaders.">
+  <meta name="keywords" content="svg clipping guide, svg masking mask vs clippath, clipPathUnits objectBoundingBox, svg luminance mask, css mix-blend-mode svg, non destructive icon badge cutout, svg hole punch">
+  <meta property="og:title" content="SVG Clipping, Masking & Blend Modes: The Complete 2026 Guide">
+  <meta property="og:description" content="How to build non-destructive icon badges, alpha-luminance masks, dynamic vector cutouts, and GPU blend modes in SVG.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/articles/svg-clipping-masking-blend-modes-guide/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/logo.png">
+  <meta property="article:published_time" content="2026-08-17T00:00:00Z">
+  <meta property="article:modified_time" content="2026-08-17T00:00:00Z">
+  <meta property="article:author" content="IconStash Graphics Engineering">
+  <meta property="article:section" content="Technical Guides">
+  <meta property="article:tag" content="SVG">
+  <meta property="article:tag" content="Vector Graphics">
+  <meta property="article:tag" content="Web Design">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SVG Clipping, Masking & Blend Modes Guide">
+  <meta name="twitter:description" content="Non-destructive icon badges, alpha-luminance masks, and GPU blend modes in modern web vectors.">
+  <meta name="twitter:image" content="https://iconstash.io/logo.png">
+  <link rel="canonical" href="https://iconstash.io/articles/svg-clipping-masking-blend-modes-guide/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "SVG Clipping, Masking & Blend Modes: The Complete Modern Guide",
+    "description": "An in-depth engineering guide dissecting the mathematical and rendering differences between SVG clipPath, luminance and alpha masks, and CSS blend modes. Includes practical patterns for notification badge cutouts, animated skeleton masks, and GPU-composited vector effects.",
+    "author": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
+    "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io", "logo": { "@type": "ImageObject", "url": "https://iconstash.io/logo.png" } },
+    "datePublished": "2026-08-17",
+    "dateModified": "2026-08-17",
+    "mainEntityOfPage": "https://iconstash.io/articles/svg-clipping-masking-blend-modes-guide/",
+    "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
+    "articleSection": "Technical Guides",
+    "proficiencyLevel": "Advanced",
+    "about": [
+      { "@type": "Thing", "name": "Scalable Vector Graphics", "sameAs": "https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" },
+      { "@type": "Thing", "name": "Clipping (computer graphics)", "sameAs": "https://en.wikipedia.org/wiki/Clipping_(computer_graphics)" }
+    ],
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".article-hero h1", ".article-hero .subtitle"] },
+    "keywords": ["SVG clipPath", "SVG mask", "clipPathUnits", "luminance mask", "mix-blend-mode SVG", "vector badge cutout"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://iconstash.io/articles/" },
+      { "@type": "ListItem", "position": 3, "name": "SVG Clipping, Masking & Blend Modes" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the core difference between <clipPath> and <mask> in SVG?",
+        "answer": { "@type": "Answer", "text": "<clipPath> is a binary 1-bit boundary (a point is either 100% visible inside the path or 100% clipped). <mask> supports 8-bit alpha transparency and luminance values, allowing soft feathered edges, gradient transparencies, and partial opacity." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does clipPathUnits='objectBoundingBox' work?",
+        "answer": { "@type": "Answer", "text": "Setting clipPathUnits='objectBoundingBox' switches the coordinate system of the clipping path from absolute pixels to normalized 0.0 to 1.0 percentages relative to the target element's bounding box, making the clip automatically responsive." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can CSS mix-blend-mode be applied directly to SVG vector elements?",
+        "answer": { "@type": "Answer", "text": "Yes. Modern browser rendering engines support mix-blend-mode (such as multiply, screen, and overlay) directly on SVG <path>, <circle>, and <rect> elements inside both inline SVGs and HTML containers." }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    svg { max-width: 100%; display: block; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: all 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    .theme-toggle-btn { background: transparent; border: 1px solid #262626; color: #A3A3A3; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms ease; }
+    .theme-toggle-btn:hover { border-color: #404040; color: #F2F2F2; }
+
+    .article-wrap { max-width: 820px; margin: 0 auto; padding: 56px 24px 100px; }
+    .breadcrumb { display: flex; gap: 8px; font-size: 13px; color: #666; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #C1DD2D; }
+    .breadcrumb .sep { color: #444; }
+
+    .article-hero { margin-bottom: 48px; border-bottom: 1px solid #1A1A1A; padding-bottom: 40px; }
+    .article-hero .tag { display: inline-block; background: rgba(193,221,45,0.12); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(193,221,45,0.25); }
+    .article-hero h1 { font-size: clamp(32px, 5vw, 44px); font-weight: 900; line-height: 1.15; color: #FFF; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .article-hero .subtitle { font-size: 20px; color: #A3A3A3; line-height: 1.5; margin-bottom: 24px; font-weight: 400; }
+    .article-meta { display: flex; gap: 20px; font-size: 13px; color: #737373; align-items: center; flex-wrap: wrap; }
+    .article-meta span { display: flex; align-items: center; gap: 6px; }
+
+    .tldr-box { background: linear-gradient(180deg, #141414 0%, #0E0E0E 100%); border: 1px solid #262626; border-left: 4px solid #C1DD2D; border-radius: 10px; padding: 24px 28px; margin: 36px 0; }
+    .tldr-box h3 { color: #C1DD2D; font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+    .tldr-box p { font-size: 15px; line-height: 1.7; color: #D4D4D4; margin: 0; }
+
+    h2 { font-size: 26px; font-weight: 800; color: #FFF; letter-spacing: -0.02em; margin: 52px 0 20px; padding-top: 20px; border-top: 1px solid #1F1F1F; }
+    h3 { font-size: 20px; font-weight: 700; color: #E5E5E5; margin: 32px 0 14px; }
+    p { margin-bottom: 22px; color: #D4D4D4; }
+    strong { color: #FFF; }
+    ul, ol { margin: 0 0 24px 28px; color: #D4D4D4; }
+    li { margin-bottom: 10px; line-height: 1.7; }
+
+    pre { background: #121212; border: 1px solid #222; border-radius: 8px; padding: 20px; overflow-x: auto; margin: 24px 0; font-family: "JetBrains Mono", monospace; font-size: 13.5px; line-height: 1.6; color: #E5E5E5; }
+    code { font-family: "JetBrains Mono", monospace; font-size: 0.9em; background: #1A1A1A; padding: 2px 6px; border-radius: 4px; color: #C1DD2D; }
+    pre code { background: transparent; padding: 0; color: inherit; }
+
+    .callout { background: #141414; border: 1px solid #262626; border-radius: 8px; padding: 20px 24px; margin: 28px 0; }
+    .callout-title { font-weight: 700; color: #FFF; margin-bottom: 8px; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+
+    .faq-item { background: #121212; border: 1px solid #222; border-radius: 8px; margin-bottom: 14px; padding: 18px 22px; }
+    .faq-q { font-weight: 700; color: #FFF; font-size: 16px; margin-bottom: 8px; }
+    .faq-a { color: #A3A3A3; font-size: 14.5px; line-height: 1.7; margin: 0; }
+
+    .cta-banner { background: linear-gradient(135deg, #181C0B 0%, #111406 100%); border: 1px solid rgba(193,221,45,0.3); border-radius: 12px; padding: 36px; text-align: center; margin: 60px 0 20px; }
+    .cta-banner h3 { color: #FFF; font-size: 24px; margin-bottom: 10px; font-weight: 800; }
+    .cta-banner p { color: #A3A3A3; max-width: 540px; margin: 0 auto 20px; font-size: 15px; }
+
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 48px 24px; background: #0A0A0A; text-align: center; font-size: 14px; color: #666; margin-top: 80px; }
+    .site-footer a { color: #888; }
+    .site-footer a:hover { color: #C1DD2D; }
+
+    /* Light Theme */
+    html[data-theme="light"] body { background: #FAFAFA; color: #171717; }
+    html[data-theme="light"] .site-header { background: rgba(250,250,250,0.88); border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .site-header .logo { color: #171717; }
+    html[data-theme="light"] .site-header nav a { color: #525252; }
+    html[data-theme="light"] .article-hero h1 { color: #0A0A0A; }
+    html[data-theme="light"] .article-hero .subtitle { color: #525252; }
+    html[data-theme="light"] h2 { color: #0A0A0A; border-top-color: #E5E5E5; }
+    html[data-theme="light"] h3 { color: #171717; }
+    html[data-theme="light"] p, html[data-theme="light"] ul, html[data-theme="light"] ol { color: #383838; }
+    html[data-theme="light"] strong { color: #0A0A0A; }
+    html[data-theme="light"] .tldr-box { background: #F4F4F5; border-color: #E4E4E7; border-left-color: #849E00; }
+    html[data-theme="light"] .tldr-box p { color: #27272A; }
+    html[data-theme="light"] pre { background: #F4F4F5; border-color: #E4E4E7; color: #18181B; }
+    html[data-theme="light"] code { background: #E4E4E7; color: #4D6300; }
+    html[data-theme="light"] .callout, html[data-theme="light"] .faq-item { background: #FFF; border-color: #E5E5E5; }
+    html[data-theme="light"] .faq-q { color: #0A0A0A; }
+    html[data-theme="light"] .faq-a { color: #525252; }
+    html[data-theme="light"] a { color: #6D8200; }
+    html[data-theme="light"] .cta-banner { background: #F8FAEE; border-color: #CCD895; }
+    html[data-theme="light"] .cta-banner h3 { color: #0A0A0A; }
+    html[data-theme="light"] .cta-banner p { color: #525252; }
+    html[data-theme="light"] .site-footer { background: #FAFAFA; border-top-color: #E5E5E5; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      IconStash
+    </a>
+    <nav>
+      <a href="/#/">Search 134K+ Icons</a>
+      <a href="/articles/">Articles &amp; Guides</a>
+      <a href="/Listicles/best-free-icon-sets-2026/">Best Sets</a>
+      <a href="/Glossary/icon-svg-terminology/">Glossary</a>
+      <a href="/stats/">Statistics</a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="/#/" class="header-cta">Open App</a>
+    </nav>
+  </header>
+
+  <main class="article-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/articles/">Articles</a>
+      <span class="sep">/</span>
+      <span>SVG Clipping, Masking &amp; Blend Modes</span>
+    </nav>
+
+    <header class="article-hero">
+      <span class="tag">Vector Compositing</span>
+      <h1>SVG Clipping, Masking &amp; Blend Modes Guide</h1>
+      <p class="subtitle">Deep architectural guide to vector compositing: building non-destructive icon notification cutouts, luminance alpha gradients, and GPU blend modes.</p>
+      <div class="article-meta">
+        <span><strong>Published:</strong> August 17, 2026</span>
+        <span><strong>Author:</strong> IconStash Graphics Engineering</span>
+        <span><strong>Reading Time:</strong> 11 min read</span>
+      </div>
+    </header>
+
+    <div class="tldr-box">
+      <h3>TL;DR — The Vector Compositing Rulebook</h3>
+      <p><strong>Clip for geometry, mask for alpha:</strong> Use <code>&lt;clipPath&gt;</code> when you need hard, razor-sharp vector cutouts (like a notification badge cutout on a bell icon) with zero GPU overhead. Use <code>&lt;mask&gt;</code> when you need soft gradient fades or luminance-based opacity. Use CSS <code>mix-blend-mode: multiply</code> or <code>overlay</code> inside SVG trees for complex vector duotone themes without modifying path geometries.</p>
+    </div>
+
+    <section>
+      <h2>The Difference: Clipping vs Masking</h2>
+      <p>While both clipping and masking restrict visual rendering to a designated area, their underlying mathematical and rendering pipelines are completely distinct:</p>
+      <ul>
+        <li><strong><code>&lt;clipPath&gt;</code> (Binary 1-Bit):</strong> Acts as a vector cookie-cutter. Any pixel inside the clip geometry is 100% visible; any pixel outside is 100% discarded. No anti-aliasing feathering or transparency gradient calculations are executed, making it extremely fast.</li>
+        <li><strong><code>&lt;mask&gt;</code> (8-Bit Luminance &amp; Alpha):</strong> Creates an intermediate pixel buffer where white (<code>#FFFFFF</code>) is 100% opaque, black (<code>#000000</code>) is 100% transparent, and grayscale values produce partial alpha transparency.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>1. The Non-Destructive Notification Badge Cutout Pattern</h2>
+      <p>A classic UI design problem: you have a bell icon and want to place an unread notification dot in the top-right corner. If the dot overlaps the bell stroke, placing a circle with a background-colored border breaks whenever the icon is placed over gradients, dark mode surfaces, or image cards.</p>
+      <p>The solution is an <strong>inverted SVG mask</strong> that punches an actual mathematical hole through the bell icon:</p>
+      <pre><code>&lt;svg viewBox="0 0 24 24" width="24" height="24"&gt;
+  &lt;defs&gt;
+    &lt;mask id="badge-hole"&gt;
+      &lt;!-- Everything white stays visible --&gt;
+      &lt;rect width="100%" height="100%" fill="white" /&gt;
+      &lt;!-- Black circle punches a transparent hole where the badge sits --&gt;
+      &lt;circle cx="18" cy="6" r="5" fill="black" /&gt;
+    &lt;/mask&gt;
+  &lt;/defs&gt;
+
+  &lt;!-- Bell Icon masked with the hole --&gt;
+  &lt;path 
+    d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0" 
+    fill="none" 
+    stroke="currentColor" 
+    stroke-width="2" 
+    mask="url(#badge-hole)" 
+  /&gt;
+
+  &lt;!-- Red Notification Dot sits in the center of the punched cutout --&gt;
+  &lt;circle cx="18" cy="6" r="3" fill="#EF4444" /&gt;
+&lt;/svg&gt;</code></pre>
+      <p>Because the cutout is physically transparent, the icon looks pristine on any surface, dark mode background, or blurred glass card.</p>
+    </section>
+
+    <section>
+      <h2>2. Responsive Clipping with clipPathUnits="objectBoundingBox"</h2>
+      <p>By default, <code>&lt;clipPath&gt;</code> uses absolute user space pixels. If you want a clipping path to automatically scale across differently sized icons or hero banners, use <code>clipPathUnits="objectBoundingBox"</code>:</p>
+      <pre><code>&lt;svg width="0" height="0"&gt;
+  &lt;defs&gt;
+    &lt;clipPath id="squircle" clipPathUnits="objectBoundingBox"&gt;
+      &lt;!-- Coordinates normalized from 0.0 to 1.0 --&gt;
+      &lt;path d="M 0,0.5 C 0,0 0,0 0.5,0 C 1,0 1,0 1,0.5 C 1,1 1,1 0.5,1 C 0,1 0,1 0,0.5 Z" /&gt;
+    &lt;/clipPath&gt;
+  &lt;/defs&gt;
+&lt;/svg&gt;
+
+&lt;!-- Applied via CSS to any HTML or SVG element of any size --&gt;
+&lt;style&gt;
+  .app-icon {
+    clip-path: url(#squircle);
+  }
+&lt;/style&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>3. CSS Blend Modes Inside SVG Vectors</h2>
+      <p>CSS blend modes allow vectors to create sophisticated lighting and duotone effects without raster Photoshop exports. Applying <code>mix-blend-mode</code> inside an SVG canvas composites shapes directly on the GPU:</p>
+      <pre><code>&lt;svg viewBox="0 0 24 24" width="48" height="48"&gt;
+  &lt;!-- Base Vector Shape --&gt;
+  &lt;circle cx="12" cy="12" r="10" fill="#3B82F6" /&gt;
+
+  &lt;!-- Highlight with Screen Blend Mode --&gt;
+  &lt;path 
+    d="M 6,6 Q 12,2 18,6" 
+    stroke="#FFFFFF" 
+    stroke-width="3" 
+    style="mix-blend-mode: overlay; opacity: 0.8;" 
+  /&gt;
+
+  &lt;!-- Shadow with Multiply Blend Mode --&gt;
+  &lt;ellipse 
+    cx="12" cy="18" rx="7" ry="2" 
+    fill="#000000" 
+    style="mix-blend-mode: multiply; opacity: 0.4;" 
+  /&gt;
+&lt;/svg&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Performance &amp; Hardware Acceleration</h2>
+      <div class="callout">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C1DD2D" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Rendering Cost Optimization
+        </div>
+        <p><strong>Never animate <code>&lt;mask&gt;</code> properties on 100+ items simultaneously:</strong> Luminance masks force the browser's CPU/GPU to recalculate alpha channel raster buffers on every single frame. For high-frequency hover animations, stick to <code>&lt;clipPath&gt;</code> transforms or pure CSS <code>transform: translate3d()</code>.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-q">Can I use an external SVG file as a CSS clip-path?</div>
+        <p class="faq-a">Yes. You can reference external SVG clips via <code>clip-path: url('/sprites/shapes.svg#squircle')</code>. However, for Safari/WebKit cross-origin compatibility, inlining the <code>&lt;defs&gt;</code> block in your main HTML document is the most reliable approach.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Why does my SVG mask disappear on Safari?</div>
+        <p class="faq-a">Safari requires explicit <code>mask-type: luminance</code> or <code>mask-type: alpha</code> CSS property declarations when applying masks to HTML elements from SVG definitions.</p>
+      </div>
+    </section>
+
+    <div class="cta-banner">
+      <h3>Ready to Build Advanced Vector Interfaces?</h3>
+      <p>Search 134,000+ open-source SVG icons across 28 curated libraries on IconStash. Fast, clean, and 100% open source.</p>
+      <a href="/#/" class="header-cta" style="font-size: 15px; padding: 12px 28px;">Search All 134K+ Icons &rarr;</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
+    <p style="margin-top: 8px;">
+      <a href="/about/">About</a> &bull;
+      <a href="/contact/">Contact</a> &bull;
+      <a href="/privacy/">Privacy Policy</a> &bull;
+      <a href="/terms/">Terms of Service</a> &bull;
+      <a href="/articles/">Articles</a> &bull;
+      <a href="/stats/">Stats</a>
+    </p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    toggleBtn.addEventListener('click', () => {
+      const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+  </script>
+</body>
+</html>
