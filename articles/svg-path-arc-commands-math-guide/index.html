@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Path Arc Commands Math Guide 2026 | IconStash</title>
+  <meta name="description" content="Demystify SVG path arc commands (A / a): large-arc-flag, sweep-flag, elliptical trigonometry, and zero-dependency dynamic gauge meters.">
+  <meta name="keywords" content="svg path arc command, svg arc math guide, large arc flag sweep flag explained, polar to cartesian svg arc, svg radial progress bar zero dependency, elliptical arc trigonometry svg">
+  <meta property="og:title" content="SVG Path Arc Commands Demystified: The Mathematical Guide">
+  <meta property="og:description" content="Master the A / a path command: understand large-arc-flag, sweep-flag, polar coordinates, and building zero-dependency donut gauges.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/articles/svg-path-arc-commands-math-guide/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/logo.png">
+  <meta property="article:published_time" content="2026-08-18T00:00:00Z">
+  <meta property="article:modified_time" content="2026-08-18T00:00:00Z">
+  <meta property="article:author" content="IconStash Mathematics & Graphics Lab">
+  <meta property="article:section" content="Technical Guides">
+  <meta property="article:tag" content="SVG Path">
+  <meta property="article:tag" content="Math & Trigonometry">
+  <meta property="article:tag" content="Data Visualization">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SVG Path Arc Commands Math Guide 2026">
+  <meta name="twitter:description" content="Mastering elliptical arc math, large-arc-flag, sweep-flag, and dynamic UI gauges in pure SVG.">
+  <meta name="twitter:image" content="https://iconstash.io/logo.png">
+  <link rel="canonical" href="https://iconstash.io/articles/svg-path-arc-commands-math-guide/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "SVG Path Arc Commands Demystified: Mastering Elliptical Arc Math (A / a) for UI Gauges & Charts",
+    "description": "An exhaustive mathematical engineering guide explaining the SVG Path Elliptical Arc (A/a) command. Covers endpoint parameterization, large-arc-flag, sweep-flag boolean combinations, polar-to-Cartesian trigonometry transformations, and building zero-dependency dynamic circular gauges.",
+    "author": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
+    "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io", "logo": { "@type": "ImageObject", "url": "https://iconstash.io/logo.png" } },
+    "datePublished": "2026-08-18",
+    "dateModified": "2026-08-18",
+    "mainEntityOfPage": "https://iconstash.io/articles/svg-path-arc-commands-math-guide/",
+    "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
+    "articleSection": "Technical Guides",
+    "proficiencyLevel": "Advanced",
+    "about": [
+      { "@type": "Thing", "name": "Scalable Vector Graphics", "sameAs": "https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" },
+      { "@type": "Thing", "name": "Arc (geometry)", "sameAs": "https://en.wikipedia.org/wiki/Arc_(geometry)" }
+    ],
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".article-hero h1", ".article-hero .subtitle"] },
+    "keywords": ["SVG arc command", "SVG path d arc", "large-arc-flag", "sweep-flag", "polar to cartesian SVG", "radial progress gauge"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://iconstash.io/articles/" },
+      { "@type": "ListItem", "position": 3, "name": "SVG Path Arc Commands Math Guide" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What do the 7 parameters of the SVG arc command mean?",
+        "answer": { "@type": "Answer", "text": "The SVG arc command syntax is 'A rx ry x-axis-rotation large-arc-flag sweep-flag x y'. rx and ry are the radii; x-axis-rotation tilts the ellipse; large-arc-flag (0 or 1) chooses between the arc >180 degrees or <180 degrees; sweep-flag (0 or 1) chooses clockwise or counter-clockwise drawing; and x, y are the destination coordinates." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why can't a single SVG arc command draw a complete 360-degree circle?",
+        "answer": { "@type": "Answer", "text": "When the starting point and ending point of an arc command are identical (x=startX, y=startY), the browser's graphics engine cannot determine which ellipse is intended, causing the arc to collapse into zero length. A full 360-degree circle requires two 180-degree semicircular arc commands." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you convert polar coordinates (angle & radius) to SVG Cartesian coordinates?",
+        "answer": { "@type": "Answer", "text": "In JavaScript, use x = centerX + radius * Math.cos((angleInDegrees - 90) * Math.PI / 180) and y = centerY + radius * Math.sin((angleInDegrees - 90) * Math.PI / 180), subtracting 90 degrees to start at the top 12 o'clock position." }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    svg { max-width: 100%; display: block; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: all 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    .theme-toggle-btn { background: transparent; border: 1px solid #262626; color: #A3A3A3; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms ease; }
+    .theme-toggle-btn:hover { border-color: #404040; color: #F2F2F2; }
+
+    .article-wrap { max-width: 820px; margin: 0 auto; padding: 56px 24px 100px; }
+    .breadcrumb { display: flex; gap: 8px; font-size: 13px; color: #666; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #C1DD2D; }
+    .breadcrumb .sep { color: #444; }
+
+    .article-hero { margin-bottom: 48px; border-bottom: 1px solid #1A1A1A; padding-bottom: 40px; }
+    .article-hero .tag { display: inline-block; background: rgba(193,221,45,0.12); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(193,221,45,0.25); }
+    .article-hero h1 { font-size: clamp(32px, 5vw, 44px); font-weight: 900; line-height: 1.15; color: #FFF; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .article-hero .subtitle { font-size: 20px; color: #A3A3A3; line-height: 1.5; margin-bottom: 24px; font-weight: 400; }
+    .article-meta { display: flex; gap: 20px; font-size: 13px; color: #737373; align-items: center; flex-wrap: wrap; }
+    .article-meta span { display: flex; align-items: center; gap: 6px; }
+
+    .tldr-box { background: linear-gradient(180deg, #141414 0%, #0E0E0E 100%); border: 1px solid #262626; border-left: 4px solid #C1DD2D; border-radius: 10px; padding: 24px 28px; margin: 36px 0; }
+    .tldr-box h3 { color: #C1DD2D; font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+    .tldr-box p { font-size: 15px; line-height: 1.7; color: #D4D4D4; margin: 0; }
+
+    h2 { font-size: 26px; font-weight: 800; color: #FFF; letter-spacing: -0.02em; margin: 52px 0 20px; padding-top: 20px; border-top: 1px solid #1F1F1F; }
+    h3 { font-size: 20px; font-weight: 700; color: #E5E5E5; margin: 32px 0 14px; }
+    p { margin-bottom: 22px; color: #D4D4D4; }
+    strong { color: #FFF; }
+    ul, ol { margin: 0 0 24px 28px; color: #D4D4D4; }
+    li { margin-bottom: 10px; line-height: 1.7; }
+
+    pre { background: #121212; border: 1px solid #222; border-radius: 8px; padding: 20px; overflow-x: auto; margin: 24px 0; font-family: "JetBrains Mono", monospace; font-size: 13.5px; line-height: 1.6; color: #E5E5E5; }
+    code { font-family: "JetBrains Mono", monospace; font-size: 0.9em; background: #1A1A1A; padding: 2px 6px; border-radius: 4px; color: #C1DD2D; }
+    pre code { background: transparent; padding: 0; color: inherit; }
+
+    .callout { background: #141414; border: 1px solid #262626; border-radius: 8px; padding: 20px 24px; margin: 28px 0; }
+    .callout-title { font-weight: 700; color: #FFF; margin-bottom: 8px; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+
+    .faq-item { background: #121212; border: 1px solid #222; border-radius: 8px; margin-bottom: 14px; padding: 18px 22px; }
+    .faq-q { font-weight: 700; color: #FFF; font-size: 16px; margin-bottom: 8px; }
+    .faq-a { color: #A3A3A3; font-size: 14.5px; line-height: 1.7; margin: 0; }
+
+    .cta-banner { background: linear-gradient(135deg, #181C0B 0%, #111406 100%); border: 1px solid rgba(193,221,45,0.3); border-radius: 12px; padding: 36px; text-align: center; margin: 60px 0 20px; }
+    .cta-banner h3 { color: #FFF; font-size: 24px; margin-bottom: 10px; font-weight: 800; }
+    .cta-banner p { color: #A3A3A3; max-width: 540px; margin: 0 auto 20px; font-size: 15px; }
+
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 48px 24px; background: #0A0A0A; text-align: center; font-size: 14px; color: #666; margin-top: 80px; }
+    .site-footer a { color: #888; }
+    .site-footer a:hover { color: #C1DD2D; }
+
+    /* Light Theme */
+    html[data-theme="light"] body { background: #FAFAFA; color: #171717; }
+    html[data-theme="light"] .site-header { background: rgba(250,250,250,0.88); border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .site-header .logo { color: #171717; }
+    html[data-theme="light"] .site-header nav a { color: #525252; }
+    html[data-theme="light"] .article-hero h1 { color: #0A0A0A; }
+    html[data-theme="light"] .article-hero .subtitle { color: #525252; }
+    html[data-theme="light"] h2 { color: #0A0A0A; border-top-color: #E5E5E5; }
+    html[data-theme="light"] h3 { color: #171717; }
+    html[data-theme="light"] p, html[data-theme="light"] ul, html[data-theme="light"] ol { color: #383838; }
+    html[data-theme="light"] strong { color: #0A0A0A; }
+    html[data-theme="light"] .tldr-box { background: #F4F4F5; border-color: #E4E4E7; border-left-color: #849E00; }
+    html[data-theme="light"] .tldr-box p { color: #27272A; }
+    html[data-theme="light"] pre { background: #F4F4F5; border-color: #E4E4E7; color: #18181B; }
+    html[data-theme="light"] code { background: #E4E4E7; color: #4D6300; }
+    html[data-theme="light"] .callout, html[data-theme="light"] .faq-item { background: #FFF; border-color: #E5E5E5; }
+    html[data-theme="light"] .faq-q { color: #0A0A0A; }
+    html[data-theme="light"] .faq-a { color: #525252; }
+    html[data-theme="light"] a { color: #6D8200; }
+    html[data-theme="light"] .cta-banner { background: #F8FAEE; border-color: #CCD895; }
+    html[data-theme="light"] .cta-banner h3 { color: #0A0A0A; }
+    html[data-theme="light"] .cta-banner p { color: #525252; }
+    html[data-theme="light"] .site-footer { background: #FAFAFA; border-top-color: #E5E5E5; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      IconStash
+    </a>
+    <nav>
+      <a href="/#/">Search 134K+ Icons</a>
+      <a href="/articles/">Articles &amp; Guides</a>
+      <a href="/Listicles/best-free-icon-sets-2026/">Best Sets</a>
+      <a href="/Glossary/icon-svg-terminology/">Glossary</a>
+      <a href="/stats/">Statistics</a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="/#/" class="header-cta">Open App</a>
+    </nav>
+  </header>
+
+  <main class="article-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/articles/">Articles</a>
+      <span class="sep">/</span>
+      <span>SVG Path Arc Commands Math Guide</span>
+    </nav>
+
+    <header class="article-hero">
+      <span class="tag">Mathematical Vector Engineering</span>
+      <h1>SVG Path Arc Commands Demystified</h1>
+      <p class="subtitle">A complete mathematical breakdown of the SVG <code>A / a</code> elliptical arc command: trigonometry, large-arc-flag, sweep-flag, and zero-dependency radial UI gauges.</p>
+      <div class="article-meta">
+        <span><strong>Published:</strong> August 18, 2026</span>
+        <span><strong>Author:</strong> IconStash Mathematics &amp; Graphics Lab</span>
+        <span><strong>Reading Time:</strong> 13 min read</span>
+      </div>
+    </header>
+
+    <div class="tldr-box">
+      <h3>TL;DR — The 7 Parameters of SVG Arc Syntax</h3>
+      <p>The arc command is defined as <code>A rx ry x-axis-rotation large-arc-flag sweep-flag x y</code>. <code>rx</code> and <code>ry</code> define ellipse radii; <code>x-axis-rotation</code> angles the ellipse; <strong><code>large-arc-flag</code></strong> (0 or 1) chooses whether to travel the short (&le;180&deg;) or long (&gt;180&deg;) path; <strong><code>sweep-flag</code></strong> (0 or 1) chooses counter-clockwise or clockwise direction; and <code>x, y</code> is the final endpoint.</p>
+    </div>
+
+    <section>
+      <h2>Why Arc Commands Intimidate Developers</h2>
+      <p>Among all SVG path commands (<code>M</code>, <code>L</code>, <code>H</code>, <code>V</code>, <code>C</code>, <code>S</code>, <code>Q</code>, <code>T</code>, <code>Z</code>), the <strong>Elliptical Arc (<code>A</code> / <code>a</code>)</strong> is uniquely notorious. While lines and Bézier curves use direct control points, the W3C specification uses <strong>endpoint parameterization</strong> for arcs.</p>
+      <p>Instead of defining the center coordinates of an ellipse and sweeping an angle, you define two physical points on a canvas and let the browser solve a system of quadratic equations to determine which ellipse connects them. Given two points and two radii, exactly <strong>four distinct arcs</strong> can connect them:</p>
+      <pre><code>/* Syntax Breakdown */
+d="M startX startY A rx ry x-axis-rotation large-arc-flag sweep-flag endX endY"</code></pre>
+    </section>
+
+    <section>
+      <h2>The 4 Boolean Combinations Visualized</h2>
+      <p>The two boolean flags (<code>large-arc-flag</code> and <code>sweep-flag</code>) dictate which of the four possible geometric solutions the browser draws:</p>
+      
+      <h3>1. <code>large-arc-flag=0, sweep-flag=1</code> (Most Common)</h3>
+      <p>Draws the <strong>shorter arc (&le; 180&deg;)</strong> sweeping <strong>clockwise</strong>. This is the default setting for standard pie wedges under 50% and rounded UI corners.</p>
+
+      <h3>2. <code>large-arc-flag=1, sweep-flag=1</code></h3>
+      <p>Draws the <strong>longer arc (&gt; 180&deg;)</strong> sweeping <strong>clockwise</strong>. Used for radial progress bars and donut meters filled past the 50% threshold.</p>
+
+      <h3>3. <code>large-arc-flag=0, sweep-flag=0</code></h3>
+      <p>Draws the <strong>shorter arc (&le; 180&deg;)</strong> sweeping <strong>counter-clockwise</strong>.</p>
+
+      <h3>4. <code>large-arc-flag=1, sweep-flag=0</code></h3>
+      <p>Draws the <strong>longer arc (&gt; 180&deg;)</strong> sweeping <strong>counter-clockwise</strong>.</p>
+    </section>
+
+    <section>
+      <h2>Polar-to-Cartesian Trigonometry in JavaScript</h2>
+      <p>To dynamically render interactive radial progress meters, donut charts, or speedometers without pulling in 150 KB charting libraries, convert angles to Cartesian coordinates using standard trigonometry:</p>
+      <pre><code>// Converts polar coordinates (radius, angle in degrees) to SVG Cartesian coordinates (x, y)
+function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+  // Subtract 90 degrees to orient 0 degrees at the 12 o'clock position
+  const angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
+
+  return {
+    x: centerX + (radius * Math.cos(angleInRadians)),
+    y: centerY + (radius * Math.sin(angleInRadians))
+  };
+}
+
+// Generates dynamic SVG path data for any arc from startAngle to endAngle
+function describeArc(x, y, radius, startAngle, endAngle) {
+  const start = polarToCartesian(x, y, radius, endAngle);
+  const end = polarToCartesian(x, y, radius, startAngle);
+
+  // If the angular span exceeds 180 degrees, set large-arc-flag to 1
+  const largeArcFlag = endAngle - startAngle &lt;= 180 ? "0" : "1";
+
+  return [
+    "M", start.x, start.y, 
+    "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
+  ].join(" ");
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Building a Zero-Dependency Circular Progress Gauge</h2>
+      <p>Here is a complete, production-ready React component rendering an interactive radial gauge using our pure arc math:</p>
+      <pre><code>import React from 'react';
+
+interface GaugeProps {
+  percentage: number; // 0 to 100
+  size?: number;
+  strokeWidth?: number;
+}
+
+export const RadialGauge: React.FC&lt;GaugeProps&gt; = ({ 
+  percentage, 
+  size = 120, 
+  strokeWidth = 10 
+}) => {
+  const center = size / 2;
+  const radius = center - strokeWidth;
+  const sweepAngle = (percentage / 100) * 359.99; // Cap at 359.99 to prevent point collision
+
+  const arcPath = describeArc(center, center, radius, 0, sweepAngle);
+
+  return (
+    &lt;svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}&gt;
+      {/* Background Track Circle */}
+      &lt;circle 
+        cx={center} 
+        cy={center} 
+        r={radius} 
+        fill="none" 
+        stroke="#1F1F1F" 
+        strokeWidth={strokeWidth} 
+      /&gt;
+      {/* Dynamic Foreground Arc */}
+      &lt;path 
+        d={arcPath} 
+        fill="none" 
+        stroke="#C1DD2D" 
+        strokeWidth={strokeWidth} 
+        strokeLinecap="round" 
+      /&gt;
+    &lt;/svg&gt;
+  );
+};</code></pre>
+      <div class="callout">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C1DD2D" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          The 360-Degree Point Collision Trap
+        </div>
+        <p>If you pass <code>startAngle = 0</code> and <code>endAngle = 360</code>, the starting point and ending point coincide at the exact same pixel coordinates. The browser treats this as a zero-length path and renders nothing! Always cap your maximum angle at <code>359.99</code> degrees, or split a 360-degree circle into two separate 180-degree semicircular arcs.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-q">When should I use stroke-dashoffset vs SVG arc paths for progress meters?</div>
+        <p class="faq-a">For simple concentric circles, CSS <code>stroke-dashoffset</code> on a <code>&lt;circle&gt;</code> element is simpler. However, for custom non-circular ellipses, speedometers with gap angles, or complex multi-segment pie charts, procedural SVG arc path calculation is required.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What is the difference between uppercase 'A' and lowercase 'a'?</div>
+        <p class="faq-a">Uppercase <code>A</code> specifies the final destination coordinates <code>(x, y)</code> in absolute canvas coordinates. Lowercase <code>a</code> specifies the endpoint relative to the previous subpath's current pen position <code>(dx, dy)</code>.</p>
+      </div>
+    </section>
+
+    <div class="cta-banner">
+      <h3>Ready to Build Custom Vector Gauges?</h3>
+      <p>Search 134,000+ open-source SVG icons across 28 curated libraries on IconStash. Fast, clean, and 100% open source.</p>
+      <a href="/#/" class="header-cta" style="font-size: 15px; padding: 12px 28px;">Search All 134K+ Icons &rarr;</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
+    <p style="margin-top: 8px;">
+      <a href="/about/">About</a> &bull;
+      <a href="/contact/">Contact</a> &bull;
+      <a href="/privacy/">Privacy Policy</a> &bull;
+      <a href="/terms/">Terms of Service</a> &bull;
+      <a href="/articles/">Articles</a> &bull;
+      <a href="/stats/">Stats</a>
+    </p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    toggleBtn.addEventListener('click', () => {
+      const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+  </script>
+</body>
+</html>
