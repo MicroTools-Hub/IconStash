@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The 12 Best Open Source Icon Libraries for Web Developers to Use in 2026 | IconStash</title>
+  <meta name="description" content="The best open source icon libraries for web projects in 2026, with 12 top picks covering 134,701+ icons. Compare styles, licenses, and frameworks.">
+  <meta name="keywords" content="best open source icon libraries for web, free svg icon collections for developers, what are the best open source icon sets, top rated open source icon libraries 2024, best open source icon libraries, free open source icon sets, comprehensive icon library database, top rated open source icons, where to find open source icons, best site for open source icon library">
+  <meta property="og:title" content="The 12 Best Open Source Icon Libraries for Web Developers to Use in 2026">
+  <meta property="og:description" content="The best open source icon libraries for web projects in 2026, with 12 top picks covering 134,701+ icons. Compare styles, licenses, and frameworks.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/articles/12-best-open-source-icon-libraries-2026/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/logo.png">
+  <meta property="article:published_time" content="2026-08-21T00:00:00Z">
+  <meta property="article:modified_time" content="2026-08-21T00:00:00Z">
+  <meta property="article:author" content="IconStash Team">
+  <meta property="article:section" content="Design Resources">
+  <meta property="article:tag" content="icon libraries">
+  <meta property="article:tag" content="open source">
+  <meta property="article:tag" content="SVG icons">
+  <meta property="article:tag" content="web design">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The 12 Best Open Source Icon Libraries for Web Developers to Use in 2026">
+  <meta name="twitter:description" content="The best open source icon libraries for web projects in 2026, with 12 top picks covering 134,701+ icons.">
+  <meta name="twitter:image" content="https://iconstash.io/logo.png">
+  <link rel="canonical" href="https://iconstash.io/articles/12-best-open-source-icon-libraries-2026/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The 12 Best Open Source Icon Libraries for Web Developers to Use in 2026",
+    "description": "The best open source icon libraries for web projects in 2026, with 12 top picks covering 134,701+ icons. Compare styles, licenses, and frameworks.",
+    "author": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
+    "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io", "logo": { "@type": "ImageObject", "url": "https://iconstash.io/logo.png" } },
+    "datePublished": "2026-08-21",
+    "dateModified": "2026-08-21",
+    "mainEntityOfPage": "https://iconstash.io/articles/12-best-open-source-icon-libraries-2026/",
+    "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
+    "articleSection": "Design Resources",
+    "about": [
+      { "@type": "Thing", "name": "Scalable Vector Graphics", "sameAs": "https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" },
+      { "@type": "Thing", "name": "Icon (computing)", "sameAs": "https://en.wikipedia.org/wiki/Icon_(computing)" }
+    ],
+    "keywords": ["best open source icon libraries for web", "free svg icon collections for developers", "what are the best open source icon sets", "top rated open source icon libraries 2024", "best open source icon libraries"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://iconstash.io/articles/" },
+      { "@type": "ListItem", "position": 3, "name": "12 Best Open Source Icon Libraries 2026" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I use open-source icons in commercial projects without attribution?",
+        "answer": { "@type": "Answer", "text": "Yes, most of the time. The majority of leading icon libraries ship under MIT or Apache 2.0 licenses, which allow commercial use without attribution. However, some libraries use licenses that require credit or restrict modification. Always check the specific license for the library you are pulling from before shipping to production." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are SVG icon libraries better than icon fonts for web performance?",
+        "answer": { "@type": "Answer", "text": "SVGs win. Icon fonts were a clever workaround in the early 2010s, but they carry real costs: a single font file loads every glyph whether you use it or not, and rendering quality degrades on subpixel screens. SVGs load only what you request, scale perfectly at any resolution, and are fully accessible via ARIA attributes." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I integrate an icon library into a React or Vue project?",
+        "answer": { "@type": "Answer", "text": "Install the library via npm, import only the icons you need, and render them as components. For React, most libraries expose named exports: import { IconName } from 'library'. Vue follows the same pattern with component registration." }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I keep bundle size small when using a large icon library?",
+        "answer": { "@type": "Answer", "text": "Use named imports over wildcard imports every time. Instead of import * from 'library', import each icon by name so your bundler can eliminate unused exports. Beyond that, consider on-demand loading for icons that appear only in specific routes or modals." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a single tool to search across multiple open-source icon libraries at once?",
+        "answer": { "@type": "Answer", "text": "Yes. IconStash provides access to 134,701 icons from 28 of the world's leading open-source libraries through a single, unified search interface. Instead of bouncing between Heroicons, Lucide, Phosphor, Material Symbols, and others separately, you can search once, compare side by side, and copy SVG or component code directly." }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    svg { max-width: 100%; display: inline-block; vertical-align: middle; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: all 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    .theme-toggle-btn { background: transparent; border: 1px solid #262626; color: #A3A3A3; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms ease; }
+    .theme-toggle-btn:hover { border-color: #404040; color: #F2F2F2; }
+
+    .article-wrap { max-width: 820px; margin: 0 auto; padding: 56px 24px 100px; }
+    .breadcrumb { display: flex; gap: 8px; font-size: 13px; color: #666; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #C1DD2D; }
+    .breadcrumb .sep { color: #444; }
+
+    .article-hero { margin-bottom: 48px; border-bottom: 1px solid #1A1A1A; padding-bottom: 40px; }
+    .article-hero .tag { display: inline-block; background: rgba(193,221,45,0.12); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(193,221,45,0.25); }
+    .article-hero h1 { font-size: clamp(30px, 4.5vw, 42px); font-weight: 900; line-height: 1.18; color: #FFF; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .article-meta { display: flex; gap: 20px; font-size: 13px; color: #737373; align-items: center; flex-wrap: wrap; margin-top: 16px; }
+
+    .featured-summary { background: linear-gradient(180deg, #141414 0%, #0E0E0E 100%); border: 1px solid #262626; border-left: 4px solid #C1DD2D; border-radius: 10px; padding: 24px 28px; margin: 28px 0 36px; }
+    .featured-summary p { font-size: 15.5px; line-height: 1.7; color: #E5E5E5; margin-bottom: 12px; font-weight: 500; }
+    .featured-summary ul { margin: 0 0 0 20px; color: #D4D4D4; }
+    .featured-summary li { margin-bottom: 8px; font-size: 14.5px; line-height: 1.6; }
+
+    h2 { font-size: 26px; font-weight: 800; color: #FFF; letter-spacing: -0.02em; margin: 52px 0 20px; padding-top: 20px; border-top: 1px solid #1F1F1F; }
+    h3 { font-size: 20px; font-weight: 700; color: #E5E5E5; margin: 32px 0 14px; }
+    p { margin-bottom: 22px; color: #D4D4D4; font-size: 16px; line-height: 1.8; }
+    strong { color: #FFF; }
+    ul, ol { margin: 0 0 24px 28px; color: #D4D4D4; }
+    li { margin-bottom: 10px; line-height: 1.7; font-size: 15.5px; }
+
+    pre { background: #121212; border: 1px solid #222; border-radius: 8px; padding: 20px; overflow-x: auto; margin: 24px 0; font-family: "JetBrains Mono", monospace; font-size: 13.5px; line-height: 1.6; color: #E5E5E5; }
+    code { font-family: "JetBrains Mono", monospace; font-size: 0.9em; background: #1A1A1A; padding: 2px 6px; border-radius: 4px; color: #C1DD2D; }
+
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 48px 24px; background: #0A0A0A; text-align: center; font-size: 14px; color: #666; margin-top: 80px; }
+    .site-footer a { color: #888; }
+    .site-footer a:hover { color: #C1DD2D; }
+
+    /* Light Theme */
+    html[data-theme="light"] body { background: #FAFAFA; color: #171717; }
+    html[data-theme="light"] .site-header { background: rgba(250,250,250,0.88); border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .site-header .logo { color: #171717; }
+    html[data-theme="light"] .site-header nav a { color: #525252; }
+    html[data-theme="light"] .article-hero h1 { color: #0A0A0A; }
+    html[data-theme="light"] h2 { color: #0A0A0A; border-top-color: #E5E5E5; }
+    html[data-theme="light"] h3 { color: #171717; }
+    html[data-theme="light"] p, html[data-theme="light"] ul, html[data-theme="light"] ol { color: #383838; }
+    html[data-theme="light"] strong { color: #0A0A0A; }
+    html[data-theme="light"] .featured-summary { background: #F4F4F5; border-color: #E4E4E7; border-left-color: #849E00; }
+    html[data-theme="light"] .featured-summary p { color: #18181B; }
+    html[data-theme="light"] pre { background: #F4F4F5; border-color: #E4E4E7; color: #18181B; }
+    html[data-theme="light"] code { background: #E4E4E7; color: #4D6300; }
+    html[data-theme="light"] a { color: #6D8200; }
+    html[data-theme="light"] .site-footer { background: #FAFAFA; border-top-color: #E5E5E5; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      IconStash
+    </a>
+    <nav>
+      <a href="/#/">Search 134K+ Icons</a>
+      <a href="/articles/">Articles &amp; Guides</a>
+      <a href="/Listicles/best-free-icon-sets-2026/">Best Sets</a>
+      <a href="/Glossary/icon-svg-terminology/">Glossary</a>
+      <a href="/stats/">Statistics</a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="/#/" class="header-cta">Open App</a>
+    </nav>
+  </header>
+
+  <main class="article-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/articles/">Articles</a>
+      <span class="sep">/</span>
+      <span>12 Best Open Source Icon Libraries</span>
+    </nav>
+
+    <article>
+      <header class="article-hero">
+        <span class="tag">Curated Collections</span>
+        <h1>The 12 Best Open Source Icon Libraries for Web Developers to Use in 2026</h1>
+        <div class="article-meta">
+          <span><strong>Published:</strong> August 21, 2026</span>
+          <span><strong>Author:</strong> IconStash Team</span>
+          <span><strong>Reading Time:</strong> 10 min read</span>
+        </div>
+      </header>
+
+      <div class="featured-summary">
+        <p>The best open source icon libraries for web development in 2026 include 12 top options: Lucide, Phosphor, Heroicons, and Tabler Icons. These options are reviewed for license clarity, framework compatibility, and scalability.</p>
+        <ul>
+          <li>All 12 libraries are MIT or Apache 2.0 licensed, meaning there is zero legal risk in commercial projects.</li>
+          <li>Framework support varies significantly; check SVG-first versus font-based delivery before committing to a library.</li>
+          <li>IconStash lets you preview and compare all 12 collections in one place, cutting research time considerably.</li>
+        </ul>
+      </div>
+
+      <p>Pick the wrong icon library and you'll spend three sprints fixing inconsistent stroke weights, fighting tree-shaking issues, and hunting down a license clause that quietly bans commercial use.</p>
+      <p>For developers and designers who care about shipping clean, consistent interfaces, finding the best open source icon libraries for web projects has quietly become one of the most consequential decisions in a UI stack. Yet, most teams still make this decision based on a quick GitHub star count.</p>
+      <p>Twelve libraries are reviewed here. Each is stress-tested across React, Vue, and plain HTML contexts. IconStash is used as the unified browsing layer to surface real-world rendering differences that documentation never shows.</p>
+      <p>The library you choose in the next ten minutes will touch every screen your users see. Choose with more than just vibes.</p>
+
+      <div role="navigation" data-rs-enrichment="1" aria-label="Table of contents" style="background:color-mix(in srgb, currentColor 4%, transparent);border:1px solid color-mix(in srgb, currentColor 13%, transparent);border-radius:8px;padding:16px 20px;margin-bottom:24px;font-family:inherit">
+        <p style="font-weight:600;font-size:.85em;text-transform:uppercase;letter-spacing:.05em;color:color-mix(in srgb, currentColor 55%, transparent);margin:0 0 10px 0">Table of contents</p>
+        <ol style="margin:0;padding-left:20px;line-height:1.75;font-size:.95em">
+          <li style="margin:4px 0"><a href="#why-choosing-the-right-icon-library-can-make-or-break-your-u" style="color:inherit;text-decoration:underline;text-underline-offset:3px">1. Why Choosing the Right Icon Library Can Make or Break Your UI</a></li>
+          <li style="margin:4px 0"><a href="#the-12-best-open-source-icon-libraries-for-web-projects-in-2" style="color:inherit;text-decoration:underline;text-underline-offset:3px">2. The 12 Best Open Source Icon Libraries for Web Projects in 2026</a></li>
+          <li style="margin:4px 0"><a href="#how-to-pick-the-right-library-for-your-specific-project" style="color:inherit;text-decoration:underline;text-underline-offset:3px">3. How to Pick the Right Library for Your Specific Project</a></li>
+          <li style="margin:4px 0"><a href="#what-most-icon-library-roundups-won-t-tell-you" style="color:inherit;text-decoration:underline;text-underline-offset:3px">4. What Most Icon Library Roundups Won't Tell You</a></li>
+          <li style="margin:4px 0"><a href="#how-iconstash-turns-28-icon-libraries-into-one-seamless-work" style="color:inherit;text-decoration:underline;text-underline-offset:3px">5. How IconStash Turns 28 Icon Libraries Into One Painless Workflow</a></li>
+          <li style="margin:4px 0"><a href="#frequently-asked-questions" style="color:inherit;text-decoration:underline;text-underline-offset:3px">6. Frequently Asked Questions</a></li>
+          <li style="margin:4px 0"><a href="#the-best-open-source-icon-libraries-for-web-come-down-to-thr" style="color:inherit;text-decoration:underline;text-underline-offset:3px">7. The Best Open Source Icon Libraries for Web Come Down to Three Things</a></li>
+        </ol>
+      </div>
+
+      <h2 id="why-choosing-the-right-icon-library-can-make-or-break-your-u">Why Choosing the Right Icon Library Can Make or Break Your UI</h2>
+      <p>Most teams pick an icon library in five minutes and spend weeks paying for it. The wrong choice creates a cascade of problems, including licensing exposure, broken accessibility, visual incoherence at 16px, and a painful mid-project migration that nobody budgets for.</p>
+      <figure style="margin: 20px 0; padding: 0; display: block;"><img src="https://xmphiscbmexupobiaivk.supabase.co/storage/v1/object/public/article-images/97480a06-0366-4d2c-8dbd-d803a330b5b7/6cc23d9b-03b2-492a-9631-a13e2a1e6379/free-stock-1-1787281034500.jpg" alt="Geometric pattern of black lines on white background" width="1200" height="900" loading="lazy" style="max-width: 100%; height: auto; border-radius: 8px; display: block;" /><figcaption style="font-size: 0.85em; color: #666; text-align: center; margin-top: 8px; font-style: italic;">Photo by <a href="https://unsplash.com/@mugeinsky?utm_source=robotspeed&utm_medium=referral" target="_blank" rel="noopener noreferrer" style="color: #888; text-decoration: none; font-weight: 500;">Harry cao</a> on <a href="https://unsplash.com?utm_source=robotspeed&utm_medium=referral" target="_blank" rel="noopener noreferrer" style="color: #888; text-decoration: none; font-weight: 500;">Unsplash</a></figcaption></figure>
+
+      <h3>License clarity matters more than you think.</h3>
+      <p>MIT, Apache 2.0, and ISC licenses all permit commercial use without attribution in most cases, but the differences matter at scale. Some libraries bundle third-party glyphs under stricter terms, buried in subdirectories.</p>
+      <p>Design-focused evaluations in 2026 consistently rank license clarity as a core selection criterion alongside Figma integration and visual consistency. Skipping this check is the kind of shortcut that surfaces during a legal review, not a design sprint.</p>
+
+      <h3>Visual consistency at small sizes is the overlooked standard.</h3>
+      <p>Inconsistent stroke weights are invisible at 64px and catastrophic at 20px. SVG-based libraries outperform icon fonts here because each glyph scales without rasterization artifacts, and stroke width remains predictable across breakpoints.</p>
+      <p>Framework compatibility adds another layer: if your library lacks first-class React, Vue, or Flutter wrappers, integration friction compounds every sprint. These criteria, not raw icon count, determine whether a library actually ships.</p>
+
+      <h2 id="the-12-best-open-source-icon-libraries-for-web-projects-in-2">The 12 Best Open Source Icon Libraries for Web Projects in 2026</h2>
+      <p>Most developers waste hours hopping between five different icon sites before settling on something that half-works. The smarter move is to know your libraries before you need them.</p>
+      <p>Here's a precise breakdown of the twelve strongest open-source options available right now, covering what each does well and where each one belongs in a real project.</p>
+      <figure style="margin: 20px 0; padding: 0; display: block;"><img src="https://xmphiscbmexupobiaivk.supabase.co/storage/v1/object/public/article-images/97480a06-0366-4d2c-8dbd-d803a330b5b7/6cc23d9b-03b2-492a-9631-a13e2a1e6379/free-stock-2-1787281037699.jpg" alt="A white background with a lot of dots on it" width="1200" height="800" loading="lazy" style="max-width: 100%; height: auto; border-radius: 8px; display: block;" /><figcaption style="font-size: 0.85em; color: #666; text-align: center; margin-top: 8px; font-style: italic;">Photo by <a href="https://unsplash.com/@steve_j?utm_source=robotspeed&utm_medium=referral" target="_blank" rel="noopener noreferrer" style="color: #888; text-decoration: none; font-weight: 500;">Steve A Johnson</a> on <a href="https://unsplash.com?utm_source=robotspeed&utm_medium=referral" target="_blank" rel="noopener noreferrer" style="color: #888; text-decoration: none; font-weight: 500;">Unsplash</a></figcaption></figure>
+
+      <h3>Tabler Icons, Lucide, and Phosphor: the top three explained</h3>
+      <p>Tabler Icons leads on sheer volume with over 4,900 icons under the MIT license, making it the largest free collection in this roundup. Dashboards, admin panels, and dense data interfaces are all handled by Tabler without visual inconsistency.</p>
+      <p>Lucide sits just behind it in popularity, with a clean outline style and an ISC license that removes any ambiguity around commercial use. If you're building a modern SaaS UI or consumer app, Lucide's restraint is a feature, not a limitation.</p>
+      <p>Phosphor Icons earns its reputation through six weight variants per icon (thin, light, regular, bold, fill, and duotone). This provides design systems with genuine flexibility without needing to switch libraries mid-project.</p>
+
+      <h3>Iconoir, Heroicons, Material Icons, and beyond</h3>
+      <p>Iconoir ships over 1,600 icons with first-class support for React, Vue, Flutter, Figma, and Framer, a rare combination that makes it genuinely cross-platform. Heroicons, crafted by the Tailwind CSS team, offers two tightly controlled styles (outline and solid) that pair predictably with utility-class workflows.</p>
+      <p>Material Icons from Google brings over 2,500 icons across five style variants, which is useful when your project already runs on a Material Design system.</p>
+      <p>Remix Icon covers over 2,800 neutral-style icons under a dual MIT license for both personal and commercial use. Feather Icons takes the opposite approach with over 280 minimal stroke icons, zero visual noise, ideal for lightweight projects where performance and clarity matter more than breadth.</p>
+      <p>Ionicons stands apart as the mobile-first option, with platform-aware variants tuned for iOS and Android conventions.</p>
+      <p>The remaining three each solve a specific problem. Lineicons V5 focuses on adaptable SVG workflows with a developer-designer handoff in mind.</p>
+      <p>Bootstrap Icons delivers over 2,000 icons that were built for Bootstrap but work cleanly in any framework. Radix Icons operates on a strict 15x15 pixel grid, minimal, precise, and built to integrate with Radix UI primitives without visual conflict.</p>
+
+      <div data-rs-enrichment="comparison-table" style="font-family:inherit;background:#121212;border:1px solid #222;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,0.05);overflow:hidden;margin:28px 0;">
+        <div style="overflow-x:auto;">
+          <table style="width:100%;min-width:700px;border-collapse:collapse;table-layout:fixed;font-family:inherit;">
+            <colgroup><col style="width:28%"><col style="width:13%"><col style="width:20%"><col style="width:22%"><col style="width:17%"></colgroup>
+            <thead>
+              <tr>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">Library</th>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">Free to build?</th>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">Custom domain</th>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">Free-tier limit</th>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">Tabler Icons</div><div style="margin-top:5px;line-height:1;font-family:inherit;"><span style="display:inline-block;background:#C1DD2D;color:#0A0A0A;font-size:10.5px;font-weight:700;letter-spacing:0.02em;border-radius:100px;padding:2px 8px;white-space:nowrap;font-family:inherit;">Top pick</span></div><div style="font-size:12.5px;color:#9CA3AF;margin-top:5px;line-height:1.2;font-family:inherit;">Largest free icon collection</div></td><td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;"><span style="display:inline-flex;align-items:center;gap:6px;font-size:14px;color:#D4D4D4;font-family:inherit;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C1DD2D" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"></polyline></svg>Yes</span></td><td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;"><span style="display:inline-block;background:rgba(255,255,255,0.06);color:#E5E5E5;border:1px solid #2E2E2E;font-size:12.5px;border-radius:6px;padding:3px 9px;white-space:nowrap;font-family:inherit;">Dashboards, admin UIs</span></td></tr>
+              <tr><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">Lucide</div><div style="font-size:12.5px;color:#9CA3AF;margin-top:5px;line-height:1.2;font-family:inherit;">Clean outline style</div></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-flex;align-items:center;gap:6px;font-size:14px;color:#D4D4D4;font-family:inherit;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C1DD2D" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"></polyline></svg>Yes</span></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-block;background:rgba(255,255,255,0.06);color:#E5E5E5;border:1px solid #2E2E2E;font-size:12.5px;border-radius:6px;padding:3px 9px;white-space:nowrap;font-family:inherit;">Modern SaaS, consumer apps</span></td></tr>
+              <tr><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">Phosphor Icons</div><div style="font-size:12.5px;color:#9CA3AF;margin-top:5px;line-height:1.2;font-family:inherit;">Six weight variants</div></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-flex;align-items:center;gap:6px;font-size:14px;color:#D4D4D4;font-family:inherit;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C1DD2D" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"></polyline></svg>Yes</span></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-block;background:rgba(255,255,255,0.06);color:#E5E5E5;border:1px solid #2E2E2E;font-size:12.5px;border-radius:6px;padding:3px 9px;white-space:nowrap;font-family:inherit;">Design systems</span></td></tr>
+              <tr><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">Iconoir</div><div style="font-size:12.5px;color:#9CA3AF;margin-top:5px;line-height:1.2;font-family:inherit;">First-class framework support</div></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-flex;align-items:center;gap:6px;font-size:14px;color:#D4D4D4;font-family:inherit;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C1DD2D" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"></polyline></svg>Yes</span></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-block;background:rgba(255,255,255,0.06);color:#E5E5E5;border:1px solid #2E2E2E;font-size:12.5px;border-radius:6px;padding:3px 9px;white-space:nowrap;font-family:inherit;">Cross-platform projects</span></td></tr>
+              <tr><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">Heroicons</div><div style="font-size:12.5px;color:#9CA3AF;margin-top:5px;line-height:1.2;font-family:inherit;">Hand-pick icon set</div></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-flex;align-items:center;gap:6px;font-size:14px;color:#D4D4D4;font-family:inherit;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C1DD2D" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"></polyline></svg>Yes</span></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-block;background:rgba(255,255,255,0.06);color:#E5E5E5;border:1px solid #2E2E2E;font-size:12.5px;border-radius:6px;padding:3px 9px;white-space:nowrap;font-family:inherit;">Tailwind CSS workflows</span></td></tr>
+              <tr><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">Material Icons</div><div style="font-size:12.5px;color:#9CA3AF;margin-top:5px;line-height:1.2;font-family:inherit;">Google's icon library</div></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-flex;align-items:center;gap:6px;font-size:14px;color:#D4D4D4;font-family:inherit;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C1DD2D" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"></polyline></svg>Yes</span></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-block;background:rgba(255,255,255,0.06);color:#E5E5E5;border:1px solid #2E2E2E;font-size:12.5px;border-radius:6px;padding:3px 9px;white-space:nowrap;font-family:inherit;">Material Design systems</span></td></tr>
+              <tr><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">Remix Icon</div><div style="font-size:12.5px;color:#9CA3AF;margin-top:5px;line-height:1.2;font-family:inherit;">Neutral-style icons</div></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-flex;align-items:center;gap:6px;font-size:14px;color:#D4D4D4;font-family:inherit;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C1DD2D" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"></polyline></svg>Yes</span></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-block;background:rgba(255,255,255,0.06);color:#E5E5E5;border:1px solid #2E2E2E;font-size:12.5px;border-radius:6px;padding:3px 9px;white-space:nowrap;font-family:inherit;">Commercial web projects</span></td></tr>
+              <tr><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">Feather Icons</div><div style="font-size:12.5px;color:#9CA3AF;margin-top:5px;line-height:1.2;font-family:inherit;">Minimal stroke icons</div></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-flex;align-items:center;gap:6px;font-size:14px;color:#D4D4D4;font-family:inherit;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C1DD2D" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"></polyline></svg>Yes</span></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-block;background:rgba(255,255,255,0.06);color:#E5E5E5;border:1px solid #2E2E2E;font-size:12.5px;border-radius:6px;padding:3px 9px;white-space:nowrap;font-family:inherit;">Lightweight interfaces</span></td></tr>
+              <tr><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">Ionicons</div><div style="font-size:12.5px;color:#9CA3AF;margin-top:5px;line-height:1.2;font-family:inherit;">Platform-aware variants</div></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-flex;align-items:center;gap:6px;font-size:14px;color:#D4D4D4;font-family:inherit;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C1DD2D" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"></polyline></svg>Yes</span></td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><span style="display:inline-block;background:rgba(255,255,255,0.06);color:#E5E5E5;border:1px solid #2E2E2E;font-size:12.5px;border-radius:6px;padding:3px 9px;white-space:nowrap;font-family:inherit;">Mobile-first apps</span></td></tr>
+              <tr><td style="padding:16px 12px;vertical-align:middle;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">Lineicons V5</div><div style="font-size:12.5px;color:#9CA3AF;margin-top:5px;line-height:1.2;font-family:inherit;">Scalable SVG workflows</div></td><td style="padding:16px 12px;vertical-align:middle;"><span style="display:inline-flex;align-items:center;gap:6px;font-size:14px;color:#D4D4D4;font-family:inherit;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C1DD2D" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"></polyline></svg>Yes</span></td><td style="padding:16px 12px;vertical-align:middle;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;font-size:14px;color:#888;font-family:inherit;">-</td><td style="padding:16px 12px;vertical-align:middle;"><span style="display:inline-block;background:rgba(255,255,255,0.06);color:#E5E5E5;border:1px solid #2E2E2E;font-size:12.5px;border-radius:6px;padding:3px 9px;white-space:nowrap;font-family:inherit;">Dev-designer handoff</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h2 id="how-to-pick-the-right-library-for-your-specific-project">How to Pick the Right Library for Your Specific Project</h2>
+      <p>Most teams waste hours debating icon libraries when the decision actually comes down to three variables: your framework, your design system's flexibility requirements, and your bundle size tolerance. Get those three right first, and the shortlist practically writes itself.</p>
+
+      <h3>Match the library to your framework and design system</h3>
+      <p>Project type drives the choice more than personal preference. SaaS dashboards with dense interfaces should default to Tabler Icons or Lucide, as both deliver tight visual consistency at small sizes, where readability collapses quickly.</p>
+      <p>Design systems that need multiple visual tones without swapping icon families entirely benefit from Phosphor's six weight variants per icon, giving designers room to adjust expressiveness up or down without breaking cohesion. Mobile-first apps have a different calculus: platform-aware variants reduce the design divergence that inevitably creeps in when iOS and Android share the same icon set.</p>
+
+      <table style="width:100%;border-collapse:collapse;font-family:inherit;margin:20px 0;background:#121212;border:1px solid #222;border-radius:8px;overflow:hidden;">
+        <thead>
+          <tr>
+            <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;border-bottom:1px solid #262626;font-family:inherit;">Project Type</th>
+            <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;border-bottom:1px solid #262626;font-family:inherit;">Recommended Library</th>
+            <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;border-bottom:1px solid #262626;font-family:inherit;">Key Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:14px 12px;font-size:14px;color:#FFF;border-bottom:1px solid #1E1E1E;vertical-align:top;font-family:inherit;">SaaS dashboard</td><td style="padding:14px 12px;font-size:14px;color:#C1DD2D;border-bottom:1px solid #1E1E1E;vertical-align:top;font-family:inherit;">Tabler Icons / Lucide</td><td style="padding:14px 12px;font-size:14px;color:#A3A3A3;border-bottom:1px solid #1E1E1E;vertical-align:top;font-family:inherit;">Density, consistency at small sizes</td></tr>
+          <tr><td style="padding:14px 12px;font-size:14px;color:#FFF;border-bottom:1px solid #1E1E1E;vertical-align:top;font-family:inherit;">Design system</td><td style="padding:14px 12px;font-size:14px;color:#C1DD2D;border-bottom:1px solid #1E1E1E;vertical-align:top;font-family:inherit;">Phosphor Icons</td><td style="padding:14px 12px;font-size:14px;color:#A3A3A3;border-bottom:1px solid #1E1E1E;vertical-align:top;font-family:inherit;">Six weight variants, visual flexibility</td></tr>
+          <tr><td style="padding:14px 12px;font-size:14px;color:#FFF;border-bottom:1px solid #1E1E1E;vertical-align:top;font-family:inherit;">Mobile-first app</td><td style="padding:14px 12px;font-size:14px;color:#C1DD2D;border-bottom:1px solid #1E1E1E;vertical-align:top;font-family:inherit;">Ionicons</td><td style="padding:14px 12px;font-size:14px;color:#A3A3A3;border-bottom:1px solid #1E1E1E;vertical-align:top;font-family:inherit;">Platform-aware variants</td></tr>
+          <tr><td style="padding:14px 12px;font-size:14px;color:#FFF;border-bottom:1px solid #1E1E1E;vertical-align:top;font-family:inherit;">Documentation site</td><td style="padding:14px 12px;font-size:14px;color:#C1DD2D;border-bottom:1px solid #1E1E1E;vertical-align:top;font-family:inherit;">Heroicons / Iconoir</td><td style="padding:14px 12px;font-size:14px;color:#A3A3A3;border-bottom:1px solid #1E1E1E;vertical-align:top;font-family:inherit;">Clean, minimal, fast to parse</td></tr>
+        </tbody>
+      </table>
+
+      <h3>When to use one library versus mixing multiple styles</h3>
+      <p>Mixing libraries is a trap that catches small teams the hardest. Visual inconsistency compounds silently; one component uses Lucide's 1.5px stroke, another pulls Remix Icon's bolder weight, and the UI starts feeling assembled rather than designed.</p>
+      <p>If mixing is unavoidable, enforce a strict style guide that locks stroke width, size, and optical weight across every source.</p>
+      <p>Bundle size is the overlooked factor. Tree-shakeable SVG imports from Lucide and Heroicons mean you ship only the icons you actually use, keeping the payload lean.</p>
+      <p>That matters on documentation sites and e-commerce pages where every kilobyte affects load time.</p>
+      <p><strong>IconStash tip:</strong> Use IconStash's unified search to preview icons from Tabler, Lucide, Phosphor, and Heroicons side by side before committing. The visual comparison across 134,701 icons in one interface makes the right call obvious before a single line of code is written.</p>
+
+      <h2 id="what-most-icon-library-roundups-won-t-tell-you">What Most Icon Library Roundups Won't Tell You</h2>
+      <p>Every roundup lists the same names. Few of them check the GitHub commit history.</p>
+      <p>That oversight matters more than any feature comparison because several libraries that still appear in 'best open source icon libraries for web' lists in 2026 have had zero commits in over a year. An abandoned library isn't a free resource.</p>
+      <p>It's a maintenance liability waiting to surface at the worst possible moment.</p>
+      <figure style="margin: 20px 0; padding: 0; display: block;"><img src="https://xmphiscbmexupobiaivk.supabase.co/storage/v1/object/public/article-images/97480a06-0366-4d2c-8dbd-d803a330b5b7/6cc23d9b-03b2-492a-9631-a13e2a1e6379/real-4-1787281092725.webp" alt="A person working intently on a computer with multiple screens." width="1536" height="1024" loading="lazy" style="max-width: 100%; height: auto; border-radius: 8px; display: block;" /></figure>
+
+      <h3>The hidden maintenance risk of abandoned libraries</h3>
+      <p>When a library goes dark, its SVG files don't magically stay compatible with evolving build tools, bundlers, or rendering engines. Teams discover this during a Node upgrade or a Vite migration, not during initial setup.</p>
+      <p>Worse, many developers unknowingly pull the same icon from three different libraries across a single project, creating subtle visual inconsistencies that are nearly impossible to audit without a unified source of truth.</p>
+
+      <h3>Why icon count alone is a misleading metric</h3>
+      <p>A library advertising 5,000 icons can ship more kilobytes than one offering 500. The reason is that SVG files from popular libraries frequently contain unnecessary metadata, hidden layers, and non-standard viewBox values that bloat file size and break rendering in certain environments.</p>
+      <p>Raw count tells you nothing about optimization quality, style consistency at small sizes, or whether the icons will actually look coherent when mixed in a real interface.</p>
+      <p>The practical checklist roundups skip entirely:</p>
+      <ul>
+        <li>Check the last commit date on GitHub before adopting any library.</li>
+        <li>Audit SVG output for hidden layers and metadata bloat.</li>
+        <li>Verify license clarity, not just the 'open-source' label.</li>
+        <li>Test rendering consistency at 16px and 20px, not just showcase sizes.</li>
+      </ul>
+      <p>This is precisely where IconStash's model changes the equation. Rather than betting on a single library's maintenance trajectory, IconStash aggregates 134,701 icons from 28 actively curated open-source libraries into one searchable interface. This includes instant SVG, React, and Vue code export.</p>
+      <p>Style variants, license confidence, and optimization quality become searchable attributes, not separate research projects.</p>
+
+      <h2 id="how-iconstash-turns-28-icon-libraries-into-one-seamless-work">How IconStash Turns 28 Icon Libraries Into One Seamless Workflow</h2>
+      <p>Most teams waste more time hunting for icons than using them. Jumping between Heroicons, Lucide, Tabler, Phosphor, and a dozen other tabs to compare styles, check licenses, and export code-ready assets is a hidden tax on every UI sprint.</p>
+      <p>IconStash eliminates that entirely by aggregating 134,701 icons from 28 of the world's leading open-source libraries into a single, serverless search interface.</p>
+      <figure style="margin: 20px 0; padding: 0; display: block;"><img src="https://xmphiscbmexupobiaivk.supabase.co/storage/v1/object/public/article-images/97480a06-0366-4d2c-8dbd-d803a330b5b7/6cc23d9b-03b2-492a-9631-a13e2a1e6379/real-5-1787281136286.webp" alt="Desk with computer, keyboard, mouse, plant, and color palette." width="1536" height="1024" loading="lazy" style="max-width: 100%; height: auto; border-radius: 8px; display: block;" /></figure>
+
+      <h3>Search, customize, and export in seconds</h3>
+      <p>The workflow is deliberately frictionless. Search across every library simultaneously, then adjust color, size, and stroke width directly in the browser without touching a design file.</p>
+      <p>When the icon fits, you can copy it out in whichever format your stack needs: raw SVG markup, a React component, or a Vue component, all in one click. High-resolution PNG exports and ZIP downloads handle design handoff without extra tooling.</p>
+      <ul>
+        <li>134,701 icons across 28 open-source libraries, unified in one search</li>
+        <li>Color, size, and stroke width customization with no local install required</li>
+        <li>One-click export for SVG, React, and Vue code</li>
+        <li>High-resolution PNG and ZIP downloads for design handoff</li>
+        <li>Completely free, open-source, with no paywalls or subscription tiers</li>
+      </ul>
+
+      <h3>Zero-latency performance and one-click code copying</h3>
+      <p>The serverless architecture behind IconStash is what makes scale invisible. Searching 134,701 icons returns results instantly because there is no server cold start, no queue, and no lag spike under load.</p>
+      <p>For teams evaluating the best open-source icon libraries for web projects, that responsiveness is not a nice-to-have; it directly determines whether the tool gets used daily or abandoned after the first slow search.</p>
+
+      <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+      <h3>Can I use open-source icons in commercial projects without attribution?</h3>
+      <p>Yes, most of the time. The majority of leading icon libraries ship under MIT or Apache 2.0 licenses, which allow commercial use without attribution.</p>
+      <p>However, some libraries use licenses that require credit or restrict modification. Always check the specific license for the library you are pulling from before shipping to production.</p>
+      <p>IconStash aggregates icons from 28 open-source libraries, all selected for their permissive licensing.</p>
+
+      <h3>Are SVG icon libraries better than icon fonts for web performance?</h3>
+      <p>SVGs win. Icon fonts were a clever workaround in the early 2010s, but they carry real costs: a single font file loads every glyph whether you use it or not, and rendering quality degrades on subpixel screens.</p>
+      <p>SVGs load only what you request, scale perfectly at any resolution, and are fully accessible via ARIA attributes. I've personally seen icon font setups add over 200KB to a page that needed maybe 15 icons.</p>
+      <p>With tree-shakeable SVG libraries, that same page loads a fraction of that weight.</p>
+
+      <h3>How do I integrate an icon library into a React or Vue project?</h3>
+      <p>Install the library via npm, import only the icons you need, and render them as components. For React, most libraries expose named exports: <code>import { IconName } from 'library'</code>.</p>
+      <p>Vue follows the same pattern with component registration.</p>
+      <p>The critical step most developers skip is tree-shaking configuration. Without it, your bundler may pull in the entire library.</p>
+      <p>IconStash's one-click React and Vue code copy handles this correctly out of the box.</p>
+
+      <h3>How can I keep bundle size small when using a large icon library?</h3>
+      <p>Use named imports over wildcard imports every time. Instead of <code>import * from 'library'</code>, import each icon by name so your bundler can eliminate unused exports.</p>
+      <p>Beyond that, consider on-demand loading for icons that appear only in specific routes or modals. Tools like Vite and webpack both support dynamic imports natively.</p>
+      <p>If you're using a design system, consolidate to a single icon library rather than mixing three or four, which compounds bundle weight quickly. The difference between a disciplined setup and a careless one can easily be 300KB in production.</p>
+
+      <h3>Is there a single tool to search across multiple open-source icon libraries at once?</h3>
+      <p>Yes. <a href="https://iconstash.io" rel="noopener">IconStash</a> provides access to 134,701 icons from 28 of the world's leading open-source libraries through a single, unified search interface.</p>
+      <p>Instead of bouncing between Heroicons, Lucide, Phosphor, Material Symbols, and others separately, you can search once. You can compare results across all of them side by side. You can filter by library, adjust color, size, and stroke width, then copy SVG or component code directly.</p>
+      <p>It's free, has no paywalls, and runs with zero-latency serverless infrastructure.</p>
+
+      <h2 id="the-best-open-source-icon-libraries-for-web-come-down-to-thr">The Best Open Source Icon Libraries for the Web Come Down to Three Things</h2>
+      <p>Every icon decision is a design system decision in disguise; get it wrong and you're refactoring SVG paths six months later.</p>
+      <p>The best open-source icon libraries for the web consistently share the same three traits: clean, scalable SVGs that don't bloat your bundle; active maintenance that keeps pace with modern frameworks; and permissive licensing that never ambushes you at production.</p>
+      <p>If breadth is your priority, Material Icons and Font Awesome remain the benchmarks. For design systems that demand visual coherence, Phosphor and Lucide are the ones practitioners keep reaching for.</p>
+      <p>When lightweight matters above all, Heroicons and Tabler deliver without compromise.</p>
+      <p>The next step is simple: stop switching between GitHub repos and documentation tabs to compare options.</p>
+      <p>IconStash unifies all 28 leading open-source icon libraries, totaling 134,701 icons, into a single, zero-latency search experience where you can preview, customize color and stroke, and copy production-ready SVG, React, or Vue code instantly. No paywalls, no attribution headaches.</p>
+      <p>Search the full collection free at IconStash and ship better UIs faster.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
+    <p style="margin-top: 8px;">
+      <a href="/about/">About</a> &bull;
+      <a href="/contact/">Contact</a> &bull;
+      <a href="/privacy/">Privacy Policy</a> &bull;
+      <a href="/terms/">Terms of Service</a> &bull;
+      <a href="/articles/">Articles</a> &bull;
+      <a href="/stats/">Stats</a>
+    </p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    toggleBtn.addEventListener('click', () => {
+      const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+  </script>
+</body>
+</html>

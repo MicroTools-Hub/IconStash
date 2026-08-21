@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Use SVG Icons in React, Next.js &amp; Tailwind CSS (2026) | IconStash</title>
+  <meta name="description" content="The definitive 2026 guide to using SVG icons in React, Next.js 15, and Tailwind CSS. Compare inline SVGs, sprites, tree shaking, and TypeScript components.">
+  <meta name="keywords" content="how to use svg icons in react, nextjs 15 svg icons guide, tailwind css svg icon styling, react svg icon component typescript, tree shaking icon libraries vite, best way to use svg in react 2026">
+  <meta property="og:title" content="How to Use SVG Icons in React, Next.js & Tailwind CSS: The 2026 Developer Guide">
+  <meta property="og:description" content="Master modern SVG icon architecture in React 19, Next.js 15 Server Components, and Tailwind CSS with zero bundle bloat.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/articles/how-to-use-svg-icons-in-react-nextjs-tailwind/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/logo.png">
+  <meta property="article:published_time" content="2026-08-21T00:00:00Z">
+  <meta property="article:modified_time" content="2026-08-21T00:00:00Z">
+  <meta property="article:author" content="IconStash Engineering Team">
+  <meta property="article:section" content="Developer Guides">
+  <meta property="article:tag" content="React">
+  <meta property="article:tag" content="Next.js">
+  <meta property="article:tag" content="Tailwind CSS">
+  <meta property="article:tag" content="SVG Icons">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to Use SVG Icons in React, Next.js & Tailwind CSS (2026)">
+  <meta name="twitter:description" content="Master SVG icon architecture across React 19, Next.js 15 RSC, and Tailwind CSS.">
+  <meta name="twitter:image" content="https://iconstash.io/logo.png">
+  <link rel="canonical" href="https://iconstash.io/articles/how-to-use-svg-icons-in-react-nextjs-tailwind/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "How to Use SVG Icons in React, Next.js & Tailwind CSS: The 2026 Developer Guide",
+    "description": "An exhaustive engineering guide covering SVG icon integration in React 19, Next.js 15 App Router, and Tailwind CSS. Covers inline components, tree-shaking, SVG sprites, dynamic loading, and TypeScript architectures.",
+    "author": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
+    "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io", "logo": { "@type": "ImageObject", "url": "https://iconstash.io/logo.png" } },
+    "datePublished": "2026-08-21",
+    "dateModified": "2026-08-21",
+    "mainEntityOfPage": "https://iconstash.io/articles/how-to-use-svg-icons-in-react-nextjs-tailwind/",
+    "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
+    "articleSection": "Developer Guides",
+    "about": [
+      { "@type": "Thing", "name": "React (JavaScript library)", "sameAs": "https://en.wikipedia.org/wiki/React_(JavaScript_library)" },
+      { "@type": "Thing", "name": "Tailwind CSS", "sameAs": "https://en.wikipedia.org/wiki/Tailwind_CSS" }
+    ],
+    "keywords": ["how to use svg icons in react", "nextjs 15 svg icons", "tailwind css svg icons", "react svg icon component typescript", "tree shake icon libraries"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://iconstash.io/articles/" },
+      { "@type": "ListItem", "position": 3, "name": "How to Use SVG Icons in React, Next.js & Tailwind CSS" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best way to render SVG icons in Next.js 15?",
+        "answer": { "@type": "Answer", "text": "In Next.js 15 App Router, render SVG icon components inside React Server Components (RSC). This streams pure HTML vector markup to the browser, shipping 0 KB of client JavaScript and eliminating hydration mismatches." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I style SVG icons with Tailwind CSS utility classes?",
+        "answer": { "@type": "Answer", "text": "Ensure your SVG elements use 'fill=\"currentColor\"' or 'stroke=\"currentColor\"'. Then apply Tailwind text color and sizing classes like 'className=\"w-6 h-6 text-primary hover:text-accent transition-colors\"'." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does importing from large icon packages slow down build times?",
+        "answer": { "@type": "Answer", "text": "Importing from root barrel files (e.g. from 'lucide-react') forces bundlers to parse thousands of icon exports. Use named imports, optimizePackageImports in Next.js, or copy direct SVG JSX components from IconStash to keep compile times instant." }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    svg { max-width: 100%; display: inline-block; vertical-align: middle; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: all 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    .theme-toggle-btn { background: transparent; border: 1px solid #262626; color: #A3A3A3; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms ease; }
+    .theme-toggle-btn:hover { border-color: #404040; color: #F2F2F2; }
+
+    .article-wrap { max-width: 820px; margin: 0 auto; padding: 56px 24px 100px; }
+    .breadcrumb { display: flex; gap: 8px; font-size: 13px; color: #666; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #C1DD2D; }
+    .breadcrumb .sep { color: #444; }
+
+    .article-hero { margin-bottom: 48px; border-bottom: 1px solid #1A1A1A; padding-bottom: 40px; }
+    .article-hero .tag { display: inline-block; background: rgba(193,221,45,0.12); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(193,221,45,0.25); }
+    .article-hero h1 { font-size: clamp(30px, 4.5vw, 42px); font-weight: 900; line-height: 1.18; color: #FFF; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .article-meta { display: flex; gap: 20px; font-size: 13px; color: #737373; align-items: center; flex-wrap: wrap; margin-top: 16px; }
+
+    .featured-summary { background: linear-gradient(180deg, #141414 0%, #0E0E0E 100%); border: 1px solid #262626; border-left: 4px solid #C1DD2D; border-radius: 10px; padding: 24px 28px; margin: 28px 0 36px; }
+    .featured-summary p { font-size: 15.5px; line-height: 1.7; color: #E5E5E5; margin-bottom: 12px; font-weight: 500; }
+    .featured-summary ul { margin: 0 0 0 20px; color: #D4D4D4; }
+    .featured-summary li { margin-bottom: 8px; font-size: 14.5px; line-height: 1.6; }
+
+    h2 { font-size: 26px; font-weight: 800; color: #FFF; letter-spacing: -0.02em; margin: 52px 0 20px; padding-top: 20px; border-top: 1px solid #1F1F1F; }
+    h3 { font-size: 20px; font-weight: 700; color: #E5E5E5; margin: 32px 0 14px; }
+    p { margin-bottom: 22px; color: #D4D4D4; font-size: 16px; line-height: 1.8; }
+    strong { color: #FFF; }
+    ul, ol { margin: 0 0 24px 28px; color: #D4D4D4; }
+    li { margin-bottom: 10px; line-height: 1.7; font-size: 15.5px; }
+
+    pre { background: #121212; border: 1px solid #222; border-radius: 8px; padding: 20px; overflow-x: auto; margin: 24px 0; font-family: "JetBrains Mono", monospace; font-size: 13.5px; line-height: 1.6; color: #E5E5E5; }
+    code { font-family: "JetBrains Mono", monospace; font-size: 0.9em; background: #1A1A1A; padding: 2px 6px; border-radius: 4px; color: #C1DD2D; }
+
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 48px 24px; background: #0A0A0A; text-align: center; font-size: 14px; color: #666; margin-top: 80px; }
+    .site-footer a { color: #888; }
+    .site-footer a:hover { color: #C1DD2D; }
+
+    /* Light Theme */
+    html[data-theme="light"] body { background: #FAFAFA; color: #171717; }
+    html[data-theme="light"] .site-header { background: rgba(250,250,250,0.88); border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .site-header .logo { color: #171717; }
+    html[data-theme="light"] .site-header nav a { color: #525252; }
+    html[data-theme="light"] .article-hero h1 { color: #0A0A0A; }
+    html[data-theme="light"] h2 { color: #0A0A0A; border-top-color: #E5E5E5; }
+    html[data-theme="light"] h3 { color: #171717; }
+    html[data-theme="light"] p, html[data-theme="light"] ul, html[data-theme="light"] ol { color: #383838; }
+    html[data-theme="light"] strong { color: #0A0A0A; }
+    html[data-theme="light"] .featured-summary { background: #F4F4F5; border-color: #E4E4E7; border-left-color: #849E00; }
+    html[data-theme="light"] .featured-summary p { color: #18181B; }
+    html[data-theme="light"] pre { background: #F4F4F5; border-color: #E4E4E7; color: #18181B; }
+    html[data-theme="light"] code { background: #E4E4E7; color: #4D6300; }
+    html[data-theme="light"] a { color: #6D8200; }
+    html[data-theme="light"] .site-footer { background: #FAFAFA; border-top-color: #E5E5E5; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      IconStash
+    </a>
+    <nav>
+      <a href="/#/">Search 134K+ Icons</a>
+      <a href="/articles/">Articles &amp; Guides</a>
+      <a href="/Listicles/best-free-icon-sets-2026/">Best Sets</a>
+      <a href="/Glossary/icon-svg-terminology/">Glossary</a>
+      <a href="/stats/">Statistics</a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="/#/" class="header-cta">Open App</a>
+    </nav>
+  </header>
+
+  <main class="article-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/articles/">Articles</a>
+      <span class="sep">/</span>
+      <span>How to Use SVG Icons in React, Next.js &amp; Tailwind</span>
+    </nav>
+
+    <article>
+      <header class="article-hero">
+        <span class="tag">Modern Architecture</span>
+        <h1>How to Use SVG Icons in React, Next.js &amp; Tailwind CSS: The 2026 Guide</h1>
+        <div class="article-meta">
+          <span><strong>Published:</strong> August 21, 2026</span>
+          <span><strong>Author:</strong> IconStash Engineering Team</span>
+          <span><strong>Reading Time:</strong> 12 min read</span>
+        </div>
+      </header>
+
+      <div class="featured-summary">
+        <p>Using SVG icons in modern frontend applications in 2026 requires balancing bundle size, SSR streaming performance, and flexible Tailwind CSS styling. This comprehensive guide covers React 19 Server Components, tree-shaking patterns, SVG sprite sheets, and production TypeScript component architectures.</p>
+        <ul>
+          <li>Compare 4 icon delivery architectures: Inline React Components, NPM Icon Libraries, SVG Sprites, and Dynamic Imports.</li>
+          <li>Learn how React 19 and Next.js 15 Server Components ship 0 KB of client JavaScript for static icons.</li>
+          <li>Copy production-ready TypeScript wrapper components with full Tailwind CSS currentColor support.</li>
+        </ul>
+      </div>
+
+      <p>Almost every React developer starts by running <code>npm install react-icons</code> or importing hundreds of SVGs via Webpack loaders. Within a few months, build times crawl, client bundles balloon by several hundred kilobytes, and hydration mismatches appear in server-rendered Next.js routes.</p>
+      <p>In 2026, delivering iconography is an engineering discipline. With React Server Components (RSC), Next.js 15 Turbopack, and Tailwind CSS v4, there are clear, battle-tested patterns for shipping crisp vector icons without performance penalties.</p>
+
+      <div role="navigation" data-rs-enrichment="1" aria-label="Table of contents" style="background:color-mix(in srgb, currentColor 4%, transparent);border:1px solid color-mix(in srgb, currentColor 13%, transparent);border-radius:8px;padding:16px 20px;margin-bottom:24px;font-family:inherit">
+        <p style="font-weight:600;font-size:.85em;text-transform:uppercase;letter-spacing:.05em;color:color-mix(in srgb, currentColor 55%, transparent);margin:0 0 10px 0">Table of contents</p>
+        <ol style="margin:0;padding-left:20px;line-height:1.75;font-size:.95em">
+          <li style="margin:4px 0"><a href="#the-4-svg-icon-delivery-architectures-compared" style="color:inherit;text-decoration:underline;text-underline-offset:3px">1. The 4 SVG Icon Delivery Architectures Compared</a></li>
+          <li style="margin:4px 0"><a href="#rendering-icons-in-nextjs-15-server-components" style="color:inherit;text-decoration:underline;text-underline-offset:3px">2. Rendering Icons in Next.js 15 Server Components (0 KB JS)</a></li>
+          <li style="margin:4px 0"><a href="#styling-svgs-with-tailwind-css-currentcolor" style="color:inherit;text-decoration:underline;text-underline-offset:3px">3. Styling SVGs with Tailwind CSS &amp; currentColor</a></li>
+          <li style="margin:4px 0"><a href="#building-a-reusable-typescript-icon-component" style="color:inherit;text-decoration:underline;text-underline-offset:3px">4. Building a Reusable TypeScript Icon Component</a></li>
+          <li style="margin:4px 0"><a href="#how-iconstash-simplifies-react-development" style="color:inherit;text-decoration:underline;text-underline-offset:3px">5. How IconStash Simplifies React Development</a></li>
+          <li style="margin:4px 0"><a href="#frequently-asked-questions" style="color:inherit;text-decoration:underline;text-underline-offset:3px">6. Frequently Asked Questions</a></li>
+          <li style="margin:4px 0"><a href="#conclusion-the-modern-react-icon-stack" style="color:inherit;text-decoration:underline;text-underline-offset:3px">7. Conclusion: The Modern React Icon Stack</a></li>
+        </ol>
+      </div>
+
+      <h2 id="the-4-svg-icon-delivery-architectures-compared">The 4 SVG Icon Delivery Architectures Compared</h2>
+      <p>Before writing a single line of JSX, understand the trade-offs between the four primary methods for delivering SVG icons to the browser:</p>
+
+      <div data-rs-enrichment="comparison-table" style="font-family:inherit;background:#121212;border:1px solid #222;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,0.05);overflow:hidden;margin:28px 0;">
+        <div style="overflow-x:auto;">
+          <table style="width:100%;min-width:720px;border-collapse:collapse;table-layout:fixed;font-family:inherit;">
+            <colgroup><col style="width:25%"><col style="width:18%"><col style="width:18%"><col style="width:20%"><col style="width:19%"></colgroup>
+            <thead>
+              <tr>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">Architecture</th>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">Client JS Size</th>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">CSS Theming</th>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">HTTP Requests</th>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">Best For</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">React Server Component</div><div style="margin-top:5px;line-height:1;font-family:inherit;"><span style="display:inline-block;background:#C1DD2D;color:#0A0A0A;font-size:10.5px;font-weight:700;letter-spacing:0.02em;border-radius:100px;padding:2px 8px;white-space:nowrap;font-family:inherit;">Recommended</span></div></td>
+                <td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;color:#C1DD2D;font-weight:700;font-size:14px;">0 KB</td>
+                <td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;color:#D4D4D4;font-size:13.5px;">Full (Tailwind/CSS)</td>
+                <td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;color:#A3A3A3;font-size:13.5px;">0 (Inlined in HTML)</td>
+                <td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;color:#E5E5E5;font-size:13.5px;">Next.js 15, Remix &amp; Astro</td>
+              </tr>
+              <tr>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">NPM Package (Tree-Shaken)</div></td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#D4D4D4;font-size:14px;">~1.2 KB per icon</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#D4D4D4;font-size:13.5px;">Full (Tailwind/CSS)</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#A3A3A3;font-size:13.5px;">0 (Bundled in JS)</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#E5E5E5;font-size:13.5px;">Interactive client SPAs (Vite)</td>
+              </tr>
+              <tr>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">External SVG Sprite</div></td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#C1DD2D;font-weight:700;font-size:14px;">0 KB</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#D4D4D4;font-size:13.5px;">currentColor only</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#A3A3A3;font-size:13.5px;">1 (HTTP/2 Cacheable)</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#E5E5E5;font-size:13.5px;">High-traffic static content</td>
+              </tr>
+              <tr>
+                <td style="padding:16px 12px;vertical-align:middle;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">Dynamic Icon Loader</div></td>
+                <td style="padding:16px 12px;vertical-align:middle;color:#D4D4D4;font-size:14px;">Loaded on demand</td>
+                <td style="padding:16px 12px;vertical-align:middle;color:#D4D4D4;font-size:13.5px;">Full (Tailwind/CSS)</td>
+                <td style="padding:16px 12px;vertical-align:middle;color:#A3A3A3;font-size:13.5px;">Multiple chunk requests</td>
+                <td style="padding:16px 12px;vertical-align:middle;color:#E5E5E5;font-size:13.5px;">User-customized CMS dashboards</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h2 id="rendering-icons-in-nextjs-15-server-components">Rendering Icons in Next.js 15 Server Components (0 KB JS)</h2>
+      <p>When you place an SVG icon inside a Server Component in Next.js 15 App Router (without the <code>'use client'</code> directive), Next.js streams the compiled SVG markup directly as HTML during SSR. The client receives <strong>zero JavaScript overhead</strong> to render the icon.</p>
+      <pre><code>// app/components/Header.tsx (Server Component)
+import { User, Bell, Settings } from 'lucide-react';
+
+export default function Header() {
+  return (
+    &lt;header className="flex items-center justify-between p-4 bg-neutral-900"&gt;
+      &lt;h1 className="text-white font-bold"&gt;Dashboard&lt;/h1&gt;
+      &lt;div className="flex gap-3 text-neutral-400"&gt;
+        &lt;Bell className="w-5 h-5 hover:text-white transition-colors" /&gt;
+        &lt;Settings className="w-5 h-5 hover:text-white transition-colors" /&gt;
+        &lt;User className="w-5 h-5 hover:text-white transition-colors" /&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+  );
+}</code></pre>
+
+      <h2 id="styling-svgs-with-tailwind-css-currentcolor">Styling SVGs with Tailwind CSS &amp; currentColor</h2>
+      <p>The magic of modern SVG styling is <strong><code>currentColor</code></strong>. When an icon's SVG markup sets <code>stroke="currentColor"</code> or <code>fill="currentColor"</code>, the icon automatically inherits whatever CSS color is defined on its parent or on its own element class.</p>
+      <pre><code>&lt;!-- Tailwind CSS Dynamic Theming --&gt;
+&lt;button className="flex items-center gap-2 px-4 py-2 bg-neutral-800 text-neutral-300 hover:text-lime-400 hover:bg-neutral-700 rounded-lg transition-all"&gt;
+  &lt;svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"&gt;
+    &lt;path d="M5 12h14M12 5l7 7-7 7"/&gt;
+  &lt;/svg&gt;
+  &lt;span&gt;Continue&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+
+      <h2 id="building-a-reusable-typescript-icon-component">Building a Reusable TypeScript Icon Component</h2>
+      <p>For design systems requiring standard icon sizing, accessible ARIA labels, and custom variants, build a type-safe wrapper component:</p>
+      <pre><code>// components/ui/Icon.tsx
+import React from 'react';
+
+export interface IconProps extends React.SVGProps&lt;SVGSVGElement&gt; {
+  size?: number | string;
+  className?: string;
+  title?: string;
+}
+
+export const BaseIcon: React.FC&lt;IconProps&gt; = ({
+  size = 24,
+  className = '',
+  title,
+  children,
+  ...props
+}) => {
+  return (
+    &lt;svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`inline-block shrink-0 ${className}`}
+      aria-hidden={!title}
+      role={title ? 'img' : 'presentation'}
+      {...props}
+    &gt;
+      {title &amp;&amp; &lt;title&gt;{title}&lt;/title&gt;}
+      {children}
+    &lt;/svg&gt;
+  );
+};</code></pre>
+
+      <h2 id="how-iconstash-simplifies-react-development">How IconStash Simplifies React Development</h2>
+      <p>Instead of manually converting SVG files with SVGR or navigating complex npm package dependencies, <strong>IconStash</strong> lets you search across 134,701 vector icons from 28 open-source libraries and copy pre-formatted React JSX in one click.</p>
+      <ul>
+        <li>Instant search across Lucide, Heroicons, Tabler, Phosphor, and 24 other sets</li>
+        <li>One-click copy for clean, optimized React JSX components with <code>currentColor</code></li>
+        <li>Adjust stroke width and icon dimensions dynamically in the UI before copying</li>
+        <li>100% free and open-source with permissive commercial licenses</li>
+      </ul>
+
+      <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+      <div class="faq-item" style="background:#121212;border:1px solid #222;border-radius:8px;margin-bottom:14px;padding:18px 22px;">
+        <h3 style="margin-top:0;font-size:16px;color:#FFF;">Do SVG icons cause hydration errors in React 19?</h3>
+        <p style="margin-bottom:0;color:#A3A3A3;font-size:14.5px;">Standard outline and fill SVGs do not. Hydration errors only occur if an SVG contains internal <code>&lt;linearGradient&gt;</code> or <code>&lt;mask&gt;</code> IDs generated with random numbers. Use React 19's <code>useId()</code> hook to ensure deterministic IDs between server and client.</p>
+      </div>
+
+      <div class="faq-item" style="background:#121212;border:1px solid #222;border-radius:8px;margin-bottom:14px;padding:18px 22px;">
+        <h3 style="margin-top:0;font-size:16px;color:#FFF;">How do I optimize SVG icons in Next.js package imports?</h3>
+        <p style="margin-bottom:0;color:#A3A3A3;font-size:14.5px;">Add <code>experimental: { optimizePackageImports: ['lucide-react', '@tabler/icons-react'] }</code> in your <code>next.config.mjs</code> to ensure Turbopack transpiles only imported icons during local development.</p>
+      </div>
+
+      <h2 id="conclusion-the-modern-react-icon-stack">Conclusion: The Modern React Icon Stack</h2>
+      <p>Building a high-performance, accessible icon system in 2026 comes down to three pillars: <strong>Server Components</strong> for 0 KB client JS, <strong><code>currentColor</code></strong> for instant Tailwind theming, and <strong>permissive open-source sets</strong> like Lucide and Tabler.</p>
+      <p>Explore, customize, and copy over 134,701 vector icons for React free at <a href="https://iconstash.io">IconStash</a>.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
+    <p style="margin-top: 8px;">
+      <a href="/about/">About</a> &bull;
+      <a href="/contact/">Contact</a> &bull;
+      <a href="/privacy/">Privacy Policy</a> &bull;
+      <a href="/terms/">Terms of Service</a> &bull;
+      <a href="/articles/">Articles</a> &bull;
+      <a href="/stats/">Stats</a>
+    </p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    toggleBtn.addEventListener('click', () => {
+      const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+  </script>
+</body>
+</html>
