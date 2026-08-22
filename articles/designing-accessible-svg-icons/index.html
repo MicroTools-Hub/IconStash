@@ -3,18 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Designing Accessible SVG Icons | IconStash</title>
-  <meta name="description" content="A practical guide to making SVG icons screen-reader friendly. Master aria-hidden, semantic tags, and descriptive title labels.">
+  <title>Designing Accessible SVG Icons (WCAG 2.2 Guide) | IconStash</title>
+  <meta name="description" content="The definitive guide to designing and developing accessible SVG icons. Master aria-hidden, role='img', aria-labelledby, screen reader testing, and high-contrast modes.">
+  <meta name="keywords" content="accessible svg icons, aria-hidden true, role img svg, screen reader accessible icons, wcag 2.2 svg accessibility, accessible web icons 2026">
+  <meta property="og:title" content="Designing Accessible SVG Icons (WCAG 2.2 Guide)">
+  <meta property="og:description" content="Step-by-step technical guide on adding ARIA tags, descriptive elements, and screen-reader accessibility for inline vector icons.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/articles/designing-accessible-svg-icons/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/assets/articles/accessible-svg-icons.jpg">
+  <meta property="article:published_time" content="2026-07-18T00:00:00Z">
+  <meta property="article:modified_time" content="2026-08-22T00:00:00Z">
+  <meta property="article:author" content="IconStash Accessibility Lab">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Designing Accessible SVG Icons (WCAG 2.2 Guide)">
+  <meta name="twitter:description" content="Step-by-step instructions on making SVG icons screen-reader friendly and WCAG compliant.">
+  <meta name="twitter:image" content="https://iconstash.io/assets/articles/accessible-svg-icons.jpg">
+  <link rel="canonical" href="https://iconstash.io/articles/designing-accessible-svg-icons/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Designing Accessible SVG Icons",
-    "description": "A practical guide to making SVG icons screen-reader friendly. Master aria-hidden, semantic tags, and descriptive title labels.",
+    "headline": "Designing Accessible SVG Icons: The Complete WCAG 2.2 Developer Blueprint",
+    "description": "A comprehensive engineering guide to making inline SVG icons fully accessible to screen readers, assistive hardware, and forced-colors modes under WCAG 2.2 standards.",
     "author": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
     "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io", "logo": { "@type": "ImageObject", "url": "https://iconstash.io/logo.png" } },
-    "datePublished": "2026-07-20",
-    "dateModified": "2026-07-20",
+    "datePublished": "2026-07-18",
+    "dateModified": "2026-08-22",
+    "image": "https://iconstash.io/assets/articles/accessible-svg-icons.jpg",
     "mainEntityOfPage": "https://iconstash.io/articles/designing-accessible-svg-icons/",
     "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
     "articleSection": "Accessibility",
@@ -22,8 +43,7 @@
       { "@type": "Thing", "name": "Scalable Vector Graphics", "sameAs": "https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" },
       { "@type": "Thing", "name": "Web accessibility", "sameAs": "https://en.wikipedia.org/wiki/Web_accessibility" }
     ],
-    "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".article-hero h1", ".article-hero .subtitle"] },
-    "keywords": ["accessible SVG icons", "aria-hidden", "screen reader", "web accessibility", "ARIA labels"]
+    "keywords": ["accessible SVG icons", "aria-hidden", "screen reader", "web accessibility", "ARIA labels", "WCAG 2.2"]
   },
   {
     "@context": "https://schema.org",
@@ -33,277 +53,280 @@
       { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://iconstash.io/articles/" },
       { "@type": "ListItem", "position": 3, "name": "Designing Accessible SVG Icons" }
     ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When should an SVG icon have aria-hidden='true'?",
+        "answer": { "@type": "Answer", "text": "Whenever the icon is purely decorative or accompanied by visible text (e.g. a search icon next to the word 'Search'), add aria-hidden='true' to prevent assistive technologies from reading redundant or confusing descriptions." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you make a standalone icon button accessible without visible text?",
+        "answer": { "@type": "Answer", "text": "Provide an aria-label on the parent <button aria-label='Close dialog'> and set aria-hidden='true' on the internal <svg>, or give the SVG role='img' and aria-label='Close dialog'." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do SVG icons adapt to Windows High Contrast / Forced Colors mode?",
+        "answer": { "@type": "Answer", "text": "Using stroke='currentColor' and fill='currentColor' ensures the browser automatically recolors vector paths according to the operating system's active High Contrast color palette (ButtonText, CanvasText)." }
+      }
+    ]
   }]
   </script>
-  <meta name="keywords" content="accessible svg, screen-reader friendly vector, ARIA labels, semantic web icons, web accessibility, design standards">
-  <meta property="og:title" content="Designing Accessible SVG Icons">
-  <meta property="og:description" content="Step-by-step instructions on adding ARIA tags, descriptive elements, and screen-reader fallbacks for inline vector icons.">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://iconstash.io/articles/designing-accessible-svg-icons">
-  <meta property="og:site_name" content="IconStash">
-  <meta property="article:published_time" content="2026-07-18T00:00:00Z">
-  <meta property="article:author" content="IconStash Team">
-  <meta property="article:section" content="A11y Standards">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://iconstash.io/articles/designing-accessible-svg-icons/">
-  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-    body {
-      background: #0A0A0A;
-      color: #F2F2F2;
-      font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
     a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
     a:hover { color: #D2ED3E; }
     ::selection { background: rgba(193,221,45,0.25); color: #fff; }
-    img, svg { max-width: 100%; display: block; }
-    code { font-family: "JetBrains Mono", Consolas, monospace; font-size: 0.88em; background: rgba(255,255,255,0.06); border: 1px solid #1F1F1F; border-radius: 4px; padding: 2px 6px; }
-    pre { background: #060610; border: 1px solid #1F1F1F; border-radius: 10px; padding: 20px; overflow-x: auto; margin: 24px 0; }
-    pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.7; color: #a8d8a8; display: block; }
+    svg { max-width: 100%; display: inline-block; vertical-align: middle; }
 
-    /* Header */
-    .site-header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(10,10,10,0.85);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid #1F1F1F;
-      padding: 0 24px; height: 58px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
     .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
     .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
     .site-header nav { display: flex; gap: 24px; align-items: center; }
     .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
     .site-header nav a:hover { color: #F2F2F2; }
-    .header-cta {
-      background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px;
-      padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer;
-      transition: background 150ms ease;
-    }
-    .header-cta:hover { background: #D2ED3E; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: all 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; transform: translateY(-1px); }
+    .theme-toggle-btn { background: transparent; border: 1px solid #262626; color: #A3A3A3; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms ease; }
+    .theme-toggle-btn:hover { border-color: #404040; color: #F2F2F2; }
 
-    /* Hero */
-    .article-hero {
-      max-width: 820px; margin: 0 auto; padding: 80px 24px 48px; text-align: center;
-    }
-    .article-hero .badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(193,221,45,0.08); border: 1px solid rgba(193,221,45,0.2);
-      color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.08em; padding: 6px 14px; border-radius: 999px; margin-bottom: 28px;
-    }
-    .article-hero h1 {
-      font-size: clamp(32px, 5vw, 52px); font-weight: 900; line-height: 1.1;
-      letter-spacing: -0.03em; margin-bottom: 20px;
-      background: linear-gradient(135deg, #F2F2F2 0%, #888 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .article-hero .subtitle {
-      font-size: 19px; color: #888; line-height: 1.7; max-width: 640px; margin: 0 auto 28px;
-    }
-    .article-meta {
-      display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
-      color: #666; font-size: 13px;
+    /* Responsive 2-Column Layout */
+    .page-container { max-width: 1280px; margin: 0 auto; padding: 48px 24px 80px; width: 100%; }
+    .breadcrumb { display: flex; gap: 8px; font-size: 13px; color: #666; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #C1DD2D; }
+    .breadcrumb .sep { color: #444; }
+
+    .article-hero { margin-bottom: 36px; border-bottom: 1px solid #1F1F1F; padding-bottom: 32px; }
+    .article-hero .tag { display: inline-block; background: rgba(193,221,45,0.12); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(193,221,45,0.25); }
+    .article-hero h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; line-height: 1.18; color: #FFF; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .article-meta { display: flex; gap: 20px; font-size: 13px; color: #737373; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+
+    .article-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; align-items: start; }
+    @media (min-width: 1024px) {
+      .article-layout { grid-template-columns: minmax(0, 1fr) 320px; }
     }
 
-    /* TOC */
-    .toc-wrapper {
-      max-width: 820px; margin: 0 auto 48px; padding: 0 24px;
-    }
-    .toc {
-      background: rgba(255,255,255,0.02); border: 1px solid #1F1F1F; border-radius: 12px;
-      padding: 28px 32px;
-    }
-    .toc h2 { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 16px; }
-    .toc ol { padding-left: 20px; }
-    .toc li { margin: 8px 0; font-size: 15px; }
-    .toc a { color: #999; }
-    .toc a:hover { color: #C1DD2D; }
+    .article-main { min-width: 0; }
+    .featured-summary { background: linear-gradient(180deg, #141414 0%, #0E0E0E 100%); border: 1px solid #262626; border-left: 4px solid #C1DD2D; border-radius: 10px; padding: 24px 28px; margin-bottom: 32px; }
+    .featured-summary p { font-size: 15.5px; line-height: 1.7; color: #E5E5E5; margin-bottom: 12px; font-weight: 500; }
+    .featured-summary ul { margin: 0 0 0 20px; color: #D4D4D4; }
+    .featured-summary li { margin-bottom: 8px; font-size: 14.5px; line-height: 1.6; }
 
-    /* Article Content */
-    .article-body {
-      max-width: 820px; margin: 0 auto; padding: 0 24px 80px;
-    }
-    .article-body h2 {
-      font-size: 28px; font-weight: 800; margin: 64px 0 20px; padding-top: 16px;
-      border-top: 1px solid #1F1F1F; letter-spacing: -0.02em;
-    }
-    .article-body h2:first-of-type { border-top: none; margin-top: 0; }
-    .article-body h3 {
-      font-size: 20px; font-weight: 700; margin: 40px 0 14px; color: #C1DD2D;
-    }
-    .article-body p { margin-bottom: 18px; color: #ccc; }
-    .article-body ul, .article-body ol { margin: 0 0 20px 20px; color: #ccc; }
-    .article-body li { margin: 8px 0; }
-    .article-body strong { color: #F2F2F2; }
-    .article-body blockquote {
-      border-left: 3px solid #C1DD2D; padding: 16px 20px; margin: 28px 0;
-      background: rgba(193,221,45,0.04); border-radius: 0 8px 8px 0;
-      font-style: italic; color: #aaa;
-    }
+    .article-figure { margin: 28px 0 36px; padding: 0; display: block; }
+    .article-figure img { width: 100%; max-width: 100%; height: auto; border-radius: 10px; display: block; border: 1px solid #262626; }
+    .article-figure figcaption { font-size: 0.85em; color: #737373; text-align: center; margin-top: 10px; font-style: italic; }
 
-    /* Key Takeaways */
-    .takeaway-box {
-      background: linear-gradient(135deg, rgba(193, 221, 45, 0.06) 0%, rgba(193, 221, 45, 0.02) 100%);
-      border: 1px solid rgba(193, 221, 45, 0.15); border-radius: 14px;
-      padding: 32px; margin: 40px 0;
-    }
-    .takeaway-box h3 { color: #C1DD2D; font-size: 18px; font-weight: 800; margin-bottom: 16px; }
+    h2 { font-size: 26px; font-weight: 800; color: #FFF; letter-spacing: -0.02em; margin: 48px 0 20px; padding-top: 24px; border-top: 1px solid #1F1F1F; }
+    h3 { font-size: 20px; font-weight: 700; color: #E5E5E5; margin: 32px 0 14px; }
+    p { margin-bottom: 22px; color: #D4D4D4; font-size: 16px; line-height: 1.8; }
+    strong { color: #FFF; }
+    ul, ol { margin: 0 0 24px 28px; color: #D4D4D4; }
+    li { margin-bottom: 10px; line-height: 1.7; font-size: 15.5px; }
 
-    /* CTA Banner */
-    .cta-banner {
-      text-align: center; padding: 64px 24px; margin: 64px 0 0;
-      background: linear-gradient(180deg, rgba(193,221,45,0.04) 0%, transparent 100%);
-      border-top: 1px solid rgba(193,221,45,0.1);
-    }
-    .cta-banner h2 { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
-    .cta-banner p { color: #888; font-size: 17px; margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
-    .cta-banner .big-cta {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: #C1DD2D; color: #0A0A0A; font-weight: 800; font-size: 16px;
-      padding: 16px 36px; border-radius: 10px; border: none; cursor: pointer;
-      transition: all 200ms ease; text-decoration: none;
-    }
-    .cta-banner .big-cta:hover { background: #D2ED3E; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(193,221,45,0.2); }
+    pre { background: #121212; border: 1px solid #222; border-radius: 8px; padding: 20px; overflow-x: auto; margin: 24px 0; font-family: "JetBrains Mono", monospace; font-size: 13.5px; line-height: 1.6; color: #E5E5E5; }
+    code { font-family: "JetBrains Mono", monospace; font-size: 0.9em; background: #1A1A1A; padding: 2px 6px; border-radius: 4px; color: #C1DD2D; }
 
-    /* Footer */
-    .article-footer {
-      max-width: 820px; margin: 0 auto; padding: 32px 24px;
-      border-top: 1px solid #1F1F1F; color: #666; font-size: 13px;
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    /* Sticky Sidebar */
+    .article-sidebar { display: flex; flex-direction: column; gap: 24px; }
+    @media (min-width: 1024px) {
+      .article-sidebar { position: sticky; top: 80px; }
     }
-    .article-footer a { color: #666; }
-    .article-footer a:hover { color: #F2F2F2; }
-    .footer-links { display: flex; gap: 20px; }
+    .sidebar-card { background: #121212; border: 1px solid #222; border-radius: 12px; padding: 24px; }
+    .sidebar-title { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 16px; }
+    .toc-nav ol { list-style: none; margin: 0; padding: 0; }
+    .toc-nav li { margin-bottom: 10px; font-size: 14px; }
+    .toc-nav a { color: #A3A3A3; display: block; line-height: 1.5; }
+    .toc-nav a:hover { color: #C1DD2D; }
+
+    .cta-sidebar-box { background: linear-gradient(145deg, #181E07 0%, #0F1205 100%); border: 1px solid rgba(193,221,45,0.3); border-radius: 12px; padding: 24px; text-align: center; }
+    .cta-sidebar-box h4 { font-size: 18px; font-weight: 800; color: #FFF; margin-bottom: 8px; }
+    .cta-sidebar-box p { font-size: 13.5px; color: #AAA; line-height: 1.5; margin-bottom: 16px; }
+    .cta-sidebar-btn { display: inline-block; width: 100%; background: #C1DD2D; color: #0A0A0A; font-weight: 800; font-size: 14px; padding: 12px 18px; border-radius: 6px; transition: all 150ms ease; }
+    .cta-sidebar-btn:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 48px 24px; background: #0A0A0A; text-align: center; font-size: 14px; color: #666; margin-top: 80px; }
+    .site-footer a { color: #888; }
+    .site-footer a:hover { color: #C1DD2D; }
 
     @media (max-width: 768px) {
-      .article-hero { padding: 48px 20px 32px; }
-      .article-hero h1 { font-size: 28px; }
-      .article-hero .subtitle { font-size: 16px; }
-      .toc-wrapper, .article-body { padding: 0 20px 48px; }
-      .toc { padding: 20px 24px; }
-      .article-body h2 { font-size: 22px; margin-top: 48px; }
-      .article-body h3 { font-size: 18px; }
+      .page-container { padding: 28px 16px 60px; }
       .site-header nav { display: none; }
-      .cta-banner { padding: 48px 20px; }
-      .cta-banner h2 { font-size: 24px; }
+      .article-hero h1 { font-size: 26px; }
+      .featured-summary { padding: 18px 20px; }
+      pre { padding: 14px; font-size: 12.5px; }
     }
+
+    /* Light Theme */
+    html[data-theme="light"] body { background: #FAFAFA; color: #171717; }
+    html[data-theme="light"] .site-header { background: rgba(250,250,250,0.88); border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .site-header .logo { color: #171717; }
+    html[data-theme="light"] .site-header nav a { color: #525252; }
+    html[data-theme="light"] .article-hero h1 { color: #0A0A0A; }
+    html[data-theme="light"] h2 { color: #0A0A0A; border-top-color: #E5E5E5; }
+    html[data-theme="light"] h3 { color: #171717; }
+    html[data-theme="light"] p, html[data-theme="light"] ul, html[data-theme="light"] ol { color: #383838; }
+    html[data-theme="light"] strong { color: #0A0A0A; }
+    html[data-theme="light"] .featured-summary { background: #F4F4F5; border-color: #E4E4E7; border-left-color: #849E00; }
+    html[data-theme="light"] .featured-summary p { color: #18181B; }
+    html[data-theme="light"] pre { background: #F4F4F5; border-color: #E4E4E7; color: #18181B; }
+    html[data-theme="light"] code { background: #E4E4E7; color: #4D6300; }
+    html[data-theme="light"] a { color: #6D8200; }
+    html[data-theme="light"] .site-footer { background: #FAFAFA; border-top-color: #E5E5E5; }
+    html[data-theme="light"] .sidebar-card { background: #F4F4F5; border-color: #E4E4E7; }
+    html[data-theme="light"] .cta-sidebar-box { background: #ECFDF5; border-color: #A7F3D0; }
   </style>
 </head>
 <body>
-
-<header class="site-header">
-  <a href="/" class="logo" aria-label="IconStash.io home">
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="IconStash.io home">
       <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2V9Z"/></svg>
       <span>IconStash</span>
     </a>
-  <nav>
-    <a href="/">Browse Icons</a>
-    <a href="/articles/">Articles</a>
-    <a href="https://github.com/OG-Huzzi/IconStash">GitHub</a>
-  </nav>
-  <a href="/" class="header-cta">Open Editor</a>
-</header>
+    <nav>
+      <a href="/#/">Search 134K+ Icons</a>
+      <a href="/articles/">Articles &amp; Guides</a>
+      <a href="/Listicles/best-free-icon-sets-2026/">Best Sets</a>
+      <a href="/Glossary/icon-svg-terminology/">Glossary</a>
+      <a href="/stats/">Statistics</a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="/#/" class="header-cta">Open App</a>
+    </nav>
+  </header>
 
-<section class="article-hero">
-  <div class="badge">Accessibility Guide</div>
-  <h1>Designing Accessible SVG Icons</h1>
-  <p class="subtitle">A complete developer handbook on structuring semantic vector graphics, managing focus states, and implementing correct ARIA tags.</p>
-  <div class="article-meta">
-    <span>July 18, 2026</span>
-    <span>•</span>
-    <span>11 min read</span>
-    <span>•</span>
-    <span>By IconStash Team</span>
-  </div>
-</section>
+  <main class="page-container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/articles/">Articles</a>
+      <span class="sep">/</span>
+      <span>Designing Accessible SVG Icons</span>
+    </nav>
 
-<div class="toc-wrapper">
-  <div class="toc">
-    <h2>Table of Contents</h2>
-    <ol>
-      <li><a href="#why-a11y">1. Why Accessibility Matters for Vectors</a></li>
-      <li><a href="#decorative">2. Decorative Icons (Hiding from Screen Readers)</a></li>
-      <li><a href="#interactive">3. Interactive Icons (Adding Text Alternatives)</a></li>
-      <li><a href="#standalone">4. Standalone Informative Vectors</a></li>
-      <li><a href="#focus-tab">5. Eliminating Ghost Focus Stops</a></li>
-      <li><a href="#takeaways">6. Summary Rules</a></li>
-    </ol>
-  </div>
-</div>
+    <div class="article-layout">
+      <article class="article-main">
+        <header class="article-hero">
+          <span class="tag">Accessibility &amp; WCAG 2.2</span>
+          <h1>Designing Accessible SVG Icons: The Complete WCAG 2.2 Guide</h1>
+          <div class="article-meta">
+            <span><strong>Published:</strong> July 18, 2026</span>
+            <span><strong>Updated:</strong> August 22, 2026</span>
+            <span><strong>Author:</strong> IconStash Accessibility Lab</span>
+            <span><strong>Reading Time:</strong> 9 min read</span>
+          </div>
+        </header>
 
-<article class="article-body">
-  <h2 id="why-a11y">1. Why Accessibility Matters for Vectors</h2>
-  <p>Unlike text, which screen readers parse natively, vector paths (the `<path>` coordinate string) carry no semantic meaning to assistive technologies. Left unconfigured, a screen reader may attempt to read out the raw filename of the SVG, speak unhelpful unicode codes, or bypass critical interactive tools entirely.</p>
-  <p>To design an inclusive interface, you must classify every SVG icon into one of three semantic categories: **decorative**, **interactive**, or **informative**.</p>
+        <div class="featured-summary">
+          <p>Web accessibility is not an afterthought — it is a legal and ethical requirement. This guide demonstrates how to properly categorize, markup, and test SVG icons to achieve 100% WCAG 2.2 Level AA compliance.</p>
+          <ul>
+            <li>The 2 Golden Rules: Decorative icons (hide them) vs Informative icons (label them).</li>
+            <li>Implement accessible standalone icon buttons with <code>aria-label</code> and keyboard focus rings.</li>
+            <li>Ensure compatibility with screen readers (NVDA, VoiceOver, JAWS) and High Contrast mode.</li>
+          </ul>
+        </div>
 
-  <h2 id="decorative">2. Decorative Icons (Hiding from Screen Readers)</h2>
-  <p>The vast majority of UI icons are purely decorative. They reinforce a nearby text label (for example, a magnifying glass icon next to the word "Search"). If a screen reader reads both the icon and the text, it creates annoying repetition (e.g. "magnifying glass, search, button").</p>
-  <p>To ensure screen readers skip decorative icons, add the <code>aria-hidden="true"</code> attribute to the SVG tag, and ensure no nested `<title>` or labels exist inside the markup:</p>
-  <pre><code>&lt;!-- Decorative icon: invisible to assistive screen readers --&gt;
-&lt;svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"&gt;
-  &lt;path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/&gt;
-&lt;/svg&gt;
-&lt;span&gt;Budget Settings&lt;/span&gt;</code></pre>
+        <figure class="article-figure">
+          <img src="/assets/articles/accessible-svg-icons.jpg" alt="Accessible SVG icon interface showing ARIA attributes and inclusive human perception waveforms" width="1200" height="675" loading="lazy" />
+          <figcaption>WCAG 2.2 vector accessibility hierarchy: semantic role="img", aria-labelledby computation, and high-contrast styling.</figcaption>
+        </figure>
 
-  <h2 id="interactive">3. Interactive Icons (Adding Text Alternatives)</h2>
-  <p>When an icon is the only element inside a trigger (like a close 'X' button or an arrow slide button), it is an interactive control. Without a label, the user has no way of knowing what the button does.</p>
-  <p>In this case, place the text label directly on the **outer wrapper element** (like the button or link) using an <code>aria-label</code>, and hide the child SVG entirely:</p>
-  <pre><code>&lt;!-- Interactive icon button --&gt;
-&lt;button class="close-btn" aria-label="Close modal dialog"&gt;
-  &lt;svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"&gt;
-    &lt;path d="M18 6 6 18M6 6l12 12"/&gt;
+        <h2 id="the-two-types">1. The Two Fundamental Icon Categories</h2>
+        <p>Every icon in your UI falls strictly into one of two categories:</p>
+
+        <h3>A. Decorative Icons</h3>
+        <p>If an icon accompanies visible text that already conveys the meaning (e.g. a shopping cart icon next to "Checkout"), the icon is purely decorative. If announced by a screen reader, it creates redundant audio clutter.</p>
+        <p><strong>Rule:</strong> Always hide decorative icons using <code>aria-hidden="true"</code>:</p>
+        <pre><code>&lt;button class="btn"&gt;
+  &lt;svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"&gt;
+    &lt;path d="..." fill="none" stroke="currentColor" stroke-width="2" /&gt;
   &lt;/svg&gt;
+  &lt;span&gt;Add to Cart&lt;/span&gt;
 &lt;/button&gt;</code></pre>
-  <p>This layout ensures that the user hears "Close modal dialog, button" instead of the raw SVG file attributes.</p>
 
-  <h2 id="standalone">4. Standalone Informative Vectors</h2>
-  <p>If an SVG contains unique information (such as an interactive chart, diagram, or standalone illustration) and does not sit inside an interactive button, it should be treated as a semantic image. Use nested `<title>` and `<desc>` tags, and link them using `aria-labelledby`:</p>
-  
-  <pre><code>&lt;svg viewBox="0 0 24 24" role="img" aria-labelledby="chart-title chart-desc"&gt;
-  &lt;title id="chart-title"&gt;Monthly Sales Chart&lt;/title&gt;
-  &lt;desc id="chart-desc"&gt;Bar chart displaying our quarterly growth, peaking at 40% in June.&lt;/desc&gt;
-  &lt;rect x="2" y="10" width="4" height="12"/&gt;
-  &lt;rect x="8" y="6" width="4" height="16"/&gt;
+        <h3>B. Informative &amp; Interactive Icons</h3>
+        <p>When an icon stands alone with no visible text (such as a hamburger menu button, a trash can delete icon, or a search magnifying glass), the icon provides critical meaning.</p>
+        <p><strong>Rule:</strong> Provide an explicit accessible name on the parent interactive element or via semantic SVG markup:</p>
+        <pre><code>&lt;!-- Option 1: On Parent Button (Recommended) --&gt;
+&lt;button aria-label="Delete user account" class="icon-btn"&gt;
+  &lt;svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"&gt;
+    &lt;path d="..." /&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;
+
+&lt;!-- Option 2: Semantic Standalone SVG --&gt;
+&lt;svg role="img" aria-labelledby="status-title" viewBox="0 0 24 24" width="24" height="24"&gt;
+  &lt;title id="status-title"&gt;Database connection active&lt;/title&gt;
+  &lt;path d="..." /&gt;
 &lt;/svg&gt;</code></pre>
 
-  <h2 id="focus-tab">5. Eliminating Ghost Focus Stops</h2>
-  <p>Internet Explorer (and some older edge/webkit engines) has a known bug where SVG elements are included in the keyboard tab index, even if their parent container is not focusable. This results in "ghost" tab stops where keyboard users have to press tab multiple times to pass through an icon.</p>
-  <p>To prevent this, always add the <code>focusable="false"</code> attribute to every SVG tag in your project. This overrides default browser behaviors and preserves a clean, sequential tab sequence for keyboard navigation.</p>
+        <h2 id="focus-and-keyboard">2. Focus Rings &amp; Keyboard Navigation</h2>
+        <p>SVG elements themselves should never be keyboard-focusable unless they serve as interactive links. In Internet Explorer and older web views, SVGs could accidentally receive tab focus. Ensure <code>focusable="false"</code> is included alongside <code>aria-hidden="true"</code>.</p>
 
-  <div class="takeaway-box" id="takeaways">
-    <h3>Summary Rules</h3>
-    <ul>
-      <li><strong>Aria-hidden:</strong> Apply `aria-hidden="true"` to hide decorative icons.</li>
-      <li><strong>Interactive Wrappers:</strong> Put `aria-label` tags on the parent button or link, never on the inner SVG path.</li>
-      <li><strong>Avoid Title tooltips:</strong> Don't use standard nested `<title>` tags for decorative icons as browsers will render an ugly default mouse tooltip.</li>
-      <li><strong>Keyboard Focus:</strong> Add `focusable="false"` to prevent tab-key bugs.</li>
-    </ul>
-  </div>
-</article>
+        <h2 id="high-contrast-mode">3. Windows High Contrast Mode &amp; Forced Colors</h2>
+        <p>Users with low vision often enable Windows High Contrast or system forced-colors modes. When you use hardcoded hex fills (e.g. <code>fill="#4F46E5"</code>), the OS cannot recolor the icon against the high-contrast background.</p>
+        <p>By using <strong><code>stroke="currentColor"</code></strong> or <strong><code>fill="currentColor"</code></strong>, the vector automatically inherits the system's high-contrast foreground color (such as <code>CanvasText</code> or <code>ButtonText</code>).</p>
 
-<section class="cta-banner">
-  <h2>Design Cohesive design systems</h2>
-  <p>Get instant access to 134,701 fully semantic, clean, and accessible vector icons.</p>
-  <a href="/" class="big-cta">Open IconStash Editor →</a>
-</section>
+        <h2 id="frequently-asked-questions">4. Frequently Asked Questions</h2>
+        <div class="faq-item" style="background:#121212;border:1px solid #222;border-radius:8px;margin-bottom:14px;padding:18px 22px;">
+          <h3 style="margin-top:0;font-size:16px;color:#FFF;">Does &lt;title&gt; work as a tooltip?</h3>
+          <p style="margin-bottom:0;color:#A3A3A3;font-size:14.5px;">Yes, in desktop browsers hovering over an SVG with a &lt;title&gt; tag displays a native browser tooltip, while also providing an accessible name when paired with <code>aria-labelledby</code>.</p>
+        </div>
 
-<footer class="article-footer">
-  <span>© 2026 IconStash by <a href="https://greatsoftwarecompany.com">Great Software Company</a></span>
-  <div class="footer-links">
-    <a href="/">Browse Icons</a>
-    <a href="/articles/">Articles</a>
-    <a href="https://github.com/OG-Huzzi/IconStash" target="_blank" rel="noopener">GitHub</a>
-  </div>
-</footer>
+        <p style="margin-top: 32px;">Discover 134,701 accessible open-source vector icons at <a href="https://iconstash.io">IconStash</a>.</p>
+      </article>
 
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-title">Table of Contents</div>
+          <nav class="toc-nav" aria-label="Table of Contents">
+            <ol>
+              <li><a href="#the-two-types">1. Two Icon Categories</a></li>
+              <li><a href="#focus-and-keyboard">2. Focus &amp; Keyboard Nav</a></li>
+              <li><a href="#high-contrast-mode">3. High Contrast Mode</a></li>
+              <li><a href="#frequently-asked-questions">4. FAQ</a></li>
+            </ol>
+          </nav>
+        </div>
+
+        <div class="cta-sidebar-box">
+          <h4>Search 134K+ Icons</h4>
+          <p>Copy clean, accessible React JSX and SVG markup with one click.</p>
+          <a href="/#/" class="cta-sidebar-btn">Open IconStash Free →</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
+    <p style="margin-top: 8px;">
+      <a href="/about/">About</a> &bull;
+      <a href="/contact/">Contact</a> &bull;
+      <a href="/privacy/">Privacy Policy</a> &bull;
+      <a href="/terms/">Terms of Service</a> &bull;
+      <a href="/articles/">Articles</a> &bull;
+      <a href="/stats/">Stats</a>
+    </p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    toggleBtn.addEventListener('click', () => {
+      const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+  </script>
 </body>
 </html>

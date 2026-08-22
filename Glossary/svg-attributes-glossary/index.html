@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SVG Attributes Glossary: 45+ Explained | IconStash</title>
+  <title>SVG Attributes Glossary: 45+ Explained with Code | IconStash</title>
   <meta name="description" content="Every SVG attribute and CSS property that matters for icons — viewBox, stroke-dasharray, preserveAspectRatio, vector-effect — explained with code examples.">
   <meta name="keywords" content="svg attributes glossary, svg attributes list, what does viewbox do, stroke-dasharray explained, preserveaspectratio, svg fill vs stroke, svg transform, vector-effect non-scaling-stroke, svg css properties">
   <meta property="og:title" content="SVG Attributes &amp; CSS Properties Glossary: 45+ Explained with Code">
@@ -11,18 +11,15 @@
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://iconstash.io/Glossary/svg-attributes-glossary/">
   <meta property="og:site_name" content="IconStash">
-  <meta property="og:image" content="https://iconstash.io/logo.png">
+  <meta property="og:image" content="https://iconstash.io/assets/articles/svg-viewbox-coordinate-system.jpg">
   <meta property="article:published_time" content="2026-07-24T00:00:00Z">
-  <meta property="article:modified_time" content="2026-07-24T00:00:00Z">
-  <meta property="article:author" content="IconStash Team">
-  <meta property="article:section" content="Reference">
-  <meta property="article:tag" content="SVG">
-  <meta property="article:tag" content="glossary">
-  <meta property="article:tag" content="attributes">
+  <meta property="article:modified_time" content="2026-08-22T00:00:00Z">
+  <meta property="article:author" content="IconStash Core Architecture Team">
+  <meta property="article:section" content="Glossary">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SVG Attributes Glossary: 45+ Attributes Explained">
   <meta name="twitter:description" content="viewBox, stroke-dasharray, preserveAspectRatio, vector-effect — every SVG attribute that matters for icons, with code.">
-  <meta name="twitter:image" content="https://iconstash.io/logo.png">
+  <meta name="twitter:image" content="https://iconstash.io/assets/articles/svg-viewbox-coordinate-system.jpg">
   <link rel="canonical" href="https://iconstash.io/Glossary/svg-attributes-glossary/">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/favicon.jpeg">
@@ -38,15 +35,15 @@
     "author": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
     "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io", "logo": { "@type": "ImageObject", "url": "https://iconstash.io/logo.png" } },
     "datePublished": "2026-07-24",
-    "dateModified": "2026-07-24",
+    "dateModified": "2026-08-22",
+    "image": "https://iconstash.io/assets/articles/svg-viewbox-coordinate-system.jpg",
     "mainEntityOfPage": "https://iconstash.io/Glossary/svg-attributes-glossary/",
     "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
-    "articleSection": "Reference",
+    "articleSection": "Glossary",
     "about": [
       { "@type": "Thing", "name": "Scalable Vector Graphics", "sameAs": "https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" },
       { "@type": "Thing", "name": "Cascading Style Sheets", "sameAs": "https://en.wikipedia.org/wiki/CSS" }
     ],
-    "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".article-hero h1", ".article-hero .subtitle"] },
     "keywords": ["SVG attributes", "viewBox", "stroke-dasharray", "preserveAspectRatio", "fill", "stroke", "SVG reference"]
   },
   {
@@ -54,7 +51,7 @@
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
-      { "@type": "ListItem", "position": 2, "name": "Glossary", "item": "https://iconstash.io/Glossary/" },
+      { "@type": "ListItem", "position": 2, "name": "Glossary", "item": "https://iconstash.io/articles/" },
       { "@type": "ListItem", "position": 3, "name": "SVG Attributes Glossary" }
     ]
   },
@@ -81,22 +78,17 @@
       {
         "@type": "Question",
         "name": "What does the SVG viewBox attribute do?",
-        "acceptedAnswer": { "@type": "Answer", "text": "viewBox defines the SVG's internal coordinate system using four numbers: min-x, min-y, width, and height. viewBox='0 0 24 24' means the artwork is drawn on a 24×24 unit canvas. The browser then scales that canvas to whatever rendered size the width/height attributes or CSS specify — which is why SVG icons stay crisp at any size." }
+        "answer": { "@type": "Answer", "text": "viewBox defines the SVG's internal coordinate system using four numbers: min-x, min-y, width, and height. viewBox='0 0 24 24' means the artwork is drawn on a 24×24 unit canvas. The browser then scales that canvas to whatever rendered size the width/height attributes or CSS specify." }
       },
       {
         "@type": "Question",
         "name": "What is the difference between fill and stroke in SVG?",
-        "acceptedAnswer": { "@type": "Answer", "text": "fill paints the interior of a shape; stroke paints its outline. Outline-style icon libraries (Lucide, Tabler, Feather) use fill='none' with stroke='currentColor', while solid-style libraries (Heroicons Solid, Material Filled) use fill='currentColor' with no stroke." }
+        "answer": { "@type": "Answer", "text": "fill paints the interior of a shape; stroke paints its outline. Outline-style icon libraries (Lucide, Tabler, Feather) use fill='none' with stroke='currentColor', while solid-style libraries (Heroicons Solid, Material Filled) use fill='currentColor' with no stroke." }
       },
       {
         "@type": "Question",
         "name": "How do stroke-dasharray and stroke-dashoffset create line animations?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Set stroke-dasharray to the path's total length so the entire path is one dash, then set stroke-dashoffset to the same length so the dash starts fully shifted out of view. Animating stroke-dashoffset to 0 with a CSS transition makes the path appear to draw itself." }
-      },
-      {
-        "@type": "Question",
-        "name": "What does preserveAspectRatio='none' do?",
-        "acceptedAnswer": { "@type": "Answer", "text": "It disables aspect-ratio preservation, stretching the viewBox to fill the viewport in both directions independently — distorting the artwork if the ratios differ. The default, 'xMidYMid meet', scales uniformly and centers the artwork instead. For icons, you almost never want 'none'." }
+        "answer": { "@type": "Answer", "text": "Set stroke-dasharray to the path's total length so the entire path is one dash, then set stroke-dashoffset to the same length so the dash starts fully shifted out of view. Animating stroke-dashoffset to 0 with a CSS transition makes the path appear to draw itself." }
       }
     ]
   }]
@@ -104,240 +96,250 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
     a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
     a:hover { color: #D2ED3E; }
     ::selection { background: rgba(193,221,45,0.25); color: #fff; }
-    code { font-family: "JetBrains Mono", Consolas, monospace; font-size: 0.88em; background: rgba(255,255,255,0.06); border: 1px solid #1F1F1F; border-radius: 4px; padding: 2px 6px; }
+    svg { max-width: 100%; display: inline-block; vertical-align: middle; }
 
-    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
     .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
     .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
     .site-header nav { display: flex; gap: 24px; align-items: center; }
     .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
     .site-header nav a:hover { color: #F2F2F2; }
-    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: background 150ms ease; }
-    .header-cta:hover { background: #D2ED3E; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: all 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; transform: translateY(-1px); }
+    .theme-toggle-btn { background: transparent; border: 1px solid #262626; color: #A3A3A3; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms ease; }
+    .theme-toggle-btn:hover { border-color: #404040; color: #F2F2F2; }
 
-    .article-hero { max-width: 900px; margin: 0 auto; padding: 80px 24px 48px; text-align: center; }
-    .article-hero .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(193,221,45,0.08); border: 1px solid rgba(193,221,45,0.2); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 6px 14px; border-radius: 999px; margin-bottom: 28px; }
-    .article-hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; background: linear-gradient(135deg, #F2F2F2 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .article-hero .subtitle { font-size: 19px; color: #888; line-height: 1.7; max-width: 660px; margin: 0 auto 28px; }
-    .article-meta { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; color: #666; font-size: 13px; }
+    /* Responsive 2-Column Layout */
+    .page-container { max-width: 1280px; margin: 0 auto; padding: 48px 24px 80px; width: 100%; }
+    .breadcrumb { display: flex; gap: 8px; font-size: 13px; color: #666; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #C1DD2D; }
+    .breadcrumb .sep { color: #444; }
 
-    .layout { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    .sidebar { display: none; }
-    .sidebar-box { background: rgba(255,255,255,0.02); border: 1px solid #1F1F1F; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; }
-    .sidebar-box h3 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 14px; }
-    .sidebar-box ul { list-style: none; padding: 0; margin: 0; }
-    .sidebar-box li { margin: 10px 0; font-size: 14px; line-height: 1.5; }
-    .sidebar-box a { color: #999; }
-    .sidebar-box a:hover { color: #C1DD2D; }
+    .article-hero { margin-bottom: 36px; border-bottom: 1px solid #1F1F1F; padding-bottom: 32px; }
+    .article-hero .tag { display: inline-block; background: rgba(193,221,45,0.12); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(193,221,45,0.25); }
+    .article-hero h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; line-height: 1.18; color: #FFF; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .article-meta { display: flex; gap: 20px; font-size: 13px; color: #737373; align-items: center; flex-wrap: wrap; margin-top: 12px; }
 
-    .article-body { margin: 0; padding: 0 0 80px; }
-    .article-body h2 { font-size: 24px; font-weight: 800; margin: 56px 0 20px; padding-top: 16px; border-top: 1px solid #1F1F1F; letter-spacing: -0.02em; color: #C1DD2D; }
-    .article-body h2:first-of-type { border-top: none; margin-top: 0; }
-    .article-body p { margin-bottom: 18px; color: #ccc; }
-    .article-body strong { color: #F2F2F2; }
+    .article-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; align-items: start; }
+    @media (min-width: 1024px) {
+      .article-layout { grid-template-columns: minmax(0, 1fr) 320px; }
+    }
 
-    .term { background: rgba(255,255,255,0.02); border: 1px solid #1F1F1F; border-radius: 12px; padding: 22px 26px; margin: 16px 0; }
+    .article-main { min-width: 0; }
+    .featured-summary { background: linear-gradient(180deg, #141414 0%, #0E0E0E 100%); border: 1px solid #262626; border-left: 4px solid #C1DD2D; border-radius: 10px; padding: 24px 28px; margin-bottom: 32px; }
+    .featured-summary p { font-size: 15.5px; line-height: 1.7; color: #E5E5E5; margin-bottom: 12px; font-weight: 500; }
+    .featured-summary ul { margin: 0 0 0 20px; color: #D4D4D4; }
+    .featured-summary li { margin-bottom: 8px; font-size: 14.5px; line-height: 1.6; }
+
+    .article-figure { margin: 28px 0 36px; padding: 0; display: block; }
+    .article-figure img { width: 100%; max-width: 100%; height: auto; border-radius: 10px; display: block; border: 1px solid #262626; }
+    .article-figure figcaption { font-size: 0.85em; color: #737373; text-align: center; margin-top: 10px; font-style: italic; }
+
+    h2 { font-size: 24px; font-weight: 800; color: #FFF; letter-spacing: -0.02em; margin: 48px 0 20px; padding-top: 24px; border-top: 1px solid #1F1F1F; }
+    h3 { font-size: 19px; font-weight: 700; color: #E5E5E5; margin: 32px 0 14px; }
+    p { margin-bottom: 22px; color: #D4D4D4; font-size: 16px; line-height: 1.8; }
+    strong { color: #FFF; }
+    ul, ol { margin: 0 0 24px 28px; color: #D4D4D4; }
+    li { margin-bottom: 10px; line-height: 1.7; font-size: 15.5px; }
+
+    .term { background: #121212; border: 1px solid #222; border-radius: 10px; padding: 22px 26px; margin: 16px 0; }
     .term dt { font-size: 17px; font-weight: 800; color: #F2F2F2; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .term dt code { font-size: 14px; color: #C1DD2D; }
     .term dd { font-size: 15px; color: #aaa; line-height: 1.7; margin: 0; }
-    .term dd + dd { margin-top: 8px; font-size: 13px; color: #666; font-style: italic; }
-    .term dd + dd code { font-size: 12px; }
+    .term dd + dd { margin-top: 8px; font-size: 13.5px; color: #777; font-style: italic; }
 
-    .cta-banner { text-align: center; padding: 64px 24px; margin: 64px 0 0; background: linear-gradient(180deg, rgba(193,221,45,0.04) 0%, transparent 100%); border-top: 1px solid rgba(193,221,45,0.1); }
-    .cta-banner h2 { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
-    .cta-banner p { color: #888; font-size: 17px; margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
-    .cta-banner .big-cta { display: inline-flex; align-items: center; gap: 8px; background: #C1DD2D; color: #0A0A0A; font-weight: 800; font-size: 16px; padding: 16px 36px; border-radius: 10px; border: none; cursor: pointer; transition: all 200ms ease; text-decoration: none; }
-    .cta-banner .big-cta:hover { background: #D2ED3E; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(193,221,45,0.2); }
+    code { font-family: "JetBrains Mono", monospace; font-size: 0.9em; background: #1A1A1A; padding: 2px 6px; border-radius: 4px; color: #C1DD2D; }
 
-    .article-footer { max-width: 1200px; margin: 0 auto; padding: 32px 24px; border-top: 1px solid #1F1F1F; color: #666; font-size: 13px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-    .article-footer a { color: #666; }
-    .article-footer a:hover { color: #F2F2F2; }
-    .footer-links { display: flex; gap: 20px; }
-
-    @media (min-width: 1100px) {
-      .layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 56px; align-items: start; }
-      .article-body { grid-column: 1; grid-row: 1; }
-      .sidebar { display: block; grid-column: 2; grid-row: 1; position: sticky; top: 82px; }
+    /* Sticky Sidebar */
+    .article-sidebar { display: flex; flex-direction: column; gap: 24px; }
+    @media (min-width: 1024px) {
+      .article-sidebar { position: sticky; top: 80px; }
     }
+    .sidebar-card { background: #121212; border: 1px solid #222; border-radius: 12px; padding: 24px; }
+    .sidebar-title { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 16px; }
+    .toc-nav ol { list-style: none; margin: 0; padding: 0; }
+    .toc-nav li { margin-bottom: 10px; font-size: 14px; }
+    .toc-nav a { color: #A3A3A3; display: block; line-height: 1.5; }
+    .toc-nav a:hover { color: #C1DD2D; }
+
+    .cta-sidebar-box { background: linear-gradient(145deg, #181E07 0%, #0F1205 100%); border: 1px solid rgba(193,221,45,0.3); border-radius: 12px; padding: 24px; text-align: center; }
+    .cta-sidebar-box h4 { font-size: 18px; font-weight: 800; color: #FFF; margin-bottom: 8px; }
+    .cta-sidebar-box p { font-size: 13.5px; color: #AAA; line-height: 1.5; margin-bottom: 16px; }
+    .cta-sidebar-btn { display: inline-block; width: 100%; background: #C1DD2D; color: #0A0A0A; font-weight: 800; font-size: 14px; padding: 12px 18px; border-radius: 6px; transition: all 150ms ease; }
+    .cta-sidebar-btn:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 48px 24px; background: #0A0A0A; text-align: center; font-size: 14px; color: #666; margin-top: 80px; }
+    .site-footer a { color: #888; }
+    .site-footer a:hover { color: #C1DD2D; }
+
     @media (max-width: 768px) {
-      .article-hero { padding: 48px 20px 32px; }
-      .article-hero h1 { font-size: 28px; }
-      .article-hero .subtitle { font-size: 16px; }
-      .layout { padding: 0 20px; }
-      .article-body { padding-bottom: 48px; }
-      .article-body h2 { font-size: 20px; margin-top: 44px; }
+      .page-container { padding: 28px 16px 60px; }
       .site-header nav { display: none; }
-      .cta-banner { padding: 48px 20px; }
-      .cta-banner h2 { font-size: 24px; }
-      .term { padding: 18px 20px; }
+      .article-hero h1 { font-size: 26px; }
+      .featured-summary { padding: 18px 20px; }
     }
+
+    /* Light Theme */
+    html[data-theme="light"] body { background: #FAFAFA; color: #171717; }
+    html[data-theme="light"] .site-header { background: rgba(250,250,250,0.88); border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .site-header .logo { color: #171717; }
+    html[data-theme="light"] .site-header nav a { color: #525252; }
+    html[data-theme="light"] .article-hero h1 { color: #0A0A0A; }
+    html[data-theme="light"] h2 { color: #0A0A0A; border-top-color: #E5E5E5; }
+    html[data-theme="light"] h3 { color: #171717; }
+    html[data-theme="light"] p, html[data-theme="light"] ul, html[data-theme="light"] ol { color: #383838; }
+    html[data-theme="light"] strong { color: #0A0A0A; }
+    html[data-theme="light"] .featured-summary { background: #F4F4F5; border-color: #E4E4E7; border-left-color: #849E00; }
+    html[data-theme="light"] .featured-summary p { color: #18181B; }
+    html[data-theme="light"] .term { background: #F4F4F5; border-color: #E4E4E7; }
+    html[data-theme="light"] .term dt { color: #0A0A0A; }
+    html[data-theme="light"] .term dd { color: #383838; }
+    html[data-theme="light"] code { background: #E4E4E7; color: #4D6300; }
+    html[data-theme="light"] a { color: #6D8200; }
+    html[data-theme="light"] .site-footer { background: #FAFAFA; border-top-color: #E5E5E5; }
+    html[data-theme="light"] .sidebar-card { background: #F4F4F5; border-color: #E4E4E7; }
+    html[data-theme="light"] .cta-sidebar-box { background: #ECFDF5; border-color: #A7F3D0; }
   </style>
 </head>
 <body>
-
-<header class="site-header">
-  <a href="/" class="logo" aria-label="IconStash.io home">
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="IconStash.io home">
       <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2V9Z"/></svg>
       <span>IconStash</span>
     </a>
-  <nav>
-    <a href="/">Browse Icons</a>
-    <a href="/articles/">Articles</a>
-    <a href="/stats/">Stats</a>
-    <a href="https://github.com/OG-Huzzi/IconStash">GitHub</a>
-  </nav>
-  <a href="/" class="header-cta">Open Editor</a>
-</header>
+    <nav>
+      <a href="/#/">Search 134K+ Icons</a>
+      <a href="/articles/">Articles &amp; Guides</a>
+      <a href="/Listicles/best-free-icon-sets-2026/">Best Sets</a>
+      <a href="/Glossary/icon-svg-terminology/">Glossary</a>
+      <a href="/stats/">Statistics</a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="/#/" class="header-cta">Open App</a>
+    </nav>
+  </header>
 
-<section class="article-hero">
-  <div class="badge">Reference</div>
-  <h1>The SVG Attributes Glossary: 45+ Attributes &amp; Properties Explained</h1>
-  <p class="subtitle">Every attribute you'll meet when you open an icon's source — organized by what it does, defined in plain English, and shown in real code. Bookmark this instead of re-Googling <code>preserveAspectRatio</code>.</p>
-  <div class="article-meta">
-    <span>July 24, 2026</span>
-    <span>•</span>
-    <span>15 min read</span>
-    <span>•</span>
-    <span>By IconStash Team</span>
-  </div>
-</section>
+  <main class="page-container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/articles/">Glossary</a>
+      <span class="sep">/</span>
+      <span>SVG Attributes Glossary</span>
+    </nav>
 
-<div class="layout">
-<article class="article-body">
-  <p>This is the companion to our <a href="/Glossary/icon-svg-terminology/">Icon &amp; SVG terminology glossary</a>. That one defines <em>concepts</em> (sprites, tree-shaking, grids); this one defines the <em>actual attributes and properties</em> in SVG markup and the CSS that styles it. Terms are grouped by function, in the order you encounter them reading an SVG file top to bottom. Open any icon on <a href="/">IconStash</a> and you can match every attribute here against live source.</p>
+    <div class="article-layout">
+      <article class="article-main">
+        <header class="article-hero">
+          <span class="tag">Technical Reference</span>
+          <h1>The SVG Attributes Glossary: 45+ Attributes &amp; Properties Explained</h1>
+          <div class="article-meta">
+            <span><strong>Published:</strong> July 24, 2026</span>
+            <span><strong>Updated:</strong> August 22, 2026</span>
+            <span><strong>Author:</strong> IconStash Core Architecture Team</span>
+            <span><strong>Reading Time:</strong> 14 min read</span>
+          </div>
+        </header>
 
-  <h2 id="document">Document &amp; Coordinate System</h2>
-  <dl>
-    <div class="term"><dt><code>xmlns</code></dt><dd>The XML namespace declaration — <code>xmlns="http://www.w3.org/2000/svg"</code> — that identifies the markup as SVG. Required in standalone <code>.svg</code> files; optional for SVG inlined in HTML5, where the parser already knows.</dd></div>
-    <div class="term"><dt><code>viewBox</code></dt><dd>The heart of SVG scaling. Four numbers — <code>min-x min-y width height</code> — defining the internal coordinate canvas. <code>viewBox="0 0 24 24"</code> means all drawing happens in a 24×24 unit space, which the browser scales to the rendered size. Remove it and the icon stops scaling.</dd><dd>Full walkthrough: <a href="/articles/understanding-svg-viewbox-guide/">SVG viewBox explained simply</a></dd></div>
-    <div class="term"><dt><code>width</code> / <code>height</code></dt><dd>The rendered viewport size. With a viewBox present, these control display size only, not the drawing coordinates. Omit them and size the SVG with CSS instead — the preferred pattern for icon components.</dd><dd>Example: &lt;svg viewBox="0 0 24 24" width="16"&gt; renders the 24-unit art at 16px</dd></div>
-    <div class="term"><dt><code>preserveAspectRatio</code></dt><dd>Governs what happens when the viewBox ratio and viewport ratio disagree. Default <code>xMidYMid meet</code> scales uniformly and centers (letterboxing if needed). <code>slice</code> crops instead of letterboxes; <code>none</code> stretches and distorts. Icons should virtually always keep the default.</dd></div>
-    <div class="term"><dt><code>x</code> / <code>y</code></dt><dd>Position offsets for elements placed inside a coordinate system — <code>&lt;rect&gt;</code>, <code>&lt;use&gt;</code>, <code>&lt;svg&gt;</code>, <code>&lt;text&gt;</code>. Measured in viewBox units, not screen pixels.</dd></div>
-  </dl>
+        <div class="featured-summary">
+          <p>Every attribute you encounter in raw SVG markup — organized by function, defined in clear technical detail, and demonstrated with real code examples.</p>
+          <ul>
+            <li>Understand viewBox coordinate transformations and <code>preserveAspectRatio</code> scaling rules.</li>
+            <li>Master <code>currentColor</code> theming, stroke-dasharray animation triggers, and non-scaling-stroke vectors.</li>
+            <li>Match every attribute directly against 134,701 live open-source icons on IconStash.</li>
+          </ul>
+        </div>
 
-  <h2 id="paint">Paint: Fill &amp; Color</h2>
-  <dl>
-    <div class="term"><dt><code>fill</code></dt><dd>The interior paint of a shape. Accepts any CSS color, <code>none</code> (hollow — the basis of outline icons), a gradient/pattern reference like <code>url(#grad)</code>, or <code>currentColor</code>.</dd></div>
-    <div class="term"><dt><code>currentColor</code></dt><dd>Not an attribute but the most important paint <em>value</em> in icon work: it resolves to the element's inherited CSS <code>color</code>. Icons using <code>fill="currentColor"</code> or <code>stroke="currentColor"</code> theme themselves automatically — light mode, dark mode, hover states, everything.</dd><dd>Deep dive: <a href="/articles/dark-mode-svg-icons-theming/">dark mode SVG icons</a></dd></div>
-    <div class="term"><dt><code>fill-opacity</code></dt><dd>Transparency of the fill alone, 0–1, independent of stroke. This is how duotone icons work: the secondary layer is typically the same color at <code>fill-opacity="0.2"</code>.</dd></div>
-    <div class="term"><dt><code>fill-rule</code></dt><dd>The algorithm deciding which regions of a self-intersecting path are "inside" (and therefore filled): <code>nonzero</code> (default, winding-direction-based) or <code>evenodd</code> (crossing-count-based). When a donut icon renders as a solid circle, a wrong fill-rule is usually the culprit.</dd></div>
-    <div class="term"><dt><code>opacity</code></dt><dd>Whole-element transparency, applied after fill and stroke are composited. Unlike fill-opacity/stroke-opacity, it fades the entire icon uniformly — the right tool for disabled states.</dd></div>
-    <div class="term"><dt><code>color-scheme</code> <code>CSS</code></dt><dd>A CSS property telling the browser which themes an element supports. Combined with <code>currentColor</code> icons and <code>prefers-color-scheme</code> media queries, it completes an automatic theming pipeline with zero duplicate assets.</dd></div>
-  </dl>
+        <figure class="article-figure">
+          <img src="/assets/articles/svg-viewbox-coordinate-system.jpg" alt="SVG viewBox coordinate system diagram showing min-x min-y width height" width="1200" height="675" loading="lazy" />
+          <figcaption>The foundation of SVG scaling: the viewBox coordinate bounding box mapped to user-space viewports.</figcaption>
+        </figure>
 
-  <h2 id="stroke">Stroke: The Outline Family</h2>
-  <dl>
-    <div class="term"><dt><code>stroke</code></dt><dd>The outline paint. Outline icon libraries (Lucide, Tabler, Feather) are built on <code>fill="none" stroke="currentColor"</code> — all geometry expressed as stroked lines.</dd></div>
-    <div class="term"><dt><code>stroke-width</code></dt><dd>Stroke thickness in viewBox units. The signature of a library's visual voice: Feather/Lucide/Tabler use 2 on a 24-grid; Iconoir uses 1.5. Because it's in viewBox units, it scales with the icon — see <code>vector-effect</code> for the exception.</dd></div>
-    <div class="term"><dt><code>stroke-linecap</code></dt><dd>The shape of an open path's ends: <code>butt</code> (flat, technical), <code>round</code> (soft, friendly — the icon-library standard), <code>square</code> (flat but extended half a stroke-width past the endpoint).</dd></div>
-    <div class="term"><dt><code>stroke-linejoin</code></dt><dd>The shape of corners where segments meet: <code>miter</code> (sharp), <code>round</code> (soft), <code>bevel</code> (clipped). Paired with linecap to define a set's personality — Lucide is <code>round</code>/<code>round</code>.</dd></div>
-    <div class="term"><dt><code>stroke-miterlimit</code></dt><dd>Caps how long a sharp <code>miter</code> corner spike may grow at acute angles before being clipped to a bevel. Only relevant with <code>stroke-linejoin="miter"</code>; a common leftover attribute SVGO removes.</dd></div>
-    <div class="term"><dt><code>stroke-dasharray</code></dt><dd>Converts a solid stroke into dashes: alternating dash/gap lengths, e.g. <code>stroke-dasharray="4 2"</code>. Set it to the path's full length and the entire path becomes a single dash — step one of line-drawing animation.</dd></div>
-    <div class="term"><dt><code>stroke-dashoffset</code></dt><dd>Shifts where the dash pattern starts. Step two of line-drawing animation: start offset at the path length (dash pushed fully out of view), then animate to 0 and the icon draws itself.</dd><dd>Tutorial: <a href="/articles/svg-path-drawing-stroke-animations/">animate SVG paths with CSS</a></dd></div>
-    <div class="term"><dt><code>stroke-opacity</code></dt><dd>Transparency of the stroke alone, 0–1, independent of fill — the stroke-side twin of fill-opacity.</dd></div>
-    <div class="term"><dt><code>vector-effect</code></dt><dd>With <code>non-scaling-stroke</code>, the stroke keeps constant on-screen thickness no matter how much the SVG scales — a 2px stroke stays 2px at 24px or 240px. Powerful for icons that must stay crisp across a wide size range.</dd></div>
-    <div class="term"><dt><code>pathLength</code></dt><dd>Overrides the path's computed length for dash calculations. <code>pathLength="100"</code> lets you write dash animations in percentages (<code>stroke-dasharray="100"</code>) without measuring real geometry with JavaScript.</dd></div>
-  </dl>
+        <h2 id="document">1. Document &amp; Coordinate System</h2>
+        <dl>
+          <div class="term"><dt><code>xmlns</code></dt><dd>The XML namespace declaration — <code>xmlns="http://www.w3.org/2000/svg"</code> — that identifies the markup as SVG. Required in standalone <code>.svg</code> files; optional for SVG inlined in HTML5, where the parser already knows.</dd></div>
+          <div class="term"><dt><code>viewBox</code></dt><dd>The heart of SVG scaling. Four numbers — <code>min-x min-y width height</code> — defining the internal coordinate canvas. <code>viewBox="0 0 24 24"</code> means all drawing happens in a 24×24 unit space, which the browser scales to the rendered size.</dd><dd>Walkthrough: <a href="/articles/understanding-svg-viewbox-guide/">SVG viewBox explained simply</a></dd></div>
+          <div class="term"><dt><code>width</code> / <code>height</code></dt><dd>The rendered viewport size. With a viewBox present, these control display dimensions only, not the drawing coordinates.</dd></div>
+          <div class="term"><dt><code>preserveAspectRatio</code></dt><dd>Governs what happens when the viewBox ratio and viewport ratio disagree. Default <code>xMidYMid meet</code> scales uniformly and centers.</dd></div>
+        </dl>
 
-  <h2 id="shapes">Paths &amp; Shape Elements</h2>
-  <dl>
-    <div class="term"><dt><code>d</code></dt><dd>The path data — the drawing itself. A command mini-language: <code>M</code> move, <code>L</code> line, <code>H</code>/<code>V</code> horizontal/vertical line, <code>C</code>/<code>Q</code> cubic/quadratic Bézier, <code>A</code> elliptical arc, <code>Z</code> close. Uppercase = absolute coordinates, lowercase = relative. Every icon is ultimately one or more <code>d</code> strings.</dd><dd>Example: &lt;path d="M3 12h18M12 3v18"/&gt; draws a plus sign</dd></div>
-    <div class="term"><dt><code>points</code></dt><dd>The coordinate list of <code>&lt;polyline&gt;</code> (open) and <code>&lt;polygon&gt;</code> (auto-closed) elements: straight segments only, no curves. A checkmark is often just &lt;polyline points="20 6 9 17 4 12"/&gt;.</dd></div>
-    <div class="term"><dt><code>cx</code> / <code>cy</code> / <code>r</code></dt><dd>Center coordinates and radius of a <code>&lt;circle&gt;</code>. Ellipses replace <code>r</code> with <code>rx</code>/<code>ry</code>. Dots on notification bells and record buttons are almost always circles, not paths.</dd></div>
-    <div class="term"><dt><code>rx</code> / <code>ry</code> <span style="font-weight:400; font-size:13px; color:#666;">(on &lt;rect&gt;)</span></dt><dd>Corner radius of a rectangle. <code>&lt;rect rx="2"&gt;</code> is how icon libraries draw rounded squares without hand-writing arc commands in path data.</dd></div>
-    <div class="term"><dt><code>x1</code> / <code>y1</code> / <code>x2</code> / <code>y2</code></dt><dd>Start and end coordinates of a <code>&lt;line&gt;</code> element — and, separately, the direction vector of a <code>&lt;linearGradient&gt;</code>. Simple icon strokes (a minus, an equals sign) are often literal <code>&lt;line&gt;</code> elements.</dd></div>
-  </dl>
+        <h2 id="paint">2. Paint: Fill &amp; Color</h2>
+        <dl>
+          <div class="term"><dt><code>fill</code></dt><dd>The interior paint of a shape. Accepts any CSS color, <code>none</code> (hollow — the basis of outline icons), or <code>currentColor</code>.</dd></div>
+          <div class="term"><dt><code>currentColor</code></dt><dd>The most important paint value in icon work: resolves to the element's inherited CSS <code>color</code>, enabling effortless dark mode and theme toggling.</dd></div>
+          <div class="term"><dt><code>fill-opacity</code></dt><dd>Transparency of the fill alone (0–1), independent of stroke. Used extensively in duotone icons.</dd></div>
+          <div class="term"><dt><code>fill-rule</code></dt><dd>The algorithm determining whether overlapping subpaths are filled: <code>nonzero</code> (winding rule) or <code>evenodd</code> (crossing count).</dd></div>
+        </dl>
 
-  <h2 id="transform">Transforms</h2>
-  <dl>
-    <div class="term"><dt><code>transform</code></dt><dd>Applies geometric operations to an element or group: <code>translate(x y)</code>, <code>rotate(deg cx cy)</code>, <code>scale(f)</code>, <code>skewX/Y(deg)</code>, or a raw <code>matrix()</code>. A chevron-down is frequently a chevron-right with <code>transform="rotate(90 12 12)"</code>.</dd></div>
-    <div class="term"><dt><code>transform-origin</code> <code>CSS</code></dt><dd>The pivot point for CSS transforms. SVG's default origin is the SVG's 0,0 corner, not the element's center — the classic reason spinner icons orbit wildly instead of spinning in place. Fix: <code>transform-origin: center</code> (with <code>transform-box: fill-box</code> where needed).</dd></div>
-    <div class="term"><dt><code>scaleX(-1)</code> <code>CSS</code></dt><dd>The horizontal mirror transform — the standard mechanism for flipping directional icons (arrows, back buttons) in right-to-left locales: <code>[dir="rtl"] .icon-directional { transform: scaleX(-1); }</code>.</dd></div>
-  </dl>
+        <h2 id="stroke">3. Stroke Geometry &amp; Caps</h2>
+        <dl>
+          <div class="term"><dt><code>stroke</code></dt><dd>The outline color of the vector path.</dd></div>
+          <div class="term"><dt><code>stroke-width</code></dt><dd>The thickness of the outline in viewBox units (e.g. 1.5, 2, 2.5).</dd></div>
+          <div class="term"><dt><code>stroke-linecap</code></dt><dd>The shape of line terminals: <code>round</code>, <code>square</code>, or <code>butt</code>.</dd></div>
+          <div class="term"><dt><code>stroke-linejoin</code></dt><dd>The corner joint style: <code>round</code>, <code>bevel</code>, or <code>miter</code>.</dd></div>
+          <div class="term"><dt><code>stroke-dasharray</code></dt><dd>Creates dashed path patterns; used with <code>stroke-dashoffset</code> for path drawing animations.</dd></div>
+          <div class="term"><dt><code>vector-effect="non-scaling-stroke"</code></dt><dd>Keeps stroke thickness constant on screen regardless of how large the SVG scales.</dd></div>
+        </dl>
 
-  <h2 id="reuse">Structure &amp; Reuse</h2>
-  <dl>
-    <div class="term"><dt><code>&lt;g&gt;</code></dt><dd>The group element. Attributes set on a group (stroke, fill, transform) cascade to all children — which is how an entire icon inherits <code>stroke="currentColor"</code> from one place instead of repeating it per path.</dd></div>
-    <div class="term"><dt><code>&lt;defs&gt;</code></dt><dd>A container for reusable definitions (gradients, clip paths, masks, symbols) that render nothing by themselves. Referenced later by id: <code>fill="url(#brand-gradient)"</code>.</dd></div>
-    <div class="term"><dt><code>&lt;symbol&gt;</code> + <code>&lt;use href&gt;</code></dt><dd>The sprite mechanism: <code>&lt;symbol id="camera" viewBox="0 0 24 24"&gt;</code> defines an icon once (with its own viewBox); <code>&lt;use href="#camera"/&gt;</code> stamps it anywhere. One HTTP request, one cached file, unlimited reuse.</dd><dd>Example: &lt;svg&gt;&lt;use href="/sprite.svg#camera"/&gt;&lt;/svg&gt;</dd></div>
-    <div class="term"><dt><code>clip-path</code></dt><dd>Restricts rendering to a defined region — everything outside the referenced <code>&lt;clipPath&gt;</code> shape is cut off with a hard edge. Binary: a pixel is either shown or not.</dd></div>
-    <div class="term"><dt><code>mask</code></dt><dd>Like clip-path but with alpha: the luminance/alpha of the referenced <code>&lt;mask&gt;</code> content controls per-pixel transparency, enabling soft fades and knockout effects (the "cut-out" slash on many crossed-out icons).</dd></div>
-    <div class="term"><dt><code>id</code></dt><dd>The reference anchor for defs, gradients, clips, and sprite symbols. The hidden danger: inlining multiple SVGs that share an id (every Figma export names its clip <code>clip0</code>) makes them silently reference each other's definitions. SVGO's <code>prefixIds</code> plugin prevents this.</dd></div>
-  </dl>
+        <h2 id="faq">4. Frequently Asked Questions</h2>
+        <div class="faq-item" style="background:#121212;border:1px solid #222;border-radius:8px;margin-bottom:14px;padding:18px 22px;">
+          <h3 style="margin-top:0;font-size:16px;color:#FFF;">What is the most critical SVG attribute for responsive icons?</h3>
+          <p style="margin-bottom:0;color:#A3A3A3;font-size:14.5px;"><code>viewBox</code> is essential. Without a valid <code>viewBox</code>, browsers cannot compute vector aspect ratios, causing icons to crop or distort when resized.</p>
+        </div>
 
-  <h2 id="gradients">Gradients</h2>
-  <dl>
-    <div class="term"><dt><code>&lt;linearGradient&gt;</code> / <code>&lt;radialGradient&gt;</code></dt><dd>Paint servers defined in <code>&lt;defs&gt;</code> and applied via <code>fill="url(#id)"</code>. Linear gradients run along the x1/y1→x2/y2 vector; radial gradients emanate from a center point.</dd></div>
-    <div class="term"><dt><code>&lt;stop&gt;</code>, <code>offset</code>, <code>stop-color</code></dt><dd>The color keyframes inside a gradient: <code>&lt;stop offset="0%" stop-color="#C1DD2D"/&gt;</code>. Two stops make a simple fade; more stops build multi-color ramps.</dd></div>
-    <div class="term"><dt><code>gradientUnits</code></dt><dd>The coordinate space of the gradient vector: <code>objectBoundingBox</code> (default — 0–1 relative to the shape) or <code>userSpaceOnUse</code> (absolute viewBox coordinates, letting one gradient flow continuously across multiple shapes).</dd></div>
-  </dl>
+        <p style="margin-top: 32px;">Search and inspect clean SVG attributes across 134,701 icons on <a href="https://iconstash.io">IconStash</a>.</p>
+      </article>
 
-  <h2 id="a11y">Accessibility &amp; Interaction</h2>
-  <dl>
-    <div class="term"><dt><code>role="img"</code></dt><dd>Tells assistive technology to treat the SVG as a single image rather than a tree of paths. Standard on meaningful standalone icons, paired with an accessible name from <code>aria-label</code> or <code>&lt;title&gt;</code>.</dd></div>
-    <div class="term"><dt><code>aria-hidden="true"</code></dt><dd>Removes the icon from the accessibility tree entirely. Correct for every decorative icon — an icon sitting next to visible text that already says the same thing.</dd></div>
-    <div class="term"><dt><code>aria-label</code></dt><dd>The accessible name, placed on the interactive parent of icon-only controls: <code>&lt;button aria-label="Delete"&gt;&lt;svg aria-hidden="true"&gt;…&lt;/svg&gt;&lt;/button&gt;</code>. The pattern that fixes the #1 icon accessibility failure.</dd><dd>Full patterns: <a href="/articles/designing-accessible-svg-icons/">designing accessible SVG icons</a></dd></div>
-    <div class="term"><dt><code>&lt;title&gt;</code> / <code>&lt;desc&gt;</code></dt><dd>SVG-native short label and long description, read by screen readers when the SVG is exposed (and shown as a native tooltip by some browsers). Must be the first children of the <code>&lt;svg&gt;</code>; reference explicitly with <code>aria-labelledby</code> for reliable support.</dd></div>
-    <div class="term"><dt><code>focusable="false"</code></dt><dd>A legacy-IE/Edge attribute preventing SVGs from receiving keyboard focus as tab stops. Modern browsers don't focus inline SVGs by default, but component libraries still emit it for safety.</dd></div>
-    <div class="term"><dt><code>pointer-events</code></dt><dd>Controls whether the SVG (or a sub-shape) receives mouse/touch events. <code>pointer-events: none</code> on a button's icon guarantees the click always lands on the button — ending the "event.target is a path" class of bugs.</dd></div>
-  </dl>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-title">Table of Contents</div>
+          <nav class="toc-nav" aria-label="Table of Contents">
+            <ol>
+              <li><a href="#document">1. Document &amp; Coordinates</a></li>
+              <li><a href="#paint">2. Paint &amp; Fill Rules</a></li>
+              <li><a href="#stroke">3. Stroke &amp; Dash Patterns</a></li>
+              <li><a href="#faq">4. FAQ</a></li>
+            </ol>
+          </nav>
+        </div>
 
-  <h2 id="rendering">Rendering &amp; Optimization Hints</h2>
-  <dl>
-    <div class="term"><dt><code>shape-rendering</code></dt><dd>A rendering-quality hint: <code>geometricPrecision</code> (favor accuracy), <code>crispEdges</code> (favor sharp axis-aligned edges, disabling some anti-aliasing), <code>optimizeSpeed</code>. Occasionally useful for 1px hairline grid icons; usually best left alone.</dd></div>
-    <div class="term"><dt><code>paint-order</code></dt><dd>Reorders fill/stroke/marker painting. <code>paint-order: stroke</code> paints the stroke underneath the fill — the trick behind clean outlined-text badges and icon "halo" outlines without duplicating shapes.</dd></div>
-    <div class="term"><dt><code>&lt;style&gt;</code> vs presentation attributes</dt><dd>SVG styling has three layers with escalating priority: presentation attributes (<code>fill="red"</code>) &lt; CSS (external or <code>&lt;style&gt;</code>) &lt; inline <code>style=""</code>. This is why a CSS rule can retheme an icon whose markup hardcodes a fill attribute — but can't beat an inline style. SVGO can convert between forms for smaller output.</dd></div>
-    <div class="term"><dt><code>data-*</code></dt><dd>Arbitrary metadata attributes (<code>data-icon="camera"</code>) used by icon frameworks for hydration, replacement, and testing hooks. Ignored by renderers, invaluable for tooling.</dd></div>
-  </dl>
-</article>
+        <div class="cta-sidebar-box">
+          <h4>Search 134K+ Icons</h4>
+          <p>Inspect and copy pre-cleaned SVG markup with <code>currentColor</code> and custom stroke thickness.</p>
+          <a href="/#/" class="cta-sidebar-btn">Open IconStash Free →</a>
+        </div>
+      </aside>
+    </div>
+  </main>
 
-<aside class="sidebar">
-  <div class="sidebar-box">
-    <h3>Jump to Category</h3>
-    <ul>
-      <li><a href="#document">Document &amp; coordinates</a></li>
-      <li><a href="#paint">Paint: fill &amp; color</a></li>
-      <li><a href="#stroke">Stroke family</a></li>
-      <li><a href="#shapes">Paths &amp; shapes</a></li>
-      <li><a href="#transform">Transforms</a></li>
-      <li><a href="#reuse">Structure &amp; reuse</a></li>
-      <li><a href="#gradients">Gradients</a></li>
-      <li><a href="#a11y">Accessibility</a></li>
-      <li><a href="#rendering">Rendering hints</a></li>
-    </ul>
-  </div>
-  <div class="sidebar-box">
-    <h3>Related Resources</h3>
-    <ul>
-      <li><a href="/Glossary/icon-svg-terminology/">Icon &amp; SVG Terminology Glossary</a></li>
-      <li><a href="/articles/understanding-svg-viewbox-guide/">SVG viewBox Explained Simply</a></li>
-      <li><a href="/articles/svg-path-drawing-stroke-animations/">Animate SVG Paths with CSS</a></li>
-      <li><a href="/articles/designing-accessible-svg-icons/">Designing Accessible SVG Icons</a></li>
-      <li><a href="/articles/how-to-optimize-svg-icons-for-web-performance/">Optimizing SVG Performance</a></li>
-    </ul>
-  </div>
-</aside>
-</div>
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
+    <p style="margin-top: 8px;">
+      <a href="/about/">About</a> &bull;
+      <a href="/contact/">Contact</a> &bull;
+      <a href="/privacy/">Privacy Policy</a> &bull;
+      <a href="/terms/">Terms of Service</a> &bull;
+      <a href="/articles/">Articles</a> &bull;
+      <a href="/stats/">Stats</a>
+    </p>
+  </footer>
 
-<section class="cta-banner">
-  <h2>Read Real Icon Source, Live</h2>
-  <p>Open any of 134,701 icons and inspect its viewBox, paths, and strokes — then export as SVG, PNG, or JSX.</p>
-  <a href="/" class="big-cta">Inspect Icons →</a>
-</section>
-
-<footer class="article-footer">
-  <span>© 2026 IconStash by <a href="https://greatsoftwarecompany.com">Great Software Company</a></span>
-  <div class="footer-links">
-    <a href="/">Browse Icons</a>
-    <a href="/articles/">Articles</a>
-    <a href="/Glossary/icon-svg-terminology/">Icon Glossary</a>
-    <a href="https://github.com/OG-Huzzi/IconStash" target="_blank" rel="noopener">GitHub</a>
-  </div>
-</footer>
-
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    toggleBtn.addEventListener('click', () => {
+      const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+  </script>
 </body>
 </html>
