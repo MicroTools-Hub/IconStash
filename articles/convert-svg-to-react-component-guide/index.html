@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Convert SVG to React Component (JSX &amp; TSX) | IconStash</title>
+  <meta name="description" content="The definitive 2026 blueprint to convert SVG to React components (JSX/TSX). Master SVGR, Vite plugins, Next.js 15 Server Components, and automated batch conversion.">
+  <meta name="keywords" content="convert svg to react component, svg to jsx online, react svg component typescript, svgr vite nextjs setup, svg to tsx batch converter, react 19 svg best practices 2026">
+  <meta property="og:title" content="How to Convert SVG to React Component (JSX & TSX): The 2026 Blueprint">
+  <meta property="og:description" content="Master transforming raw SVG vectors into production-grade React & TypeScript components with dynamic currentColor theming and zero bundle overhead.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/articles/convert-svg-to-react-component-guide/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/assets/articles/convert-svg-to-react-component.jpg">
+  <meta property="article:published_time" content="2026-08-22T00:00:00Z">
+  <meta property="article:modified_time" content="2026-08-22T00:00:00Z">
+  <meta property="article:author" content="IconStash Core Architecture Team">
+  <meta property="article:section" content="Developer Guides">
+  <meta property="article:tag" content="React">
+  <meta property="article:tag" content="TypeScript">
+  <meta property="article:tag" content="SVG">
+  <meta property="article:tag" content="Next.js">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to Convert SVG to React Component (JSX & TSX): The 2026 Blueprint">
+  <meta name="twitter:description" content="Step-by-step developer guide to converting SVG code to type-safe React JSX/TSX with SVGR and IconStash.">
+  <meta name="twitter:image" content="https://iconstash.io/assets/articles/convert-svg-to-react-component.jpg">
+  <link rel="canonical" href="https://iconstash.io/articles/convert-svg-to-react-component-guide/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "How to Convert SVG to React Component (JSX & TSX): The 2026 Developer Blueprint",
+    "description": "An in-depth engineering blueprint detailing how to transform raw SVG vectors into high-performance, accessible, and type-safe React 19 JSX and TypeScript components.",
+    "author": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io" },
+    "publisher": { "@type": "Organization", "name": "IconStash", "url": "https://iconstash.io", "logo": { "@type": "ImageObject", "url": "https://iconstash.io/logo.png" } },
+    "datePublished": "2026-08-22",
+    "dateModified": "2026-08-22",
+    "image": "https://iconstash.io/assets/articles/convert-svg-to-react-component.jpg",
+    "mainEntityOfPage": "https://iconstash.io/articles/convert-svg-to-react-component-guide/",
+    "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
+    "articleSection": "Developer Guides",
+    "about": [
+      { "@type": "Thing", "name": "React (JavaScript library)", "sameAs": "https://en.wikipedia.org/wiki/React_(JavaScript_library)" },
+      { "@type": "Thing", "name": "Scalable Vector Graphics", "sameAs": "https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" },
+      { "@type": "Thing", "name": "TypeScript", "sameAs": "https://en.wikipedia.org/wiki/TypeScript" }
+    ],
+    "keywords": ["convert svg to react component", "svg to jsx", "react svg component typescript", "svgr vite setup", "svg to tsx 2026"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://iconstash.io/articles/" },
+      { "@type": "ListItem", "position": 3, "name": "Convert SVG to React Component Guide" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best tool to convert SVG to React component in 2026?",
+        "answer": { "@type": "Answer", "text": "For batch pipelines and CI/CD, the SVGR CLI or @svgr/plugin-jsx is standard. For visual workflows and instant development, IconStash provides one-click copy of pre-optimized React JSX with custom stroke, size, and currentColor tokens across 134,701 vector icons." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I make a converted React SVG icon accept Tailwind CSS classes?",
+        "answer": { "@type": "Answer", "text": "Ensure your converted JSX paths replace hardcoded hex colors with stroke='currentColor' or fill='currentColor' and spread props onto the root <svg {...props} className={className}> element." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do converted SVGs sometimes fail with hydration errors in Next.js?",
+        "answer": { "@type": "Answer", "text": "If an SVG uses linear gradients or masks with static IDs (like id='gradient-1'), multiple instances on the same page collide or mismatch during server-side rendering. Use React 19's useId() hook to generate unique, deterministic clip and gradient IDs." }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    svg { max-width: 100%; display: inline-block; vertical-align: middle; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: all 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    .theme-toggle-btn { background: transparent; border: 1px solid #262626; color: #A3A3A3; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms ease; }
+    .theme-toggle-btn:hover { border-color: #404040; color: #F2F2F2; }
+
+    .article-wrap { max-width: 820px; margin: 0 auto; padding: 56px 24px 100px; }
+    .breadcrumb { display: flex; gap: 8px; font-size: 13px; color: #666; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #C1DD2D; }
+    .breadcrumb .sep { color: #444; }
+
+    .article-hero { margin-bottom: 48px; border-bottom: 1px solid #1A1A1A; padding-bottom: 40px; }
+    .article-hero .tag { display: inline-block; background: rgba(193,221,45,0.12); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(193,221,45,0.25); }
+    .article-hero h1 { font-size: clamp(30px, 4.5vw, 42px); font-weight: 900; line-height: 1.18; color: #FFF; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .article-meta { display: flex; gap: 20px; font-size: 13px; color: #737373; align-items: center; flex-wrap: wrap; margin-top: 16px; }
+
+    .featured-summary { background: linear-gradient(180deg, #141414 0%, #0E0E0E 100%); border: 1px solid #262626; border-left: 4px solid #C1DD2D; border-radius: 10px; padding: 24px 28px; margin: 28px 0 36px; }
+    .featured-summary p { font-size: 15.5px; line-height: 1.7; color: #E5E5E5; margin-bottom: 12px; font-weight: 500; }
+    .featured-summary ul { margin: 0 0 0 20px; color: #D4D4D4; }
+    .featured-summary li { margin-bottom: 8px; font-size: 14.5px; line-height: 1.6; }
+
+    h2 { font-size: 26px; font-weight: 800; color: #FFF; letter-spacing: -0.02em; margin: 52px 0 20px; padding-top: 20px; border-top: 1px solid #1F1F1F; }
+    h3 { font-size: 20px; font-weight: 700; color: #E5E5E5; margin: 32px 0 14px; }
+    p { margin-bottom: 22px; color: #D4D4D4; font-size: 16px; line-height: 1.8; }
+    strong { color: #FFF; }
+    ul, ol { margin: 0 0 24px 28px; color: #D4D4D4; }
+    li { margin-bottom: 10px; line-height: 1.7; font-size: 15.5px; }
+
+    pre { background: #121212; border: 1px solid #222; border-radius: 8px; padding: 20px; overflow-x: auto; margin: 24px 0; font-family: "JetBrains Mono", monospace; font-size: 13.5px; line-height: 1.6; color: #E5E5E5; }
+    code { font-family: "JetBrains Mono", monospace; font-size: 0.9em; background: #1A1A1A; padding: 2px 6px; border-radius: 4px; color: #C1DD2D; }
+
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 48px 24px; background: #0A0A0A; text-align: center; font-size: 14px; color: #666; margin-top: 80px; }
+    .site-footer a { color: #888; }
+    .site-footer a:hover { color: #C1DD2D; }
+
+    /* Light Theme */
+    html[data-theme="light"] body { background: #FAFAFA; color: #171717; }
+    html[data-theme="light"] .site-header { background: rgba(250,250,250,0.88); border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .site-header .logo { color: #171717; }
+    html[data-theme="light"] .site-header nav a { color: #525252; }
+    html[data-theme="light"] .article-hero h1 { color: #0A0A0A; }
+    html[data-theme="light"] h2 { color: #0A0A0A; border-top-color: #E5E5E5; }
+    html[data-theme="light"] h3 { color: #171717; }
+    html[data-theme="light"] p, html[data-theme="light"] ul, html[data-theme="light"] ol { color: #383838; }
+    html[data-theme="light"] strong { color: #0A0A0A; }
+    html[data-theme="light"] .featured-summary { background: #F4F4F5; border-color: #E4E4E7; border-left-color: #849E00; }
+    html[data-theme="light"] .featured-summary p { color: #18181B; }
+    html[data-theme="light"] pre { background: #F4F4F5; border-color: #E4E4E7; color: #18181B; }
+    html[data-theme="light"] code { background: #E4E4E7; color: #4D6300; }
+    html[data-theme="light"] a { color: #6D8200; }
+    html[data-theme="light"] .site-footer { background: #FAFAFA; border-top-color: #E5E5E5; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="IconStash.io home">
+      <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2V9Z"/></svg>
+      <span>IconStash</span>
+    </a>
+    <nav>
+      <a href="/#/">Search 134K+ Icons</a>
+      <a href="/articles/">Articles &amp; Guides</a>
+      <a href="/Listicles/best-free-icon-sets-2026/">Best Sets</a>
+      <a href="/Glossary/icon-svg-terminology/">Glossary</a>
+      <a href="/stats/">Statistics</a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="/#/" class="header-cta">Open App</a>
+    </nav>
+  </header>
+
+  <main class="article-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/articles/">Articles</a>
+      <span class="sep">/</span>
+      <span>Convert SVG to React Component Guide</span>
+    </nav>
+
+    <article>
+      <header class="article-hero">
+        <span class="tag">React &amp; TypeScript Architecture</span>
+        <h1>How to Convert SVG to React Component (JSX &amp; TSX): The 2026 Blueprint</h1>
+        <div class="article-meta">
+          <span><strong>Published:</strong> August 22, 2026</span>
+          <span><strong>Author:</strong> IconStash Core Architecture Team</span>
+          <span><strong>Reading Time:</strong> 13 min read</span>
+        </div>
+      </header>
+
+      <div class="featured-summary">
+        <p>Converting raw SVG files into optimized React components is essential for modern web development. This comprehensive 2026 guide covers manual JSX conversions, SVGR CLI automation, Vite and Next.js Turbopack integrations, type-safe TypeScript props, and how IconStash eliminates conversion friction.</p>
+        <ul>
+          <li>Compare 5 SVG-to-React transformation workflows for developer ergonomics, build speed, and bundle size.</li>
+          <li>Master <code>currentColor</code> attribute substitution and dynamic Tailwind CSS sizing.</li>
+          <li>Prevent common pitfalls: gradient ID collisions, kebab-case JSX syntax errors, and hydration mismatches.</li>
+        </ul>
+      </div>
+
+      <figure style="margin: 24px 0 36px; padding: 0; display: block;">
+        <img src="/assets/articles/convert-svg-to-react-component.jpg" alt="SVG to React JSX and TSX Component conversion automated pipeline" width="1200" height="675" loading="lazy" style="max-width: 100%; height: auto; border-radius: 10px; display: block; border: 1px solid #262626;" />
+        <figcaption style="font-size: 0.85em; color: #666; text-align: center; margin-top: 10px; font-style: italic;">Visualizing the automated vector pipeline: converting raw XML markup into type-safe React Server Components.</figcaption>
+      </figure>
+
+      <p>Converting an SVG into a React component sounds trivial: copy the raw markup, paste it into a <code>.tsx</code> file, change <code>class</code> to <code>className</code>, and you're done. But in production engineering, naive conversions quickly trigger subtle bugs:</p>
+      <ul>
+        <li>Attributes like <code>stroke-width</code> or <code>fill-rule</code> crash React with kebab-case runtime warnings.</li>
+        <li>Hardcoded hex fills break dark mode theming and ignore parent Tailwind CSS color utilities.</li>
+        <li>Multiple icon instances sharing internal <code>&lt;linearGradient id="a"&gt;</code> IDs overwrite each other's colors across the entire DOM tree.</li>
+      </ul>
+      <p>In this guide, we break down the definitive engineering standards for turning SVG vectors into production-ready React 19 JSX and TypeScript components.</p>
+
+      <div role="navigation" data-rs-enrichment="1" aria-label="Table of contents" style="background:color-mix(in srgb, currentColor 4%, transparent);border:1px solid color-mix(in srgb, currentColor 13%, transparent);border-radius:8px;padding:16px 20px;margin-bottom:24px;font-family:inherit">
+        <p style="font-weight:600;font-size:.85em;text-transform:uppercase;letter-spacing:.05em;color:color-mix(in srgb, currentColor 55%, transparent);margin:0 0 10px 0">Table of contents</p>
+        <ol style="margin:0;padding-left:20px;line-height:1.75;font-size:.95em">
+          <li style="margin:4px 0"><a href="#5-ways-to-convert-svg-to-react-compared" style="color:inherit;text-decoration:underline;text-underline-offset:3px">1. 5 Ways to Convert SVG to React Compared</a></li>
+          <li style="margin:4px 0"><a href="#the-golden-rules-of-react-svg-components" style="color:inherit;text-decoration:underline;text-underline-offset:3px">2. The 4 Golden Rules of React SVG Components</a></li>
+          <li style="margin:4px 0"><a href="#automated-svgr-cli-batch-pipeline" style="color:inherit;text-decoration:underline;text-underline-offset:3px">3. Automated SVGR CLI &amp; TypeScript Batch Pipeline</a></li>
+          <li style="margin:4px 0"><a href="#handling-gradients-masks-and-ids-safely" style="color:inherit;text-decoration:underline;text-underline-offset:3px">4. Handling Gradients, Masks &amp; IDs Safely with useId()</a></li>
+          <li style="margin:4px 0"><a href="#how-iconstash-delivers-instant-react-jsx" style="color:inherit;text-decoration:underline;text-underline-offset:3px">5. How IconStash Delivers Instant React JSX (0 Tools Needed)</a></li>
+          <li style="margin:4px 0"><a href="#frequently-asked-questions" style="color:inherit;text-decoration:underline;text-underline-offset:3px">6. Frequently Asked Questions</a></li>
+          <li style="margin:4px 0"><a href="#final-takeaways" style="color:inherit;text-decoration:underline;text-underline-offset:3px">7. Final Takeaways</a></li>
+        </ol>
+      </div>
+
+      <h2 id="5-ways-to-convert-svg-to-react-compared">5 Ways to Convert SVG to React Compared</h2>
+      <p>Depending on whether you are converting a single one-off icon or maintaining a design system of 500+ assets, here is how the top conversion methods stack up:</p>
+
+      <div data-rs-enrichment="comparison-table" style="font-family:inherit;background:#121212;border:1px solid #222;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,0.05);overflow:hidden;margin:28px 0;">
+        <div style="overflow-x:auto;">
+          <table style="width:100%;min-width:720px;border-collapse:collapse;table-layout:fixed;font-family:inherit;">
+            <colgroup><col style="width:25%"><col style="width:18%"><col style="width:18%"><col style="width:20%"><col style="width:19%"></colgroup>
+            <thead>
+              <tr>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">Method</th>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">Workflow Speed</th>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">TypeScript Safety</th>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">Build Tooling Required</th>
+                <th style="padding:13px 12px;background:#161616;color:#8A8F98;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;text-align:left;vertical-align:middle;border-bottom:1px solid #262626;font-family:inherit;">Best For</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">IconStash Copy JSX</div><div style="margin-top:5px;line-height:1;font-family:inherit;"><span style="display:inline-block;background:#C1DD2D;color:#0A0A0A;font-size:10.5px;font-weight:700;letter-spacing:0.02em;border-radius:100px;padding:2px 8px;white-space:nowrap;font-family:inherit;">Fastest</span></div></td>
+                <td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;color:#C1DD2D;font-weight:700;font-size:14px;">Instant (1 click)</td>
+                <td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;color:#D4D4D4;font-size:13.5px;">Full Props Support</td>
+                <td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;color:#A3A3A3;font-size:13.5px;">None (Zero npm installs)</td>
+                <td style="padding:16px 12px;vertical-align:middle;background:#161616;border-bottom:1px solid #262626;color:#E5E5E5;font-size:13.5px;">Everyday UI development</td>
+              </tr>
+              <tr>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">SVGR CLI Batch</div></td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#D4D4D4;font-size:14px;">Automated in CI/CD</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#C1DD2D;font-size:13.5px;font-weight:600;">Strict TypeScript (.tsx)</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#A3A3A3;font-size:13.5px;">@svgr/cli &amp; SVGO</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#E5E5E5;font-size:13.5px;">Large design system monorepos</td>
+              </tr>
+              <tr>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">vite-plugin-svgr</div></td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#D4D4D4;font-size:14px;">Import on demand</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#D4D4D4;font-size:13.5px;">Requires d.ts types</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#A3A3A3;font-size:13.5px;">Vite Build Plugin</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#E5E5E5;font-size:13.5px;">Vite React Single Page Apps</td>
+              </tr>
+              <tr>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">Manual Online Converter</div></td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#E5E5E5;font-size:14px;">Manual copy/paste</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#A3A3A3;font-size:13.5px;">Basic JSX only</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#A3A3A3;font-size:13.5px;">None</td>
+                <td style="padding:16px 12px;vertical-align:middle;border-bottom:1px solid #1E1E1E;color:#E5E5E5;font-size:13.5px;">Quick prototypes</td>
+              </tr>
+              <tr>
+                <td style="padding:16px 12px;vertical-align:middle;"><div style="font-size:15px;font-weight:600;color:#FFF;line-height:1.2;font-family:inherit;">Webpack @svgr/webpack</div></td>
+                <td style="padding:16px 12px;vertical-align:middle;color:#D4D4D4;font-size:14px;">Import on demand</td>
+                <td style="padding:16px 12px;vertical-align:middle;color:#D4D4D4;font-size:13.5px;">Config dependent</td>
+                <td style="padding:16px 12px;vertical-align:middle;color:#A3A3A3;font-size:13.5px;">Webpack 5 loader</td>
+                <td style="padding:16px 12px;vertical-align:middle;color:#E5E5E5;font-size:13.5px;">Legacy Next.js Webpack builds</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h2 id="the-golden-rules-of-react-svg-components">The 4 Golden Rules of React SVG Components</h2>
+      <p>When engineering React SVG components, apply these four principles to guarantee universal theme support and high performance:</p>
+
+      <h3>1. Convert Kebab-Case Attributes to CamelCase</h3>
+      <p>XML allows hyphenated attributes, but React JSX requires camelCase. Failure to convert will trigger console warnings or fail strict JSX compilation:</p>
+      <ul>
+        <li><code>stroke-width</code> ➔ <code>strokeWidth</code></li>
+        <li><code>stroke-linecap</code> ➔ <code>strokeLinecap</code></li>
+        <li><code>stroke-linejoin</code> ➔ <code>strokeLinejoin</code></li>
+        <li><code>fill-rule</code> ➔ <code>fillRule</code></li>
+        <li><code>clip-path</code> ➔ <code>clipPath</code></li>
+      </ul>
+
+      <h3>2. Dynamic Theming with currentColor</h3>
+      <p>Replace hardcoded colors like <code>stroke="#000000"</code> or <code>fill="#1E293B"</code> with <code>currentColor</code>. This allows the icon to seamlessly inherit CSS colors, dark mode states, and Tailwind utility classes (e.g. <code>text-blue-500 hover:text-blue-600</code>).</p>
+
+      <h3>3. Spread Props onto the Root SVG</h3>
+      <p>Always extend <code>React.SVGProps&lt;SVGSVGElement&gt;</code> and spread <code>{...props}</code> onto the root <code>&lt;svg&gt;</code> tag so consumers can pass <code>onClick</code>, <code>className</code>, <code>id</code>, or <code>aria-label</code> dynamically.</p>
+
+      <h3>4. Enforce Accessibility (ARIA)</h3>
+      <p>Icons without text require <code>aria-label</code> or <code>&lt;title&gt;</code> elements, while purely decorative icons should include <code>aria-hidden="true"</code>.</p>
+
+      <h2 id="automated-svgr-cli-batch-pipeline">Automated SVGR CLI &amp; TypeScript Batch Pipeline</h2>
+      <p>For engineering teams with dozens of raw Figma SVG exports in an <code>icons/</code> directory, use SVGR CLI to transpile all SVGs into optimized, typed React components automatically:</p>
+      <pre><code># Install SVGR CLI and SVGO
+npm install --save-dev @svgr/cli svgo
+
+# Run batch conversion to TypeScript .tsx
+npx @svgr/cli \
+  --icon \
+  --typescript \
+  --replace-attr-values "#000=currentColor" \
+  --out-dir src/components/icons \
+  src/assets/raw-svgs</code></pre>
+
+      <p>Here is the resulting high-performance component created by SVGR:</p>
+      <pre><code>// src/components/icons/ArrowRight.tsx
+import * as React from 'react';
+import type { SVGProps } from 'react';
+
+const ArrowRight = (props: SVGProps&lt;SVGSVGElement&gt;) => (
+  &lt;svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1em"
+    height="1em"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    {...props}
+  &gt;
+    &lt;path d="M5 12h14M12 5l7 7-7 7" /&gt;
+  &lt;/svg&gt;
+);
+
+export default ArrowRight;</code></pre>
+
+      <h2 id="handling-gradients-masks-and-ids-safely">Handling Gradients, Masks &amp; IDs Safely with useId()</h2>
+      <p>One of the most insidious bugs in React SVG development occurs when complex icons with gradients (such as Solar Duotone or Flat Icons) use hardcoded element IDs like <code>&lt;linearGradient id="gradient-1"&gt;</code>.</p>
+      <p>When you render five instances of that icon on a dashboard, the browser links every icon to the first instance's gradient in memory. In React 19 and Next.js 15, solve this using the native <code>useId()</code> hook:</p>
+      <pre><code>import React, { useId } from 'react';
+
+export const GradientShieldIcon = (props: React.SVGProps&lt;SVGSVGElement&gt;) => {
+  const gradientId = useId();
+
+  return (
+    &lt;svg viewBox="0 0 24 24" width="24" height="24" fill="none" {...props}&gt;
+      &lt;defs&gt;
+        &lt;linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%"&gt;
+          &lt;stop offset="0%" stopColor="#C1DD2D" /&gt;
+          &lt;stop offset="100%" stopColor="#00E5FF" /&gt;
+        &lt;/linearGradient&gt;
+      &lt;/defs&gt;
+      &lt;path
+        d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"
+        fill={`url(#${gradientId})`}
+      /&gt;
+    &lt;/svg&gt;
+  );
+};</code></pre>
+
+      <h2 id="how-iconstash-delivers-instant-react-jsx">How IconStash Delivers Instant React JSX (0 Tools Needed)</h2>
+      <p>While build plugins and CLI scripts are great for automated pipelines, everyday frontend development demands speed. When you need an icon for a button, modal, or dropdown, configuring SVGR plugins slows you down.</p>
+      <p><strong>IconStash</strong> completely eliminates the conversion step:</p>
+      <ul>
+        <li>Search 134,701 vector icons across 28 curated libraries simultaneously</li>
+        <li>One-click <strong>Copy JSX</strong> extracts pre-cleaned, camelCased React code with <code>currentColor</code></li>
+        <li>Adjust stroke thickness (e.g. 1.5px, 2px, 2.5px) live before copying</li>
+        <li>100% open-source under permissive MIT, Apache 2.0, and ISC commercial licenses</li>
+      </ul>
+
+      <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+      <div class="faq-item" style="background:#121212;border:1px solid #222;border-radius:8px;margin-bottom:14px;padding:18px 22px;">
+        <h3 style="margin-top:0;font-size:16px;color:#FFF;">Can I pass Tailwind CSS classes directly to converted React SVG icons?</h3>
+        <p style="margin-bottom:0;color:#A3A3A3;font-size:14.5px;">Yes. Because clean converted components spread <code>{...props}</code> and use <code>stroke="currentColor"</code> or <code>fill="currentColor"</code>, you can style them with classes like <code>&lt;Icon className="w-5 h-5 text-lime-400 hover:text-white transition-colors" /&gt;</code>.</p>
+      </div>
+
+      <div class="faq-item" style="background:#121212;border:1px solid #222;border-radius:8px;margin-bottom:14px;padding:18px 22px;">
+        <h3 style="margin-top:0;font-size:16px;color:#FFF;">Is inlining SVG components better than using an SVG sprite sheet?</h3>
+        <p style="margin-bottom:0;color:#A3A3A3;font-size:14.5px;">In Next.js 15 Server Components (RSC), inline SVG components stream pure HTML with 0 KB client JavaScript, making them superior for dynamic UI. For thousands of static icons, external cached SVG sprites offer minor cache benefits.</p>
+      </div>
+
+      <h2 id="final-takeaways">Final Takeaways</h2>
+      <p>Transforming SVG files into React components requires enforcing <strong>camelCase attributes</strong>, dynamic <strong><code>currentColor</code> tokens</strong>, and <strong><code>useId()</code> isolation</strong> for complex fills.</p>
+      <p>Copy clean, production-ready React JSX instantly for over 134,000+ icons at <a href="https://iconstash.io">IconStash</a> today.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
+    <p style="margin-top: 8px;">
+      <a href="/about/">About</a> &bull;
+      <a href="/contact/">Contact</a> &bull;
+      <a href="/privacy/">Privacy Policy</a> &bull;
+      <a href="/terms/">Terms of Service</a> &bull;
+      <a href="/articles/">Articles</a> &bull;
+      <a href="/stats/">Stats</a>
+    </p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    toggleBtn.addEventListener('click', () => {
+      const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+  </script>
+</body>
+</html>

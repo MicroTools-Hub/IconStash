@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Path Syntax &amp; Vector Geometry Glossary (40+ Terms) | IconStash</title>
+  <meta name="description" content="The definitive SVG path syntax and vector geometry glossary. Clear definitions for all SVG path commands (M, L, C, S, Q, T, A, Z), Bezier curves, and coordinate systems.">
+  <meta name="keywords" content="svg path syntax glossary, svg path commands explained, svg cubic bezier syntax, svg arc command parameters, svg vector geometry reference 2026">
+  <meta property="og:title" content="SVG Path Syntax & Vector Geometry Glossary (40+ Terms)">
+  <meta property="og:description" content="Comprehensive reference for every SVG path command, curve equation, and coordinate transform used in modern web iconography.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/Glossary/svg-path-syntax-geometry-glossary/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/assets/articles/svg-path-syntax-geometry.jpg">
+  <meta property="article:published_time" content="2026-08-22T00:00:00Z">
+  <meta property="article:modified_time" content="2026-08-22T00:00:00Z">
+  <meta property="article:author" content="IconStash Mathematics & Graphics Team">
+  <meta property="article:section" content="Glossary">
+  <meta property="article:tag" content="SVG">
+  <meta property="article:tag" content="Vector Geometry">
+  <meta property="article:tag" content="Web Standards">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SVG Path Syntax & Vector Geometry Glossary (40+ Terms)">
+  <meta name="twitter:description" content="Reference guide for SVG path commands (M, L, C, S, Q, T, A, Z) and coordinate math.">
+  <meta name="twitter:image" content="https://iconstash.io/assets/articles/svg-path-syntax-geometry.jpg">
+  <link rel="canonical" href="https://iconstash.io/Glossary/svg-path-syntax-geometry-glossary/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "name": "SVG Path Syntax & Vector Geometry Glossary",
+    "description": "Comprehensive reference documentation defining all SVG path commands, Bezier mathematical curves, and 2D vector geometry concepts.",
+    "url": "https://iconstash.io/Glossary/svg-path-syntax-geometry-glossary/",
+    "hasDefinedTerm": [
+      { "@type": "DefinedTerm", "name": "M / m (MoveTo)", "description": "Establishes a new current point for the SVG path without drawing a visible line segment." },
+      { "@type": "DefinedTerm", "name": "C / c (Cubic Bézier Curve)", "description": "Draws a smooth cubic Bézier curve from the current point to an endpoint using two distinct control points." },
+      { "@type": "DefinedTerm", "name": "A / a (Elliptical Arc)", "description": "Draws an elliptical arc segment defined by radii (rx, ry), x-axis rotation, large-arc-flag, and sweep-flag." },
+      { "@type": "DefinedTerm", "name": "Z / z (ClosePath)", "description": "Closes the current subpath by drawing a straight line from the current position back to the initial MoveTo coordinate." }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Glossary", "item": "https://iconstash.io/articles/" },
+      { "@type": "ListItem", "position": 3, "name": "SVG Path Syntax & Geometry Glossary" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the difference between uppercase and lowercase SVG path commands?",
+        "answer": { "@type": "Answer", "text": "Uppercase commands (e.g. M, L, C, A) use absolute coordinates within the SVG viewBox. Lowercase commands (e.g. m, l, c, a) use relative coordinates offset from the preceding point." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the SVG Arc (A) command determine which ellipse curve to draw?",
+        "answer": { "@type": "Answer", "text": "The Arc command uses large-arc-flag (0 for arcs <= 180 degrees, 1 for arcs > 180 degrees) and sweep-flag (0 for counter-clockwise, 1 for clockwise) to select between the 4 possible mathematical arcs connecting two points." }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    svg { max-width: 100%; display: inline-block; vertical-align: middle; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: all 150ms ease; }
+    .header-cta:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    .theme-toggle-btn { background: transparent; border: 1px solid #262626; color: #A3A3A3; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms ease; }
+    .theme-toggle-btn:hover { border-color: #404040; color: #F2F2F2; }
+
+    .article-wrap { max-width: 820px; margin: 0 auto; padding: 56px 24px 100px; }
+    .breadcrumb { display: flex; gap: 8px; font-size: 13px; color: #666; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #C1DD2D; }
+    .breadcrumb .sep { color: #444; }
+
+    .article-hero { margin-bottom: 48px; border-bottom: 1px solid #1A1A1A; padding-bottom: 40px; }
+    .article-hero .tag { display: inline-block; background: rgba(193,221,45,0.12); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(193,221,45,0.25); }
+    .article-hero h1 { font-size: clamp(30px, 4.5vw, 42px); font-weight: 900; line-height: 1.18; color: #FFF; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .article-meta { display: flex; gap: 20px; font-size: 13px; color: #737373; align-items: center; flex-wrap: wrap; margin-top: 16px; }
+
+    .featured-summary { background: linear-gradient(180deg, #141414 0%, #0E0E0E 100%); border: 1px solid #262626; border-left: 4px solid #C1DD2D; border-radius: 10px; padding: 24px 28px; margin: 28px 0 36px; }
+    .featured-summary p { font-size: 15.5px; line-height: 1.7; color: #E5E5E5; margin-bottom: 12px; font-weight: 500; }
+    .featured-summary ul { margin: 0 0 0 20px; color: #D4D4D4; }
+    .featured-summary li { margin-bottom: 8px; font-size: 14.5px; line-height: 1.6; }
+
+    h2 { font-size: 26px; font-weight: 800; color: #FFF; letter-spacing: -0.02em; margin: 52px 0 20px; padding-top: 20px; border-top: 1px solid #1F1F1F; }
+    h3 { font-size: 20px; font-weight: 700; color: #E5E5E5; margin: 32px 0 14px; }
+    p { margin-bottom: 22px; color: #D4D4D4; font-size: 16px; line-height: 1.8; }
+    strong { color: #FFF; }
+    ul, ol { margin: 0 0 24px 28px; color: #D4D4D4; }
+    li { margin-bottom: 10px; line-height: 1.7; font-size: 15.5px; }
+
+    pre { background: #121212; border: 1px solid #222; border-radius: 8px; padding: 20px; overflow-x: auto; margin: 24px 0; font-family: "JetBrains Mono", monospace; font-size: 13.5px; line-height: 1.6; color: #E5E5E5; }
+    code { font-family: "JetBrains Mono", monospace; font-size: 0.9em; background: #1A1A1A; padding: 2px 6px; border-radius: 4px; color: #C1DD2D; }
+
+    .glossary-card { background: #121212; border: 1px solid #222; border-radius: 8px; padding: 20px 24px; margin-bottom: 16px; transition: border-color 150ms ease; }
+    .glossary-card:hover { border-color: #333; }
+    .glossary-card h3 { margin: 0 0 8px; font-size: 18px; color: #FFF; display: flex; align-items: center; justify-content: space-between; }
+    .glossary-card h3 code { font-size: 14px; color: #C1DD2D; }
+    .glossary-card p { margin-bottom: 0; font-size: 15px; color: #A3A3A3; line-height: 1.6; }
+
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 48px 24px; background: #0A0A0A; text-align: center; font-size: 14px; color: #666; margin-top: 80px; }
+    .site-footer a { color: #888; }
+    .site-footer a:hover { color: #C1DD2D; }
+
+    /* Light Theme */
+    html[data-theme="light"] body { background: #FAFAFA; color: #171717; }
+    html[data-theme="light"] .site-header { background: rgba(250,250,250,0.88); border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .site-header .logo { color: #171717; }
+    html[data-theme="light"] .site-header nav a { color: #525252; }
+    html[data-theme="light"] .article-hero h1 { color: #0A0A0A; }
+    html[data-theme="light"] h2 { color: #0A0A0A; border-top-color: #E5E5E5; }
+    html[data-theme="light"] h3 { color: #171717; }
+    html[data-theme="light"] p, html[data-theme="light"] ul, html[data-theme="light"] ol { color: #383838; }
+    html[data-theme="light"] strong { color: #0A0A0A; }
+    html[data-theme="light"] .featured-summary { background: #F4F4F5; border-color: #E4E4E7; border-left-color: #849E00; }
+    html[data-theme="light"] .featured-summary p { color: #18181B; }
+    html[data-theme="light"] .glossary-card { background: #F4F4F5; border-color: #E4E4E7; }
+    html[data-theme="light"] .glossary-card h3 { color: #0A0A0A; }
+    html[data-theme="light"] .glossary-card p { color: #383838; }
+    html[data-theme="light"] pre { background: #F4F4F5; border-color: #E4E4E7; color: #18181B; }
+    html[data-theme="light"] code { background: #E4E4E7; color: #4D6300; }
+    html[data-theme="light"] a { color: #6D8200; }
+    html[data-theme="light"] .site-footer { background: #FAFAFA; border-top-color: #E5E5E5; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="IconStash.io home">
+      <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2V9Z"/></svg>
+      <span>IconStash</span>
+    </a>
+    <nav>
+      <a href="/#/">Search 134K+ Icons</a>
+      <a href="/articles/">Articles &amp; Guides</a>
+      <a href="/Listicles/best-free-icon-sets-2026/">Best Sets</a>
+      <a href="/Glossary/icon-svg-terminology/">Glossary</a>
+      <a href="/stats/">Statistics</a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="/#/" class="header-cta">Open App</a>
+    </nav>
+  </header>
+
+  <main class="article-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/articles/">Glossary</a>
+      <span class="sep">/</span>
+      <span>SVG Path Syntax &amp; Geometry Glossary</span>
+    </nav>
+
+    <article>
+      <header class="article-hero">
+        <span class="tag">Technical Reference</span>
+        <h1>SVG Path Syntax &amp; Vector Geometry Glossary (40+ Terms)</h1>
+        <div class="article-meta">
+          <span><strong>Published:</strong> August 22, 2026</span>
+          <span><strong>Author:</strong> IconStash Mathematics &amp; Graphics Team</span>
+          <span><strong>Reading Time:</strong> 14 min read</span>
+        </div>
+      </header>
+
+      <div class="featured-summary">
+        <p>The <code>&lt;path d="..."&gt;</code> element is the foundational primitive of all SVG vector icons. This glossary provides rigorous mathematical definitions, syntax references, and practical diagrams for every SVG path command and 2D vector coordinate concept.</p>
+        <ul>
+          <li>Comprehensive coverage of line commands, Bézier curves, elliptical arcs, and subpath closures.</li>
+          <li>Clear explanations of matrix transformations, coordinate spaces, and winding order fill rules.</li>
+          <li>Explore and inspect clean vector paths for 134,701 icons on IconStash.</li>
+        </ul>
+      </div>
+
+      <figure style="margin: 24px 0 36px; padding: 0; display: block;">
+        <img src="/assets/articles/svg-path-syntax-geometry.jpg" alt="SVG vector path syntax and cubic bezier curve geometry reference diagram" width="1200" height="675" loading="lazy" style="max-width: 100%; height: auto; border-radius: 10px; display: block; border: 1px solid #262626;" />
+        <figcaption style="font-size: 0.85em; color: #666; text-align: center; margin-top: 10px; font-style: italic;">Mathematical breakdown of SVG path commands: Cubic Bézier control points and Elliptical Arc geometry.</figcaption>
+      </figure>
+
+      <div role="navigation" data-rs-enrichment="1" aria-label="Table of contents" style="background:color-mix(in srgb, currentColor 4%, transparent);border:1px solid color-mix(in srgb, currentColor 13%, transparent);border-radius:8px;padding:16px 20px;margin-bottom:24px;font-family:inherit">
+        <p style="font-weight:600;font-size:.85em;text-transform:uppercase;letter-spacing:.05em;color:color-mix(in srgb, currentColor 55%, transparent);margin:0 0 10px 0">Table of contents</p>
+        <ol style="margin:0;padding-left:20px;line-height:1.75;font-size:.95em">
+          <li style="margin:4px 0"><a href="#primary-path-commands" style="color:inherit;text-decoration:underline;text-underline-offset:3px">1. Primary Path Commands (M, L, H, V, Z)</a></li>
+          <li style="margin:4px 0"><a href="#bezier-curve-commands" style="color:inherit;text-decoration:underline;text-underline-offset:3px">2. Bézier Curve Commands (C, S, Q, T)</a></li>
+          <li style="margin:4px 0"><a href="#elliptical-arc-command" style="color:inherit;text-decoration:underline;text-underline-offset:3px">3. Elliptical Arc Command (A)</a></li>
+          <li style="margin:4px 0"><a href="#coordinate-systems-and-viewbox" style="color:inherit;text-decoration:underline;text-underline-offset:3px">4. Coordinate Systems &amp; ViewBox Math</a></li>
+          <li style="margin:4px 0"><a href="#vector-geometry-and-rendering-rules" style="color:inherit;text-decoration:underline;text-underline-offset:3px">5. Vector Geometry &amp; Rendering Rules</a></li>
+          <li style="margin:4px 0"><a href="#frequently-asked-questions" style="color:inherit;text-decoration:underline;text-underline-offset:3px">6. Frequently Asked Questions</a></li>
+        </ol>
+      </div>
+
+      <h2 id="primary-path-commands">1. Primary Path Commands (M, L, H, V, Z)</h2>
+
+      <div class="glossary-card">
+        <h3>MoveTo <code>M x,y / m dx,dy</code></h3>
+        <p>Establishes a new current point for the drawing cursor without creating a visible line. Uppercase <code>M</code> uses absolute coordinates; lowercase <code>m</code> uses relative coordinates offset from the preceding coordinate.</p>
+      </div>
+
+      <div class="glossary-card">
+        <h3>LineTo <code>L x,y / l dx,dy</code></h3>
+        <p>Draws a straight line from the current position to the specified (x, y) coordinates.</p>
+      </div>
+
+      <div class="glossary-card">
+        <h3>Horizontal LineTo <code>H x / h dx</code></h3>
+        <p>Optimized shorthand that draws a strictly horizontal line to the target x-coordinate, maintaining the current y-coordinate.</p>
+      </div>
+
+      <div class="glossary-card">
+        <h3>Vertical LineTo <code>V y / v dy</code></h3>
+        <p>Optimized shorthand that draws a strictly vertical line to the target y-coordinate, maintaining the current x-coordinate.</p>
+      </div>
+
+      <div class="glossary-card">
+        <h3>ClosePath <code>Z / z</code></h3>
+        <p>Closes the active subpath by connecting a straight segment from the current coordinate back to the initial <code>MoveTo</code> point of that subpath.</p>
+      </div>
+
+      <h2 id="bezier-curve-commands">2. Bézier Curve Commands (C, S, Q, T)</h2>
+
+      <div class="glossary-card">
+        <h3>Cubic Bézier Curve <code>C x1,y1 x2,y2 x,y</code></h3>
+        <p>Draws a smooth cubic curve defined by two control points (x1, y1 for the start tangent, and x2, y2 for the end tangent) terminating at (x, y).</p>
+      </div>
+
+      <div class="glossary-card">
+        <h3>Smooth Cubic Bézier <code>S x2,y2 x,y</code></h3>
+        <p>Draws a cubic curve where the first control point is automatically calculated as the reflection of the previous curve's second control point, guaranteeing continuous tangent velocity.</p>
+      </div>
+
+      <div class="glossary-card">
+        <h3>Quadratic Bézier Curve <code>Q x1,y1 x,y</code></h3>
+        <p>Draws a quadratic curve controlled by a single control point (x1, y1) pulling the curve towards it before ending at (x, y).</p>
+      </div>
+
+      <div class="glossary-card">
+        <h3>Smooth Quadratic Bézier <code>T x,y</code></h3>
+        <p>Draws a quadratic curve that mirrors the preceding control point, creating seamless waving paths with minimal data.</p>
+      </div>
+
+      <h2 id="elliptical-arc-command">3. Elliptical Arc Command (A)</h2>
+
+      <div class="glossary-card">
+        <h3>Elliptical Arc <code>A rx,ry x-rot large-arc sweep x,y</code></h3>
+        <p>Draws an arc from the current point to (x, y) along an ellipse with horizontal radius <code>rx</code> and vertical radius <code>ry</code>. The <code>x-rot</code> parameter rotates the ellipse axes in degrees. The two boolean flags (<code>large-arc-flag</code> and <code>sweep-flag</code>) determine which of the four possible arc segments is drawn.</p>
+      </div>
+
+      <h2 id="coordinate-systems-and-viewbox">4. Coordinate Systems &amp; ViewBox Math</h2>
+
+      <div class="glossary-card">
+        <h3>viewBox <code>min-x min-y width height</code></h3>
+        <p>Defines the internal coordinate grid of the SVG canvas, enabling resolution-independent scaling to any external container dimensions.</p>
+      </div>
+
+      <div class="glossary-card">
+        <h3>preserveAspectRatio</h3>
+        <p>Dictates whether an SVG maintains its uniform aspect ratio (e.g. <code>xMidYMid meet</code>) or stretches non-uniformly (<code>none</code>) when the viewport dimensions mismatch.</p>
+      </div>
+
+      <div class="glossary-card">
+        <h3>Current Transformation Matrix (CTM)</h3>
+        <p>The 3x3 affine mathematical matrix mapping user-space vector points to screen pixels during browser GPU rendering.</p>
+      </div>
+
+      <h2 id="vector-geometry-and-rendering-rules">5. Vector Geometry &amp; Rendering Rules</h2>
+
+      <div class="glossary-card">
+        <h3>Winding Order (Fill Rules)</h3>
+        <p>The algorithmic rule determining whether enclosed vector regions are filled or transparent. <code>nonzero</code> counts clockwise vs counter-clockwise crossings; <code>evenodd</code> counts raw line intersections regardless of direction.</p>
+      </div>
+
+      <div class="glossary-card">
+        <h3>strokeDasharray &amp; strokeDashoffset</h3>
+        <p>Properties controlling dashed line patterns and stroke offset, used extensively in SVG line-drawing animations.</p>
+      </div>
+
+      <div class="glossary-card">
+        <h3>Subpath</h3>
+        <p>An isolated sequence of drawing commands beginning with a <code>MoveTo</code> (M) command and terminating with either a <code>ClosePath</code> (Z) or a subsequent <code>MoveTo</code> command.</p>
+      </div>
+
+      <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+      <div class="faq-item" style="background:#121212;border:1px solid #222;border-radius:8px;margin-bottom:14px;padding:18px 22px;">
+        <h3 style="margin-top:0;font-size:16px;color:#FFF;">Why do icon libraries minify SVG path commands?</h3>
+        <p style="margin-bottom:0;color:#A3A3A3;font-size:14.5px;">Minifiers like SVGO remove unnecessary whitespace, convert absolute coordinates to relative numbers when shorter, and merge consecutive commands (e.g. <code>L 10 10 L 20 20</code> ➔ <code>L10 10 20 20</code>) to reduce network payload size.</p>
+      </div>
+
+      <p style="margin-top: 32px;">Explore and copy clean, optimized SVG paths across 134,701 vector icons at <a href="https://iconstash.io">IconStash</a>.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
+    <p style="margin-top: 8px;">
+      <a href="/about/">About</a> &bull;
+      <a href="/contact/">Contact</a> &bull;
+      <a href="/privacy/">Privacy Policy</a> &bull;
+      <a href="/terms/">Terms of Service</a> &bull;
+      <a href="/articles/">Articles</a> &bull;
+      <a href="/stats/">Stats</a>
+    </p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    toggleBtn.addEventListener('click', () => {
+      const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+  </script>
+</body>
+</html>
