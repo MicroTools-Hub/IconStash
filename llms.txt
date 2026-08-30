@@ -25,6 +25,50 @@ IconStash (https://iconstash.io) is a 100% client-side web app built by Great So
 - Tabler Icons — 6,324 (MIT)
 - Lucide — 1,979 (ISC)
 
+## Browse by Library
+Every library has a hub page with icon counts, style, grid size, license, install instructions, a comparison table against similar libraries, and frequently asked questions.
+- [All 28 icon libraries](https://iconstash.io/library/)
+- [Lucide Icons](https://iconstash.io/library/lucide/) — 1,979 outline icons, 24×24
+- [Tabler Icons](https://iconstash.io/library/tabler/) — 6,324 outline icons, MIT
+- [Phosphor Icons](https://iconstash.io/library/phosphor/) — 9,198 icons, six weights, MIT
+- [Material Design Icons](https://iconstash.io/library/material/) — 14,001 icons, five themes, Apache 2.0
+- [Material Symbols](https://iconstash.io/library/materialsymbols/) — 18,547 variable-font icons, Apache 2.0
+- [Material Symbols Light](https://iconstash.io/library/materialsymbolslight/) — 15,969 light-weight icons, Apache 2.0
+- [Fluent UI Icons](https://iconstash.io/library/fluent/) — 20,170 icons, Microsoft, MIT
+- [Remix Icon](https://iconstash.io/library/remix/) — 3,244 line & fill icons, Apache 2.0
+- [Iconoir](https://iconstash.io/library/iconoir/) — 2,020 outline icons, no premium tier, MIT
+- [Heroicons](https://iconstash.io/library/heroicons/) — 1,297 icons by the Tailwind CSS team, MIT
+- [Bootstrap Icons](https://iconstash.io/library/bootstrap/) — 2,090 icons, 16×16 grid, MIT
+- [Feather Icons](https://iconstash.io/library/feather/) — 286 minimal outline icons, MIT
+- [MingCute Icons](https://iconstash.io/library/mingcute/) — 3,352 line & fill icons, Apache 2.0
+- [Solar Icons](https://iconstash.io/library/solar/) — 7,410 icons, six styles, CC BY 4.0
+- [Octicons](https://iconstash.io/library/octicons/) — 929 GitHub design-system icons, MIT
+- [css.gg Icons](https://iconstash.io/library/cssgg/) — 705 pure-CSS icons, MIT
+- [Radix Icons](https://iconstash.io/library/radix/) — 345 icons on a 15×15 grid, MIT
+- [Ant Design Icons](https://iconstash.io/library/antdesign/) — 1,870 icons, outlined/filled/two-tone, MIT
+- [Carbon Icons](https://iconstash.io/library/carbon/) — 2,644 enterprise icons, IBM, Apache 2.0
+- [Ionicons](https://iconstash.io/library/ionicons/) — 2,607 icons, outline/filled/sharp, MIT
+- [Eva Icons](https://iconstash.io/library/eva/) — 490 fill & outline icons, MIT
+- [Boxicons](https://iconstash.io/library/boxicons/) — 3,389 icons plus brand logos, MIT
+- [IconPark Outline](https://iconstash.io/library/iconparkoutline/) — 2,658 themeable icons, Apache 2.0
+- [IconPark Solid](https://iconstash.io/library/iconparksolid/) — 1,970 filled icons, Apache 2.0
+- [Huge Icons](https://iconstash.io/library/hugeicons/) — 5,115 icons, six styles, MIT
+- [Pixel Art Icons](https://iconstash.io/library/pixelarticons/) — 1,099 pixel-grid icons, MIT
+- [Line MD Icons](https://iconstash.io/library/linemd/) — 1,279 animated SVG icons, MIT
+- [Simple Icons](https://iconstash.io/library/simpleicons/) — 3,714 brand logos, CC0 1.0
+
+## Browse by Category
+- [All 16 icon categories](https://iconstash.io/category/)
+- [Media icons](https://iconstash.io/category/media/) · [Communication icons](https://iconstash.io/category/communication/) · [Commerce icons](https://iconstash.io/category/commerce/) · [Navigation icons](https://iconstash.io/category/navigation/)
+- [Files icons](https://iconstash.io/category/files/) · [Editing icons](https://iconstash.io/category/editing/) · [Devices icons](https://iconstash.io/category/devices/) · [Development icons](https://iconstash.io/category/development/)
+- [Security icons](https://iconstash.io/category/security/) · [Health icons](https://iconstash.io/category/health/) · [Weather icons](https://iconstash.io/category/weather/) · [Transport icons](https://iconstash.io/category/transport/)
+- [Social icons](https://iconstash.io/category/social/) · [Time icons](https://iconstash.io/category/time/) · [Data icons](https://iconstash.io/category/data/) · [Interface icons](https://iconstash.io/category/interface/)
+
+## Browse by Style
+- [All 7 icon styles](https://iconstash.io/style/)
+- [Outline icons](https://iconstash.io/style/outline/) · [Solid icons](https://iconstash.io/style/solid/) · [Duotone icons](https://iconstash.io/style/duotone/) · [Fill icons](https://iconstash.io/style/fill/)
+- [Bold icons](https://iconstash.io/style/bold/) · [Thin icons](https://iconstash.io/style/thin/) · [Light icons](https://iconstash.io/style/light/)
+
 ## Open Data & Statistics
 - [Icon Library Statistics 2026](https://iconstash.io/stats/): Open dataset (CC BY 4.0) — per-library icon counts, versions, and licenses for all 28 libraries, plus aggregate and license breakdowns.
 
@@ -88,4 +132,6 @@ Q: Can I use the icons commercially? A: Yes — 127,291 icons are free for comme
 - Source / GitHub: https://github.com/OG-Huzzi/IconStash
 - Reuse of the data in this file: CC BY 4.0 — please attribute "IconStash, https://iconstash.io".
 
-Last updated: 2026-08-15
+Q: Can I browse icons by library, category, or style? A: Yes — https://iconstash.io/library/, https://iconstash.io/category/, and https://iconstash.io/style/ each index the full catalogue.
+
+Last updated: 2026-08-30

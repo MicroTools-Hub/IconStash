@@ -2891,3 +2891,54 @@ kbd { min-width: 28px; text-align: center; padding: 4px 7px; border-radius: 6px;
   text-shadow: none !important;
   filter: none !important;
 }
+
+/* ─── Hub pages: /library/ /category/ /style/ ───────────────────────────── */
+.hub-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+  padding: 8px;
+}
+.hub-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 6px;
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  background: var(--glass-3);
+  text-align: center;
+}
+.hub-stat b { font-size: 17px; font-weight: 700; color: var(--text-primary); }
+.hub-stat span { font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
+
+.hub-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.hub-table th,
+.hub-table td { padding: 10px 12px; border-bottom: 1px solid var(--glass-border); text-align: left; }
+.hub-table th { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-secondary); }
+.hub-table td { color: var(--text-secondary); }
+.hub-table a { color: var(--text-primary); text-decoration: none; }
+.hub-table a:hover { color: var(--neon-blue); }
+
+.hub-links { line-height: 2.1; }
+.hub-links a { color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--glass-border); }
+.hub-links a:hover { color: var(--neon-blue); border-bottom-color: var(--neon-blue); }
+
+.pseo-page pre {
+  overflow-x: auto;
+  margin: 0 0 12px;
+  padding: 14px;
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  background: var(--glass-3);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+.pseo-page code { font-family: var(--font-mono); font-size: 13px; color: var(--neon-blue); }
+.pseo-page pre code { color: inherit; }
+.pseo-page .card ul { margin: 0 0 0 18px; color: var(--text-secondary); font-size: 14px; line-height: 1.7; }
+.pseo-page .card li { margin-bottom: 6px; }
+.pseo-page .lead + .lead { margin-top: 12px; }

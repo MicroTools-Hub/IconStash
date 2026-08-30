@@ -26,3 +26,7 @@ seomator.toml
 *-audit/
 # claude-seo: any local cache/baseline created in-tree (global cache lives in ~/.cache/claude-seo)
 .claude-seo/
+
+# Agent working data (memory notes, QA scripts). Not site content — must not be
+# pulled onto the VPS, or it ends up publicly served.
+.workbuddy-ai/
