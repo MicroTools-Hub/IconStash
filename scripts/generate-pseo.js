@@ -146,9 +146,9 @@ function toPascalCase(str) {
 
 const LIBRARY_INFO = {
   lucide: {
-    fullName: "Lucide Icons", count: "1,979", style: "outline", license: "MIT",
+    fullName: "Lucide Icons", count: "1,979", style: "outline", license: "ISC",
     npm: "lucide-react",
-    desc: "Clean, consistent, and MIT-licensed icon library built by the open-source community as a fork of Feather Icons. Every icon sits on a 24×24 grid with a 2px default stroke.",
+    desc: "Clean, consistent, and ISC-licensed icon library built by the open-source community as a fork of Feather Icons. Every icon sits on a 24×24 grid with a 2px default stroke.",
     reactCode: (n) => `npm install lucide-react\n\nimport { ${toPascalCase(n)} } from 'lucide-react';\n\n// JSX usage:\n<${toPascalCase(n)} size={24} color="#000" />`
   },
   tabler: {
@@ -473,7 +473,7 @@ function renderPseoHeader() {
 function renderPseoSidebar(activeSlug) {
   const rows = pseoLibraries().map((lib, rowIndex) => {
     const active = lib.slug === activeSlug;
-    return `<a class="lib-row ${active ? "active" : ""}" href="/#/library/${escapeHtml(lib.slug)}" data-slug="${escapeHtml(lib.slug)}" style="animation-delay:${rowIndex * 30}ms">
+    return `<a class="lib-row ${active ? "active" : ""}" href="/library/${escapeHtml(lib.slug)}/" data-slug="${escapeHtml(lib.slug)}" style="animation-delay:${rowIndex * 30}ms">
       <span class="lib-badge">${libraryBadgeSvg()}</span>
       <span class="lib-name">${escapeHtml(lib.name)}</span>
       <span class="lib-count">${Number(lib.count || 0).toLocaleString("en-US")}</span>
@@ -483,7 +483,7 @@ function renderPseoSidebar(activeSlug) {
   const categories = CATEGORY_RULES.concat([["Interface", "Controls"]]).map(([name], categoryIndex) => {
     const color = ["#00c3ff", "#ff2d9b", "#00ff88", "#bf00ff", "#ff6a00", "#f5ff00"][categoryIndex % 6];
     const slug = String(name).toLowerCase().replace(/\s+/g, "-");
-    return `<a class="category-item" href="/#/category/${encodeURIComponent(slug)}">
+    return `<a class="category-item" href="/category/${encodeURIComponent(slug)}/">
       <span class="category-dot" style="background:${color};color:${color}"></span>
       <span>${escapeHtml(name)}</span>
     </a>`;
@@ -593,7 +593,7 @@ function renderPseoFooter() {
       </div>
       <div class="footer-right">
         <div class="footer-line">This website is offered to you by <a href="https://greatsoftwarecompany.com" target="_blank" rel="noopener" class="footer-link">Great Software Company</a> in collaboration with Huzzi.</div>
-        <div class="footer-line"><a href="/#/legal/terms" class="footer-link">Terms of Service</a> / <a href="/#/legal/privacy" class="footer-link">Privacy Policy</a></div>
+        <div class="footer-line"><a href="/terms/" class="footer-link">Terms of Service</a> / <a href="/privacy/" class="footer-link">Privacy Policy</a></div>
         <div class="footer-line">Questions? Feedback? Contact us at <a href="mailto:heybro@iconstash.io" class="footer-link">heybro@iconstash.io</a></div>
         <div class="footer-line">&copy; ${new Date().getFullYear()} IconStash.io. All rights reserved.</div>
       </div>
@@ -601,7 +601,8 @@ function renderPseoFooter() {
   </footer>`;
 }
 
-function renderPseoShell({ title, description, url, schema, activeSlug, content }) {
+function renderPseoShell({ title, description, url, canonicalUrl, schema, activeSlug, content }) {
+  const canonical = canonicalUrl || url;
   return `<!doctype html>
 <html lang="en" data-theme="dark">
 <head>
@@ -611,7 +612,7 @@ function renderPseoShell({ title, description, url, schema, activeSlug, content 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
-  <link rel="canonical" href="${escapeHtml(url)}">
+  <link rel="canonical" href="${escapeHtml(canonical)}">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
@@ -932,8 +933,9 @@ function buildSchema(row, icon, faq, url, appUrl) {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "IconStash", item: `${SITE_URL}/` },
-        { "@type": "ListItem", position: 2, name: icon.library, item: `${SITE_URL}/#/library/${icon.librarySlug}` },
-        { "@type": "ListItem", position: 3, name: icon.displayName, item: url }
+        { "@type": "ListItem", position: 2, name: "Icon libraries", item: `${SITE_URL}/library/` },
+        { "@type": "ListItem", position: 3, name: icon.library, item: `${SITE_URL}/library/${icon.librarySlug}/` },
+        { "@type": "ListItem", position: 4, name: icon.displayName, item: url }
       ]
     },
     {
@@ -1022,23 +1024,117 @@ function buildIndexes(keywords, byIcon) {
   }
 }
 
+/* ─── Canonical consolidation ───────────────────────────────────────────────
+   One icon can currently produce ~10 indexable, self-canonical URLs (variant
+   sprawl). Every variant now canonicalises to a single chosen page per icon,
+   and artwork-identical synonym pairs (-filled/-fill, -outlined/-outline)
+   collapse onto the shorter form.                                           */
+const canonicalByIcon = new Map();
+let allSlugSet = new Set();
+
+// [duplicate suffix, canonical suffix] — verified artwork-identical pairs.
+const SYNONYM_PAIRS = [["-filled", "-fill"], ["-outlined", "-outline"]];
+
+function synonymTarget(slug) {
+  for (const [dup, base] of SYNONYM_PAIRS) {
+    if (slug.endsWith(dup)) {
+      const candidate = slug.slice(0, -dup.length) + base;
+      if (allSlugSet.has(candidate)) return candidate;
+    }
+  }
+  return null;
+}
+
+// "home-icon", "0-circle-fill-icon" — the exact-match head term.
+function isHeadTerm(slug) {
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*-icon$/.test(slug);
+}
+
+function preferredRow(a, b) {
+  const aHead = isHeadTerm(a.slug);
+  const bHead = isHeadTerm(b.slug);
+  if (aHead !== bHead) return aHead ? a : b;
+  const aDirect = a.intent === "direct-id";
+  const bDirect = b.intent === "direct-id";
+  if (aDirect !== bDirect) return aDirect ? a : b;
+  if (aHead && bHead) return a.slug.length <= b.slug.length ? a : b;
+  return (a.priority || Infinity) <= (b.priority || Infinity) ? a : b;
+}
+
+function buildCanonicals(keywords) {
+  allSlugSet = new Set(keywords.map((row) => row.slug));
+  canonicalByIcon.clear();
+  const best = new Map();
+  for (const row of keywords) {
+    if (synonymTarget(row.slug)) continue; // never canonical: folds into a synonym sibling
+    const current = best.get(row.iconId);
+    best.set(row.iconId, current ? preferredRow(current, row) : row);
+  }
+  for (const [iconId, row] of best) canonicalByIcon.set(iconId, row.slug);
+  const collapsed = keywords.filter((row) => synonymTarget(row.slug)).length;
+  const redirected = keywords.filter((row) => canonicalSlugFor(row) !== row.slug).length;
+  console.log(`Canonicals: ${canonicalByIcon.size.toLocaleString("en-US")} canonical icon pages, `
+    + `${redirected.toLocaleString("en-US")} variant pages folding into them `
+    + `(${collapsed.toLocaleString("en-US")} via synonym collapse).`);
+}
+
+function canonicalSlugFor(row) {
+  const synonym = synonymTarget(row.slug);
+  if (synonym) return synonym;
+  return canonicalByIcon.get(row.iconId) || row.slug;
+}
+
+/* ─── Related links: link out, never just sideways to own duplicates ─────────
+   Previously every page linked only to its own 10 variant URLs, so 149k pages
+   passed authority to themselves and dead-ended. Order now favours the same
+   concept in *other* libraries (the product's differentiator), then siblings,
+   then same-category, and only falls back to own variants.                  */
+const conceptsByName = new Map();
+
+function buildConceptIndex(keywords, byIcon) {
+  conceptsByName.clear();
+  for (const row of keywords) {
+    const icon = byIcon.get(row.iconId);
+    if (!icon) continue;
+    const concept = icon.base;
+    if (!conceptsByName.has(concept)) conceptsByName.set(concept, []);
+    conceptsByName.get(concept).push(row);
+  }
+}
+
 function relatedFor(row, byIcon) {
   const icon = byIcon.get(row.iconId);
   const related = [];
   const seen = new Set([row.slug]);
-  function add(list) {
+  const canonicalSelf = canonicalSlugFor(row);
+  seen.add(canonicalSelf);
+
+  function add(list, filter) {
     for (const item of list) {
-      if (!seen.has(item.slug)) { seen.add(item.slug); related.push(item); if (related.length >= 10) return true; }
+      if (seen.has(item.slug)) continue;
+      if (filter && !filter(item)) continue;
+      seen.add(item.slug);
+      related.push(item);
+      if (related.length >= 10) return true;
     }
     return false;
   }
-  if (add(keywordsByIcon.get(row.iconId) || [])) return related;
+
+  if (icon) {
+    // 1. Same concept, different library — cross-library comparison value.
+    if (add(conceptsByName.get(icon.base) || [], (item) => item.librarySlug !== icon.librarySlug)) return related;
+    // 2. Sibling icons in the same library and category.
+    if (add(keywordsByLibrary.get(row.librarySlug) || [], (item) => item.category === row.category)) return related;
+  }
+  // 3. Same category anywhere.
   if (add(keywordsByCategory.get(row.category) || [])) return related;
-  if (add(keywordsByLibrary.get(row.librarySlug) || [])) return related;
+  // 4. Same first word (loose semantic relation).
   if (icon) {
     const fw = icon.base.split("-")[0];
-    if (fw) add(keywordsByFirstWord.get(fw) || []);
+    if (fw && add(keywordsByFirstWord.get(fw) || [])) return related;
   }
+  // 5. Last resort: own variants — better than nothing, worth little.
+  add(keywordsByIcon.get(row.iconId) || []);
   return related;
 }
 
@@ -1084,7 +1180,7 @@ function pageHtml(row, icon, related) {
   const description = metaDescription(row, icon);
   const url = `${SITE_URL}${row.url}`;
   const appUrl = `${SITE_URL}/#/icon/${encodeURIComponent(icon.id)}`;
-  const libUrl = `${SITE_URL}/#/library/${encodeURIComponent(icon.librarySlug)}`;
+  const libUrl = `${SITE_URL}/library/${encodeURIComponent(icon.librarySlug)}/`;
   const libInfo = LIBRARY_INFO[icon.librarySlug] || null;
 
   const faq = buildFaq(row, icon, libInfo);
@@ -1160,7 +1256,7 @@ function pageHtml(row, icon, related) {
   const content = `
   <nav class="crumbs" aria-label="Breadcrumb">
     <a href="/">IconStash</a><span>/</span>
-    <a href="/#/library/${escapeHtml(icon.librarySlug)}">${escapeHtml(icon.library)}</a><span>/</span>
+    <a href="/library/${escapeHtml(icon.librarySlug)}/">${escapeHtml(icon.library)}</a><span>/</span>
     <span>${escapeHtml(icon.displayName)}</span>
   </nav>
 
@@ -1417,7 +1513,8 @@ function pageHtml(row, icon, related) {
     })();
   </script>
 `;
-  return renderPseoShell({ title, description, url, schema, activeSlug: icon.librarySlug, content });
+  const canonicalUrl = `${SITE_URL}/icons/${canonicalSlugFor(row)}/`;
+  return renderPseoShell({ title, description, url, canonicalUrl, schema, activeSlug: icon.librarySlug, content });
 }
 
 /* ─── Write pages ─────────────────────────────────────────────────────────── */
@@ -1425,6 +1522,8 @@ function writePages(keywords, icons) {
   const byIcon = new Map(icons.map((icon) => [icon.id, icon]));
   console.log("Building index maps for related searches...");
   buildIndexes(keywords, byIcon);
+  buildConceptIndex(keywords, byIcon);
+  buildCanonicals(keywords);
   console.log("Indexes completed. Writing HTML files...");
   let count = 0;
   const total = keywords.length;
