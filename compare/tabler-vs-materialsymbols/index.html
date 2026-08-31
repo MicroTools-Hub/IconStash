@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <script async src="https://plausible.io/js/pa--bfaHBAPFGUV3yUn96sF4.js"></script>
+  <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tabler vs Material Symbols: Icon Library Comparison</title>
+  <meta name="description" content="Tabler Icons ships 6,324 icons, Material Symbols ships 18,547. Compare grid, license, variants and real side-by-side previews to pick the right one.">
+  <link rel="canonical" href="https://iconstash.io/compare/tabler-vs-materialsymbols/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tabler vs Material Symbols: Icon Library Comparison">
+  <meta property="og:description" content="Tabler Icons ships 6,324 icons, Material Symbols ships 18,547. Compare grid, license, variants and real side-by-side previews to pick the right one.">
+  <meta property="og:url" content="https://iconstash.io/compare/tabler-vs-materialsymbols/">
+  <meta property="og:image" content="https://iconstash.io/logo.png">
+  <meta property="og:site_name" content="IconStash">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tabler vs Material Symbols: Icon Library Comparison">
+  <meta name="twitter:description" content="Tabler Icons ships 6,324 icons, Material Symbols ships 18,547. Compare grid, license, variants and real side-by-side previews to pick the right one.">
+  <meta name="twitter:image" content="https://iconstash.io/logo.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260602-brandlogo">
+  <link rel="stylesheet" href="/style.css?v=20260830-comparisons">
+  <script type="application/ld+json">
+  [{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://iconstash.io/"},{"@type":"ListItem","position":2,"name":"Compare","item":"https://iconstash.io/compare/"},{"@type":"ListItem","position":3,"name":"Tabler vs Material Symbols","item":"https://iconstash.io/compare/tabler-vs-materialsymbols/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Tabler or Material Symbols better for React projects?","acceptedAnswer":{"@type":"Answer","text":"Both have first-party React packages: @tabler/icons-react and @material-symbols/svg-400. Tabler has the smaller catalogue, so for a React app the practical difference is coverage and visual style rather than integration effort. Both tree-shake, so bundle size tracks the number of icons you import, not the size of the library."}},{"@type":"Question","name":"Which has more icons, Tabler or Material Symbols?","acceptedAnswer":{"@type":"Answer","text":"Tabler Icons has 6,324 icons and Material Symbols has 18,547. Material Symbols is larger by about 193%. Raw count is not the whole story though — a 20,000-icon set with many near-duplicate variants can be slower to search than a tightly edited 2,000-icon set."}},{"@type":"Question","name":"Can I mix Tabler and Material Symbols in one interface?","acceptedAnswer":{"@type":"Answer","text":"You can, but it usually looks wrong. Each library draws to its own grid and stroke weight — Tabler uses 24×24 and Material Symbols uses 24×24 — so icons from both sit slightly differently next to each other. If you must mix them, keep each library to a distinct area of the interface rather than interleaving them in the same toolbar."}},{"@type":"Question","name":"What licenses do Tabler and Material Symbols use?","acceptedAnswer":{"@type":"Answer","text":"Tabler Icons is MIT: Commercial use, modification and redistribution with no attribution required. Material Symbols is Apache 2.0: No attribution required, but carries an explicit patent grant and requires notice for modified files. Neither requires payment, but attribution rules differ, so check before shipping in a product where credit is inconvenient."}},{"@type":"Question","name":"Do Tabler and Material Symbols include filled and outline versions?","acceptedAnswer":{"@type":"Answer","text":"Tabler Icons offers outline only; Material Symbols offers variable weight, fill, grade and optical size axes. If you need to express selected and unselected states with the same glyph, the library with more variants saves you from importing a second set."}},{"@type":"Question","name":"Which is better for small sizes like 16px?","acceptedAnswer":{"@type":"Answer","text":"At 16px, stroke weight and counter size matter more than coverage. Tabler draws on a 24×24 grid and Material Symbols on 24×24. Libraries that redraw per size rather than scaling — such as Fluent UI — generally hold up best. The reliable test is to preview both at your actual render size, which you can do on any icon page on IconStash."}}]},{"@context":"https://schema.org","@type":"Article","headline":"Tabler vs Material Symbols: Icon Library Comparison","description":"Tabler Icons ships 6,324 icons, Material Symbols ships 18,547. Compare grid, license, variants and real side-by-side previews to pick the right one.","url":"https://iconstash.io/compare/tabler-vs-materialsymbols/","dateModified":"2026-08-31","publisher":{"@type":"Organization","name":"IconStash","url":"https://iconstash.io/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://iconstash.io/compare/tabler-vs-materialsymbols/"}}]
+  </script>
+</head>
+<body class="pseo-page">
+  <div class="bg-canvas" aria-hidden="true">
+    <div class="mesh-orb orb-1"></div>
+    <div class="mesh-orb orb-2"></div>
+    <div class="mesh-orb orb-3"></div>
+    <div class="mesh-orb orb-4"></div>
+    <div class="corner-glow glow-tl"></div>
+    <div class="corner-glow glow-br"></div>
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+  </div>
+
+  <div class="app-shell">
+    <header id="main-header">
+      <div class="header-left">
+        <a class="logo" href="/" aria-label="IconStash.io home">
+          <svg class="logo-icon" viewBox="0 0 24 24"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2V9Z"/></svg>
+          <span class="logo-text">IconStash<span class="logo-io">.io</span></span>
+        </a>
+      </div>
+      <div class="header-right">
+        <a href="/library/" class="nav-link">Libraries</a>
+        <a href="/category/" class="nav-link">Categories</a>
+        <a href="/style/" class="nav-link">Styles</a>
+        <a href="/compare/" class="nav-link active">Comparisons</a>
+        <a href="/" class="nav-link">Search all icons</a>
+        <button class="nav-link" id="theme-toggle" title="Toggle theme">Light</button>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <aside id="left-sidebar" aria-label="Browse icon libraries">
+        <div class="sidebar-content">
+          <section class="filter-section">
+            <div class="filter-header"><h2>Libraries</h2><span class="muted">28</span></div>
+            <div class="lib-list">
+              <a class="lib-row" href="/library/lucide/"><span class="lib-name">Lucide</span><span class="lib-count">1,979</span></a>
+              <a class="lib-row" href="/library/tabler/"><span class="lib-name">Tabler</span><span class="lib-count">6,324</span></a>
+              <a class="lib-row" href="/library/phosphor/"><span class="lib-name">Phosphor</span><span class="lib-count">9,198</span></a>
+              <a class="lib-row" href="/library/material/"><span class="lib-name">Material</span><span class="lib-count">14,001</span></a>
+              <a class="lib-row" href="/library/remix/"><span class="lib-name">Remix</span><span class="lib-count">3,244</span></a>
+              <a class="lib-row" href="/library/iconoir/"><span class="lib-name">Iconoir</span><span class="lib-count">2,020</span></a>
+              <a class="lib-row" href="/library/heroicons/"><span class="lib-name">Heroicons</span><span class="lib-count">1,297</span></a>
+              <a class="lib-row" href="/library/bootstrap/"><span class="lib-name">Bootstrap</span><span class="lib-count">2,090</span></a>
+              <a class="lib-row" href="/library/feather/"><span class="lib-name">Feather</span><span class="lib-count">286</span></a>
+              <a class="lib-row" href="/library/mingcute/"><span class="lib-name">MingCute</span><span class="lib-count">3,352</span></a>
+              <a class="lib-row" href="/library/solar/"><span class="lib-name">Solar</span><span class="lib-count">7,410</span></a>
+              <a class="lib-row" href="/library/octicons/"><span class="lib-name">Octicons</span><span class="lib-count">929</span></a>
+              <a class="lib-row" href="/library/cssgg/"><span class="lib-name">css.gg</span><span class="lib-count">705</span></a>
+              <a class="lib-row" href="/library/radix/"><span class="lib-name">Radix</span><span class="lib-count">345</span></a>
+              <a class="lib-row" href="/library/antdesign/"><span class="lib-name">Ant Design</span><span class="lib-count">1,870</span></a>
+              <a class="lib-row" href="/library/fluent/"><span class="lib-name">Fluent UI</span><span class="lib-count">20,170</span></a>
+              <a class="lib-row" href="/library/carbon/"><span class="lib-name">Carbon</span><span class="lib-count">2,644</span></a>
+              <a class="lib-row" href="/library/ionicons/"><span class="lib-name">Ionicons</span><span class="lib-count">2,607</span></a>
+              <a class="lib-row" href="/library/eva/"><span class="lib-name">Eva</span><span class="lib-count">490</span></a>
+              <a class="lib-row" href="/library/boxicons/"><span class="lib-name">Boxicons</span><span class="lib-count">3,389</span></a>
+              <a class="lib-row" href="/library/materialsymbols/"><span class="lib-name">Material Symbols</span><span class="lib-count">18,547</span></a>
+              <a class="lib-row" href="/library/materialsymbolslight/"><span class="lib-name">Symbols Light</span><span class="lib-count">15,969</span></a>
+              <a class="lib-row" href="/library/iconparkoutline/"><span class="lib-name">IconPark Outline</span><span class="lib-count">2,658</span></a>
+              <a class="lib-row" href="/library/iconparksolid/"><span class="lib-name">IconPark Solid</span><span class="lib-count">1,970</span></a>
+              <a class="lib-row" href="/library/hugeicons/"><span class="lib-name">Huge Icons</span><span class="lib-count">5,115</span></a>
+              <a class="lib-row" href="/library/pixelarticons/"><span class="lib-name">Pixel Art</span><span class="lib-count">1,099</span></a>
+              <a class="lib-row" href="/library/linemd/"><span class="lib-name">Line MD</span><span class="lib-count">1,279</span></a>
+              <a class="lib-row" href="/library/simpleicons/"><span class="lib-name">Simple Icons</span><span class="lib-count">3,714</span></a>
+            </div>
+          </section>
+
+          <section class="sidebar-card expandable open" id="category-section">
+            <div class="filter-header"><h2>Categories</h2></div>
+            <div class="card-content category-list">
+              <a class="category-item" href="/category/media/"><span class="category-dot" style="background:#00c3ff"></span><span>Media</span></a>
+              <a class="category-item" href="/category/communication/"><span class="category-dot" style="background:#ff2d9b"></span><span>Communication</span></a>
+              <a class="category-item" href="/category/commerce/"><span class="category-dot" style="background:#00ff88"></span><span>Commerce</span></a>
+              <a class="category-item" href="/category/navigation/"><span class="category-dot" style="background:#bf00ff"></span><span>Navigation</span></a>
+              <a class="category-item" href="/category/files/"><span class="category-dot" style="background:#ff6a00"></span><span>Files</span></a>
+              <a class="category-item" href="/category/editing/"><span class="category-dot" style="background:#f5ff00"></span><span>Editing</span></a>
+              <a class="category-item" href="/category/devices/"><span class="category-dot" style="background:#00c3ff"></span><span>Devices</span></a>
+              <a class="category-item" href="/category/development/"><span class="category-dot" style="background:#ff2d9b"></span><span>Development</span></a>
+              <a class="category-item" href="/category/security/"><span class="category-dot" style="background:#00ff88"></span><span>Security</span></a>
+              <a class="category-item" href="/category/health/"><span class="category-dot" style="background:#bf00ff"></span><span>Health</span></a>
+              <a class="category-item" href="/category/weather/"><span class="category-dot" style="background:#ff6a00"></span><span>Weather</span></a>
+              <a class="category-item" href="/category/transport/"><span class="category-dot" style="background:#f5ff00"></span><span>Transport</span></a>
+              <a class="category-item" href="/category/social/"><span class="category-dot" style="background:#00c3ff"></span><span>Social</span></a>
+              <a class="category-item" href="/category/time/"><span class="category-dot" style="background:#ff2d9b"></span><span>Time</span></a>
+              <a class="category-item" href="/category/data/"><span class="category-dot" style="background:#00ff88"></span><span>Data</span></a>
+              <a class="category-item" href="/category/interface/"><span class="category-dot" style="background:#bf00ff"></span><span>Interface</span></a>
+            </div>
+          </section>
+
+          <section class="sidebar-card expandable open" id="style-section">
+            <div class="filter-header"><h2>Styles</h2></div>
+            <div class="card-content style-pills">
+              <a class="style-pill" href="/style/outline/">Outline</a>
+              <a class="style-pill" href="/style/solid/">Solid</a>
+              <a class="style-pill" href="/style/duotone/">Duotone</a>
+              <a class="style-pill" href="/style/fill/">Fill</a>
+              <a class="style-pill" href="/style/bold/">Bold</a>
+              <a class="style-pill" href="/style/thin/">Thin</a>
+              <a class="style-pill" href="/style/light/">Light</a>
+            </div>
+          </section>
+        </div>
+      </aside>
+
+      <main id="main-content">
+        <section class="route-view pseo-view active">
+          <div class="pseo-document">
+
+            <nav class="crumbs" aria-label="Breadcrumb">
+              <a href="/">Home</a> / <a href="/compare/">Compare</a> / <span>Tabler vs Material Symbols</span>
+            </nav>
+
+
+            <h1>Tabler vs Material Symbols</h1>
+
+            <p class="lede">Tabler Icons and Material Symbols are two of the most widely used
+            open-source icon sets. Both are free, both ship framework packages, and both will look perfectly
+            reasonable in a product UI — which is exactly why the choice is annoying. This page puts the two
+            side by side using the actual artwork and the real numbers.</p>
+
+            <section class="card cmp-verdict">
+              <h2>The short answer</h2>
+              <ul>
+                <li><strong>Material Symbols</strong> is the broader set: 18,547 icons against 6,324 in Tabler Icons — roughly 193% more coverage, which matters most if you build interfaces that need unusual glyphs.</li>
+                <li><strong>Material Symbols</strong> gives you more visual range: 4 variants per concept (variable weight, fill, grade and optical size axes), where Tabler Icons ships 1.</li>
+                <li>Both are MIT, so licensing is not a deciding factor here.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2>Specifications compared</h2>
+              <div class="hub-table-wrap"><table class="hub-table">
+  <caption>Specification comparison</caption>
+  <thead><tr><th scope="col">&nbsp;</th><th scope="col">Tabler Icons</th><th scope="col">Material Symbols</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">Icons</th><td>6,324</td><td>18,547</td></tr>
+    <tr><th scope="row">Visual variants per concept</th><td>1 — outline only</td><td>4 — variable weight, fill, grade and optical size axes</td></tr>
+    <tr><th scope="row">Design grid</th><td>24×24</td><td>24×24</td></tr>
+    <tr><th scope="row">License</th><td>MIT</td><td>Apache 2.0</td></tr>
+    <tr><th scope="row">Attribution required</th><td>No</td><td>No</td></tr>
+    <tr><th scope="row">Official React package</th><td><code>@tabler/icons-react</code></td><td><code>@material-symbols/svg-400</code></td></tr>
+  </tbody>
+</table></div>
+            </section>
+
+            <section>
+              <h2>Same icons, both libraries</h2>
+              <p>Every pair below is the same concept rendered from each library's own source files. This is the
+              part you cannot get from a written review — the difference in stroke weight, corner rounding and
+              optical size is the thing you will actually notice in your interface.</p>
+              <div class="cmp-grid" role="group" aria-label="Side-by-side icon previews">
+    <div class="cmp-grid-head"><span>Tabler Icons</span><span>Material Symbols</span><span>&nbsp;</span></div>
+    <div class="cmp-cell">
+      <div class="cmp-preview"><a href="/icons/tabler-home/" aria-label="Tabler home icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5 12H3l9-9l9 9h-2M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/><path d="M9 21v-6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v6"/></g></svg></a></div>
+      <div class="cmp-preview"><a href="/icons/materialsymbols-home/" aria-label="Material Symbols home icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" d="M4 21V9l8-6l8 6v12h-6v-7h-4v7z"/></svg></a></div>
+      <div class="cmp-label">home</div>
+    </div>
+    <div class="cmp-cell">
+      <div class="cmp-preview"><a href="/icons/tabler-search/" aria-label="Tabler search icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0-14 0m18 11l-6-6"/></svg></a></div>
+      <div class="cmp-preview"><a href="/icons/materialsymbols-search/" aria-label="Material Symbols search icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14"/></svg></a></div>
+      <div class="cmp-label">search</div>
+    </div>
+    <div class="cmp-cell">
+      <div class="cmp-preview"><a href="/icons/tabler-settings/" aria-label="Tabler settings icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065"/><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/></g></svg></a></div>
+      <div class="cmp-preview"><a href="/icons/materialsymbols-settings/" aria-label="Material Symbols settings icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" d="m9.25 22l-.4-3.2q-.325-.125-.612-.3t-.563-.375L4.7 19.375l-2.75-4.75l2.575-1.95Q4.5 12.5 4.5 12.338v-.675q0-.163.025-.338L1.95 9.375l2.75-4.75l2.975 1.25q.275-.2.575-.375t.6-.3l.4-3.2h5.5l.4 3.2q.325.125.613.3t.562.375l2.975-1.25l2.75 4.75l-2.575 1.95q.025.175.025.338v.674q0 .163-.05.338l2.575 1.95l-2.75 4.75l-2.95-1.25q-.275.2-.575.375t-.6.3l-.4 3.2zm2.8-6.5q1.45 0 2.475-1.025T15.55 12t-1.025-2.475T12.05 8.5q-1.475 0-2.488 1.025T8.55 12t1.013 2.475T12.05 15.5"/></svg></a></div>
+      <div class="cmp-label">settings</div>
+    </div>
+    <div class="cmp-cell">
+      <div class="cmp-preview"><a href="/icons/tabler-user/" aria-label="Tabler user icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0-8 0M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></a></div>
+      <div class="cmp-preview"><a href="/icons/materialsymbols-user-attributes/" aria-label="Material Symbols user icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" d="M14 7V5h8v2zm0 4V9h8v2zm0 4v-2h8v2zm-8.125-1.875Q5 12.25 5 11t.875-2.125T8 8t2.125.875T11 11t-.875 2.125T8 14t-2.125-.875M2 20v-1.9q0-.525.25-1t.7-.75q1.125-.675 2.388-1.012T8 15t2.663.338t2.387 1.012q.45.275.7.75t.25 1V20z"/></svg></a></div>
+      <div class="cmp-label">user</div>
+    </div>
+    <div class="cmp-cell">
+      <div class="cmp-preview"><a href="/icons/tabler-heart/" aria-label="Tabler heart icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.5 12.572L12 20l-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572"/></svg></a></div>
+      <div class="cmp-preview"><a href="/icons/materialsymbols-bookmark-heart/" aria-label="Material Symbols heart icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" d="M12 14.3q1.275-1.175 2.063-1.937t1.212-1.313t.575-.962T16 9.2q0-.9-.65-1.55T13.8 7q-.525 0-1.013.213T12 7.8q-.3-.375-.775-.587T10.2 7q-.9 0-1.55.65T8 9.2q0 .475.137.875t.563.95t1.2 1.313T12 14.3M5 21V5q0-.825.588-1.412T7 3h10q.825 0 1.413.588T19 5v16l-7-3z"/></svg></a></div>
+      <div class="cmp-label">heart</div>
+    </div>
+    <div class="cmp-cell">
+      <div class="cmp-preview"><a href="/icons/tabler-star/" aria-label="Tabler star icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/></svg></a></div>
+      <div class="cmp-preview"><a href="/icons/materialsymbols-star/" aria-label="Material Symbols star icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" d="m5.825 21l1.625-7.025L2 9.25l7.2-.625L12 2l2.8 6.625l7.2.625l-5.45 4.725L18.175 21L12 17.275z"/></svg></a></div>
+      <div class="cmp-label">star</div>
+    </div>
+    <div class="cmp-cell">
+      <div class="cmp-preview"><a href="/icons/tabler-garden-cart/" aria-label="Tabler cart icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M15 17.5a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0-5 0M6 8v11a1 1 0 0 0 1.806.591L11.5 14.5v.055"/><path d="M6 8h15l-3.5 7l-7.1-.747a4 4 0 0 1-3.296-2.493L4.251 4.63A1 1 0 0 0 3.323 4H2"/></g></svg></a></div>
+      <div class="cmp-preview"><a href="/icons/materialsymbols-add-shopping-cart/" aria-label="Material Symbols cart icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" d="M11 9V6H8V4h3V1h2v3h3v2h-3v3zM5.588 21.413Q5 20.825 5 20t.588-1.412T7 18t1.413.588T9 20t-.587 1.413T7 22t-1.412-.587m10 0Q15 20.825 15 20t.588-1.412T17 18t1.413.588T19 20t-.587 1.413T17 22t-1.412-.587M1 4V2h3.275l4.25 9h7l3.9-7H21.7l-4.4 7.95q-.275.5-.737.775T15.55 13H8.1L7 15h12v2H7q-1.125 0-1.713-.975T5.25 14.05L6.6 11.6L3 4z"/></svg></a></div>
+      <div class="cmp-label">cart</div>
+    </div>
+    <div class="cmp-cell">
+      <div class="cmp-preview"><a href="/icons/tabler-bell/" aria-label="Tabler bell icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3H4a4 4 0 0 0 2-3v-3a7 7 0 0 1 4-6M9 17v1a3 3 0 0 0 6 0v-1"/></svg></a></div>
+      <div class="cmp-preview"><span class="cmp-missing">—</span></div>
+      <div class="cmp-label">bell</div>
+    </div>
+    <div class="cmp-cell">
+      <div class="cmp-preview"><a href="/icons/tabler-mail/" aria-label="Tabler mail icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="m3 7l9 6l9-6"/></g></svg></a></div>
+      <div class="cmp-preview"><a href="/icons/materialsymbols-mail/" aria-label="Material Symbols mail icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" d="M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h16q.825 0 1.413.588T22 6v12q0 .825-.587 1.413T20 20zm8-7l8-5V6l-8 5l-8-5v2z"/></svg></a></div>
+      <div class="cmp-label">mail</div>
+    </div>
+    <div class="cmp-cell">
+      <div class="cmp-preview"><a href="/icons/tabler-calendar/" aria-label="Tabler calendar icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm12-4v4M8 3v4m-4 4h16m-9 4h1m0 0v3"/></svg></a></div>
+      <div class="cmp-preview"><a href="/icons/materialsymbols-calendar-add-on/" aria-label="Material Symbols calendar icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" d="M17 22v-3h-3v-2h3v-3h2v3h3v2h-3v3zM5 20q-.825 0-1.412-.587T3 18V6q0-.825.588-1.412T5 4h1V2h2v2h6V2h2v2h1q.825 0 1.413.588T19 6v6.1q-.5-.075-1-.075t-1 .075V10H5v8h7q0 .5.075 1t.275 1z"/></svg></a></div>
+      <div class="cmp-label">calendar</div>
+    </div>
+  </div>
+            </section>
+
+            <section class="cmp-choose-wrap">
+              <h2>Which one should you choose?</h2>
+              <div class="card cmp-choose">
+    <h3>Pick Tabler Icons when</h3>
+    <p>Admin panels, internal tools, and data-heavy B2B products where you need an unusual icon and don't want to draw it yourself. Tabler's breadth means you are rarely forced to mix libraries to fill a gap.</p>
+    <p class="cmp-alt"><strong>Consider otherwise if:</strong> If you want a smaller, more opinionated set with tighter visual consistency, <a href="/library/lucide/">Lucide</a> or <a href="/library/feather/">Feather</a> are easier to keep coherent. For multiple weights in one library, look at <a href="/library/phosphor/">Phosphor</a>.</p>
+  </div>
+              <div class="card cmp-choose">
+    <h3>Pick Material Symbols when</h3>
+    <p>Products that want continuous control over icon weight and fill state, and teams that would rather ship one font file than manage five icon sets.</p>
+    <p class="cmp-alt"><strong>Consider otherwise if:</strong> If you need individually imported SVG components with tree-shaking, the older <a href="/library/material/">Material Icons</a> set or <a href="/library/lucide/">Lucide</a> is a better fit — a variable font loads all 18,547 glyphs even if you use thirty of them.</p>
+  </div>
+            </section>
+
+            <section>
+              <h2>Coverage</h2>
+              <p>Tabler Icons contains 6,324 icons and Material Symbols contains 18,547.
+              Tabler Icons is maintained alongside the <strong>Tabler</strong> admin dashboard template, and it shows: the set is built for real application chrome rather than marketing pages. With 6,324 icons it is one of the largest MIT-licensed outline libraries available, and every icon is drawn on a consistent 24×24 grid with a 2px stroke.</p>
+              <p>Material Symbols is Google's current icon format and the successor to Material Icons. It is built on variable font technology: all 18,547 icons live in a single font file, and four axes — Weight, Fill, Grade, and Optical Size — can be adjusted continuously rather than by swapping between five static themes.</p>
+            </section>
+
+            <section>
+              <h2>Licensing</h2>
+              <p>Tabler Icons is released under <strong>MIT</strong>.
+              Commercial use, modification and redistribution with no attribution required.</p>
+              <p>Material Symbols is released under <strong>Apache 2.0</strong>.
+              No attribution required, but carries an explicit patent grant and requires notice for modified files.</p>
+              
+            </section>
+
+            <section>
+              <h2>Using them from IconStash</h2>
+              <p>You do not have to commit to one. IconStash indexes both libraries, so you can search a concept
+              once and see how each set drew it, then export SVG or PNG at any size and colour. Start with
+              <a href="/library/tabler/">Tabler Icons</a> or
+              <a href="/library/materialsymbols/">Material Symbols</a>, or browse
+              <a href="/compare/">every library comparison</a>.</p>
+            </section>
+
+            <section class="hub-faq">
+              <h2>Frequently asked questions</h2>
+              <article class="card faq-item">
+                <h2>Is Tabler or Material Symbols better for React projects?</h2>
+                <p>Both have first-party React packages: <code&gt;@tabler/icons-react</code and <code&gt;@material-symbols/svg-400</code. Tabler has the smaller catalogue, so for a React app the practical difference is coverage and visual style rather than integration effort. Both tree-shake, so bundle size tracks the number of icons you import, not the size of the library.</p>
+              </article>
+              <article class="card faq-item">
+                <h2>Which has more icons, Tabler or Material Symbols?</h2>
+                <p>Tabler Icons has 6,324 icons and Material Symbols has 18,547. Material Symbols is larger by about 193%. Raw count is not the whole story though — a 20,000-icon set with many near-duplicate variants can be slower to search than a tightly edited 2,000-icon set.</p>
+              </article>
+              <article class="card faq-item">
+                <h2>Can I mix Tabler and Material Symbols in one interface?</h2>
+                <p>You can, but it usually looks wrong. Each library draws to its own grid and stroke weight — Tabler uses 24×24 and Material Symbols uses 24×24 — so icons from both sit slightly differently next to each other. If you must mix them, keep each library to a distinct area of the interface rather than interleaving them in the same toolbar.</p>
+              </article>
+              <article class="card faq-item">
+                <h2>What licenses do Tabler and Material Symbols use?</h2>
+                <p>Tabler Icons is MIT: Commercial use, modification and redistribution with no attribution required. Material Symbols is Apache 2.0: No attribution required, but carries an explicit patent grant and requires notice for modified files. Neither requires payment, but attribution rules differ, so check before shipping in a product where credit is inconvenient.</p>
+              </article>
+              <article class="card faq-item">
+                <h2>Do Tabler and Material Symbols include filled and outline versions?</h2>
+                <p>Tabler Icons offers outline only; Material Symbols offers variable weight, fill, grade and optical size axes. If you need to express selected and unselected states with the same glyph, the library with more variants saves you from importing a second set.</p>
+              </article>
+              <article class="card faq-item">
+                <h2>Which is better for small sizes like 16px?</h2>
+                <p>At 16px, stroke weight and counter size matter more than coverage. Tabler draws on a 24×24 grid and Material Symbols on 24×24. Libraries that redraw per size rather than scaling — such as Fluent UI — generally hold up best. The reliable test is to preview both at your actual render size, which you can do on any icon page on IconStash.</p>
+              </article>
+            </section>
+
+            <section class="hub-links">
+              <h2>Related comparisons</h2>
+              <a class="cmp-related" href="/compare/tabler-vs-feather/">Tabler vs Feather</a>
+              <a class="cmp-related" href="/compare/tabler-vs-lucide/">Tabler vs Lucide</a>
+              <a class="cmp-related" href="/compare/tabler-vs-iconoir/">Tabler vs Iconoir</a>
+              <a class="cmp-related" href="/compare/tabler-vs-remix/">Tabler vs Remix</a>
+              <a class="cmp-related" href="/compare/materialsymbols-vs-material/">Material Symbols vs Material</a>
+              <a class="cmp-related" href="/compare/materialsymbols-vs-fluent/">Material Symbols vs Fluent UI</a>
+              <a class="cmp-related" href="/compare/materialsymbols-vs-carbon/">Material Symbols vs Carbon</a>
+            </section>
+
+            <footer class="home-footer">
+              <div class="footer-container">
+                <div class="footer-left">
+                  <a class="footer-logo" href="/" aria-label="IconStash.io home">
+                    <svg class="logo-icon" viewBox="0 0 24 24"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2V9Z"/></svg>
+                    <span class="logo-text">IconStash<span class="logo-io">.io</span></span>
+                  </a>
+                  <p class="footer-tagline">Instant, browser-based icon search engine. Unify 28 open-source icon libraries into a single lightning-fast search.</p>
+                </div>
+                <div class="footer-right">
+                  <div class="footer-line">This website is offered to you by <a href="https://greatsoftwarecompany.com" target="_blank" rel="noopener" class="footer-link">Great Software Company</a> in collaboration with Huzzi.</div>
+                  <div class="footer-line"><a href="/terms/" class="footer-link">Terms of Service</a> / <a href="/privacy/" class="footer-link">Privacy Policy</a></div>
+                  <div class="footer-line">Questions? Feedback? Contact us at <a href="mailto:heybro@iconstash.io" class="footer-link">heybro@iconstash.io</a></div>
+                  <div class="footer-line">&copy; 2026 IconStash.io. All rights reserved.</div>
+                </div>
+              </div>
+            </footer>
+
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const themeToggle = document.getElementById("theme-toggle");
+      const updateThemeUI = (theme) => { root.dataset.theme = theme; if (themeToggle) themeToggle.textContent = theme === "light" ? "Dark" : "Light"; };
+      try { updateThemeUI(localStorage.getItem("iconvault-theme") || "dark"); } catch (_) { updateThemeUI("dark"); }
+      themeToggle?.addEventListener("click", () => { const next = root.dataset.theme === "light" ? "dark" : "light"; updateThemeUI(next); try { localStorage.setItem("iconvault-theme", next); } catch (_) {} });
+    })();
+  </script>
+</body>
+</html>

@@ -2942,3 +2942,183 @@ kbd { min-width: 28px; text-align: center; padding: 4px 7px; border-radius: 6px;
 .pseo-page .card ul { margin: 0 0 0 18px; color: var(--text-secondary); font-size: 14px; line-height: 1.7; }
 .pseo-page .card li { margin-bottom: 6px; }
 .pseo-page .lead + .lead { margin-top: 12px; }
+
+/* ─── Concept pages: /icons/<concept>-icon/ (added 2026-08-30) ───────────────
+   The cross-library comparison grid. This is the one layout on the site that
+   shows the same concept rendered by many libraries at once, so the tiles are
+   deliberately tight: artwork leads, library name labels it, style qualifies. */
+.pseo-page .concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
+  gap: 10px;
+}
+.pseo-page .concept-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 14px 8px 12px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  background: var(--glass-3);
+  color: var(--text-primary);
+  text-align: center;
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+.pseo-page .concept-icon:hover {
+  transform: translateY(-2px);
+  border-color: var(--glass-border-bright);
+  background: var(--glass-2);
+  text-decoration: none;
+}
+.pseo-page .concept-icon-art {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 48px;
+  margin-bottom: 2px;
+}
+.pseo-page .concept-icon-art svg { display: block; }
+.pseo-page .concept-icon-lib {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pseo-page .concept-icon-style {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.pseo-page .hub-table-scroll { overflow-x: auto; }
+.pseo-page .hub-table { margin-top: 4px; }
+@media (max-width: 640px) {
+  .pseo-page .concept-grid { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+  .pseo-page .concept-icon-art { height: 40px; }
+}
+
+/* ─── Comparison pages: /compare/ /alternatives/ /icons-for/ ───────────────
+   The side-by-side preview grid is the point of these pages, so it is a real
+   two-column grid rather than a table: each row shows the same concept
+   rendered from both libraries, which is the comparison nobody else can make. */
+.pseo-page .lede {
+  margin: 0 0 20px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+.pseo-page .hub-table-wrap {
+  overflow-x: auto;
+  margin: 0 0 20px;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+}
+.pseo-page .hub-table-wrap .hub-table { margin: 0; }
+.pseo-page .hub-table caption {
+  padding: 12px 12px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-align: left;
+}
+.pseo-page .hub-table code {
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--glass-3);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.pseo-page .hub-faq { margin-top: 28px; }
+
+.pseo-page .cmp-verdict ul { margin: 0; padding-left: 20px; }
+.pseo-page .cmp-verdict li { margin-bottom: 8px; line-height: 1.65; }
+.pseo-page .cmp-verdict li:last-child { margin-bottom: 0; }
+
+.pseo-page .cmp-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  margin: 16px 0 20px;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: var(--glass-border);
+  overflow: hidden;
+}
+.pseo-page .cmp-grid-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr 88px;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--glass-3);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.pseo-page .cmp-cell {
+  display: grid;
+  grid-template-columns: 1fr 1fr 88px;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 14px;
+  background: var(--bg-surface);
+}
+.pseo-page .cmp-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  color: var(--text-primary);
+}
+.pseo-page .cmp-preview a { display: flex; color: var(--text-primary); }
+.pseo-page .cmp-preview a:hover { color: var(--neon-blue); }
+.pseo-page .cmp-missing { color: var(--text-subtle); font-size: 18px; }
+.pseo-page .cmp-label {
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.pseo-page .cmp-choose-wrap { margin-top: 24px; }
+.pseo-page .cmp-choose { margin-bottom: 12px; }
+.pseo-page .cmp-choose h3 { margin: 0 0 8px; font-size: 15px; }
+.pseo-page .cmp-choose p { margin: 0; line-height: 1.65; color: var(--text-secondary); }
+.pseo-page .cmp-alt { margin-top: 10px !important; padding-top: 10px; border-top: 1px solid var(--glass-border); font-size: 13px; }
+.pseo-page .cmp-warn {
+  margin: 12px 0 0;
+  padding: 12px 14px;
+  border-left: 2px solid var(--neon-blue);
+  border-radius: 0 8px 8px 0;
+  background: var(--glass-2);
+  color: var(--text-primary);
+  line-height: 1.65;
+}
+
+.pseo-page .cmp-related {
+  display: inline-block;
+  margin: 0 14px 8px 0;
+  padding: 7px 13px;
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  background: var(--glass-2);
+  font-size: 13px;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+.pseo-page .cmp-related:hover {
+  border-color: var(--neon-blue);
+  color: var(--neon-blue);
+}
+
+@media (max-width: 640px) {
+  .pseo-page .cmp-grid-head,
+  .pseo-page .cmp-cell { grid-template-columns: 1fr 1fr 64px; gap: 6px; padding: 8px 10px; }
+  .pseo-page .cmp-label { font-size: 10px; }
+}

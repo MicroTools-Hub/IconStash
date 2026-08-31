@@ -25,7 +25,12 @@ const ROOT = path.resolve(__dirname, "..");
 const DATA_DIR = path.join(ROOT, "data");
 const ICONS_DIR = path.join(ROOT, "icons");
 const SITE_URL = "https://iconstash.io";
-const CSS_VERSION = "20260830-hubpages";
+/* Bump this whenever style.css gains rules that new pages depend on. Every page
+   loads style.css?v=<this>, so returning visitors will serve the cached old
+   file and render the new pages unstyled unless the string changes. The 137k
+   icon pages deliberately stay on ?v=20260715-sidebarfix because they use none
+   of the hub or comparison CSS and keeping them pinned preserves their cache. */
+const CSS_VERSION = "20260830-comparisons";
 
 /* ────────────────────────────────────────────────────────────────────────────
    1. Load data
@@ -797,7 +802,8 @@ function page({ title, description, canonical, schema, activeType, activeSlug, c
         <a href="/library/" class="nav-link${activeType === "library" ? " active" : ""}">Libraries</a>
         <a href="/category/" class="nav-link${activeType === "category" ? " active" : ""}">Categories</a>
         <a href="/style/" class="nav-link${activeType === "style" ? " active" : ""}">Styles</a>
-        <a href="/#/" class="nav-link">Search all icons</a>
+        <a href="/compare/" class="nav-link${activeType === "compare" || activeType === "alternatives" || activeType === "icons-for" ? " active" : ""}">Comparisons</a>
+        <a href="/" class="nav-link">Search all icons</a>
         <button class="nav-link" id="theme-toggle" title="Toggle theme">Light</button>
       </div>
     </header>
@@ -1001,8 +1007,8 @@ function buildLibraryPage(lib) {
                 <h1>${escapeHtml(lib.fullName)}</h1>
                 <p class="lead">${lib.count} ${escapeHtml(lib.license)}-licensed ${escapeHtml(lib.style.toLowerCase())} icons${lib.grid === "24×24" ? " on a 24×24 grid" : ` on a ${escapeHtml(lib.grid)} grid`}. ${escapeHtml(firstSentence(copy.about[1]))}</p>
                 <div class="cta">
-                  <a class="btn primary" href="/#/library/${encodeURIComponent(lib.slug)}">Browse all ${escapeHtml(lib.name)} icons</a>
-                  <a class="btn" href="/category/">Browse by category</a>
+                  <a class="btn primary" href="/category/">Browse ${escapeHtml(lib.name)} icons by category</a>
+                  <a class="btn" href="/compare/">Compare libraries</a>
                 </div>
               </div>
             </section>
@@ -1211,8 +1217,8 @@ function buildCategoryPage(slug) {
                 <h1>${escapeHtml(info.name)} Icons</h1>
                 <p class="lead">${total.toLocaleString("en-US")} free ${escapeHtml(info.name.toLowerCase())} icons indexed across ${libCounts.size} open-source libraries — ${escapeHtml(info.blurb)}. Compare how each library draws the same icon, then copy the SVG or export a PNG.</p>
                 <div class="cta">
-                  <a class="btn primary" href="/#/category/${encodeURIComponent(slug)}">Search all ${escapeHtml(info.name.toLowerCase())} icons</a>
-                  <a class="btn" href="/library/">Browse by library</a>
+                  <a class="btn primary" href="/library/">Browse ${escapeHtml(info.name.toLowerCase())} icons by library</a>
+                  <a class="btn" href="/compare/">Compare libraries</a>
                 </div>
               </div>
             </section>
@@ -1378,7 +1384,7 @@ function buildStylePage(style) {
                 <h1>${escapeHtml(style.title)}</h1>
                 <p class="lead">${total.toLocaleString("en-US")} free ${escapeHtml(style.name.toLowerCase())} icons indexed across ${libCounts.size} open-source libraries — ${escapeHtml(info.blurb)}. Preview, recolour, and export without an account.</p>
                 <div class="cta">
-                  <a class="btn primary" href="/#/">Search all ${escapeHtml(style.name.toLowerCase())} icons</a>
+                  <a class="btn primary" href="/">Search all ${escapeHtml(style.name.toLowerCase())} icons</a>
                   <a class="btn" href="/library/">Browse by library</a>
                 </div>
               </div>
@@ -1487,7 +1493,7 @@ function buildLibraryIndex() {
                 <h1>Icon Libraries</h1>
                 <p class="lead">${LIBRARIES.length} open-source icon libraries indexed in one searchable catalogue — about ${total.toLocaleString("en-US")} icons. Compare counts, styles, grids, and licenses, then open any library to browse its icons and install instructions.</p>
                 <div class="cta">
-                  <a class="btn primary" href="/#/">Search all libraries at once</a>
+                  <a class="btn primary" href="/">Search all libraries at once</a>
                   <a class="btn" href="/category/">Browse by category</a>
                 </div>
               </div>
@@ -1578,7 +1584,7 @@ function buildCategoryIndex() {
                 <h1>Icon Categories</h1>
                 <p class="lead">Browse ${CATEGORY_SLUGS.length} icon categories across ${LIBRARIES.length} open-source libraries. Every category page shows the same concept drawn by many design teams, so you can pick the interpretation that matches your product.</p>
                 <div class="cta">
-                  <a class="btn primary" href="/#/">Search all icons</a>
+                  <a class="btn primary" href="/">Search all icons</a>
                   <a class="btn" href="/library/">Browse by library</a>
                 </div>
               </div>
@@ -1664,7 +1670,7 @@ function buildStyleIndex() {
                 <h1>Icon Styles</h1>
                 <p class="lead">Browse icons by visual weight across ${LIBRARIES.length} open-source libraries — outline, solid, duotone, fill, bold, thin, and light. Hold the style constant and compare how each design team handles it.</p>
                 <div class="cta">
-                  <a class="btn primary" href="/#/">Search all icons</a>
+                  <a class="btn primary" href="/">Search all icons</a>
                   <a class="btn" href="/library/">Browse by library</a>
                 </div>
               </div>
@@ -1773,4 +1779,15 @@ function main() {
   console.log(`\nWrote sitemaps/hubs.xml (${urls.length} URLs)`);
 }
 
-main();
+/* Only auto-run when invoked directly. `require`-ing this file to reuse its
+   page shell must not rebuild the whole hub layer as a side effect. */
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  main, write, page, head, footer, sidebar, faqBlock, faqSchema,
+  breadcrumbSchema, collectionSchema, iconLink, iconLinks, richText,
+  LIBRARIES, LIB_BY_SLUG, LIB_COPY, STYLES, CATEGORY_SLUGS, CATEGORY_INFO,
+  SITE_URL, CSS_VERSION, KEYWORDS, escapeHtml
+};

@@ -1,3 +1,9 @@
+# Retired URLs (the ~14.9k keyword-variant pages collapsed on 2026-08-30) keep a
+# directory containing index.php, which issues a real 301 to the canonical icon
+# page. index.php must be checked before index.html for those to take effect.
+# Directories that hold only index.html are unaffected — Apache falls through.
+DirectoryIndex index.php index.html
+
 <IfModule mod_mime.c>
   AddType application/json .json
   AddType image/svg+xml .svg

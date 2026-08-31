@@ -1,4 +1,6 @@
 data/pseo-keywords.json
+# Interrupted write-retry loops leave data/*.tmp shards (1.5 GB once). Never ship them.
+data/*.tmp
 .agents/
 .vscode/
 .well-known/

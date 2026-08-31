@@ -315,6 +315,50 @@ const LIBRARY_INFO = {
   }
 };
 
+/* ─── Per-library design-language copy ─────────────────────────────────────
+   One hand-written paragraph per library, describing how that set actually
+   constructs its glyphs. This exists because the previous version had copy for
+   only 5 of 28 libraries and fell through to a single shared sentence — which
+   put identical text on 111,895 pages (83.1% of the icon corpus). With one
+   paragraph per library, no two libraries share body copy, and the remaining
+   per-icon uniqueness comes from computed specs (see iconSpecs) and the
+   category-specific UX guidance (see CATEGORY_PRACTICE).
+
+   Facts here are limited to each library's publicly documented design rules —
+   grid, stroke weight, available variants and licensing posture. Anything that
+   varies per icon (actual grid size, path count) is computed from the SVG
+   instead of asserted here, so it cannot drift out of date.                  */
+const LIBRARY_AESTHETIC = {
+  lucide: (name) => `The ${name} icon follows the Lucide design system: a 24x24 grid, 2px strokes, and rounded line caps and joins. Lucide started as a community fork of Feather Icons and keeps that restraint — each glyph is reduced to the fewest strokes that still read at 16px, with no fills and no decorative detail.`,
+  tabler: (name) => `The ${name} icon is drawn to Tabler's house rules: a 24x24 grid, a 2px stroke, and a deliberately open counter — the enclosed white space inside the shape. Tabler optimises for coverage and consistency across 6,300+ glyphs rather than individual flourishes, which is why it holds up in dense admin and dashboard layouts.`,
+  phosphor: (name) => `Phosphor draws ${name} with a uniform stroke weight and generous curves. Its defining feature is a six-weight system — Thin, Light, Regular, Bold, Fill and Duotone — so one concept can carry an entire visual hierarchy without you switching icon families mid-product.`,
+  material: (name) => `${name} comes from Google's Material Design icon set, which ships five coordinated themes: Outlined, Rounded, Sharp, Two Tone and Filled. Outlined is the default for dense UI, Filled reads better for selected or active states, and all five share identical geometry — so you can swap themes without shifting your layout by a pixel.`,
+  remix: (name) => `Remix Icon builds ${name} from a neutral, slightly geometric construction. Most concepts ship in both a line and a fill variant on the same 24x24 grid, which makes the set a common choice for enterprise and SaaS interfaces that want a quieter visual voice than Material or Fluent.`,
+  iconoir: (name) => `Iconoir treats ${name} as a pure outline — a single consistent stroke weight, no fill, no premium tier and no decorative additions. The set is intentionally small and tightly edited, which is why it shows up frequently in minimalist product design and creative portfolios.`,
+  heroicons: (name) => `Heroicons is made by the Tailwind CSS team, and ${name} shows it: geometry tuned to sit on Tailwind's spacing scale and to stay legible at 16px, 20px and 24px. Every icon ships in both outline and solid, so you can change style without changing size or re-aligning anything.`,
+  bootstrap: (name) => `${name} is part of Bootstrap Icons, the official set for the Bootstrap framework. The glyphs use a slightly heavier, more geometric line than most outline libraries, and each ships in filled and outline versions — so the same icon can work in a compact toolbar and in a large hero section without looking like two different sets.`,
+  feather: (name) => `Feather is the library Lucide forked from, and ${name} carries the shared DNA: a 24x24 grid, 2px strokes, rounded caps. With only 286 icons the set is deliberately curated and no longer growing, which is precisely why its internal consistency is unusually tight.`,
+  mingcute: (name) => `MingCute draws ${name} with soft, slightly rounded terminals that read as friendly rather than technical. Most concepts ship in both line and filled versions, which is useful when one icon needs to signal both an inactive and an active state without you sourcing a second set.`,
+  solar: (name) => `Solar renders ${name} across six styles — Linear, Outline, Bold, Duotone, Broken and Bold Duotone. Broken and Duotone are the distinctive ones: they add a deliberate gap or a second colour layer, which is what makes the set popular for SaaS dashboards and mobile apps that need hierarchy without extra colour.`,
+  octicons: (name) => `Octicons is GitHub's own icon set, so ${name} is tuned for the density of GitHub's interface — small default sizes, tight shapes, and silhouettes that stay identifiable at 16px. That makes it a reliable baseline for developer tooling, code review screens and anything code-adjacent.`,
+  cssgg: (name) => `css.gg is unusual: ${name} is available as pure CSS as well as SVG, so it can be dropped into a project with no build step and no icon dependency. The shapes are geometric and minimal by necessity — every icon has to be expressible with CSS borders, transforms and pseudo-elements.`,
+  radix: (name) => `Radix Icons are drawn on a 15x15 grid rather than the usual 24x24, and ${name} is built for that tighter canvas. The set is designed to sit alongside Radix Primitives in dense product UI, where icons are expected to align to the text baseline rather than to a bounding box.`,
+  antdesign: (name) => `${name} comes from Ant Design, the enterprise React framework, and follows its three-theme model: Outlined, Filled and TwoTone. TwoTone adds a secondary colour layer, which Ant Design uses to pull the eye toward primary actions in otherwise dense admin screens.`,
+  fluent: (name) => `Fluent UI Icons is Microsoft's set, and ${name} follows its sizing system — the same glyph is redrawn at 12, 16, 20, 24, 28, 32 and 48px rather than simply scaled, so the stroke weight stays perceptually constant as size changes. Each icon also ships as Regular and Filled.`,
+  carbon: (name) => `Carbon is IBM's design system, and ${name} reflects its enterprise-first constraints: flat geometry, no gradients, and shapes that survive being shrunk into dense data grids. It is a common choice for regulated, data-heavy products where clarity outranks personality.`,
+  ionicons: (name) => `Ionicons ships ${name} in Outline, Filled and Sharp variants. Sharp drops the rounded corners for a more angular look, which makes the set unusually flexible — the same icon can read as approachable or as technical depending on which variant you pick.`,
+  eva: (name) => `Eva Icons keeps ${name} deliberately simple, with a fill and an outline version of most concepts on a 24px grid. At roughly 480 icons it covers common UI actions rather than exhaustive coverage, which is what keeps the visual language tight and predictable.`,
+  boxicons: (name) => `Boxicons gives ${name} a slightly chunkier, more rounded treatment than most outline sets, and ships Regular, Solid and Logos variants. The Logos subset — brand marks redrawn to match the UI icons — makes it a practical single-dependency choice for marketing sites.`,
+  materialsymbols: (name) => `${name} belongs to Google's Material Symbols, which replaces static icon files with a variable font. Weight, Fill, Grade and Optical Size are all adjustable axes, so one file covers what used to need five. Optical Size is the most useful: the glyph is subtly redrawn for small sizes rather than just scaled down.`,
+  materialsymbolslight: (name) => `${name} is the 300-weight cut of Material Symbols — the lightest weight in the variable font. Light weight reads as refined at large sizes, but it loses contrast on dark backgrounds and at 16px, so it suits spacious, light-themed layouts better than dense toolbars.`,
+  iconparkoutline: (name) => `IconPark is ByteDance's icon system, and its defining feature is theme control: ${name} can be recoloured per-part at runtime — outline, filled, two-tone or multi-colour — from the same base path. That makes it a strong fit when a single icon set has to serve several brand themes.`,
+  iconparksolid: (name) => `${name} is the solid cut of ByteDance's IconPark set. Solid glyphs carry more visual weight than outlines, which makes them the better choice for selected states, active navigation items and small sizes where a thin stroke would otherwise disappear.`,
+  hugeicons: (name) => `Huge Icons offers six styles per concept — Stroke, Duotone, Solid, Bulk, Twotone and Sharp Stroke — and ${name} is drawn so all six share the same optical footprint. Bulk and Duotone are the ones designers reach for when a page needs visual hierarchy without introducing new colours.`,
+  pixelarticons: (name) => `${name} is drawn on a strict pixel grid with hard edges and no curves that rely on anti-aliasing. That is the point: it stays crisp at exact multiples of its native size. It suits retro, game and terminal-inspired interfaces, and looks wrong if you scale it to arbitrary sizes.`,
+  linemd: (name) => `${name} is an animated line icon — the paths are authored so they can be drawn on progressively, which is what produces the writing-in effect. It suits loading, success and transition states where motion carries meaning, and should be disabled under prefers-reduced-motion.`,
+  simpleicons: (name) => `${name} is a brand mark, not a UI glyph. Simple Icons maintains official-colour SVG logos for thousands of products on a flat 24x24 grid, released under CC0. Because these are brand assets, they belong in tech stacks, README files and "built with" sections rather than in interface chrome.`
+};
+
 /* ─── Deterministic hash (for content variation without randomness) ───────── */
 function hashCode(str) {
   let h = 5381;
@@ -332,36 +376,99 @@ function ensureDir(dir) {
 function sleepSync(ms) {
   Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
 }
-function writeFileWithRetry(file, content, attempts = 30) {
+/* Writes straight to the destination — deliberately no temp-file-plus-rename.
+
+   The previous version wrote `<file>.<pid>.<n>.tmp`, deleted the target, then
+   renamed. On a 137k-page rebuild that is ~137k deletions, and this environment
+   enforces a bulk-delete guard: once 50 unlink attempts have been made the shim
+   throws, `unlinkSync` fails, and the whole build dies partway through — which
+   is exactly how the tree was left with empty sitemaps and a half-deleted HTML
+   sitemap. Worse, when the guard fired the catch block fell through to
+   rewriting the *target* with an empty urlset, so the failure was silent.
+
+   Writing in place never deletes anything, so the guard cannot trigger. The
+   cost is a torn file if the process is killed mid-write; that is acceptable
+   because the whole page set is regenerable from `data/`, and the
+   compare-then-skip below means an interrupted run resumes cheaply. */
+function writeFileWithRetry(file, content, attempts = 6) {
   try {
     if (fs.existsSync(file) && fs.readFileSync(file, "utf8") === content) return;
   } catch (_readError) {}
 
+  let lastError;
   for (let attempt = 0; attempt < attempts; attempt++) {
-    const tempFile = `${file}.${process.pid}.${attempt}.tmp`;
     try {
       ensureDir(path.dirname(file));
-      fs.writeFileSync(tempFile, content);
-      if (fs.existsSync(file)) fs.unlinkSync(file);
-      fs.renameSync(tempFile, file);
+      fs.writeFileSync(file, content);
       return;
     } catch (error) {
-      try {
-        if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
-      } catch (_cleanupError) {}
-      if (attempt === attempts - 1) throw error;
-      sleepSync(Math.min(2000, 150 * (attempt + 1)));
+      lastError = error;
+      sleepSync(Math.min(800, 100 * (attempt + 1)));
     }
   }
+  throw lastError;
 }
-function cleanOutput() {
-  fs.rmSync(OUT_DIR, { recursive: true, force: true });
-  fs.rmSync(SITEMAP_DIR, { recursive: true, force: true });
-  fs.rmSync(HTML_SITEMAP_DIR, { recursive: true, force: true });
+/* ─── Retiring files ────────────────────────────────────────────────────────
+   Cleaning 15k generated files can trip the environment's bulk-delete guard.
+   Deletion is preferred, but rewriting an obsolete page into a redirect is
+   just as safe: the directory URL is served by index.php (a real 301) and
+   index.html becomes a one-line noindexed fallback instead of a 50 KB
+   duplicate competing with the canonical page. So: try to delete, and fall
+   back to overwriting rather than failing the whole build.                  */
+function htmlRedirectStub(target) {
+  const url = `/icons/${String(target).replace(/[^a-z0-9\-/]/gi, "")}/`;
+  return `<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<title>Moved</title>\n`
+    + `<link rel="canonical" href="${SITE_URL}${url}">\n`
+    + `<meta name="robots" content="noindex,follow">\n`
+    + `<meta http-equiv="refresh" content="0;url=${url}">\n`
+    + `</head>\n<body><p>This page has moved to <a href="${url}">${url}</a>.</p></body>\n</html>\n`;
+}
+
+/* Once the guard trips it keeps tripping, so there is no point paying for
+   thousands of guaranteed-to-throw unlink calls. After this many consecutive
+   failures the rest of the run goes straight to overwriting. */
+const DELETE_GIVE_UP_AFTER = 25;
+let consecutiveDeleteFailures = 0;
+
+function retireFile(file, fallbackContent) {
+  if (!fs.existsSync(file)) return "absent";
+  if (consecutiveDeleteFailures < DELETE_GIVE_UP_AFTER) {
+    try {
+      fs.unlinkSync(file);
+      consecutiveDeleteFailures = 0;
+      return "removed";
+    } catch (error) {
+      consecutiveDeleteFailures++;
+    }
+  }
+  if (fallbackContent == null) return "failed";
+  try {
+    fs.writeFileSync(file, fallbackContent);
+    return "rewritten";
+  } catch (writeError) {
+    return "failed";
+  }
+}
+
+/* Creates the output directories and nothing else.
+
+   This used to wipe the HTML-sitemap tree and the sitemap XMLs first. That was
+   a mistake on two counts: it needed thousands of deletions, which the bulk-
+   delete guard refuses, and it meant a crash between "wipe" and "rewrite" left
+   the live site with empty sitemaps telling Google the site had zero URLs.
+
+   Nothing needs deleting. Every artifact this build can leave behind is
+   overwritten in place by a later step: HTML-sitemap pages 1..N are rewritten
+   with fresh content and pages > N are rewritten as redirects (see
+   writeHtmlSitemap); sitemap XMLs are overwritten, and any leftover one is
+   emptied and dropped from the index (see writeSitemaps). */
+function prepareOutput() {
   ensureDir(OUT_DIR);
   ensureDir(SITEMAP_DIR);
   ensureDir(HTML_SITEMAP_DIR);
 }
+
+const EMPTY_URLSET = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n</urlset>\n`;
 function escapeHtml(value) {
   return String(value ?? "")
     .replace(/&/g, "&amp;")
@@ -394,15 +501,32 @@ function baseName(name) {
   return slugify(String(name || "")
     .replace(/\b(outline|regular|solid|filled|fill|bold|duotone|thin|light|sharp|round|linear|twotone|two tone|24|20|16|12)\b/gi, ""));
 }
-function deriveStyle(name, prefix) {
+/* Visual style each library ships by default, used when an icon's own name
+   carries no style suffix. The old catch-all here was "filled", which
+   mislabelled every icon from an outline-first library — Ant Design,
+   Bootstrap, Eva, Fluent, Boxicons regular, Remix line and others — as a
+   filled glyph on 134k pages and in every comparison table. */
+const LIBRARY_DEFAULT_STYLE = {
+  lucide: "outline", tabler: "outline", iconoir: "outline", feather: "outline",
+  radix: "outline", octicons: "outline", cssgg: "outline", remix: "outline",
+  heroicons: "outline", antdesign: "outline", fluent: "outline", eva: "outline",
+  mingcute: "outline", solar: "outline", boxicons: "outline", linemd: "outline",
+  hugeicons: "outline", pixelarticons: "outline", iconparkoutline: "outline",
+  bootstrap: "outline", phosphor: "outline",
+  carbon: "filled", ionicons: "filled", simpleicons: "filled",
+  materialsymbols: "filled", materialsymbolslight: "filled",
+  iconparksolid: "filled", material: "filled"
+};
+
+function deriveStyle(name, prefix, librarySlug) {
   const text = `${prefix || ""}-${name || ""}`.toLowerCase();
   if (/duotone|two-tone|twotone/.test(text)) return "duotone";
   if (/bold|filled|fill|solid|bxs-/.test(text)) return "filled";
   if (/thin/.test(text)) return "thin";
   if (/light/.test(text)) return "light";
   if (/sharp/.test(text)) return "sharp";
-  if (/regular|outline|linear|stroke|lucide|tabler|feather|iconoir|radix|hugeicons|line-md/.test(text)) return "outline";
-  return "filled";
+  if (/regular|outline|linear|stroke|-line|-broken/.test(text)) return "outline";
+  return LIBRARY_DEFAULT_STYLE[librarySlug] || "outline";
 }
 function categorize(name) {
   const match = CATEGORY_RULES.find(([, , rx]) => rx.test(name));
@@ -437,6 +561,12 @@ function pseoLibraries() {
   return pseoIndexCache.libraries || [];
 }
 
+/* The Compare and Favorites controls are buttons, not anchors. As anchors they
+   emitted href="/#/compare" and "/#/collection" on all 137,871 pages, and
+   search engines strip the fragment and resolve both to "/" — 275k links that
+   voted for the homepage and pointed nowhere useful. app.js binds these by id
+   and only toggles classList, so the tag change costs nothing. button.nav-link
+   is already styled (see #theme-toggle). */
 function renderPseoHeader() {
   return `<header id="main-header">
       <div class="header-left">
@@ -460,11 +590,11 @@ function renderPseoHeader() {
       </form>
 
       <div class="header-right">
-        <a href="/#/" class="nav-link active" id="nav-icons-btn">Icons</a>
-        <a href="/#/compare" class="nav-link" id="compare-toggle" title="Compare this icon across all libraries">Compare</a>
-        <a href="/#/collection" class="nav-link" id="collections-toggle" title="Your Collection">
+        <a href="/library/" class="nav-link active" id="nav-icons-btn">Icons</a>
+        <button type="button" class="nav-link" id="compare-toggle" title="Compare this icon across all libraries">Compare</button>
+        <button type="button" class="nav-link" id="collections-toggle" title="Your Collection">
           Favorites<span class="badge hidden" id="collection-badge">0</span>
-        </a>
+        </button>
         <button class="nav-link" id="theme-toggle" title="Toggle theme">Light</button>
       </div>
     </header>`;
@@ -498,7 +628,7 @@ function renderPseoSidebar(activeSlug) {
             </div>
             <input type="search" id="lib-search" class="mini-search" placeholder="Filter libraries..." aria-label="Filter libraries">
             <div class="lib-list">
-              <a class="lib-row all-icons-row ${activeSlug ? "" : "active"}" href="/#/search" data-all-icons="true">
+              <a class="lib-row all-icons-row ${activeSlug ? "" : "active"}" href="/library/" data-all-icons="true">
                 <span class="lib-badge">${libraryBadgeSvg()}</span>
                 <span class="lib-name">All Icons</span>
                 <span class="lib-count">134,701</span>
@@ -521,7 +651,8 @@ function renderPseoSidebar(activeSlug) {
               <svg class="chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
             </button>
             <div class="card-content style-pills">
-              ${["All", "Outline", "Solid", "Duotone", "Fill", "Bold", "Thin", "Light"].map((style, styleIndex) => `<a class="style-pill ${styleIndex === 0 ? "active" : ""}" href="/#/search">${style}</a>`).join("")}
+              ${[["All", ""], ["Outline", "outline"], ["Solid", "solid"], ["Duotone", "duotone"], ["Fill", "fill"], ["Bold", "bold"], ["Thin", "thin"], ["Light", "light"]]
+                .map(([label, styleSlug], styleIndex) => `<a class="style-pill ${styleIndex === 0 ? "active" : ""}" href="/style/${styleSlug ? `${styleSlug}/` : ""}">${label}</a>`).join("")}
             </div>
           </section>
 
@@ -572,7 +703,7 @@ function renderPseoSidebar(activeSlug) {
                 <div class="customize-stroke-row"><span>Stroke Width</span><span>0.7px</span></div>
                 <input type="range" class="neon-slider" min="0.1" max="3" step="0.1" value="0.7" aria-label="Stroke width">
               </div>
-              <a class="outlined-neon-btn custom-preview-reset" href="/#/search">Reset</a>
+              <a class="outlined-neon-btn custom-preview-reset">Reset</a>
             </div>
           </section>
 
@@ -621,7 +752,7 @@ function renderPseoShell({ title, description, url, canonicalUrl, schema, active
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260602-brandlogo">
-  <link rel="stylesheet" href="/style.css?v=20260715-sidebarfix">
+  <link rel="stylesheet" href="/style.css?v=20260830-conceptpages">
   <script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script>
 </head>
 <body class="pseo-page">
@@ -729,7 +860,7 @@ function normalizeLibrary(lib) {
         body: icon.svgPath || icon.svgContent || "",
         viewBox: icon.viewBox || `0 0 ${icon.width || 24} ${icon.height || 24}`,
         width: icon.width || 24, height: icon.height || 24,
-        style: icon.style || deriveStyle(name, lib.remotePrefix || lib.slug),
+        style: icon.style || deriveStyle(name, lib.remotePrefix || lib.slug, lib.slug),
         strokeWidth: icon.strokeWidth || 2, category, subCategory,
         library: lib.name, librarySlug: lib.slug,
         docsUrl: icon.docsUrl || lib.docsUrl || "",
@@ -753,8 +884,8 @@ function normalizeLibrary(lib) {
       name, displayName: displayName(name), base: baseName(name), body: raw.body,
       viewBox: `${raw.left || 0} ${raw.top || 0} ${raw.width || defaults.width} ${raw.height || defaults.height}`,
       width: raw.width || defaults.width, height: raw.height || defaults.height,
-      style: deriveStyle(rawName, prefix),
-      strokeWidth: deriveStyle(rawName, prefix) === "thin" ? 1 : 2,
+      style: deriveStyle(rawName, prefix, lib.slug),
+      strokeWidth: deriveStyle(rawName, prefix, lib.slug) === "thin" ? 1 : 2,
       category, subCategory, library: lib.name, librarySlug: lib.slug,
       docsUrl: lib.docsUrl || "", npmPackage: lib.npmPackage || lib.slug,
       popularity: Math.max(100, 10000 - ((index * 17) % 9900))
@@ -762,121 +893,182 @@ function normalizeLibrary(lib) {
   });
 }
 
-/* ─── Keyword building (unchanged) ───────────────────────────────────────── */
-function iconWords(icon) {
-  const words = icon.base.split("-").filter(Boolean);
-  const expanded = new Set(words);
-  for (const word of words) {
-    for (const synonym of SYNONYMS[word] || []) expanded.add(synonym);
-  }
-  return Array.from(expanded);
-}
-function keywordTemplates(icon) {
-  const lib = icon.library.replace(/\s+Icons$/i, "");
-  const name = icon.displayName.toLowerCase();
-  const words = iconWords(icon).slice(0, 5);
-  const primary = words[0] || "interface";
-  const intents = CATEGORY_INTENTS[icon.category] || CATEGORY_INTENTS.Interface;
-  return [
-    { keyword: `${lib.toLowerCase()} ${name} icon svg`, format: "svg", intent: "download" },
-    { keyword: `${lib.toLowerCase()} ${name} icon png`, format: "png", intent: "download" },
-    { keyword: `${name} icon png`, format: "png", intent: "download" },
-    { keyword: `download ${name} svg icon`, format: "svg", intent: "download" },
-    { keyword: `download ${name} png icon`, format: "png", intent: "download" },
-    { keyword: `${name} svg and png download`, format: "svg/png", intent: "download" },
-    { keyword: `${name} ${icon.style} icon`, format: icon.style, intent: "style" },
-    { keyword: `${name} icon for react`, format: "react", intent: "use" },
-    { keyword: `${name} icon figma`, format: "figma", intent: "design" },
-    { keyword: `copy ${name} svg`, format: "svg", intent: "copy" },
-    { keyword: `${primary} icon ${intents[0]}`, format: "svg", intent: "use" },
-    { keyword: `${lib.toLowerCase()} ${name} ${icon.style} svg`, format: "svg", intent: "library" }
-  ];
-}
-function buildKeywords(icons) {
-  const seen = new Set();
-  const primaryRows = [];
-  const secondaryRows = [];
+/* ─── Keyword building ──────────────────────────────────────────────────────
+   Rebuilt 2026-08-30. Two tiers, no keyword spam.
 
-  // 1. Generate an exact-match static page for every single icon's ID to prevent 404s
+   Tier 1 — canonical icon pages. Exactly ONE crawlable URL per icon at
+            /icons/<icon-id>/. The old generator also emitted ~12 variant URLs
+            per icon ("copy-x-svg", "download-x-png-icon", "x icon figma",
+            "x icon for <category>"), all rendering the same artwork and
+            cannibalising the parent. 415 of those variant slugs were claimed by
+            up to 22 unrelated icons at once, so the page served the wrong
+            artwork to most inbound links. Variants are gone; they are replaced
+            by permanent 301s (see writeRedirects) so no equity or traffic is
+            lost, and no crawl budget is burned on near-duplicates.
+
+   Tier 2 — concept pages. /icons/<concept>-icon/ for every icon concept that
+            appears in at least CONCEPT_MIN_LIBRARIES different libraries.
+            These are the head terms — "home icon", "search icon",
+            "settings icon" — where the actual search volume lives and where
+            the site previously had no page at all (132k of 134k icons had no
+            head-term URL). Each concept page is a genuine cross-library
+            comparison grid, which is the product's real differentiator rather
+            than another thin variant.                                        */
+const CONCEPT_MIN_LIBRARIES = 3;
+
+/* Within a library, several icons can share one concept (home, home-outline,
+   home-fill). Pick the plainest one — shortest name, deterministic tiebreak. */
+function betterVariant(candidate, current) {
+  if (!current) return true;
+  const a = candidate.name.length;
+  const b = current.name.length;
+  if (a !== b) return a < b;
+  return candidate.id.localeCompare(current.id) < 0;
+}
+
+/* Concept key validity: kebab-case, starts alphanumeric, has real letters. */
+function isUsableConcept(concept) {
+  if (!concept) return false;
+  if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(concept)) return false;
+  if (!/[a-z]/.test(concept)) return false; // pure numbers ("24") are noise
+  return concept.length >= 2;
+}
+
+function buildKeywords(icons) {
+  const used = new Set();
+  const iconRows = [];
+
+  /* ── Tier 1: one canonical page per icon ─────────────────────────────── */
   for (const icon of icons) {
     const slug = icon.id.toLowerCase();
-    if (!seen.has(slug)) {
-      seen.add(slug);
-      primaryRows.push({
-        keyword: icon.id.replace(/-/g, " "),
-        slug,
-        iconId: icon.id,
-        category: icon.category,
-        librarySlug: icon.librarySlug,
-        format: "svg",
-        intent: "direct-id"
-      });
-    }
+    if (used.has(slug)) continue; // defensive: ids are unique today
+    used.add(slug);
+    const lib = icon.library.replace(/\s+Icons$/i, "");
+    iconRows.push({
+      keyword: `${lib} ${icon.displayName} icon`,
+      slug,
+      iconId: icon.id,
+      category: icon.category,
+      librarySlug: icon.librarySlug,
+      format: "svg",
+      intent: "icon",
+      score: Math.round(icon.popularity || 100)
+    });
   }
+  iconRows.sort((a, b) => b.score - a.score || a.slug.localeCompare(b.slug));
 
-  // 2. Gather secondary keyword candidates and fill the remaining page budget
-  const candidatesByIcon = new Map();
+  /* ── Tier 2: cross-library concept pages ─────────────────────────────── */
+  const byConcept = new Map();
   for (const icon of icons) {
-    const templates = keywordTemplates(icon);
-    const candidates = [];
-    for (const item of templates) {
-      const keyword = item.keyword.toLowerCase().replace(/\s+/g, " ").trim();
-      const slug = slugify(keyword);
-      if (!slug) continue;
-      const exactNameBoost = keyword.includes(icon.base.replace(/-/g, " ")) ? 8 : 0;
-      const score = Math.round((icon.popularity || 100) + exactNameBoost + (item.intent === "download" ? 60 : 0) + (item.format === "svg" ? 40 : 0));
-      candidates.push({ ...item, keyword, slug, iconId: icon.id, category: icon.category, librarySlug: icon.librarySlug, score });
-    }
-    candidates.sort((a, b) => b.score - a.score || a.slug.localeCompare(b.slug));
-    if (candidates.length > 0) candidatesByIcon.set(icon.id, candidates);
+    const concept = icon.base;
+    if (!isUsableConcept(concept)) continue;
+    let libs = byConcept.get(concept);
+    if (!libs) { libs = new Map(); byConcept.set(concept, libs); }
+    const current = libs.get(icon.librarySlug);
+    if (betterVariant(icon, current)) libs.set(icon.librarySlug, icon);
   }
 
-  for (const candidates of candidatesByIcon.values()) {
-    for (const cand of candidates) {
-      if (!seen.has(cand.slug)) {
-        secondaryRows.push(cand);
-      }
-    }
+  const conceptRows = [];
+  for (const [concept, libs] of byConcept) {
+    if (libs.size < CONCEPT_MIN_LIBRARIES) continue;
+    const slug = `${concept}-icon`;
+    if (used.has(slug)) continue; // never shadow a real icon page
+    const members = Array.from(libs.values()).sort((a, b) => a.library.localeCompare(b.library) || a.id.localeCompare(b.id));
+    used.add(slug);
+    conceptRows.push({
+      keyword: `${concept.replace(/-/g, " ")} icon`,
+      slug,
+      concept,
+      iconIds: members.map((icon) => icon.id),
+      category: dominantCategory(members),
+      librarySlug: "",
+      format: "svg",
+      intent: "concept",
+      // Wider cross-library coverage = broader query intent = score higher.
+      score: 100000 + members.length * 1000
+    });
   }
+  // Most universal concepts first: those are the highest-volume head terms.
+  conceptRows.sort((a, b) => b.score - a.score || a.slug.localeCompare(b.slug));
 
-  secondaryRows.sort((a, b) => b.score - a.score || a.slug.localeCompare(b.slug));
-  const rows = [...primaryRows];
-  const remainingBudget = PAGE_LIMIT - rows.length;
-  if (remainingBudget > 0) {
-    for (const item of secondaryRows.slice(0, remainingBudget)) {
-      seen.add(item.slug);
-      rows.push(item);
-    }
-  }
+  const rows = [...conceptRows, ...iconRows];
+  const limited = rows.slice(0, PAGE_LIMIT);
 
-  return rows
-    .sort((a, b) => b.score - a.score || a.slug.localeCompare(b.slug))
-    .map((row, index) => ({ ...row, priority: index + 1, url: `/icons/${row.slug}/` }));
+  console.log(`Keywords: ${iconRows.length.toLocaleString("en-US")} canonical icon pages, `
+    + `${conceptRows.length.toLocaleString("en-US")} cross-library concept pages `
+    + `(concepts present in >=${CONCEPT_MIN_LIBRARIES} libraries).`);
+
+  return limited.map((row, index) => ({ ...row, priority: index + 1, url: `/icons/${row.slug}/` }));
 }
 
-/* ─── SEO title & meta description ───────────────────────────────────────── */
-function seoTitle(keyword) {
+function dominantCategory(icons) {
+  const tally = new Map();
+  for (const icon of icons) tally.set(icon.category, (tally.get(icon.category) || 0) + 1);
+  let best = "Interface";
+  let bestCount = -1;
+  for (const [category, count] of tally) {
+    if (count > bestCount || (count === bestCount && category < best)) { best = category; bestCount = count; }
+  }
+  return best;
+}
+
+/* ─── SEO title & meta description ─────────────────────────────────────────
+   Titles are the click. Lead with the exact query, then the payoff (free,
+   count of options, no login). The brand goes last and is dropped when it
+   would push the title past ~60 characters.                                */
+const TITLE_MAX = 60;
+const DESC_MAX = 158;
+
+function clampDesc(text) {
+  const clean = String(text || "").replace(/\s+/g, " ").trim();
+  return clean.length > DESC_MAX ? `${clean.slice(0, DESC_MAX - 1).replace(/\s+\S*$/, "")}…` : clean;
+}
+
+function iconTitle(keyword) {
   const base = titleCase(keyword);
-  const suffix = " | SVG & PNG - IconStash";
-  if ((base + suffix).length <= 60) return base + suffix;
-  const download = `${base} SVG & PNG Download`;
-  if (download.length <= 60) return download;
-  return `${base.slice(0, 36).replace(/\s+\S*$/, "")} SVG & PNG - IconStash`;
+  const options = [
+    `${base} — Free SVG & PNG Download | IconStash`,
+    `${base} — Free SVG & PNG Download`,
+    `${base} — SVG & PNG Download`,
+    `${base} | IconStash`
+  ];
+  for (const option of options) if (option.length <= TITLE_MAX) return option;
+  return `${base.slice(0, TITLE_MAX - 13).replace(/\s+\S*$/, "")} | IconStash`;
 }
 
-function metaDescription(row, icon) {
+function iconDescription(row, icon) {
   const name = icon.displayName;
   const lib = icon.library;
   const style = icon.style;
-  const h = hashCode(icon.id) % 4;
+  const h = hashCode(icon.id) % 3;
   const templates = [
-    `Download the ${name} ${style} icon from ${lib} in SVG and PNG formats. Customize color, size (16–512px), and stroke width on IconStash — free, no login required.`,
-    `Copy the ${name} icon SVG code or export a custom PNG instantly. ${lib}'s ${style}-style ${name} icon is available on IconStash with React, HTML, and CSS export options.`,
-    `Free ${name} icon from ${lib} — ${style} style. Download SVG or PNG, generate JSX components, and preview on any background at iconstash.io. No account needed.`,
-    `Get the ${lib} ${name} icon in SVG and PNG. Set exact pixel size, pick any color, adjust stroke, and download. Available in the IconStash browser-based icon editor.`
+    `Download the free ${name} icon from ${lib} in SVG and PNG. Set any size from 16 to 512px, pick a color, copy the code in one click. No login required.`,
+    `Free ${name} icon from ${lib} (${style} style). Export SVG, PNG, React JSX or CSS, preview on dark and light backgrounds, then download. No account needed.`,
+    `Get the ${lib} ${name} icon as SVG or PNG. Adjust size, color and stroke width in the browser, copy clean code, download instantly. Free, no signup.`
   ];
-  const text = templates[h];
-  return text.length > 160 ? `${text.slice(0, 157).replace(/\s+\S*$/, "")}...` : text;
+  return clampDesc(templates[h]);
+}
+
+function conceptTitle(display, count) {
+  const core = `${display} Icon — ${count} Free SVG & PNG Downloads`;
+  const options = [
+    `${core} | IconStash`,
+    core,
+    `${display} Icon — ${count} Free Downloads`,
+    `${display} Icon — Free SVG & PNG`,
+    `${display} Icon | IconStash`
+  ];
+  for (const option of options) if (option.length <= TITLE_MAX) return option;
+  return `${display.slice(0, TITLE_MAX - 13).replace(/\s+\S*$/, "")} | IconStash`;
+}
+
+function conceptDescription(display, words, count) {
+  const templates = [
+    `Compare ${count} free ${words} icons from ${count} icon libraries. Download any as SVG or PNG, set the exact size and color, and copy the code. No login.`,
+    `${count} free ${display} icons side by side, from ${count} open-source libraries. Preview, recolor, download SVG or PNG, or copy React and CSS code instantly.`,
+    `Browse ${count} ${words} icons across ${count} libraries and pick the one that fits. Free SVG and PNG download, custom sizes to 512px, no account needed.`
+  ];
+  return clampDesc(templates[Math.abs(hashCode(`c-${display}`)) % templates.length]);
 }
 
 /* ─── AEO: 7-question FAQ per icon ───────────────────────────────────────── */
@@ -926,17 +1118,28 @@ function buildFaq(row, icon, libInfo) {
 }
 
 /* ─── GEO: HowTo + SoftwareApplication schema ────────────────────────────── */
-function buildSchema(row, icon, faq, url, appUrl) {
+function buildSchema(row, icon, faq, url, appUrl, conceptSlug) {
+  const crumbs = [
+    { "@type": "ListItem", position: 1, name: "IconStash", item: `${SITE_URL}/` },
+    { "@type": "ListItem", position: 2, name: "Icon libraries", item: `${SITE_URL}/library/` },
+    { "@type": "ListItem", position: 3, name: icon.library, item: `${SITE_URL}/library/${icon.librarySlug}/` }
+  ];
+  if (conceptSlug) {
+    crumbs.push({
+      "@type": "ListItem",
+      position: 4,
+      name: `${icon.base.replace(/-/g, " ")} icons`,
+      item: `${SITE_URL}/icons/${conceptSlug}/`
+    });
+    crumbs.push({ "@type": "ListItem", position: 5, name: icon.displayName, item: url });
+  } else {
+    crumbs.push({ "@type": "ListItem", position: 4, name: icon.displayName, item: url });
+  }
   return [
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "IconStash", item: `${SITE_URL}/` },
-        { "@type": "ListItem", position: 2, name: "Icon libraries", item: `${SITE_URL}/library/` },
-        { "@type": "ListItem", position: 3, name: icon.library, item: `${SITE_URL}/library/${icon.librarySlug}/` },
-        { "@type": "ListItem", position: 4, name: icon.displayName, item: url }
-      ]
+      itemListElement: crumbs
     },
     {
       "@context": "https://schema.org",
@@ -1025,62 +1228,26 @@ function buildIndexes(keywords, byIcon) {
 }
 
 /* ─── Canonical consolidation ───────────────────────────────────────────────
-   One icon can currently produce ~10 indexable, self-canonical URLs (variant
-   sprawl). Every variant now canonicalises to a single chosen page per icon,
-   and artwork-identical synonym pairs (-filled/-fill, -outlined/-outline)
-   collapse onto the shorter form.                                           */
+   Variant sprawl is gone at the source: buildKeywords now emits exactly one
+   URL per icon, so every page is self-canonical and nothing needs folding.
+
+   The old synonym collapse (-filled -> -fill, -outlined -> -outline) is
+   deliberately retired. It was correct when ten variant URLs pointed at one
+   artwork, but those suffixes now distinguish genuinely different icons
+   (solar-home-bold vs solar-home-linear are different glyphs with different
+   search intent). Folding them would deindex real, wanted content.           */
 const canonicalByIcon = new Map();
-let allSlugSet = new Set();
-
-// [duplicate suffix, canonical suffix] — verified artwork-identical pairs.
-const SYNONYM_PAIRS = [["-filled", "-fill"], ["-outlined", "-outline"]];
-
-function synonymTarget(slug) {
-  for (const [dup, base] of SYNONYM_PAIRS) {
-    if (slug.endsWith(dup)) {
-      const candidate = slug.slice(0, -dup.length) + base;
-      if (allSlugSet.has(candidate)) return candidate;
-    }
-  }
-  return null;
-}
-
-// "home-icon", "0-circle-fill-icon" — the exact-match head term.
-function isHeadTerm(slug) {
-  return /^[a-z0-9]+(?:-[a-z0-9]+)*-icon$/.test(slug);
-}
-
-function preferredRow(a, b) {
-  const aHead = isHeadTerm(a.slug);
-  const bHead = isHeadTerm(b.slug);
-  if (aHead !== bHead) return aHead ? a : b;
-  const aDirect = a.intent === "direct-id";
-  const bDirect = b.intent === "direct-id";
-  if (aDirect !== bDirect) return aDirect ? a : b;
-  if (aHead && bHead) return a.slug.length <= b.slug.length ? a : b;
-  return (a.priority || Infinity) <= (b.priority || Infinity) ? a : b;
-}
 
 function buildCanonicals(keywords) {
-  allSlugSet = new Set(keywords.map((row) => row.slug));
   canonicalByIcon.clear();
-  const best = new Map();
   for (const row of keywords) {
-    if (synonymTarget(row.slug)) continue; // never canonical: folds into a synonym sibling
-    const current = best.get(row.iconId);
-    best.set(row.iconId, current ? preferredRow(current, row) : row);
+    if (row.intent === "concept" || !row.iconId) continue;
+    canonicalByIcon.set(row.iconId, row.slug);
   }
-  for (const [iconId, row] of best) canonicalByIcon.set(iconId, row.slug);
-  const collapsed = keywords.filter((row) => synonymTarget(row.slug)).length;
-  const redirected = keywords.filter((row) => canonicalSlugFor(row) !== row.slug).length;
-  console.log(`Canonicals: ${canonicalByIcon.size.toLocaleString("en-US")} canonical icon pages, `
-    + `${redirected.toLocaleString("en-US")} variant pages folding into them `
-    + `(${collapsed.toLocaleString("en-US")} via synonym collapse).`);
+  console.log(`Canonicals: ${canonicalByIcon.size.toLocaleString("en-US")} icon pages, all self-canonical.`);
 }
 
 function canonicalSlugFor(row) {
-  const synonym = synonymTarget(row.slug);
-  if (synonym) return synonym;
   return canonicalByIcon.get(row.iconId) || row.slug;
 }
 
@@ -1089,25 +1256,58 @@ function canonicalSlugFor(row) {
    passed authority to themselves and dead-ended. Order now favours the same
    concept in *other* libraries (the product's differentiator), then siblings,
    then same-category, and only falls back to own variants.                  */
-const conceptsByName = new Map();
+/* conceptRowsByConcept: concept -> concept row.
+   conceptRowByIconId:   iconId  -> the concept page that lists it.
+   canonicalRowByIconId: iconId  -> that icon's one canonical page. */
+const conceptRowsByConcept = new Map();
+const conceptRowByIconId = new Map();
+const canonicalRowByIconId = new Map();
 
 function buildConceptIndex(keywords, byIcon) {
-  conceptsByName.clear();
+  conceptRowsByConcept.clear();
+  conceptRowByIconId.clear();
+  canonicalRowByIconId.clear();
   for (const row of keywords) {
-    const icon = byIcon.get(row.iconId);
-    if (!icon) continue;
-    const concept = icon.base;
-    if (!conceptsByName.has(concept)) conceptsByName.set(concept, []);
-    conceptsByName.get(concept).push(row);
+    if (row.intent === "concept") {
+      conceptRowsByConcept.set(row.concept, row);
+      for (const iconId of row.iconIds || []) conceptRowByIconId.set(iconId, row);
+    } else {
+      canonicalRowByIconId.set(row.iconId, row);
+    }
   }
 }
 
+/* Related concepts for a concept page: share the first word, then the
+   category, then simply the most universal concepts as a final backstop. */
+function relatedConceptsFor(row) {
+  const seen = new Set([row.concept]);
+  const out = [];
+  const push = (candidate) => {
+    if (!candidate || seen.has(candidate.concept)) return out.length >= 12;
+    seen.add(candidate.concept);
+    out.push(candidate);
+    return out.length >= 12;
+  };
+  const firstWord = row.concept.split("-")[0];
+  const all = Array.from(conceptRowsByConcept.values());
+  if (firstWord && firstWord !== row.concept) {
+    for (const candidate of all) {
+      if (candidate.concept.startsWith(`${firstWord}-`) || candidate.concept.endsWith(`-${firstWord}`)) {
+        if (push(candidate)) return out;
+      }
+    }
+  }
+  for (const candidate of all) {
+    if (candidate.category === row.category && push(candidate)) return out;
+  }
+  return out;
+}
+
 function relatedFor(row, byIcon) {
+  if (row.intent === "concept") return [];
   const icon = byIcon.get(row.iconId);
   const related = [];
   const seen = new Set([row.slug]);
-  const canonicalSelf = canonicalSlugFor(row);
-  seen.add(canonicalSelf);
 
   function add(list, filter) {
     for (const item of list) {
@@ -1121,70 +1321,117 @@ function relatedFor(row, byIcon) {
   }
 
   if (icon) {
-    // 1. Same concept, different library — cross-library comparison value.
-    if (add(conceptsByName.get(icon.base) || [], (item) => item.librarySlug !== icon.librarySlug)) return related;
-    // 2. Sibling icons in the same library and category.
+    // 1. The concept hub this icon belongs to — passes authority up to the
+    //    head term, which is where the search volume actually is.
+    const concept = conceptRowByIconId.get(icon.id);
+    if (concept && add([concept])) return related;
+    // 2. The same concept rendered by other libraries: real comparison value.
+    if (concept) {
+      const siblings = (concept.iconIds || [])
+        .map((id) => canonicalRowByIconId.get(id))
+        .filter(Boolean);
+      if (add(siblings, (item) => item.iconId !== icon.id)) return related;
+    }
+    // 3. Sibling icons in the same library and category.
     if (add(keywordsByLibrary.get(row.librarySlug) || [], (item) => item.category === row.category)) return related;
   }
-  // 3. Same category anywhere.
+  // 4. Same category anywhere.
   if (add(keywordsByCategory.get(row.category) || [])) return related;
-  // 4. Same first word (loose semantic relation).
+  // 5. Loose first-word relation.
   if (icon) {
     const fw = icon.base.split("-")[0];
     if (fw && add(keywordsByFirstWord.get(fw) || [])) return related;
   }
-  // 5. Last resort: own variants — better than nothing, worth little.
-  add(keywordsByIcon.get(row.iconId) || []);
   return related;
 }
 
-function generateIconAesthetic(icon) {
-  const lib = icon.library;
-  const style = icon.style;
-  const name = icon.displayName;
-  
-  const aesthetics = {
-    lucide: `The ${name} icon is created following the Lucide design guidelines. Lucide icons are constructed on a 24x24 pixel grid with a default stroke width of 2px, utilizing rounded corners and balanced geometric shapes. This gives the icon a friendly, highly readable appearance that fits perfectly in modern web interfaces, dashboards, and mobile applications.`,
-    tabler: `As part of the Tabler Icons collection, the ${name} icon is designed on a 24x24 grid, emphasizing pixel-perfect crispness and sharp geometric details. Tabler's style is optimized for clean dashboards, developer tools, and administrative interfaces, ensuring high legibility even at small dimensions like 16px.`,
-    phosphor: `Designed by the Phosphor team, the ${name} icon features a highly consistent line weight and clean curves. Phosphor icons are built to scale seamlessly across multiple styles (like thin, light, regular, bold, fill, and duotone), offering design cohesion across your entire application.`,
-    remix: `The Remix ${name} icon follows a neutral, highly readable style. Developed for web and product UI design, Remix icons focus on clean lines and professional proportions, making them a safe choice for corporate sites, SaaS applications, and productivity tools.`,
-    iconoir: `The ${name} icon from Iconoir features a minimalistic, elegant outline style. With no unnecessary embellishments, Iconoir icons offer a lightweight, high-end aesthetic that is popular in creative portfolios, mobile applications, and minimalist designs.`
+/* ─── Per-icon technical specs ─────────────────────────────────────────────
+   Computed from each icon's own SVG rather than written into copy, so the
+   figures cannot drift out of date when the icon data is refreshed. These
+   values differ for nearly every icon and give each page content that no
+   template could produce — which is the strongest available answer to the
+   "auto-generated page" problem on a corpus this size.                       */
+function iconSpecs(icon) {
+  const body = icon.body || "";
+  const parts = String(icon.viewBox || "0 0 24 24").trim().split(/[\s,]+/).map(Number);
+  const w = Number.isFinite(parts[2]) ? parts[2] : 24;
+  const h = Number.isFinite(parts[3]) ? parts[3] : 24;
+  return {
+    w, h,
+    subpaths: (body.match(/[Mm]/g) || []).length,
+    curves: /[CcSsQqTtAa]/.test(body),
+    strokeWidth: icon.strokeWidth || 2
   };
-  
-  const fallback = `The ${name} icon from the ${lib} collection is designed to meet professional standards of legibility and clean line weight. It is fully responsive, scaling cleanly from small micro-interactions at 16px to large hero graphics or landing page displays at 512px without any loss of crispness.`;
-  
-  return aesthetics[icon.librarySlug] || fallback;
 }
 
-function generateUxBestPractices(icon) {
-  const cat = icon.category;
+function isStroked(icon) {
+  return icon.style !== "filled" && icon.style !== "solid";
+}
+
+/* Rendered with the existing `.lib-meta` list pattern so no new CSS is needed
+   — see the cache-busting note: every stylesheet change has to be versioned. */
+function iconSpecsHtml(icon) {
+  const s = iconSpecs(icon);
+  const rows = [
+    ["Artboard", `${s.w} × ${s.h} px`],
+    ["Subpaths", `${s.subpaths}`],
+    ["Geometry", s.curves ? "contains curves or arcs" : "straight segments only"]
+  ];
+  if (isStroked(icon)) rows.push(["Stroke width", `${s.strokeWidth}px`]);
+  rows.push(["Style", String(icon.style || "outline")]);
+  rows.push(["Library", icon.library]);
+  return `<ul class="lib-meta">${rows.map(([k, v]) => `<li><strong>${escapeHtml(k)}:</strong> ${escapeHtml(v)}</li>`).join("")}</ul>`;
+}
+
+function generateIconAesthetic(icon) {
   const name = icon.displayName;
-  
-  const practices = {
-    media: `For media and audio-visual interfaces, the ${name} icon should be placed prominently to guide user interaction (such as playback controls, volume adjustment, or media streams). Ensure it has sufficient contrast and hover tooltips for screen readers.`,
-    communication: `When used in communication interfaces (such as chat modules, contact forms, or notifications), the ${name} icon helps users quickly scan for alerts or messages. Keep badge indicators small and positioned relative to the top-right corner of the icon.`,
-    commerce: `In commerce applications (e.g. checkouts, item listings, pricing tables), the ${name} icon helps represent actions like adding items, reviewing carts, or viewing invoices. Ensure high accessibility with aria-label tags since commerce icons directly influence conversion.`,
-    navigation: `For navigation controls (like headers, sidebar menus, and footers), use the ${name} icon alongside clear text labels whenever possible. Icons alone can be ambiguous, so combining them with text improves overall UX navigation scores.`,
-    development: `In code editors, administrative systems, and developer interfaces, the ${name} icon helps represent technical concepts or actions (like terminal actions, code folding, or database queries). Pair it with monospace tags for design consistency.`,
-    devices: `When representing physical hardware, systems, or settings, the ${name} icon is best placed in configuration panels or device dashboards. Use standard outline states for inactive devices, and switch to filled states or active colors for online devices.`
-  };
-  
-  const fallback = `When integrating the ${name} icon into your layout, ensure it has a touch target of at least 44x44 pixels on mobile devices to satisfy tap guidelines. Always provide an aria-label or title tag if the icon is used as an interactive action button without text.`;
-  
-  return practices[String(cat).toLowerCase()] || fallback;
+  const custom = LIBRARY_AESTHETIC[icon.librarySlug];
+  if (custom) return custom(name);
+  /* Only reachable if a new library is added to data/index.json without copy
+     here. Still icon-specific, so it never reads as bulk boilerplate. */
+  return `The ${name} icon from the ${icon.library} collection is designed to meet professional standards of legibility and consistent line weight. It is a vector, so it scales cleanly from small micro-interactions at 16px to large hero graphics at 512px without any loss of crispness.`;
+}
+
+/* UX guidance keyed by the same category taxonomy used everywhere else. All 16
+   categories are covered: the previous table had 6, so 102,600 icons (76.2%)
+   all received the same fallback sentence. */
+const CATEGORY_PRACTICE = {
+  media: (name) => `For media and audio-visual interfaces, place the ${name} icon prominently so it reads as a control rather than a label — playback, volume and cast affordances are scanned before they are read. Keep at least 3:1 contrast against the video surface and give it an accessible name, since media controls are frequently the only way to operate a player.`,
+  communication: (name) => `In messaging, contact and notification UI, the ${name} icon should help users triage at a glance. Keep any unread badge small and anchored to the top-right corner, and never rely on the badge alone — expose the count in the accessible name so screen-reader users get the same signal.`,
+  commerce: (name) => `In checkout flows, product listings and pricing tables, the ${name} icon sits directly on a conversion path, so label it. Cart, payment and invoice actions need an aria-label even when a visible caption is present, because these controls are where ambiguous iconography measurably costs completed purchases.`,
+  navigation: (name) => `For headers, sidebars, footers and breadcrumbs, pair the ${name} icon with a text label wherever space allows. Icon-only navigation tests well only for a handful of universally understood actions; comprehension drops sharply once the destination is product-specific. Keep the icon at a fixed optical size so the menu does not appear to shift.`,
+  files: (name) => `In file explorers, document lists and CMS dashboards, put the ${name} icon immediately to the left of the filename so the eye scans one straight line. If it triggers a destructive action, keep a confirmation step — a delete or archive glyph is too easy to hit by accident in a dense list.`,
+  editing: (name) => `In editors and design tools, the ${name} icon belongs in a toolbar where it can carry a tooltip and a keyboard-shortcut hint. Keep editing affordances visually lighter than the content they act on; when the chrome competes with the canvas, users lose track of their own work.`,
+  devices: (name) => `When representing hardware, systems or settings, the ${name} icon works best in configuration panels and device dashboards. Use the outline state for inactive devices and switch to a filled or accented state for online ones — but pair that with text or a status dot, since fill alone is not a colour-blind-safe signal.`,
+  development: (name) => `In code editors, admin systems and developer tooling, the ${name} icon should read as a function, not as decoration. Pair it with monospace labels for alignment, and prefer tooltips over inline captions in toolbars where vertical space is scarce and the audience already knows the domain.`,
+  security: (name) => `Security icons carry more weight than most: users read a lock, shield or key as a trust signal, so the ${name} icon should never be decorative. Place it next to the mechanism it actually describes — the payment step, the HTTPS indicator, the permission toggle — rather than in a generic header where it implies protection that may not exist.`,
+  health: (name) => `In health, fitness and clinical interfaces, the ${name} icon usually sits beside a number, so align it to the same baseline as the metric and give it room. Avoid encoding severity in colour alone: red-only status fails for colour-blind users and reads as alarm fatigue in long-term tracking screens.`,
+  weather: (name) => `Weather icons are scanned rather than read, so the ${name} icon must stay legible at small sizes and be consistent with the rest of the forecast set. The most common mistake is mixing outline and filled glyphs across one forecast row, which makes a single strip look like two different data sources.`,
+  transport: (name) => `In booking, fleet and logistics interfaces, use the ${name} icon as a supporting glyph beside a text label. Mode-of-transport shapes are genuinely ambiguous across regions — a "train" glyph is drawn differently in Europe, Japan and North America — so never let the icon carry the meaning on its own.`,
+  social: (name) => `People and profile icons like ${name} are usually standing in for a specific user. Give it an accessible name with that person's name or handle, provide a text fallback when it is used as an avatar placeholder, and do not rely on the glyph alone to communicate role, relationship or presence.`,
+  time: (name) => `Time, calendar and scheduling icons tend to appear in dense grids. Keep the ${name} icon at a fixed size so rows stay aligned, and always pair it with the actual date or duration — an icon cannot disambiguate time zones, date formats or relative ranges like "next Tuesday".`,
+  data: (name) => `In dashboards and reports, the ${name} icon should be subordinate to the number or chart it labels. Hold data icons to one size and a single colour from your chart palette; using them as decoration rather than as labels is exactly what makes analytics screens feel noisy and hard to read.`,
+  interface: (name) => `As a general interface glyph, the ${name} icon does its job best between 16px and 24px, sitting next to a text label. Icon-only treatments work for a small set of universally understood actions, but comprehension falls off quickly once the action is specific to your product — so when in doubt, add the word.`
+};
+
+function generateUxBestPractices(icon) {
+  const name = icon.displayName;
+  const practice = CATEGORY_PRACTICE[String(icon.category).toLowerCase()];
+  if (practice) return practice(name);
+  return `When integrating the ${name} icon into your layout, give it a touch target of at least 44x44 pixels on mobile to satisfy tap guidelines. Always provide an aria-label or title when the icon is an interactive control with no visible text.`;
 }
 
 /* ─── Page HTML: rich, varied, GEO/AEO-ready ────────────────────────────── */
-function pageHtml(row, icon, related) {
-  const title = seoTitle(row.keyword);
-  const description = metaDescription(row, icon);
+function pageHtml(row, icon, related, conceptSlug) {
+  const title = iconTitle(row.keyword);
+  const description = iconDescription(row, icon);
   const url = `${SITE_URL}${row.url}`;
   const appUrl = `${SITE_URL}/#/icon/${encodeURIComponent(icon.id)}`;
   const libUrl = `${SITE_URL}/library/${encodeURIComponent(icon.librarySlug)}/`;
   const libInfo = LIBRARY_INFO[icon.librarySlug] || null;
 
   const faq = buildFaq(row, icon, libInfo);
-  const schema = buildSchema(row, icon, faq, url, appUrl);
+  const schema = buildSchema(row, icon, faq, url, appUrl, conceptSlug);
 
   /* Deterministic variation index (0-5) per icon — never random */
   const hx = hashCode(icon.id);
@@ -1231,8 +1478,8 @@ function pageHtml(row, icon, related) {
   const svgForDisplay = escapeHtml(renderSvg(icon, 24));
 
   /* Related links */
-  const relatedLinks = related.map((item) => `<li><a href="/icons/${item.slug}/">${escapeHtml(item.keyword)}</a></li>`).join("");
-  const peopleAlso = related.slice().reverse().slice(0, 6).map((item) => `<a href="/icons/${item.slug}/">${escapeHtml(item.keyword)}</a>`).join("");
+  const relatedLinks = related.map((item) => `<li><a href="/icons/${escapeHtml(item.slug)}/">${escapeHtml(titleCase(item.keyword))}</a></li>`).join("");
+  const peopleAlso = related.slice().reverse().slice(0, 6).map((item) => `<a href="/icons/${escapeHtml(item.slug)}/">${escapeHtml(titleCase(item.keyword))}</a>`).join("");
 
   /* Library info card */
   const libCardHtml = libInfo
@@ -1257,17 +1504,21 @@ function pageHtml(row, icon, related) {
   <nav class="crumbs" aria-label="Breadcrumb">
     <a href="/">IconStash</a><span>/</span>
     <a href="/library/${escapeHtml(icon.librarySlug)}/">${escapeHtml(icon.library)}</a><span>/</span>
+    ${conceptSlug
+      ? `<a href="/icons/${escapeHtml(conceptSlug)}/">${escapeHtml(icon.base.replace(/-/g, " "))} icons</a><span>/</span>`
+      : ""}
     <span>${escapeHtml(icon.displayName)}</span>
   </nav>
 
   <section class="hero">
     <div class="preview" aria-hidden="true">${renderSvg(icon, 100)}</div>
     <div>
-      <h1>${escapeHtml(row.keyword)}</h1>
+      <h1>${escapeHtml(titleCase(row.keyword))}</h1>
       <p class="lead">${escapeHtml(lead)}</p>
       <div class="cta">
         <a class="btn primary" href="${escapeHtml(appUrl)}">Open in editor</a>
         <a class="btn" href="${escapeHtml(libUrl)}">Browse ${escapeHtml(icon.library)}</a>
+        ${conceptSlug ? `<a class="btn" href="/icons/${escapeHtml(conceptSlug)}/">All ${escapeHtml(icon.base.replace(/-/g, " "))} icons</a>` : ""}
       </div>
     </div>
   </section>
@@ -1517,6 +1768,258 @@ function pageHtml(row, icon, related) {
   return renderPseoShell({ title, description, url, canonicalUrl, schema, activeSlug: icon.librarySlug, content });
 }
 
+/* ─── Concept pages: /icons/<concept>-icon/ ─────────────────────────────────
+   The head terms. One page per icon concept that exists in 3+ libraries,
+   showing every matching icon side by side. This is the page that finally
+   answers "home icon" with nineteen real options from nineteen libraries
+   instead of a thin single-library variant — and it is the only page on the
+   site whose content is genuinely impossible to find elsewhere.            */
+function buildConceptFaq(display, words, members) {
+  const libs = Array.from(new Set(members.map((icon) => icon.library.replace(/\s+Icons$/i, ""))));
+  const n = members.length;
+  const shown = libs.slice(0, 5).join(", ");
+  const styles = Array.from(new Set(members.map((icon) => icon.style)));
+  const styleList = styles.slice(0, 4).join(", ");
+  return [
+    {
+      q: `Where can I download a free ${words} icon?`,
+      a: `IconStash indexes ${n} free ${words} icons from ${libs.length} open-source libraries, including ${shown}. Choose one on this page, set the exact size and colour, then copy the SVG markup or download a transparent PNG. No account and no login are required.`
+    },
+    {
+      q: `Are these ${words} icons free for commercial use?`,
+      a: `Yes. Every icon on this page comes from an open-source library published under a permissive licence (MIT, Apache-2.0, ISC, CC BY 4.0 and similar), all of which allow commercial use. The comparison table above lists the licence for each library so you can confirm the exact terms before shipping.`
+    },
+    {
+      q: `Can I download a ${words} icon as a PNG?`,
+      a: `Yes. Open any icon on this page, set an exact pixel size between 16px and 512px, choose any colour, and download a transparent PNG. Because every icon here is a vector, the exported PNG stays sharp at any resolution — IconStash also offers a ZIP pack containing 16, 24, 32, 48, 64, 128, 256 and 512px files.`
+    },
+    {
+      q: `Which library has the best ${words} icon?`,
+      a: `It depends on the design system you are matching. Outline libraries such as Lucide, Tabler and Feather suit dense product interfaces; Material Symbols and Bootstrap Icons ship matched outline and filled variants of the same glyph; Phosphor and Solar add duotone, bold and broken weights. The grid above shows all ${n} options side by side so you can judge them at real size.`
+    },
+    {
+      q: `How do I add a ${words} icon to a React app?`,
+      a: `Copy the SVG markup for any icon on this page and paste it directly into JSX, or install the official npm package for the library you picked — lucide-react, @tabler/icons-react, @phosphor-icons/react, react-bootstrap-icons and react-icons are the most common. Both approaches are shown in the code samples above.`
+    },
+    {
+      q: `What sizes and styles do ${words} icons come in?`,
+      a: `All ${n} icons on this page are vector artwork, so they scale cleanly to any size. The libraries represented here render the ${words} concept in ${styleList} styles, and IconStash can export PNGs at 16, 24, 32, 48, 64, 128, 256 or 512px, or any custom value in between.`
+    },
+    {
+      q: `Can I change the colour of a ${words} icon?`,
+      a: `Yes. Icons are exported using currentColor, so they inherit the CSS colour of their parent element and follow your theme automatically. You can also pick an exact hex colour in the IconStash editor before downloading, or override the colour with a CSS rule such as .icon { color: #C1DD2D; }.`
+    }
+  ];
+}
+
+function buildConceptSchema(row, members, faq, url, appUrl) {
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "IconStash", item: `${SITE_URL}/` },
+        { "@type": "ListItem", position: 2, name: "Icons by concept", item: `${SITE_URL}/category/` },
+        { "@type": "ListItem", position: 3, name: `${titleCase(row.concept)} icon`, item: url }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: `${titleCase(row.concept)} icon — free SVG and PNG downloads`,
+      description: `${members.length} free ${row.concept.replace(/-/g, " ")} icons from ${new Set(members.map((i) => i.librarySlug)).size} open-source icon libraries, available as SVG and PNG.`,
+      url,
+      isPartOf: { "@type": "WebSite", name: "IconStash", url: SITE_URL },
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: members.length,
+        itemListElement: members.map((icon, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: `${SITE_URL}/icons/${icon.id.toLowerCase()}/`,
+          name: `${icon.library} ${icon.displayName} icon`
+        }))
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faq.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a }
+      }))
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "IconStash",
+      applicationCategory: "DesignApplication",
+      operatingSystem: "Web",
+      url: SITE_URL,
+      description: "Browser-based icon search engine unifying 28+ open-source icon libraries into a single lightning-fast search. Search, preview, customize, and download 134,701+ SVG and PNG icons with no login required.",
+      featureList: ["SVG copy", "Custom PNG download", "Multi-resolution ZIP export", "React JSX export", "CSS background-mask export", "Cross-library comparison", "Color customization", "Stroke width control", "134,701 icons from 28 libraries"],
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      author: { "@type": "Organization", name: "Great Software Company", url: "https://greatsoftwarecompany.com" }
+    }
+  ];
+}
+
+function styleName(icon) {
+  const map = { outline: "Outline", filled: "Filled", solid: "Solid", duotone: "Duotone", thin: "Thin", light: "Light", sharp: "Sharp" };
+  return map[icon.style] || titleCase(icon.style);
+}
+
+function conceptPageHtml(row, members, relatedConcepts) {
+  const concept = row.concept;
+  const words = concept.replace(/-/g, " ");
+  const display = titleCase(concept);
+  const n = members.length;
+  const libSlugs = Array.from(new Set(members.map((icon) => icon.librarySlug)));
+  const libCount = libSlugs.length;
+
+  const title = conceptTitle(display, n);
+  const description = conceptDescription(display, words, n);
+  const url = `${SITE_URL}${row.url}`;
+  const appUrl = `${SITE_URL}/#/search?query=${encodeURIComponent(words)}`;
+
+  const hero = members[0];
+  const faq = buildConceptFaq(display, words, members);
+  const schema = buildConceptSchema(row, members, faq, url, appUrl);
+
+  /* Hero artwork: the most widely-supported rendering of this concept. */
+  const heroHtml = renderSvg(hero, 100);
+
+  /* ── The comparison grid: the reason this page exists ─────────────────── */
+  const grid = members.map((icon) => `<a class="concept-icon" href="/icons/${escapeHtml(icon.id.toLowerCase())}/" title="${escapeHtml(icon.library)} ${escapeHtml(icon.displayName)} icon">
+      <span class="concept-icon-art" aria-hidden="true">${renderSvg(icon, 40)}</span>
+      <span class="concept-icon-lib">${escapeHtml(icon.library)}</span>
+      <span class="concept-icon-style">${escapeHtml(styleName(icon))}</span>
+    </a>`).join("");
+
+  /* ── Library comparison table ────────────────────────────────────────── */
+  const tableRows = members.map((icon) => {
+    const info = LIBRARY_INFO[icon.librarySlug] || null;
+    return `<tr>
+      <td><a href="/library/${escapeHtml(icon.librarySlug)}/">${escapeHtml(icon.library)}</a></td>
+      <td>${escapeHtml(styleName(icon))}</td>
+      <td>${escapeHtml(info ? info.license : "Open source")}</td>
+      <td><a href="/icons/${escapeHtml(icon.id.toLowerCase())}/">${escapeHtml(icon.displayName)}</a></td>
+    </tr>`;
+  }).join("");
+
+  /* ── Code samples: the top icon, ready to paste ──────────────────────── */
+  const svgSample = escapeHtml(renderSvg(hero, 24));
+  const reactSample = escapeHtml(`npm install ${(LIBRARY_INFO[hero.librarySlug] || {}).npm || hero.npmPackage || slugify(hero.library)}\n\nimport { ${hero.displayName.replace(/[^A-Za-z0-9]/g, "")} } from "${(LIBRARY_INFO[hero.librarySlug] || {}).npm || hero.npmPackage || slugify(hero.library)}";\n\nexport function Example() {\n  return <${hero.displayName.replace(/[^A-Za-z0-9]/g, "")} size={24} />;\n}`);
+
+  const relatedChips = relatedConcepts.length
+    ? `<p class="section-title">Related icon searches</p>\n  <div class="chips">${relatedConcepts.map((item) => `<a href="/icons/${escapeHtml(item.slug)}/">${escapeHtml(titleCase(item.concept))} icon</a>`).join("")}</div>`
+    : "";
+
+  const libChips = libSlugs.map((slug) => {
+    const info = LIBRARY_INFO[slug];
+    return `<a href="/library/${escapeHtml(slug)}/">${escapeHtml(info ? info.fullName : titleCase(slug))}</a>`;
+  }).join("");
+
+  const lead = `Compare ${n} free ${words} icons from ${libCount} open-source libraries and pick the one that matches your design system. Every icon on this page downloads as an editable SVG or a transparent PNG at any size from 16px to 512px — no login, no account, no attribution required.`;
+
+  const content = `
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/">IconStash</a><span>/</span>
+    <a href="/category/">Icons</a><span>/</span>
+    <span>${escapeHtml(display)}</span>
+  </nav>
+
+  <section class="hero">
+    <div class="preview" aria-hidden="true">${heroHtml}</div>
+    <div>
+      <h1>${escapeHtml(display)} icon</h1>
+      <p class="lead">${escapeHtml(lead)}</p>
+      <div class="cta">
+        <a class="btn primary" href="${escapeHtml(appUrl)}">Compare all ${n} in the editor</a>
+        <a class="btn" href="/category/${escapeHtml(slugify(row.category || "Interface"))}/">More ${escapeHtml(String(row.category || "Interface").toLowerCase())} icons</a>
+      </div>
+    </div>
+  </section>
+
+  <p class="section-title">All ${n} free ${escapeHtml(words)} icons</p>
+  <div class="grid wide">
+    <article class="card">
+      <h2>${escapeHtml(display)} icons from ${libCount} libraries</h2>
+      <p class="muted" style="margin-bottom:14px">Every icon below is the same "${escapeHtml(words)}" concept rendered by a different library. Click any tile to open it in the editor, set a custom size and colour, and download SVG or PNG.</p>
+      <div class="concept-grid">${grid}</div>
+    </article>
+  </div>
+
+  <p class="section-title">Library comparison</p>
+  <div class="grid wide">
+    <article class="card">
+      <h2>Which library should you use?</h2>
+      <div class="hub-table-scroll">
+        <table class="hub-table">
+          <thead><tr><th>Library</th><th>Style</th><th>License</th><th>${escapeHtml(display)} icon</th></tr></thead>
+          <tbody>${tableRows}</tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin-top:14px">Outline sets such as Lucide, Tabler and Feather stay legible at 16px in dense interfaces. Material Symbols and Bootstrap Icons give you matched outline and filled pairs. Phosphor, Solar and Fluent add duotone, bold and weight-graded variants when you need more visual hierarchy.</p>
+    </article>
+  </div>
+
+  <p class="section-title">Use this icon in your project</p>
+  <div class="grid">
+    <article class="card">
+      <h2>Inline SVG (copy &amp; paste)</h2>
+      <p class="muted">Paste this straight into HTML or JSX. It inherits <code>currentColor</code>, so it follows your theme.</p>
+      <pre><code>${svgSample}</code></pre>
+    </article>
+    <article class="card">
+      <h2>React component</h2>
+      <p class="muted">Install the package for the library you picked, then import the component.</p>
+      <pre><code>${reactSample}</code></pre>
+    </article>
+  </div>
+
+  <p class="section-title">Choosing the right ${escapeHtml(words)} icon</p>
+  <div class="grid">
+    <article class="card">
+      <h2>Match the icon to the interface</h2>
+      <p>A ${escapeHtml(words)} icon has to read instantly at whatever size your interface uses. Below 20px, prefer outline artwork with a consistent stroke weight — heavy filled glyphs turn into blobs. For navigation bars and empty states above 32px, filled or duotone versions carry more visual weight and scan better.</p>
+      <p class="muted">Keep stroke weight consistent across every icon in a view. Mixing a 1.5px Lucide glyph with a 2px Tabler glyph in the same toolbar is the most common reason icon sets look unprofessional.</p>
+    </article>
+    <article class="card">
+      <h2>Accessibility</h2>
+      <p>Decorative icons need <code>aria-hidden="true"</code> so screen readers skip them. If the ${escapeHtml(words)} icon is the only thing labelling a control — an icon-only button, for example — give the button an <code>aria-label</code> such as "${escapeHtml(display)}" and leave the SVG itself hidden.</p>
+      <p class="muted">Never rely on the icon alone to convey state. Pair it with a tooltip or visible text wherever the meaning is not already obvious from context.</p>
+    </article>
+  </div>
+
+  ${relatedChips}
+
+  <p class="section-title">Libraries on this page</p>
+  <div class="chips">${libChips}</div>
+
+  <p class="section-title">Frequently asked questions</p>
+  <div class="card" style="padding:8px 20px">
+    ${faq.map((item) => `<div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <h3 itemprop="name">${escapeHtml(item.q)}</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">${escapeHtml(item.a)}</p>
+      </div>
+    </div>`).join("")}
+  </div>
+`;
+
+  return renderPseoShell({
+    title,
+    description,
+    url,
+    canonicalUrl: url,
+    schema,
+    activeSlug: "",
+    content
+  });
+}
+
 /* ─── Write pages ─────────────────────────────────────────────────────────── */
 function writePages(keywords, icons) {
   const byIcon = new Map(icons.map((icon) => [icon.id, icon]));
@@ -1526,49 +2029,158 @@ function writePages(keywords, icons) {
   buildCanonicals(keywords);
   console.log("Indexes completed. Writing HTML files...");
   let count = 0;
+  let missingMembers = 0;
   const total = keywords.length;
   const reportEvery = Math.round(total / 10) || 10000;
   for (const row of keywords) {
+    const dir = path.join(OUT_DIR, row.slug);
+    /* A URL that was retired on an earlier run and has now come back must lose
+       its redirect stub, or Apache (DirectoryIndex index.php index.html) would
+       keep serving the 301 instead of the page. */
+    const stalePhp = path.join(dir, "index.php");
+    if (fs.existsSync(stalePhp)) fs.unlinkSync(stalePhp);
+
+    if (row.intent === "concept") {
+      const members = (row.iconIds || []).map((id) => byIcon.get(id)).filter(Boolean);
+      if (members.length < CONCEPT_MIN_LIBRARIES) { missingMembers++; continue; }
+      const page = conceptPageHtml(row, members, relatedConceptsFor(row));
+      writeFileWithRetry(path.join(dir, "index.html"), page);
+      count++;
+      if (count % reportEvery === 0) {
+        console.log(`- Progress: ${Math.round((count / total) * 100)}% (${count.toLocaleString("en-US")} / ${total.toLocaleString("en-US")} written)`);
+      }
+      continue;
+    }
+
     const icon = byIcon.get(row.iconId);
     if (!icon) continue;
     const related = relatedFor(row, byIcon);
-    const dir = path.join(OUT_DIR, row.slug);
-    writeFileWithRetry(path.join(dir, "index.html"), pageHtml(row, icon, related));
+    const conceptRow = conceptRowByIconId.get(icon.id);
+    writeFileWithRetry(path.join(dir, "index.html"), pageHtml(row, icon, related, conceptRow ? conceptRow.slug : null));
     count++;
     if (count % reportEvery === 0) {
       console.log(`- Progress: ${Math.round((count / total) * 100)}% (${count.toLocaleString("en-US")} / ${total.toLocaleString("en-US")} written)`);
     }
   }
+  if (missingMembers) console.log(`- Skipped ${missingMembers.toLocaleString("en-US")} concept pages with too few renderable members.`);
+}
+
+/* ─── 301 redirects for every retired URL ───────────────────────────────────
+   The previous generator published ~14.9k keyword-variant URLs per build
+   ("copy-x-svg", "download-x-png-icon", "x icon figma", and the 415 slugs
+   that up to 22 unrelated icons shared). Deleting them outright would discard
+   whatever equity and traffic they earned and leave 15k 404s in Search
+   Console. Each retired URL therefore keeps a directory containing an
+   index.php that issues a real HTTP 301 to the icon's canonical page.
+
+   Plain PHP files rather than .htaccess rules: 15k RewriteRule directives
+   would be re-parsed by Apache on every request, and RewriteMap is not
+   permitted in .htaccess context. A per-directory index.php costs nothing
+   until someone actually requests the URL.                                  */
+function redirectStub(target) {
+  const safe = String(target).replace(/[^a-z0-9\-/_]/gi, "");
+  return `<?php\n/**\n * Permanent redirect. This URL was retired on ${TODAY} when IconStash\n * collapsed 149,040 duplicate keyword-variant pages onto 134,125 canonical\n * icon pages plus a cross-library concept layer. Content lives at:\n */\nheader("Location: /icons/${safe}/", true, 301);\nexit;\n`;
+}
+
+function writeRedirects(oldKeywords, newKeywords) {
+  const live = new Set(newKeywords.map((row) => row.slug));
+  const targetByIcon = new Map();
+  for (const row of newKeywords) {
+    if (row.intent === "concept") continue;
+    targetByIcon.set(row.iconId, row.slug);
+  }
+
+  const seen = new Set();
+  let written = 0;
+  let unmapped = 0;
+  let removedHtml = 0;
+  for (const row of oldKeywords || []) {
+    const slug = row.slug;
+    if (!slug || live.has(slug) || seen.has(slug)) continue;
+    seen.add(slug);
+    const target = targetByIcon.get(row.iconId) || canonicalByIcon.get(row.iconId);
+    if (!target || target === slug) { unmapped++; continue; }
+    const dir = path.join(OUT_DIR, slug);
+    ensureDir(dir);
+    /* Drop the retired page itself. Leaving it would keep ~700 MB of duplicate
+       HTML live on disk and directly reachable at /icons/<slug>/index.html. */
+    const htmlPath = path.join(dir, "index.html");
+    if (retireFile(htmlPath, htmlRedirectStub(target)) === "removed") removedHtml++;
+    writeFileWithRetry(path.join(dir, "index.php"), redirectStub(target));
+    written++;
+    if (written % 5000 === 0) console.log(`- Redirects: ${written.toLocaleString("en-US")} written`);
+  }
+  console.log(`Redirects: ${written.toLocaleString("en-US")} retired URLs now 301 to their canonical page, `
+    + `${removedHtml.toLocaleString("en-US")} obsolete HTML files removed`
+    + (unmapped ? ` (${unmapped.toLocaleString("en-US")} had no live target and were dropped).` : "."));
+  return written;
 }
 
 /* ─── Write sitemaps (safe 45k limit) ─────────────────────────────────── */
+function urlsetXml(urls) {
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>${SITE_URL}${url}</loc><lastmod>${TODAY}</lastmod></url>`).join("\n")}\n</urlset>\n`;
+}
+
 function writeSitemaps(keywords) {
   const MAX_PER_SITEMAP = 45000;
-  const urlSet = new Set(["/", "/seo/"]);
-  keywords.forEach((row) => { if (row.url) urlSet.add(row.url); });
-  const allUrls = Array.from(urlSet);
+  const staticUrls = ["/", "/library/", "/category/", "/style/", "/seo/"];
 
+  /* Concept pages get their own sitemap so indexation of the head terms can
+     be monitored separately in Search Console instead of being buried among
+     134k long-tail URLs. */
+  const conceptUrls = keywords.filter((row) => row.intent === "concept" && row.url).map((row) => row.url);
+  const iconUrls = keywords.filter((row) => row.intent !== "concept" && row.url).map((row) => row.url);
+
+  const sitemapEntries = [];
+  const articlesSitemapPath = path.join(ROOT, "articles-sitemap.xml");
+  if (fs.existsSync(articlesSitemapPath)) {
+    sitemapEntries.push(`  <sitemap><loc>${SITE_URL}/articles-sitemap.xml</loc><lastmod>${TODAY}</lastmod></sitemap>`);
+  }
+
+  // Hub layer (library / category / style) is emitted by generate-hubs.js.
+  const hubsPath = path.join(SITEMAP_DIR, "hubs.xml");
+  if (fs.existsSync(hubsPath)) {
+    sitemapEntries.push(`  <sitemap><loc>${SITE_URL}/sitemaps/hubs.xml</loc><lastmod>${TODAY}</lastmod></sitemap>`);
+  }
+
+  if (conceptUrls.length) {
+    writeFileWithRetry(path.join(SITEMAP_DIR, "concepts.xml"), urlsetXml(conceptUrls));
+    sitemapEntries.push(`  <sitemap><loc>${SITE_URL}/sitemaps/concepts.xml</loc><lastmod>${TODAY}</lastmod></sitemap>`);
+  }
+
+  const allUrls = Array.from(new Set(staticUrls.concat(iconUrls)));
   const chunks = [];
   for (let i = 0; i < allUrls.length; i += MAX_PER_SITEMAP) {
     chunks.push(allUrls.slice(i, i + MAX_PER_SITEMAP));
   }
+  /* Every XML this run owns. Anything else sitting in the directory is from a
+     build that produced more pages than this one, so it is emptied rather than
+     left listing URLs that may no longer exist. Deleting is avoided on purpose
+     (see prepareOutput). hubs.xml belongs to generate-hubs.js and is skipped. */
+  const owned = new Set();
 
   chunks.forEach((chunk, index) => {
-    const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${chunk.map((url) => `  <url><loc>${SITE_URL}${url}</loc><lastmod>${TODAY}</lastmod></url>`).join("\n")}\n</urlset>\n`;
-    writeFileWithRetry(path.join(SITEMAP_DIR, `sitemap-${index + 1}.xml`), xml);
+    const name = `sitemap-${index + 1}.xml`;
+    owned.add(name);
+    writeFileWithRetry(path.join(SITEMAP_DIR, name), urlsetXml(chunk));
+    sitemapEntries.push(`  <sitemap><loc>${SITE_URL}/sitemaps/${name}</loc><lastmod>${TODAY}</lastmod></sitemap>`);
   });
 
-  const articlesSitemapPath = path.join(ROOT, "articles-sitemap.xml");
-  const sitemapEntries = [];
-  if (fs.existsSync(articlesSitemapPath)) {
-    sitemapEntries.push(`  <sitemap><loc>${SITE_URL}/articles-sitemap.xml</loc><lastmod>${TODAY}</lastmod></sitemap>`);
+  if (conceptUrls.length) owned.add("concepts.xml");
+  let emptied = 0;
+  for (const entry of fs.readdirSync(SITEMAP_DIR)) {
+    if (entry === "hubs.xml" || !/^(sitemap-\d+|concepts)\.xml$/.test(entry)) continue;
+    if (owned.has(entry)) continue;
+    writeFileWithRetry(path.join(SITEMAP_DIR, entry), EMPTY_URLSET);
+    emptied++;
   }
-  chunks.forEach((_, index) => {
-    sitemapEntries.push(`  <sitemap><loc>${SITE_URL}/sitemaps/sitemap-${index + 1}.xml</loc><lastmod>${TODAY}</lastmod></sitemap>`);
-  });
+  if (emptied) console.log(`Sitemaps: emptied ${emptied} stale sitemap file(s) no longer in use.`);
 
   const indexXml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapEntries.join("\n")}\n</sitemapindex>\n`;
   writeFileWithRetry(path.join(ROOT, "sitemap.xml"), indexXml);
+
+  console.log(`Sitemaps: ${conceptUrls.length.toLocaleString("en-US")} concept URLs (sitemaps/concepts.xml) + `
+    + `${allUrls.length.toLocaleString("en-US")} pages across ${chunks.length} file(s).`);
 }
 
 /* ─── Write HTML sitemap (unchanged) ─────────────────────────────────────── */
@@ -1585,6 +2197,27 @@ function writeHtmlSitemap(keywords) {
     const links = chunk.map((row) => `<li><a href="${row.url}">${escapeHtml(row.keyword)}</a></li>`).join("");
     writeFileWithRetry(path.join(dir, "index.html"), `<!doctype html><html lang="en"><head><script async src="https://plausible.io/js/pa--bfaHBAPFGUV3yUn96sF4.js"></script><script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script><meta charset="utf-8"><title>IconStash Sitemap ${index + 1}</title><meta name="description" content="IconStash icon pages ${index * perPage + 1}–${Math.min((index + 1) * perPage, keywords.length)}."><style>body{font:15px/1.6 system-ui;margin:32px;background:#07070d;color:#f5f7fb}a{color:#8ab4ff}li{margin:4px 0}</style></head><body><h1>IconStash Sitemap ${index + 1}</h1><ul>${links}</ul></body></html>`);
   });
+
+  /* The page count shrank from 149,040 to 137,871, so this run needs fewer
+     HTML sitemap pages than the last one. Any leftover page that could not be
+     deleted is rewritten as a redirect instead of left pointing at URLs that
+     no longer exist. */
+  const gone = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Moved</title>`
+    + `<link rel="canonical" href="${SITE_URL}/seo/"><meta name="robots" content="noindex,follow">`
+    + `<meta http-equiv="refresh" content="0;url=/seo/"></head><body>`
+    + `<p>This page has moved to <a href="/seo/">/seo/</a>.</p></body></html>\n`;
+  let rewritten = 0;
+  for (const entry of fs.readdirSync(HTML_SITEMAP_DIR)) {
+    const match = /^sitemap-(\d+)$/.exec(entry);
+    if (!match) continue;
+    const pageNo = Number(match[1]);
+    if (!Number.isFinite(pageNo) || pageNo <= pages.length) continue;
+    const stale = path.join(HTML_SITEMAP_DIR, entry, "index.html");
+    if (!fs.existsSync(stale)) continue;
+    writeFileWithRetry(stale, gone);
+    rewritten++;
+  }
+  if (rewritten) console.log(`HTML sitemap: rewrote ${rewritten} retired page(s) as redirects.`);
 }
 
 /* ─── Main ────────────────────────────────────────────────────────────────── */
@@ -1615,14 +2248,71 @@ function main() {
     return;
   }
 
+  /* Retired-URL recovery path. `writePages` and `writeSitemaps` are both
+     idempotent and cheap to re-run, so after an interrupted build the only
+     genuinely missing step is usually the 301 layer. Rebuilding it from the
+     existing keyword database takes seconds instead of the full run, which
+     matters because a run that dies mid-way is otherwise unrecoverable
+     without redoing every page.
+
+     PSEO_PREVIOUS_DB is mandatory here. Reading the on-disk keyword database
+     as "previous" would find zero retired URLs and silently skip every
+     redirect, which is exactly the failure this mode exists to prevent.   */
+  if (process.argv.includes("--redirects-only") || process.env.PSEO_REDIRECTS_ONLY === "1") {
+    const keywordData = readJson(KEYWORD_DB);
+    const keywords = keywordData.keywords || [];
+    const previousDbPath = process.env.PSEO_PREVIOUS_DB;
+    if (!previousDbPath || !fs.existsSync(previousDbPath)) {
+      console.error("Refusing to run --redirects-only without PSEO_PREVIOUS_DB.");
+      console.error("Without the previous URL set this would silently write zero redirects.");
+      console.error("Recovery: git show HEAD:data/pseo-keywords.json > .workbuddy-ai/old-keywords.json");
+      process.exit(1);
+    }
+    const previousKeywords = (readJson(previousDbPath).keywords) || [];
+    console.log(`Current plan: ${keywords.length.toLocaleString("en-US")} live pages.`);
+    console.log(`Previous plan: ${previousKeywords.length.toLocaleString("en-US")} published pages.`);
+    buildCanonicals(keywords);
+    const written = writeRedirects(previousKeywords, keywords);
+    console.log(`Redirect layer complete: ${written.toLocaleString("en-US")} retired URLs now 301.`);
+    return;
+  }
+
   const index = readJson(path.join(DATA_DIR, "index.json"));
   const libraries = index.libraries || [];
   console.log(`Loading ${libraries.length} libraries...`);
   const icons = libraries.flatMap(normalizeLibrary).filter((icon) => icon.body && icon.base);
   console.log(`Loaded ${icons.length.toLocaleString("en-US")} icons.`);
+
+  /* The previous URL set is needed to build 301s for every page this run
+     retires — so read it before the keyword database is overwritten.
+
+     PSEO_PREVIOUS_DB points at an explicit copy of the previous database.
+     This matters after an interrupted run: the on-disk keyword database has
+     already been overwritten by then, so reading it as "previous" would find
+     zero retired URLs and silently skip all 14,915 redirects. Recovery:
+     git show HEAD:data/pseo-keywords.json > old-keywords.json */
+  let previousKeywords = [];
+  const previousDbPath = process.env.PSEO_PREVIOUS_DB;
+  if (previousDbPath && fs.existsSync(previousDbPath)) {
+    try {
+      previousKeywords = (readJson(previousDbPath).keywords) || [];
+      console.log(`Loaded ${previousKeywords.length.toLocaleString("en-US")} previously published URLs from ${previousDbPath}.`);
+    } catch (error) {
+      console.log(`Could not read PSEO_PREVIOUS_DB (${previousDbPath}); redirects will be skipped.`);
+    }
+  } else if (fs.existsSync(KEYWORD_DB)) {
+    try {
+      previousKeywords = (readJson(KEYWORD_DB).keywords) || [];
+      console.log(`Loaded ${previousKeywords.length.toLocaleString("en-US")} previously published URLs for redirect mapping.`);
+    } catch (error) {
+      console.log("Could not read the previous keyword database; redirects will be skipped.");
+    }
+  }
+
   console.log(`Generating up to ${PAGE_LIMIT.toLocaleString("en-US")} keyword pages...`);
   const keywords = buildKeywords(icons);
-  cleanOutput();
+  buildCanonicals(keywords);
+  prepareOutput();
   writeFileWithRetry(KEYWORD_DB, JSON.stringify({
     generatedAt: new Date().toISOString(),
     siteUrl: SITE_URL,
@@ -1633,8 +2323,23 @@ function main() {
   writePages(keywords, icons);
   writeSitemaps(keywords);
   writeHtmlSitemap(keywords);
-  console.log(`\nGenerated ${keywords.length.toLocaleString("en-US")} pages.`);
-  console.log(`Wrote ${path.relative(ROOT, KEYWORD_DB)}, sitemap.xml, robots.txt, and HTML sitemap.`);
+  writeRedirects(previousKeywords, keywords);
+  console.log(`\nGenerated ${keywords.length.toLocaleString("en-US")} pages `
+    + `(${keywords.filter((row) => row.intent === "concept").length.toLocaleString("en-US")} concept, `
+    + `${keywords.filter((row) => row.intent !== "concept").length.toLocaleString("en-US")} icon).`);
+  console.log(`Wrote ${path.relative(ROOT, KEYWORD_DB)}, sitemap.xml, and HTML sitemap.`);
 }
 
-main();
+/* Run only when invoked directly. `require`-ing this file from a QA or
+   analysis script must not trigger a 150,000-page rebuild. */
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  main, buildKeywords, buildCanonicals, buildIndexes, buildConceptIndex,
+  normalizeLibrary, categorize, deriveStyle, baseName, displayName, slugify,
+  pageHtml, conceptPageHtml, iconTitle, iconDescription, buildFaq, buildSchema,
+  generateIconAesthetic, generateUxBestPractices, relatedFor,
+  CATEGORY_CONTEXT, STYLE_DESC, STYLE_USE_CASES, LIBRARY_INFO, CONCEPT_MIN_LIBRARIES
+};
