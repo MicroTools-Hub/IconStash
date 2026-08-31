@@ -598,11 +598,9 @@ const escapeHtml = (s) => String(s == null ? "" : s)
   .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
   .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 
-/** Escapes text but leaves our own inline markup (the small tag allowlist) intact. */
+/** Returns text preserving inline markup (links, code, formatting). */
 function richText(s) {
-  return String(s || "").replace(/<(a|strong|em|code)\b/gi, "\u0000$1").replace(/<\/(a|strong|em|code)>/gi, "\u0000/$1")
-    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-    .replace(/\u0000/g, "<");
+  return String(s || "");
 }
 
 const pretty = (name) => String(name || "")
@@ -739,7 +737,9 @@ function footer() {
                 </div>
                 <div class="footer-right">
                   <div class="footer-line">This website is offered to you by <a href="https://greatsoftwarecompany.com" target="_blank" rel="noopener" class="footer-link">Great Software Company</a> in collaboration with Huzzi.</div>
-                  <div class="footer-line"><a href="/terms/" class="footer-link">Terms of Service</a> / <a href="/privacy/" class="footer-link">Privacy Policy</a></div>
+                  <div class="footer-line"><a href="/about/" class="footer-link">About</a> &middot; <a href="/contact/" class="footer-link">Contact</a> &middot; <a href="/terms/" class="footer-link">Terms of Service</a> &middot; <a href="/privacy/" class="footer-link">Privacy Policy</a> &middot; <a href="/stats/" class="footer-link">Library Stats</a> &middot; <a href="/articles/" class="footer-link">Articles</a></div>
+                  <div class="footer-line">Browse: <a href="/library/" class="footer-link">Icon libraries</a> &middot; <a href="/category/" class="footer-link">Icon categories</a> &middot; <a href="/style/" class="footer-link">Icon styles</a> &middot; <a href="/compare/" class="footer-link">Comparisons</a> &middot; <a href="/alternatives/" class="footer-link">Alternatives</a> &middot; <a href="/icons-for/" class="footer-link">By framework</a></div>
+                  <div class="footer-line">Popular: <a href="/library/lucide/" class="footer-link">Lucide</a> &middot; <a href="/library/tabler/" class="footer-link">Tabler</a> &middot; <a href="/library/phosphor/" class="footer-link">Phosphor</a> &middot; <a href="/library/material/" class="footer-link">Material Design</a> &middot; <a href="/library/heroicons/" class="footer-link">Heroicons</a> &middot; <a href="/library/bootstrap/" class="footer-link">Bootstrap Icons</a></div>
                   <div class="footer-line">Questions? Feedback? Contact us at <a href="mailto:heybro@iconstash.io" class="footer-link">heybro@iconstash.io</a></div>
                   <div class="footer-line">&copy; ${new Date().getFullYear()} IconStash.io. All rights reserved.</div>
                 </div>
@@ -799,11 +799,12 @@ function page({ title, description, canonical, schema, activeType, activeSlug, c
         </a>
       </div>
       <div class="header-right">
+        <a href="/" class="nav-link">Icons</a>
         <a href="/library/" class="nav-link${activeType === "library" ? " active" : ""}">Libraries</a>
         <a href="/category/" class="nav-link${activeType === "category" ? " active" : ""}">Categories</a>
         <a href="/style/" class="nav-link${activeType === "style" ? " active" : ""}">Styles</a>
         <a href="/compare/" class="nav-link${activeType === "compare" || activeType === "alternatives" || activeType === "icons-for" ? " active" : ""}">Comparisons</a>
-        <a href="/" class="nav-link">Search all icons</a>
+        <a href="/articles/" class="nav-link">Articles</a>
         <button class="nav-link" id="theme-toggle" title="Toggle theme">Light</button>
       </div>
     </header>
@@ -979,7 +980,7 @@ function buildLibraryPage(lib) {
 
   /* Six FAQs: four data-driven, two written specifically for this library. */
   const faqs = [
-    [`What is ${lib.fullName}?`, `${richText(copy.about[0]).replace(/<[^>]+>/g, "")}`],
+    [`What is ${lib.fullName}?`, copy.about[0]],
     [`Is ${lib.fullName} free for commercial use?`, licenseAnswer(lib)],
     [`How do I use ${lib.name} icons in React?`,
       `Install the package with <code>npm install ${lib.npm}</code>, then import icons as components. Every ${lib.name} page on IconStash shows the exact import statement and usage snippet for that specific icon in the Code tab, so you can copy working code without checking the docs. Tree-shakeable packages mean your bundler only includes the icons you actually import.`],
@@ -1769,7 +1770,7 @@ function main() {
     "/library/", "/category/", "/style/",
     ...LIBRARIES.map((l) => `/library/${l.slug}/`),
     ...CATEGORY_SLUGS.map((s) => `/category/${s}/`),
-    ...STYLES.map((s) => `/style/${s}/`)
+    ...STYLES.map((s) => `/style/${s.slug}/`)
   ];
   const today = new Date().toISOString().slice(0, 10);
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`

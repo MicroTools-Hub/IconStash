@@ -1,8 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8">
-  <title>Redirecting to IconStash...</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found (404) | IconStash</title>
+  <meta name="description" content="The requested page could not be found on IconStash. Browse 134,701 free vector SVG icons across 28 open-source icon sets.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script>
     (() => {
       const path = window.location.pathname;
@@ -10,21 +17,74 @@
         const parts = path.split("/").filter(Boolean);
         const slug = parts[parts.length - 1];
         if (slug) {
-          // If the slug ends with standard keywords, extract the base icon ID
           let cleanId = slug;
           if (cleanId.endsWith("-icon-svg")) cleanId = cleanId.slice(0, -9);
           else if (cleanId.endsWith("-icon-png")) cleanId = cleanId.slice(0, -9);
           else if (cleanId.endsWith("-svg-and-png-download")) cleanId = cleanId.slice(0, -21);
           
-          window.location.replace("/#/icon/" + encodeURIComponent(cleanId));
+          window.location.replace("/icons/" + encodeURIComponent(cleanId) + "-icon-svg/");
           return;
         }
       }
-      window.location.replace("/#/");
     })();
   </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 16px/1.7 "Inter", system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; min-height: 100vh; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    .site-header { border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 20px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .main-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 24px; max-width: 680px; margin: 0 auto; }
+    .code-tag { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 14px; font-weight: 700; color: #C1DD2D; background: rgba(193,221,45,0.1); border: 1px solid rgba(193,221,45,0.25); padding: 4px 12px; border-radius: 6px; margin-bottom: 20px; }
+    h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 16px; color: #FFF; }
+    p { color: #A3A3A3; font-size: 17px; margin-bottom: 32px; line-height: 1.6; }
+    .nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; margin-bottom: 32px; }
+    .nav-card { background: #121212; border: 1px solid #1F1F1F; border-radius: 8px; padding: 16px; font-size: 14px; font-weight: 600; color: #D4D4D4; transition: all 150ms ease; }
+    .nav-card:hover { border-color: #C1DD2D; color: #FFF; transform: translateY(-2px); }
+    .btn-primary { background: #C1DD2D; color: #0A0A0A; font-weight: 800; font-size: 15px; padding: 14px 32px; border-radius: 8px; display: inline-block; transition: all 150ms ease; }
+    .btn-primary:hover { background: #D2ED3E; transform: translateY(-1px); color: #0A0A0A; }
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 24px; text-align: center; font-size: 13px; color: #666; }
+    @media (max-width: 600px) { .nav-grid { grid-template-columns: 1fr; } }
+  </style>
 </head>
 <body>
-  <p>Redirecting to IconStash...</p>
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="IconStash.io home">
+      <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2V9Z"/></svg>
+      <span>IconStash</span>
+    </a>
+    <nav>
+      <a href="/library/">Libraries</a>
+      <a href="/category/">Categories</a>
+      <a href="/style/">Styles</a>
+      <a href="/articles/">Articles</a>
+    </nav>
+  </header>
+
+  <main class="main-wrap">
+    <div class="code-tag">404 · Not Found</div>
+    <h1>Page Not Found</h1>
+    <p>The page or icon you're looking for might have been moved or updated in our 134,701 vector icon database.</p>
+
+    <div class="nav-grid">
+      <a href="/library/" class="nav-card">Browse 28 Libraries &rarr;</a>
+      <a href="/category/" class="nav-card">Browse 16 Categories &rarr;</a>
+      <a href="/style/" class="nav-card">Browse 7 Styles &rarr;</a>
+      <a href="/compare/" class="nav-card">Compare Icon Sets &rarr;</a>
+      <a href="/articles/" class="nav-card">Developer Guides &rarr;</a>
+      <a href="/stats/" class="nav-card">Library Statistics &rarr;</a>
+    </div>
+
+    <a href="/" class="btn-primary">Search All 134K+ Icons &rarr;</a>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine.</p>
+  </footer>
 </body>
 </html>

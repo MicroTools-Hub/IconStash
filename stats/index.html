@@ -83,7 +83,7 @@
     .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
     .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
     .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
-    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav { display: flex; gap: 20px; align-items: center; }
     .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
     .site-header nav a:hover { color: #F2F2F2; }
     .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: background 150ms ease; }
@@ -172,16 +172,21 @@
 
 <header class="site-header">
   <a href="/" class="logo" aria-label="IconStash.io home">
-      <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2V9Z"/></svg>
-      <span>IconStash</span>
-    </a>
+    <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2V9Z"/></svg>
+    <span>IconStash</span>
+  </a>
   <nav>
-    <a href="/">Browse Icons</a>
+    <a href="/">Search</a>
+    <a href="/library/">Libraries</a>
+    <a href="/category/">Categories</a>
+    <a href="/style/">Styles</a>
+    <a href="/compare/">Comparisons</a>
     <a href="/articles/">Articles</a>
     <a href="/stats/">Stats</a>
-    <a href="https://github.com/OG-Huzzi/IconStash">GitHub</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
   </nav>
-  <a href="/" class="header-cta">Open Editor</a>
+  <a href="/" class="header-cta">Open App</a>
 </header>
 
 <section class="hero">
@@ -223,7 +228,6 @@
   <p class="section-sub">How the 134,701 icons split across five open-source licenses.</p>
   <div class="license-bar">
     <span style="width:46.3%;background:#C1DD2D" title="Apache 2.0 — 46.3%"></span>
-    <span style="width:44.0%;background:#5AA9E6" title="MIT — 44.0%"></span>
     <span style="width:5.5%;background:#F5C542" title="CC BY 4.0 — 5.5%"></span>
     <span style="width:2.8%;background:#A78BFA" title="CC0 — 2.8%"></span>
     <span style="width:1.5%;background:#F97362" title="ISC — 1.5%"></span>
@@ -338,12 +342,18 @@ IconStash. https://iconstash.io/stats/ (accessed 2026). CC BY 4.0.</code>
 </section>
 
 <footer class="article-footer">
-  <span>© 2026 IconStash by <a href="https://greatsoftwarecompany.com">Great Software Company</a></span>
+  <span>© 2026 IconStash. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</span>
   <div class="footer-links">
-    <a href="/">Browse Icons</a>
+    <a href="/library/">Libraries</a>
+    <a href="/category/">Categories</a>
+    <a href="/style/">Styles</a>
+    <a href="/compare/">Comparisons</a>
     <a href="/articles/">Articles</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+    <a href="/privacy/">Privacy Policy</a>
+    <a href="/terms/">Terms of Service</a>
     <a href="/stats/">Stats</a>
-    <a href="https://github.com/OG-Huzzi/IconStash" target="_blank" rel="noopener">GitHub</a>
   </div>
 </footer>
 

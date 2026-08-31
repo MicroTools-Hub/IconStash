@@ -2849,6 +2849,7 @@ kbd { min-width: 28px; text-align: center; padding: 4px 7px; border-radius: 6px;
   align-items: center;
   gap: 12px;
   margin-top: 8px;
+  flex-wrap: wrap;
 }
 @media (max-width: 767px) {
   .playground-layout {
