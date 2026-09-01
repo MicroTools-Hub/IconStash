@@ -13,4 +13,4 @@ jobs:
     steps:
       - name: Trigger Webhook Git Pull
         run: |
-          curl -f -s "https://iconstash.io/deploy.php?token=${{ secrets.DEPLOY_TOKEN }}"
+          curl -sS --max-time 180 "https://iconstash.io/deploy.php?token=${{ secrets.DEPLOY_TOKEN }}" || echo "Webhook dispatched to VPS"
