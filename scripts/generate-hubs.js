@@ -800,11 +800,6 @@ function page({ title, description, canonical, schema, activeType, activeSlug, c
       </div>
       <div class="header-right">
         <a href="/" class="nav-link">Icons</a>
-        <a href="/library/" class="nav-link${activeType === "library" ? " active" : ""}">Libraries</a>
-        <a href="/category/" class="nav-link${activeType === "category" ? " active" : ""}">Categories</a>
-        <a href="/style/" class="nav-link${activeType === "style" ? " active" : ""}">Styles</a>
-        <a href="/compare/" class="nav-link${activeType === "compare" || activeType === "alternatives" || activeType === "icons-for" ? " active" : ""}">Comparisons</a>
-        <a href="/articles/" class="nav-link">Articles</a>
         <button class="nav-link" id="theme-toggle" title="Toggle theme">Light</button>
       </div>
     </header>
