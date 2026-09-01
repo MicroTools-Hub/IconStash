@@ -4,6 +4,20 @@
 # Directories that hold only index.html are unaffected — Apache falls through.
 DirectoryIndex index.php index.html
 
+# --- Canonical Host & HTTPS Redirection (P1 High) ---
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Redirect www.iconstash.io -> https://iconstash.io (301 Permanent)
+  RewriteCond %{HTTP_HOST} ^www\.iconstash\.io$ [NC]
+  RewriteRule ^(.*)$ https://iconstash.io/$1 [L,R=301]
+
+  # Redirect plain HTTP -> HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=301]
+</IfModule>
+
 <IfModule mod_mime.c>
   AddType application/json .json
   AddType image/svg+xml .svg
@@ -39,14 +53,18 @@ DirectoryIndex index.php index.html
     Header set Cache-Control "public, max-age=3600, stale-while-revalidate=86400"
   </FilesMatch>
 
-  <FilesMatch "^(index\.html|sw\.js)$">
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+
+  <FilesMatch "^sw\.js$">
     Header set Cache-Control "no-cache, no-store, must-revalidate"
   </FilesMatch>
 </IfModule>
 
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/html "access plus 1 hour"
   ExpiresByType application/javascript "access plus 7 days"
   ExpiresByType text/css "access plus 7 days"
   ExpiresByType application/json "access plus 1 hour"

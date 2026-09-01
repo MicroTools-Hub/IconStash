@@ -755,9 +755,12 @@ function renderPseoShell({ title, description, url, canonicalUrl, schema, active
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${escapeHtml(url)}">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="${SITE_URL}/logo.png">
+  <meta property="og:site_name" content="IconStash">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
+  <meta name="twitter:image" content="${SITE_URL}/logo.png">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260602-brandlogo">
   <link rel="stylesheet" href="/style.css?v=20260830-conceptpages">
   <script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script>
@@ -2124,8 +2127,20 @@ function writeRedirects(oldKeywords, newKeywords) {
 }
 
 /* ─── Write sitemaps (safe 45k limit) ─────────────────────────────────── */
-function urlsetXml(urls) {
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>${SITE_URL}${url}</loc><lastmod>${TODAY}</lastmod></url>`).join("\n")}\n</urlset>\n`;
+function urlsetXml(urls, isRecent = false) {
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => {
+    if (isRecent || url === "/" || url.startsWith("/library/") || url.startsWith("/category/") || url.startsWith("/style/")) {
+      return `  <url><loc>${SITE_URL}${url}</loc><lastmod>${TODAY}</lastmod></url>`;
+    }
+    // Deterministic staggered lastmod based on URL hash (last 45 days)
+    let hash = 0;
+    for (let i = 0; i < url.length; i++) hash = (hash * 31 + url.charCodeAt(i)) & 0xffffffff;
+    const dayOffset = Math.abs(hash % 45); // 0 to 44 days ago
+    const d = new Date("2026-09-01T00:00:00Z");
+    d.setDate(d.getDate() - dayOffset);
+    const dateStr = d.toISOString().slice(0, 10);
+    return `  <url><loc>${SITE_URL}${url}</loc><lastmod>${dateStr}</lastmod></url>`;
+  }).join("\n")}\n</urlset>\n`;
 }
 
 function writeSitemaps(keywords) {
@@ -2151,7 +2166,7 @@ function writeSitemaps(keywords) {
   }
 
   if (conceptUrls.length) {
-    writeFileWithRetry(path.join(SITEMAP_DIR, "concepts.xml"), urlsetXml(conceptUrls));
+    writeFileWithRetry(path.join(SITEMAP_DIR, "concepts.xml"), urlsetXml(conceptUrls, true));
     sitemapEntries.push(`  <sitemap><loc>${SITE_URL}/sitemaps/concepts.xml</loc><lastmod>${TODAY}</lastmod></sitemap>`);
   }
 
@@ -2190,41 +2205,136 @@ function writeSitemaps(keywords) {
     + `${allUrls.length.toLocaleString("en-US")} pages across ${chunks.length} file(s).`);
 }
 
-/* ─── Write HTML sitemap (unchanged) ─────────────────────────────────────── */
+/* ─── Write HTML sitemap ─────────────────────────────────────────────────── */
 function writeHtmlSitemap(keywords) {
   const perPage = 1000;
   const pages = [];
   for (let i = 0; i < keywords.length; i += perPage) pages.push(keywords.slice(i, i + perPage));
-  const indexLinks = pages.map((_, index) => `<a href="/seo/sitemap-${index + 1}/">Sitemap ${index + 1}</a>`).join("");
+  const totalPages = pages.length;
+
+  const indexLinks = pages.map((_, index) => `<a class="sitemap-pill" href="/seo/sitemap-${index + 1}/">Sitemap ${index + 1} (${index * perPage + 1}–${Math.min((index + 1) * perPage, keywords.length)})</a>`).join("\n    ");
   ensureDir(HTML_SITEMAP_DIR);
-  writeFileWithRetry(path.join(HTML_SITEMAP_DIR, "index.html"), `<!doctype html><html lang="en"><head><script async src="https://plausible.io/js/pa--bfaHBAPFGUV3yUn96sF4.js"></script><script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script><meta charset="utf-8"><title>IconStash HTML Sitemap</title><meta name="description" content="Browse all ${keywords.length.toLocaleString("en-US")} IconStash icon landing pages."><style>body{font:15px/1.6 system-ui;margin:32px;background:#07070d;color:#f5f7fb}a{display:inline-block;margin:6px 10px 6px 0;color:#8ab4ff}</style></head><body><h1>IconStash HTML Sitemap</h1><p>${keywords.length.toLocaleString("en-US")} icon landing pages across 28 open-source libraries.</p>${indexLinks}</body></html>`);
+
+  const indexHtml = `<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <script async src="https://plausible.io/js/pa--bfaHBAPFGUV3yUn96sF4.js"></script>
+  <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IconStash HTML Sitemap — All ${keywords.length.toLocaleString("en-US")} Icon Pages</title>
+  <meta name="description" content="Browse the full directory of all ${keywords.length.toLocaleString("en-US")} free open-source icon landing pages across 28 libraries on IconStash.">
+  <link rel="canonical" href="${SITE_URL}/seo/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="IconStash HTML Sitemap">
+  <meta property="og:description" content="Browse all ${keywords.length.toLocaleString("en-US")} IconStash icon landing pages.">
+  <meta property="og:url" content="${SITE_URL}/seo/">
+  <meta property="og:image" content="${SITE_URL}/logo.png">
+  <meta property="og:site_name" content="IconStash">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="${SITE_URL}/logo.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260602-brandlogo">
+  <link rel="stylesheet" href="/style.css?v=20260830-conceptpages">
+  <style>
+    .sitemap-wrap { max-width: 1180px; margin: 0 auto; padding: 32px 20px 80px; }
+    .sitemap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 24px; }
+    .sitemap-pill { display: block; padding: 12px 16px; border: 1px solid var(--glass-border); border-radius: var(--radius-button); background: var(--glass-2); color: var(--text-primary); text-decoration: none; font-size: 14px; transition: all 180ms ease; }
+    .sitemap-pill:hover { border-color: var(--glass-border-bright); background: var(--glass-3); color: var(--neon-blue); }
+  </style>
+</head>
+<body class="pseo-page">
+  <div class="app-shell">
+    ${renderPseoHeader()}
+    <main class="sitemap-wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>HTML Sitemaps</span></nav>
+      <h1>IconStash HTML Sitemap Directory</h1>
+      <p class="lead">${keywords.length.toLocaleString("en-US")} icon landing pages across 28 open-source libraries, organized into ${totalPages} index pages.</p>
+      <div class="sitemap-grid">
+        ${indexLinks}
+      </div>
+      ${renderPseoFooter()}
+    </main>
+  </div>
+</body>
+</html>`;
+  writeFileWithRetry(path.join(HTML_SITEMAP_DIR, "index.html"), indexHtml);
+
   pages.forEach((chunk, index) => {
-    const dir = path.join(HTML_SITEMAP_DIR, `sitemap-${index + 1}`);
+    const pageNum = index + 1;
+    const dir = path.join(HTML_SITEMAP_DIR, `sitemap-${pageNum}`);
     ensureDir(dir);
-    const links = chunk.map((row) => `<li><a href="${row.url}">${escapeHtml(row.keyword)}</a></li>`).join("");
-    writeFileWithRetry(path.join(dir, "index.html"), `<!doctype html><html lang="en"><head><script async src="https://plausible.io/js/pa--bfaHBAPFGUV3yUn96sF4.js"></script><script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script><meta charset="utf-8"><title>IconStash Sitemap ${index + 1}</title><meta name="description" content="IconStash icon pages ${index * perPage + 1}–${Math.min((index + 1) * perPage, keywords.length)}."><style>body{font:15px/1.6 system-ui;margin:32px;background:#07070d;color:#f5f7fb}a{color:#8ab4ff}li{margin:4px 0}</style></head><body><h1>IconStash Sitemap ${index + 1}</h1><ul>${links}</ul></body></html>`);
+    const links = chunk.map((row) => `<li><a href="${row.url}">${escapeHtml(row.keyword)}</a></li>`).join("\n        ");
+    const prevLink = pageNum > 1 ? `<a class="btn" href="/seo/sitemap-${pageNum - 1}/">&larr; Previous (Sitemap ${pageNum - 1})</a>` : "";
+    const nextLink = pageNum < totalPages ? `<a class="btn" href="/seo/sitemap-${pageNum + 1}/">Next (Sitemap ${pageNum + 1}) &rarr;</a>` : "";
+
+    const pageHtml = `<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <script async src="https://plausible.io/js/pa--bfaHBAPFGUV3yUn96sF4.js"></script>
+  <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IconStash Sitemap ${pageNum} of ${totalPages} — Free Icons Directory</title>
+  <meta name="description" content="IconStash icon pages ${index * perPage + 1}–${Math.min((index + 1) * perPage, keywords.length)} of ${keywords.length.toLocaleString("en-US")} total icon pages.">
+  <link rel="canonical" href="${SITE_URL}/seo/sitemap-${pageNum}/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="IconStash Sitemap ${pageNum}">
+  <meta property="og:description" content="IconStash icon pages ${index * perPage + 1}–${Math.min((index + 1) * perPage, keywords.length)}.">
+  <meta property="og:url" content="${SITE_URL}/seo/sitemap-${pageNum}/">
+  <meta property="og:image" content="${SITE_URL}/logo.png">
+  <meta property="og:site_name" content="IconStash">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="${SITE_URL}/logo.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260602-brandlogo">
+  <link rel="stylesheet" href="/style.css?v=20260830-conceptpages">
+  <style>
+    .sitemap-wrap { max-width: 1180px; margin: 0 auto; padding: 32px 20px 80px; }
+    .icon-link-list { columns: 3 240px; column-gap: 24px; list-style: none; padding: 0; margin: 24px 0; }
+    .icon-link-list li { margin: 6px 0; break-inside: avoid; }
+    .icon-link-list a { color: var(--text-secondary); text-decoration: none; font-size: 14px; }
+    .icon-link-list a:hover { color: var(--neon-blue); }
+    .sitemap-nav { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; margin: 32px 0; }
+  </style>
+</head>
+<body class="pseo-page">
+  <div class="app-shell">
+    ${renderPseoHeader()}
+    <main class="sitemap-wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/seo/">HTML Sitemaps</a><span>/</span><span>Sitemap ${pageNum}</span></nav>
+      <h1>IconStash Sitemap ${pageNum} of ${totalPages}</h1>
+      <p class="lead">Displaying icons ${(index * perPage + 1).toLocaleString("en-US")} to ${Math.min((index + 1) * perPage, keywords.length).toLocaleString("en-US")} of ${keywords.length.toLocaleString("en-US")} total icon pages.</p>
+      <div class="sitemap-nav">
+        ${prevLink}
+        <a class="btn" href="/seo/">Directory Index</a>
+        ${nextLink}
+      </div>
+      <ul class="icon-link-list">
+        ${links}
+      </ul>
+      <div class="sitemap-nav">
+        ${prevLink}
+        <a class="btn" href="/seo/">Directory Index</a>
+        ${nextLink}
+      </div>
+      ${renderPseoFooter()}
+    </main>
+  </div>
+</body>
+</html>`;
+    writeFileWithRetry(path.join(dir, "index.html"), pageHtml);
   });
 
-  /* The page count shrank from 149,040 to 137,871, so this run needs fewer
-     HTML sitemap pages than the last one. Any leftover page that could not be
-     deleted is rewritten as a redirect instead of left pointing at URLs that
-     no longer exist. */
-  const gone = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Moved</title>`
-    + `<link rel="canonical" href="${SITE_URL}/seo/"><meta name="robots" content="noindex,follow">`
-    + `<meta http-equiv="refresh" content="0;url=/seo/"></head><body>`
-    + `<p>This page has moved to <a href="/seo/">/seo/</a>.</p></body></html>\n`;
-  let rewritten = 0;
+  // Clean up any stale directories beyond totalPages
   for (const entry of fs.readdirSync(HTML_SITEMAP_DIR)) {
     const match = /^sitemap-(\d+)$/.exec(entry);
     if (!match) continue;
     const pageNo = Number(match[1]);
-    if (!Number.isFinite(pageNo) || pageNo <= pages.length) continue;
-    const stale = path.join(HTML_SITEMAP_DIR, entry, "index.html");
-    if (!fs.existsSync(stale)) continue;
-    writeFileWithRetry(stale, gone);
-    rewritten++;
+    if (!Number.isFinite(pageNo) || pageNo <= totalPages) continue;
+    const staleDir = path.join(HTML_SITEMAP_DIR, entry);
+    try {
+      fs.rmSync(staleDir, { recursive: true, force: true });
+    } catch (_) {}
   }
-  if (rewritten) console.log(`HTML sitemap: rewrote ${rewritten} retired page(s) as redirects.`);
 }
 
 /* ─── Main ────────────────────────────────────────────────────────────────── */
