@@ -64,8 +64,7 @@ IconStash is a free, open-source SVG icon search engine and browser. It aggregat
   - Meta tab (tags, icon ID, library badge)
 - **Cross-Library Matching** — Shows the same icon across other libraries in the detail panel
 - **Dark / Light Theme** — Toggle with keyboard shortcut `T`
-- **Keyboard Shortcuts** — `K` to focus search, `Esc` to clear, `T` for theme, `?` for shortcuts modal
-- **Programmatic SEO** — 146,000+ dedicated landing pages for search discovery (e.g. `/icons/camera-icon-png/`)
+- **Programmatic SEO & AEO** — 137,000+ high-quality canonical icon pages, 3,746 concept hubs (e.g. `/icons/home-icon/`), library comparison matrices, and comprehensive `llms.txt` AEO integration.
 
 ---
 
