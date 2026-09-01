@@ -681,46 +681,134 @@ function makeCard(title, list, where) {
    5. Shell
    ──────────────────────────────────────────────────────────────────────────── */
 
+function libraryBadgeSvg() {
+  return `<svg class="lib-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z"></path><path d="M8 9h8M8 13h8"></path></svg>`;
+}
+
 function sidebar(activeType, activeSlug) {
-  const libRows = LIBRARIES.map((lib) => {
+  const libRows = LIBRARIES.map((lib, rowIndex) => {
     const on = activeType === "library" && lib.slug === activeSlug;
-    return `<a class="lib-row${on ? " active" : ""}" href="/library/${lib.slug}/"><span class="lib-name">${escapeHtml(lib.name)}</span><span class="lib-count">${escapeHtml(lib.count)}</span></a>`;
+    return `<a class="lib-row ${on ? "active" : ""}" href="/library/${escapeHtml(lib.slug)}/" data-slug="${escapeHtml(lib.slug)}" style="animation-delay:${rowIndex * 30}ms">
+      <span class="lib-badge">${libraryBadgeSvg()}</span>
+      <span class="lib-name">${escapeHtml(lib.name)}</span>
+      <span class="lib-count">${Number(lib.count || 0).toLocaleString("en-US")}</span>
+    </a>`;
   }).join("\n              ");
 
   const catRows = CATEGORY_SLUGS.map((slug, i) => {
     const on = activeType === "category" && slug === activeSlug;
     const color = CATEGORY_COLORS[i % CATEGORY_COLORS.length];
     const info = CATEGORY_INFO[slug];
-    return `<a class="category-item${on ? " active" : ""}" href="/category/${slug}/"><span class="category-dot" style="background:${color}"></span><span>${escapeHtml(info.name)}</span></a>`;
+    return `<a class="category-item${on ? " active" : ""}" href="/category/${escapeHtml(slug)}/">
+      <span class="category-dot" style="background:${color};color:${color}"></span>
+      <span>${escapeHtml(info.name)}</span>
+    </a>`;
   }).join("\n              ");
 
-  const styleRows = STYLES.map((s) => {
-    const on = activeType === "style" && s.slug === activeSlug;
-    return `<a class="style-pill${on ? " active" : ""}" href="/style/${s.slug}/">${escapeHtml(s.name)}</a>`;
-  }).join("\n              ");
+  const stylePills = [
+    ["All", ""],
+    ["Outline", "outline"],
+    ["Solid", "solid"],
+    ["Duotone", "duotone"],
+    ["Fill", "fill"],
+    ["Bold", "bold"],
+    ["Thin", "thin"],
+    ["Light", "light"]
+  ].map(([label, styleSlug]) => {
+    const on = activeType === "style" && (activeSlug === styleSlug || (!activeSlug && !styleSlug));
+    return `<a class="style-pill ${on ? "active" : ""}" href="/style/${styleSlug ? `${styleSlug}/` : ""}">${label}</a>`;
+  }).join("\n                ");
 
-  return `<aside id="left-sidebar" aria-label="Browse icon libraries">
+  return `<aside id="left-sidebar" aria-label="Filters">
         <div class="sidebar-content">
           <section class="filter-section">
-            <div class="filter-header"><h2>Libraries</h2><span class="muted">${LIBRARIES.length}</span></div>
+            <div class="filter-header">
+              <h2>Libraries</h2>
+              <span class="muted">${activeType === "library" && activeSlug ? "1 selected" : "All"}</span>
+            </div>
+            <input type="search" id="lib-search" class="mini-search" placeholder="Filter libraries..." aria-label="Filter libraries">
             <div class="lib-list">
-              ${libRows}
+              <a class="lib-row all-icons-row ${activeType === "library" && activeSlug ? "" : "active"}" href="/library/" data-all-icons="true">
+                <span class="lib-badge">${libraryBadgeSvg()}</span>
+                <span class="lib-name">All Icons</span>
+                <span class="lib-count">134,701</span>
+              </a>
+              <div class="sidebar-card" id="lib-card-section" style="margin-top: 10px;">
+                <button class="filter-header lib-toggle" id="lib-toggle" aria-expanded="false" type="button">
+                  <h2>Libraries List</h2>
+                  <svg class="chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div class="card-content lib-collapse-list" id="lib-collapse-list">
+                  ${libRows}
+                </div>
+              </div>
             </div>
           </section>
 
-          <section class="sidebar-card expandable open" id="category-section">
-            <div class="filter-header"><h2>Categories</h2></div>
+          <section class="sidebar-card expandable" id="style-section">
+            <button class="filter-header style-toggle" id="style-toggle" aria-expanded="false" type="button">
+              <h2>Styles</h2>
+              <svg class="chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="card-content style-pills">
+              ${stylePills}
+            </div>
+          </section>
+
+          <section class="sidebar-card expandable" id="category-section">
+            <button class="filter-header category-toggle" id="category-toggle" aria-expanded="false" type="button">
+              <h2>Categories</h2>
+              <svg class="chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
             <div class="card-content category-list">
               ${catRows}
             </div>
           </section>
 
-          <section class="sidebar-card expandable open" id="style-section">
-            <div class="filter-header"><h2>Styles</h2></div>
-            <div class="card-content style-pills">
-              ${styleRows}
+          <section class="filter-section">
+            <div class="filter-header"><h2>Preview Size: 24px</h2></div>
+            <input type="range" class="neon-slider" min="16" max="128" value="24" aria-label="Preview size">
+          </section>
+
+          <section class="filter-section">
+            <div class="filter-header"><h2>Sort By</h2></div>
+            <label class="custom-select-wrapper">
+              <select class="glass-select" aria-label="Sort icons">
+                <option>Relevance</option>
+                <option>Most Popular</option>
+                <option>Newest</option>
+                <option>A to Z</option>
+                <option>Z to A</option>
+              </select>
+              <svg class="chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </label>
+            <div>
+              <div class="unlocked-badge" title="Every search filter is free and unlocked.">All filters unlocked</div>
             </div>
           </section>
+
+          <section class="sidebar-card expandable" id="customize-section">
+            <button class="filter-header category-toggle" id="customize-toggle" aria-expanded="false" type="button">
+              <h2>Customize Preview</h2>
+              <svg class="chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="card-content customize-preview-controls">
+              <div class="customize-field">
+                <div>Fill Color</div>
+                <div class="customize-color-row">
+                  <input type="text" class="mini-search" value="#ffffff" aria-label="Fill color">
+                  <button type="button" class="color-wheel-btn" aria-label="Choose fill color"></button>
+                </div>
+              </div>
+              <div class="customize-field">
+                <div class="customize-stroke-row"><span>Stroke Width</span><span>0.7px</span></div>
+                <input type="range" class="neon-slider" min="0.1" max="3" step="0.1" value="0.7" aria-label="Stroke width">
+              </div>
+              <a class="outlined-neon-btn custom-preview-reset">Reset</a>
+            </div>
+          </section>
+
+          <button id="clear-filters-btn" class="outlined-neon-btn" type="button">Clear All Filters</button>
         </div>
       </aside>`;
 }
@@ -738,9 +826,9 @@ function footer() {
                 <div class="footer-right">
                   <div class="footer-line">This website is offered to you by <a href="https://greatsoftwarecompany.com" target="_blank" rel="noopener" class="footer-link">Great Software Company</a> in collaboration with Huzzi.</div>
                   <div class="footer-line"><a href="/about/" class="footer-link">About</a> &middot; <a href="/contact/" class="footer-link">Contact</a> &middot; <a href="/terms/" class="footer-link">Terms of Service</a> &middot; <a href="/privacy/" class="footer-link">Privacy Policy</a> &middot; <a href="/stats/" class="footer-link">Library Stats</a> &middot; <a href="/articles/" class="footer-link">Articles</a></div>
-                  <div class="footer-line">Browse: <a href="/library/" class="footer-link">Icon libraries</a> &middot; <a href="/category/" class="footer-link">Icon categories</a> &middot; <a href="/style/" class="footer-link">Icon styles</a> &middot; <a href="/compare/" class="footer-link">Comparisons</a> &middot; <a href="/alternatives/" class="footer-link">Alternatives</a> &middot; <a href="/icons-for/" class="footer-link">By framework</a></div>
+                  <div class="footer-line">Browse: <a href="/library/" class="footer-link">Icon libraries</a> &middot; <a href="/category/" class="footer-link">Icon categories</a> &middot; <a href="/style/" class="footer-link">Icon styles</a> &middot; <a href="/compare/" class="footer-link">Comparisons</a> &middot; <a href="/alternatives/" class="footer-link">Alternatives</a> &middot; <a href="/icons-for/" class="footer-link">By framework</a> &middot; <a href="/seo/" class="footer-link">HTML Sitemap</a></div>
                   <div class="footer-line">Popular: <a href="/library/lucide/" class="footer-link">Lucide</a> &middot; <a href="/library/tabler/" class="footer-link">Tabler</a> &middot; <a href="/library/phosphor/" class="footer-link">Phosphor</a> &middot; <a href="/library/material/" class="footer-link">Material Design</a> &middot; <a href="/library/heroicons/" class="footer-link">Heroicons</a> &middot; <a href="/library/bootstrap/" class="footer-link">Bootstrap Icons</a></div>
-                  <div class="footer-line">Questions? Feedback? Contact us at <a href="mailto:heybro@iconstash.io" class="footer-link">heybro@iconstash.io</a></div>
+                  <div class="footer-line">Questions? Feedback? Love letters? Contact us at <a href="mailto:heybro@iconstash.io" class="footer-link">heybro@iconstash.io</a></div>
                   <div class="footer-line">&copy; ${new Date().getFullYear()} IconStash.io. All rights reserved.</div>
                 </div>
               </div>
@@ -793,6 +881,9 @@ function page({ title, description, canonical, schema, activeType, activeSlug, c
   <div class="app-shell">
     <header id="main-header">
       <div class="header-left">
+        <button class="icon-btn mobile-only" id="sidebar-toggle" title="Open filters" aria-label="Open filters" type="button">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
         <a class="logo" href="/" aria-label="IconStash.io home">
           <svg class="logo-icon" viewBox="0 0 24 24"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2V9Z"/></svg>
           <span class="logo-text">IconStash<span class="logo-io">.io</span></span>
@@ -805,6 +896,9 @@ function page({ title, description, canonical, schema, activeType, activeSlug, c
     </header>
 
     <div class="workspace">
+      <button class="sidebar-collapse" id="sidebar-collapse" title="Collapse filters" aria-label="Collapse filters" aria-expanded="true" type="button">
+        <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
       ${sidebar(activeType, activeSlug)}
 
       <main id="main-content">
@@ -831,6 +925,36 @@ ${body}
       const updateThemeUI = (theme) => { root.dataset.theme = theme; if (themeToggle) themeToggle.textContent = theme === "light" ? "Dark" : "Light"; };
       try { updateThemeUI(localStorage.getItem("iconvault-theme") || "dark"); } catch (_) { updateThemeUI("dark"); }
       themeToggle?.addEventListener("click", () => { const next = root.dataset.theme === "light" ? "dark" : "light"; updateThemeUI(next); try { localStorage.setItem("iconvault-theme", next); } catch (_) {} });
+
+      document.getElementById("sidebar-toggle")?.addEventListener("click", () => document.body.classList.toggle("sidebar-open"));
+      document.getElementById("sidebar-collapse")?.addEventListener("click", () => document.body.classList.toggle("sidebar-collapsed"));
+
+      const libraryToggle = document.getElementById("lib-toggle");
+      const libraryList = document.getElementById("lib-collapse-list");
+      const setLibrariesOpen = (open) => {
+        if (!libraryToggle || !libraryList) return;
+        libraryToggle.setAttribute("aria-expanded", String(open));
+        const libCard = document.getElementById("lib-card-section");
+        if (libCard) libCard.classList.toggle("open", open);
+      };
+      libraryToggle?.addEventListener("click", () => setLibrariesOpen(libraryToggle.getAttribute("aria-expanded") !== "true"));
+
+      document.getElementById("lib-search")?.addEventListener("input", (event) => {
+        const query = event.currentTarget.value.trim().toLowerCase();
+        libraryList?.querySelectorAll("[data-slug]").forEach((row) => {
+          row.hidden = Boolean(query) && !row.textContent.toLowerCase().includes(query);
+        });
+      });
+
+      document.querySelectorAll(".expandable .filter-header").forEach((header) => {
+        header.addEventListener("click", () => {
+          const card = header.closest(".sidebar-card");
+          if (card) {
+            const isOpen = card.classList.toggle("open");
+            header.setAttribute("aria-expanded", String(isOpen));
+          }
+        });
+      });
     })();
   </script>
 </body>
