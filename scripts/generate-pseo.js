@@ -750,7 +750,7 @@ function renderPseoShell({ title, description, url, canonicalUrl, schema, active
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${escapeHtml(url)}">
-  <meta property="og:image" content="${SITE_URL}/logo.png">
+  <meta property="og:image" content="${SITE_URL}/og-default.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="${escapeHtml(title)}">
@@ -758,7 +758,7 @@ function renderPseoShell({ title, description, url, canonicalUrl, schema, active
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
-  <meta name="twitter:image" content="${SITE_URL}/logo.png">
+  <meta name="twitter:image" content="${SITE_URL}/og-default.png">
   <meta name="twitter:image:alt" content="${escapeHtml(title)}">
   <meta name="theme-color" content="#0A0A0A">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260602-brandlogo">
@@ -1455,7 +1455,7 @@ function pageHtml(row, icon, related, conceptSlug) {
     `The ${icon.displayName} icon from ${icon.library} is a ${icon.style}-style SVG available in IconStash alongside ${libCount}+ other icons from the same library. Copy its SVG code, export a custom PNG, or download a React component — no account required.`,
     `Find the ${icon.library} ${icon.displayName} icon and download it in SVG or PNG format. This ${icon.style}-style icon is optimized for ${catCtx}. Customize color, size, and stroke width inside the IconStash browser editor before exporting.`,
     `IconStash indexes the ${icon.displayName} icon from ${icon.library} alongside 134,701 icons from 28 open-source libraries. It ${styleD}, making it well suited for ${catCtx}. Set an exact pixel size from 16px to 512px and download a lossless PNG in one click.`,
-    `Use the ${icon.displayName} SVG icon from ${icon.library} in your ${icon.category.toLowerCase()} interface. IconStash gives you instant access to the SVG code, React JSX snippet, CSS background-mask, and custom PNG download — all from the browser with no login.`,
+    `Use the ${icon.displayName} SVG icon from ${icon.library} in your ${icon.category.toLowerCase() === "interface" ? "product UI" : icon.category.toLowerCase() + " interface"}. IconStash gives you instant access to the SVG code, React JSX snippet, CSS background-mask, and custom PNG download — all from the browser with no login.`,
     `The ${icon.library} ${icon.displayName} icon uses ${styleD}. Compare it against similar icons in 27 other libraries on IconStash, adjust stroke width, change colors with a hex picker, and export at any size.`,
     `The ${icon.displayName} icon is part of the ${icon.library} collection — ${libCount}+ professional icons for ${catCtx}. On IconStash, you can preview, customize, compare across libraries, and download in SVG, PNG, JSX, or CSS format.`
   ];
@@ -2229,10 +2229,14 @@ function writeHtmlSitemap(keywords) {
   <meta property="og:title" content="IconStash HTML Sitemap">
   <meta property="og:description" content="Browse all ${keywords.length.toLocaleString("en-US")} IconStash icon landing pages.">
   <meta property="og:url" content="${SITE_URL}/seo/">
-  <meta property="og:image" content="${SITE_URL}/logo.png">
+  <meta property="og:image" content="${SITE_URL}/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="IconStash HTML Sitemap Directory">
   <meta property="og:site_name" content="IconStash">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="${SITE_URL}/logo.png">
+  <meta name="twitter:image" content="${SITE_URL}/og-default.png">
+  <meta name="twitter:image:alt" content="IconStash HTML Sitemap Directory">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260602-brandlogo">
   <link rel="stylesheet" href="/style.css?v=20260830-conceptpages">
   <style>
@@ -2281,10 +2285,14 @@ function writeHtmlSitemap(keywords) {
   <meta property="og:title" content="IconStash Sitemap ${pageNum}">
   <meta property="og:description" content="IconStash icon pages ${index * perPage + 1}–${Math.min((index + 1) * perPage, keywords.length)}.">
   <meta property="og:url" content="${SITE_URL}/seo/sitemap-${pageNum}/">
-  <meta property="og:image" content="${SITE_URL}/logo.png">
+  <meta property="og:image" content="${SITE_URL}/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="IconStash Free Icons Directory">
   <meta property="og:site_name" content="IconStash">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="${SITE_URL}/logo.png">
+  <meta name="twitter:image" content="${SITE_URL}/og-default.png">
+  <meta name="twitter:image:alt" content="IconStash Free Icons Directory">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260602-brandlogo">
   <link rel="stylesheet" href="/style.css?v=20260830-conceptpages">
   <style>

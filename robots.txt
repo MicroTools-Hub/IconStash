@@ -4,6 +4,7 @@ User-agent: *
 Allow: /
 # Crawl-budget guards: block raw data / build artifacts / internal search
 # endpoints. No UI change — these paths are never linked for users.
+Allow: /data/index.json
 Disallow: /data/
 Disallow: /vendor/
 Disallow: /*?query=
