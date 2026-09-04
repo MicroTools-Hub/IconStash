@@ -6,7 +6,6 @@ Allow: /
 # endpoints. No UI change — these paths are never linked for users.
 Disallow: /data/
 Disallow: /vendor/
-Disallow: /seo/
 Disallow: /*?query=
 Disallow: /*?q=
 Disallow: /search.worker.js

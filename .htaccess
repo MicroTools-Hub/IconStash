@@ -21,7 +21,9 @@ DirectoryIndex index.php index.html
   # /Listicles/* and /Glossary/* are the canonical capitalized paths on disk.
   # Lowercase variants 301 to canonical so link equity is not split and no
   # duplicate pair can be indexed.
+  RewriteCond %{REQUEST_URI} !^/Listicles/
   RewriteRule ^listicles/(.*)$ /Listicles/$1 [L,R=301,NC]
+  RewriteCond %{REQUEST_URI} !^/Glossary/
   RewriteRule ^glossary/(.*)$ /Glossary/$1 [L,R=301,NC]
 </IfModule>
 
