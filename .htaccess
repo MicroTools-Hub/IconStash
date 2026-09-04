@@ -16,12 +16,25 @@ DirectoryIndex index.php index.html
   RewriteCond %{HTTPS} off
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=301]
+
+  # --- SEO: case-canonical redirects (no file moves, no UI change) ---
+  # /Listicles/* and /Glossary/* are the canonical capitalized paths on disk.
+  # Lowercase variants 301 to canonical so link equity is not split and no
+  # duplicate pair can be indexed.
+  RewriteRule ^listicles/(.*)$ /Listicles/$1 [L,R=301,NC]
+  RewriteRule ^glossary/(.*)$ /Glossary/$1 [L,R=301,NC]
 </IfModule>
 
 <IfModule mod_mime.c>
   AddType application/json .json
   AddType image/svg+xml .svg
+  AddCharset UTF-8 .html .css .js .json .svg .xml .txt
 </IfModule>
+
+# Serve everything as UTF-8 by default so em-dashes (—, U+2014), × and other
+# multibyte chars in titles/meta render correctly even if Apache's default
+# charset is ISO-8859-1. Fixes perceived mojibake without touching any HTML.
+AddDefaultCharset UTF-8
 
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json image/svg+xml
@@ -45,8 +58,11 @@ DirectoryIndex index.php index.html
     Header append Vary Accept-Encoding
   </FilesMatch>
 
-  <FilesMatch "^(?!sw\.js$).*\.(js|css|svg|jpg|jpeg|png|webp|ico)$">
-    Header set Cache-Control "public, max-age=604800"
+  <FilesMatch "^(?!sw\.js$).*\.(js|css|svg|jpg|jpeg|png|webp|ico|woff2?)$">
+    # Versioned via ?v= query (?v=20260830-*). Long immutable cache is safe:
+    # bumping the version string changes the URL, so stale CSS/JS can never
+    # be served to returning visitors. No UI change, faster repeat views.
+    Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 
   <FilesMatch "\.json$">
@@ -65,8 +81,11 @@ DirectoryIndex index.php index.html
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType text/html "access plus 1 hour"
-  ExpiresByType application/javascript "access plus 7 days"
-  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
   ExpiresByType application/json "access plus 1 hour"
-  ExpiresByType image/svg+xml "access plus 7 days"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
 </IfModule>

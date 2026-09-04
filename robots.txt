@@ -2,6 +2,14 @@
 # Traditional search engines
 User-agent: *
 Allow: /
+# Crawl-budget guards: block raw data / build artifacts / internal search
+# endpoints. No UI change — these paths are never linked for users.
+Disallow: /data/
+Disallow: /vendor/
+Disallow: /seo/
+Disallow: /*?query=
+Disallow: /*?q=
+Disallow: /search.worker.js
 
 # ---------------------------------------------------------------------------
 # AI / LLM crawlers — explicitly welcomed for answer-engine citation (AEO/GEO).

@@ -691,7 +691,7 @@ function sidebar(activeType, activeSlug) {
     return `<a class="lib-row ${on ? "active" : ""}" href="/library/${escapeHtml(lib.slug)}/" data-slug="${escapeHtml(lib.slug)}" style="animation-delay:${rowIndex * 30}ms">
       <span class="lib-badge">${libraryBadgeSvg()}</span>
       <span class="lib-name">${escapeHtml(lib.name)}</span>
-      <span class="lib-count">${Number(lib.count || 0).toLocaleString("en-US")}</span>
+      <span class="lib-count">${Number(lib.countNum || String(lib.count || "0").replace(/[^0-9]/g, "") || 0).toLocaleString("en-US")}</span>
     </a>`;
   }).join("\n              ");
 
@@ -851,11 +851,16 @@ function head({ title, description, canonical, schema, activeType }) {
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${escapeHtml(canonical)}">
   <meta property="og:image" content="${SITE_URL}/logo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="${escapeHtml(title)}">
   <meta property="og:site_name" content="IconStash">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${SITE_URL}/logo.png">
+  <meta name="twitter:image:alt" content="${escapeHtml(title)}">
+  <meta name="theme-color" content="#0A0A0A">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260602-brandlogo">
   <link rel="stylesheet" href="/style.css?v=${CSS_VERSION}">
   <script type="application/ld+json">
@@ -991,13 +996,22 @@ function breadcrumbSchema(items) {
   };
 }
 
-function collectionSchema({ name, url, description, count }) {
+function collectionSchema({ name, url, description, count, items }) {
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name, url, description,
     isPartOf: { "@type": "WebSite", name: "IconStash", url: `${SITE_URL}/` },
-    mainEntity: { "@type": "ItemList", numberOfItems: count, itemListElement: [] }
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: count,
+      itemListElement: (items || []).slice(0, 10).map((it, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: it.url,
+        name: it.name
+      }))
+    }
   };
 }
 
@@ -1221,7 +1235,11 @@ function buildLibraryPage(lib) {
     collectionSchema({
       name: lib.fullName, url,
       description: `Complete index of ${lib.count} ${lib.fullName} icon pages on IconStash, with SVG code, PNG export, and React snippets for every icon.`,
-      count: lib.countNum
+      count: lib.countNum,
+      items: [...groupA, ...groupB, ...groupC, ...groupD].slice(0, 10).map((r) => ({
+        url: `${SITE_URL}/icons/${r.slug}/`,
+        name: labelFor(r)
+      }))
     }),
     faqSchema(faqs)
   ];
@@ -1400,7 +1418,11 @@ function buildCategoryPage(slug) {
     collectionSchema({
       name: `${info.name} Icons`, url,
       description: `Index of ${total.toLocaleString("en-US")} ${info.name.toLowerCase()} icon pages on IconStash across ${libCounts.size} open-source icon libraries.`,
-      count: total
+      count: total,
+      items: conceptRows.slice(0, 10).map((r) => ({
+        url: `${SITE_URL}/icons/${r.slug}/`,
+        name: labelFor(r)
+      }))
     }),
     faqSchema(faqs)
   ];
@@ -1563,7 +1585,11 @@ function buildStylePage(style) {
     collectionSchema({
       name: style.title, url,
       description: `Index of ${total.toLocaleString("en-US")} ${style.name.toLowerCase()} icon pages on IconStash across ${libCounts.size} open-source icon libraries.`,
-      count: total
+      count: total,
+      items: conceptRows.slice(0, 10).map((r) => ({
+        url: `${SITE_URL}/icons/${r.slug}/`,
+        name: labelFor(r)
+      }))
     }),
     faqSchema(faqs)
   ];
@@ -1657,7 +1683,11 @@ function buildLibraryIndex() {
     collectionSchema({
       name: "Icon Libraries", url,
       description: `Index of ${LIBRARIES.length} open-source icon libraries on IconStash, covering roughly ${total.toLocaleString("en-US")} icons.`,
-      count: LIBRARIES.length
+      count: LIBRARIES.length,
+      items: LIBRARIES.slice(0, 10).map((l) => ({
+        url: `${SITE_URL}/library/${l.slug}/`,
+        name: l.fullName
+      }))
     }),
     faqSchema(faqs)
   ];
@@ -1746,7 +1776,11 @@ function buildCategoryIndex() {
     collectionSchema({
       name: "Icon Categories", url,
       description: `Index of ${CATEGORY_SLUGS.length} icon categories on IconStash, covering all ${LIBRARIES.length} indexed open-source icon libraries.`,
-      count: CATEGORY_SLUGS.length
+      count: CATEGORY_SLUGS.length,
+      items: CATEGORY_SLUGS.slice(0, 10).map((s) => ({
+        url: `${SITE_URL}/category/${s}/`,
+        name: `${CATEGORY_INFO[s].name} Icons`
+      }))
     }),
     faqSchema(faqs)
   ];
@@ -1832,7 +1866,11 @@ function buildStyleIndex() {
     collectionSchema({
       name: "Icon Styles", url,
       description: `Index of ${STYLES.length} icon styles on IconStash, covering all ${LIBRARIES.length} indexed open-source icon libraries.`,
-      count: STYLES.length
+      count: STYLES.length,
+      items: STYLES.slice(0, 7).map((s) => ({
+        url: `${SITE_URL}/style/${s.slug}/`,
+        name: s.title
+      }))
     }),
     faqSchema(faqs)
   ];
@@ -1891,9 +1929,23 @@ function main() {
     ...CATEGORY_SLUGS.map((s) => `/category/${s}/`),
     ...STYLES.map((s) => `/style/${s.slug}/`)
   ];
+  // Static trust/content pages: not generated by this script but part of the
+  // crawlable site. Listed here so future runs never drop them from hubs.xml.
+  const staticUrls = [
+    ["/about/", "monthly", "0.5"],
+    ["/contact/", "monthly", "0.5"],
+    ["/privacy/", "yearly", "0.3"],
+    ["/terms/", "yearly", "0.3"],
+    ["/stats/", "weekly", "0.6"],
+    ["/compare/", "weekly", "0.7"],
+    ["/alternatives/", "weekly", "0.7"],
+    ["/icons-for/", "weekly", "0.7"]
+  ];
   const today = new Date().toISOString().slice(0, 10);
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`
     + urls.map((u) => `  <url><loc>${SITE_URL}${u}</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>${u.split("/").filter(Boolean).length === 1 ? "0.9" : "0.8"}</priority></url>`).join("\n")
+    + "\n"
+    + staticUrls.map(([u, freq, pri]) => `  <url><loc>${SITE_URL}${u}</loc><lastmod>${today}</lastmod><changefreq>${freq}</changefreq><priority>${pri}</priority></url>`).join("\n")
     + `\n</urlset>\n`;
   fs.writeFileSync(path.join(ROOT, "sitemaps", "hubs.xml"), xml, "utf8");
   console.log(`\nWrote sitemaps/hubs.xml (${urls.length} URLs)`);

@@ -1,0 +1,4 @@
+# ads.txt for iconstash.io - placeholder until a direct AdSense/GAM account is linked.
+# Having a valid ads.txt (even OWNERDOMAIN-only) prevents "missing ads.txt" warnings
+# in Search Console / AdSense and costs nothing. Replace with your seller lines when monetizing.
+OWNERDOMAIN=iconstash.io

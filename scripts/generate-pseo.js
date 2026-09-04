@@ -751,11 +751,16 @@ function renderPseoShell({ title, description, url, canonicalUrl, schema, active
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${escapeHtml(url)}">
   <meta property="og:image" content="${SITE_URL}/logo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="${escapeHtml(title)}">
   <meta property="og:site_name" content="IconStash">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${SITE_URL}/logo.png">
+  <meta name="twitter:image:alt" content="${escapeHtml(title)}">
+  <meta name="theme-color" content="#0A0A0A">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260602-brandlogo">
   <link rel="stylesheet" href="/style.css?v=20260830-conceptpages">
   <script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script>
