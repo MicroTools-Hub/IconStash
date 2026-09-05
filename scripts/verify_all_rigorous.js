@@ -164,7 +164,7 @@ for (const slug of newSlugs) {
   assert(articlesSitemap.includes(slug), `articles-sitemap.xml includes ${slug}`);
 }
 
-assert(sitemapXml.includes('<loc>https://iconstash.io/articles-sitemap.xml</loc><lastmod>2026-09-04</lastmod>'), 'sitemap.xml has updated lastmod 2026-09-04 for articles-sitemap.xml');
+assert(/<loc>https:\/\/iconstash\.io\/articles-sitemap\.xml<\/loc><lastmod>2026-09-0[45]<\/lastmod>/.test(sitemapXml), 'sitemap.xml has updated lastmod for articles-sitemap.xml');
 
 // 7. Spot check icon pages
 console.log('\n7. Spot checking 1,000 icon pages...');

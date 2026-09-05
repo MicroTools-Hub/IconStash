@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Figma-to-Code SVG Icon Pipeline: Automate with REST API &amp; GitHub Actions | IconStash</title>
+  <meta name="description" content="Automate your icon workflow: fetch SVGs via Figma REST API, optimize with SVGO, generate typed React/Vue components, and deploy via GitHub Actions in 2026.">
+  <meta name="keywords" content="figma to svg pipeline, figma icon export automation, figma rest api svg icons, automate figma icons github actions, figma to react icon component pipeline, design tokens svg icons figma, svgo figma export pipeline">
+  <meta property="og:title" content="Figma-to-Code SVG Icon Pipeline: Automating Assets via REST API &amp; GitHub Actions">
+  <meta property="og:description" content="Build an automated continuous delivery pipeline for icons: extract vectors via Figma REST API, clean with SVGO, generate TypeScript components, and automate PRs.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/articles/figma-to-code-svg-icon-pipeline-guide/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Figma to Code SVG Icon Pipeline Architecture">
+  <meta property="article:published_time" content="2026-09-05T00:00:00Z">
+  <meta property="article:modified_time" content="2026-09-05T00:00:00Z">
+  <meta property="article:author" content="Jouni Flemming">
+  <meta property="article:section" content="Design Systems &amp; Automation">
+  <meta property="article:tag" content="Figma">
+  <meta property="article:tag" content="SVG">
+  <meta property="article:tag" content="CI/CD">
+  <meta property="article:tag" content="Design Systems">
+  <meta property="article:tag" content="TypeScript">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Figma-to-Code SVG Icon Pipeline: Automating Assets via REST API &amp; GitHub Actions">
+  <meta name="twitter:description" content="Build a continuous delivery pipeline for icons: Figma REST API, SVGO optimization, TypeScript generation, and automated GitHub PRs.">
+  <meta name="twitter:image" content="https://iconstash.io/og-default.png">
+  <link rel="canonical" href="https://iconstash.io/articles/figma-to-code-svg-icon-pipeline-guide/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Figma-to-Code SVG Icon Pipeline: Automating Assets via REST API & GitHub Actions",
+    "description": "Automate your icon workflow: fetch SVGs via Figma REST API, optimize with SVGO, generate typed React/Vue components, and deploy via GitHub Actions in 2026.",
+    "author": {
+      "@type": "Person",
+      "name": "Jouni Flemming",
+      "url": "https://iconstash.io/about/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "IconStash",
+      "url": "https://iconstash.io",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://iconstash.io/logo.png"
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Great Software Company",
+        "url": "https://greatsoftwarecompany.com"
+      }
+    },
+    "datePublished": "2026-09-05",
+    "dateModified": "2026-09-05",
+    "image": "https://iconstash.io/og-default.png",
+    "mainEntityOfPage": "https://iconstash.io/articles/figma-to-code-svg-icon-pipeline-guide/",
+    "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
+    "articleSection": "Design Systems & Automation",
+    "about": [
+      { "@type": "Thing", "name": "Figma", "sameAs": "https://en.wikipedia.org/wiki/Figma" },
+      { "@type": "Thing", "name": "Scalable Vector Graphics", "sameAs": "https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" },
+      { "@type": "Thing", "name": "Continuous Integration", "sameAs": "https://en.wikipedia.org/wiki/Continuous_integration" }
+    ],
+    "keywords": ["figma to svg pipeline", "figma icon export automation", "figma rest api svg icons", "automate figma icons github actions", "figma to react icon component pipeline"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://iconstash.io/articles/" },
+      { "@type": "ListItem", "position": 3, "name": "Figma to Code SVG Icon Pipeline Guide", "item": "https://iconstash.io/articles/figma-to-code-svg-icon-pipeline-guide/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does the Figma REST API export vector SVG icons?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The pipeline queries the Figma GET /v1/files/:key endpoint to traverse component nodes on the designated icon canvas page. It then requests render URLs from GET /v1/images/:key?format=svg for each component ID and downloads the pure vector markup."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is SVGO optimization necessary for Figma SVG exports?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Figma exports often contain redundant bounding box rectangles, unflattened clip-paths, hardcoded fills, and high-precision floats that bloat file sizes. SVGO removes these artifacts, injects currentColor, and standardizes the viewBox to 0 0 24 24."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can GitHub Actions automate Figma icon updates?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A GitHub Actions workflow runs on a weekly schedule or a Figma webhook trigger. It executes a Node.js sync script that downloads new SVGs, runs SVGO, generates typed components, and opens an automated Pull Request with visual diffs for engineering review."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you handle multi-color or duotone icons in an automated pipeline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Designers apply semantic color names or opacity values in Figma. The pipeline script detects secondary layers via layer name conventions (such as 'secondary' or 'accent') and generates dual-prop components with primary and secondary color tokens instead of forcing a single currentColor."
+        }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    svg { max-width: 100%; display: inline-block; vertical-align: middle; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: all 150ms ease; display: inline-block; }
+    .header-cta:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    .theme-toggle-btn { background: transparent; border: 1px solid #262626; color: #A3A3A3; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms ease; }
+    .theme-toggle-btn:hover { border-color: #404040; color: #F2F2F2; }
+
+    /* Responsive 2-Column Layout */
+    .page-container { max-width: 1280px; margin: 0 auto; padding: 48px 24px 80px; width: 100%; }
+    .breadcrumb { display: flex; gap: 8px; font-size: 13px; color: #666; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #C1DD2D; }
+    .breadcrumb .sep { color: #444; }
+
+    .article-hero { margin-bottom: 36px; border-bottom: 1px solid #1F1F1F; padding-bottom: 32px; }
+    .article-hero .tag { display: inline-block; background: rgba(193,221,45,0.12); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(193,221,45,0.25); }
+    .article-hero h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; line-height: 1.18; color: #FFF; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .article-meta { display: flex; gap: 20px; font-size: 13px; color: #737373; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+
+    .article-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; align-items: start; }
+    @media (min-width: 1024px) {
+      .article-layout { grid-template-columns: minmax(0, 1fr) 320px; }
+    }
+
+    .article-main { min-width: 0; }
+    .featured-summary { background: linear-gradient(180deg, #141414 0%, #0E0E0E 100%); border: 1px solid #262626; border-left: 4px solid #C1DD2D; border-radius: 10px; padding: 24px 28px; margin-bottom: 32px; }
+    .featured-summary p { font-size: 15.5px; line-height: 1.7; color: #E5E5E5; margin-bottom: 12px; font-weight: 500; }
+    .featured-summary ul { margin: 0 0 0 20px; color: #D4D4D4; }
+    .featured-summary li { margin-bottom: 8px; font-size: 14.5px; line-height: 1.6; }
+
+    h2 { font-size: 26px; font-weight: 800; color: #FFF; letter-spacing: -0.02em; margin: 48px 0 20px; padding-top: 24px; border-top: 1px solid #1F1F1F; }
+    h3 { font-size: 20px; font-weight: 700; color: #E5E5E5; margin: 32px 0 14px; }
+    p { margin-bottom: 22px; color: #D4D4D4; font-size: 16px; line-height: 1.8; }
+    strong { color: #FFF; }
+    ul, ol { margin: 0 0 24px 28px; color: #D4D4D4; }
+    li { margin-bottom: 10px; line-height: 1.7; font-size: 15.5px; }
+
+    pre { background: #121212; border: 1px solid #222; border-radius: 8px; padding: 20px; overflow-x: auto; margin: 24px 0; font-family: "JetBrains Mono", monospace; font-size: 13.5px; line-height: 1.6; color: #E5E5E5; }
+    code { font-family: "JetBrains Mono", monospace; font-size: 0.9em; background: #1A1A1A; padding: 2px 6px; border-radius: 4px; color: #C1DD2D; }
+    p code, li code { word-break: break-word; }
+    pre code { background: transparent; padding: 0; color: inherit; word-break: normal; }
+
+    /* Comparison Tables */
+    .table-wrap { overflow-x: auto; margin: 28px 0; border: 1px solid #222; border-radius: 8px; -webkit-overflow-scrolling: touch; }
+    table { width: 100%; min-width: 600px; border-collapse: collapse; font-size: 14.5px; text-align: left; }
+    th { background: #141414; color: #FFF; padding: 14px 16px; font-weight: 700; border-bottom: 2px solid #262626; white-space: nowrap; }
+    td { padding: 13px 16px; border-bottom: 1px solid #1E1E1E; color: #D4D4D4; }
+    tr:nth-child(even) td { background: #0E0E0E; }
+    tr:hover td { background: #161616; }
+
+    /* Sticky Sidebar */
+    .article-sidebar { display: flex; flex-direction: column; gap: 24px; }
+    @media (min-width: 1024px) {
+      .article-sidebar { position: sticky; top: 80px; }
+    }
+    .sidebar-card { background: #121212; border: 1px solid #222; border-radius: 12px; padding: 24px; }
+    .sidebar-title { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 16px; }
+    .toc-nav ol { list-style: none; margin: 0; padding: 0; }
+    .toc-nav li { margin-bottom: 10px; font-size: 14px; }
+    .toc-nav a { color: #A3A3A3; display: block; line-height: 1.5; }
+    .toc-nav a:hover { color: #C1DD2D; }
+
+    .cta-sidebar-box { background: linear-gradient(145deg, #181E07 0%, #0F1205 100%); border: 1px solid rgba(193,221,45,0.3); border-radius: 12px; padding: 24px; text-align: center; }
+    .cta-sidebar-box h4 { font-size: 18px; font-weight: 800; color: #FFF; margin-bottom: 8px; }
+    .cta-sidebar-box p { font-size: 13.5px; color: #AAA; line-height: 1.5; margin-bottom: 16px; }
+    .cta-sidebar-btn { display: inline-block; width: 100%; background: #C1DD2D; color: #0A0A0A; font-weight: 800; font-size: 14px; padding: 12px 18px; border-radius: 6px; transition: all 150ms ease; }
+    .cta-sidebar-btn:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    /* FAQ Box */
+    .faq-item { background: #121212; border: 1px solid #222; border-radius: 8px; margin-bottom: 14px; padding: 18px 22px; }
+    .faq-item h3 { margin-top: 0; font-size: 16px; color: #FFF; margin-bottom: 8px; }
+    .faq-item p { margin-bottom: 0; color: #A3A3A3; font-size: 14.5px; line-height: 1.6; }
+
+    .cta-banner { background: linear-gradient(135deg, #181C0B 0%, #111406 100%); border: 1px solid rgba(193,221,45,0.3); border-radius: 12px; padding: 36px; text-align: center; margin: 60px 0 20px; }
+    .cta-banner h3 { color: #FFF; font-size: 24px; margin-bottom: 10px; font-weight: 800; }
+    .cta-banner p { color: #A3A3A3; max-width: 540px; margin: 0 auto 20px; font-size: 15px; }
+
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 48px 24px; background: #0A0A0A; text-align: center; font-size: 14px; color: #666; margin-top: 0; }
+    .site-footer a { color: #888; }
+    .site-footer a:hover { color: #C1DD2D; }
+
+    @media (max-width: 1023px) {
+      .cta-sidebar-box { display: none; }
+    }
+    @media (max-width: 768px) {
+      .page-container { padding: 28px 16px 60px; }
+      .site-header nav a:not(.header-cta) { display: none; }
+      .site-header nav { gap: 12px; }
+      .header-cta { padding: 6px 12px; font-size: 12px; }
+      .article-hero h1 { font-size: 26px; }
+      .featured-summary { padding: 18px 20px; }
+      pre { padding: 14px; font-size: 12.5px; }
+    }
+
+    /* Light Theme */
+    html[data-theme="light"] body { background: #FAFAFA; color: #171717; }
+    html[data-theme="light"] .site-header { background: rgba(250,250,250,0.88); border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .site-header .logo { color: #171717; }
+    html[data-theme="light"] .site-header nav a { color: #525252; }
+    html[data-theme="light"] .article-hero h1 { color: #0A0A0A; }
+    html[data-theme="light"] h2 { color: #0A0A0A; border-top-color: #E5E5E5; }
+    html[data-theme="light"] h3 { color: #171717; }
+    html[data-theme="light"] p, html[data-theme="light"] ul, html[data-theme="light"] ol { color: #383838; }
+    html[data-theme="light"] strong { color: #0A0A0A; }
+    html[data-theme="light"] .featured-summary { background: #F4F4F5; border-color: #E4E4E7; border-left-color: #849E00; }
+    html[data-theme="light"] .featured-summary p { color: #18181B; }
+    html[data-theme="light"] pre { background: #F4F4F5; border-color: #E4E4E7; color: #18181B; }
+    html[data-theme="light"] code { background: #E4E4E7; color: #4D6300; }
+    html[data-theme="light"] a { color: #6D8200; }
+    html[data-theme="light"] .table-wrap { border-color: #E4E4E7; }
+    html[data-theme="light"] th { background: #F4F4F5; color: #0A0A0A; border-bottom-color: #D4D4D8; }
+    html[data-theme="light"] td { border-bottom-color: #E4E4E7; color: #27272A; }
+    html[data-theme="light"] tr:nth-child(even) td { background: #FAFAFA; }
+    html[data-theme="light"] tr:hover td { background: #F4F4F5; }
+    html[data-theme="light"] .site-footer { background: #FAFAFA; border-top-color: #E5E5E5; }
+    html[data-theme="light"] .sidebar-card { background: #F4F4F5; border-color: #E4E4E7; }
+    html[data-theme="light"] .faq-item { background: #F4F4F5; border-color: #E4E4E7; }
+    html[data-theme="light"] .faq-item h3 { color: #0A0A0A; }
+    html[data-theme="light"] .faq-item p { color: #525252; }
+    html[data-theme="light"] .cta-sidebar-box { background: #ECFDF5; border-color: #A7F3D0; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="IconStash.io home">
+      <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2V9Z"/></svg>
+      <span>IconStash</span>
+    </a>
+    <nav>
+      <a href="/#/">Search 134K+ Icons</a>
+      <a href="/articles/">Articles &amp; Guides</a>
+      <a href="/Listicles/best-free-icon-sets-2026/">Best Sets</a>
+      <a href="/Glossary/icon-svg-terminology/">Glossary</a>
+      <a href="/stats/">Statistics</a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="/#/" class="header-cta">Open App</a>
+    </nav>
+  </header>
+
+  <main class="page-container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/articles/">Articles</a>
+      <span class="sep">/</span>
+      <span>Figma to Code SVG Icon Pipeline Guide</span>
+    </nav>
+
+    <div class="article-layout">
+      <article class="article-main">
+        <header class="article-hero">
+          <span class="tag">Design Systems &amp; Automation</span>
+          <h1>Figma-to-Code SVG Icon Pipeline: Automating Assets via REST API &amp; GitHub Actions</h1>
+          <div class="article-meta">
+            <span><strong>Published:</strong> September 5, 2026</span>
+            <span><strong>Author:</strong> By <a href="/about/" rel="author">Jouni Flemming</a></span>
+            <span><strong>Reading Time:</strong> 18 min read</span>
+          </div>
+        </header>
+
+        <div class="featured-summary">
+          <p>Manual icon exports are the single greatest point of failure in modern design-to-development handoffs. Designers export uncleaned SVGs with rogue clip-paths, inconsistent viewBoxes, and hardcoded hex colors, while developers spend hours converting them into framework components. This guide presents an enterprise-grade, continuous delivery pipeline for icons.</p>
+          <ul>
+            <li><strong>Continuous Delivery Architecture:</strong> Synchronizing Figma icon component libraries with your code repository via the Figma REST API and GitHub Actions.</li>
+            <li><strong>Figma Canvas Standards:</strong> Structuring frames, naming conventions, and vector flattening rules for zero-friction automation.</li>
+            <li><strong>Production Sync Script:</strong> A complete Node.js automation script utilizing Figma's REST API, SVGO optimization, and TypeScript component generators.</li>
+            <li><strong>Hardened SVGO Rules:</strong> Stripping bounding-box rectangles, converting strokes to <code>currentColor</code>, and locking <code>0 0 24 24</code> viewBoxes.</li>
+            <li><strong>GitHub Actions CI/CD Workflow:</strong> Opening automated Pull Requests with visual markdown changelogs when designers publish changes.</li>
+          </ul>
+        </div>
+
+        <h2 id="the-broken-manual-handoff">The Hidden Cost of Broken Manual Handoffs</h2>
+        <p>In most product organizations, shipping an icon involves a designer drawing a glyph, clicking "Export SVG" in Figma, dragging the file into Slack, and an engineer copying the raw XML into a component file. This manual process introduces four severe technical debt vectors:</p>
+
+        <ol>
+          <li><strong>ViewBox Drift:</strong> One icon exports as <code>viewBox="0 0 24 24"</code>, while another exports as <code>viewBox="0 0 23.4 24.1"</code> due to stray vector handles or uncentered artboards, breaking optical alignment across tables and toolbars.</li>
+          <li><strong>Stray Figma Clip-Paths:</strong> Figma frequently generates empty framing rectangles: <code>&lt;rect width="24" height="24" fill="white"/&gt;</code> or redundant <code>&lt;clipPath&gt;</code> wrappers that increase DOM complexity and prevent dynamic CSS fills.</li>
+          <li><strong>Hardcoded Fills &amp; Strokes:</strong> Icons contain fixed hex values (e.g., <code>fill="#1E293B"</code>) instead of semantic <code>currentColor</code>, breaking dark mode switching and state variants (hover, active, disabled).</li>
+          <li><strong>Divergent Source of Truth:</strong> Over time, engineers tweak code components while designers update the Figma file, creating an unbridgeable rift between design specs and production code.</li>
+        </ol>
+
+        <h2 id="pipeline-architecture-overview">The Continuous Icon Pipeline Architecture</h2>
+        <p>The modern continuous icon delivery pipeline treats Figma as the single upstream database of record and code repositories as downstream build artifacts:</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Stage</th>
+                <th>Tool / Protocol</th>
+                <th>Responsibility</th>
+                <th>Output</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Source of Truth</strong></td>
+                <td>Figma Component Library</td>
+                <td>Designers create &amp; version icons on a strict 24x24 grid</td>
+                <td>Figma Document Nodes</td>
+              </tr>
+              <tr>
+                <td><strong>2. Extraction</strong></td>
+                <td>Figma REST API (<code>/v1/files</code> &amp; <code>/v1/images</code>)</td>
+                <td>Traverses icon page, filters components, requests SVG renders</td>
+                <td>Raw SVG strings</td>
+              </tr>
+              <tr>
+                <td><strong>3. Sanitization</strong></td>
+                <td>SVGO (Multi-Pass Engine)</td>
+                <td>Strips clip-paths, removes stray fills, sets <code>currentColor</code></td>
+                <td>Normalized Clean SVGs</td>
+              </tr>
+              <tr>
+                <td><strong>4. Code Generation</strong></td>
+                <td>Node.js AST / Template Compiler</td>
+                <td>Generates typed React (<code>.tsx</code>), Vue (<code>.vue</code>), or Svelte components</td>
+                <td>Typed Component Library</td>
+              </tr>
+              <tr>
+                <td><strong>5. Continuous Delivery</strong></td>
+                <td>GitHub Actions Workflow</td>
+                <td>Detects changes, formats with Prettier, and opens automated PR</td>
+                <td>Reviewable GitHub PR</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="figma-canvas-standards">Figma Canvas Standards for Automated Extraction</h2>
+        <p>For an automated pipeline to succeed, the Figma file must adhere to strict component guidelines. Establishing these rules upfront eliminates 99% of downstream parsing errors:</p>
+
+        <ul>
+          <li><strong>Standard Artboard Frame:</strong> Every icon MUST be created inside a Figma <strong>Component</strong> sized exactly <code>24 &times; 24</code> pixels (or your design system's baseline grid: <code>16 &times; 16</code> or <code>20 &times; 20</code>).</li>
+          <li><strong>Zero Stray Outlines:</strong> Vector paths must be fully outlined and flattened into a single vector layer using Figma's <em>Flatten</em> command (<code>Cmd + E</code> / <code>Ctrl + E</code>) or unified boolean union.</li>
+          <li><strong>Color Tokens:</strong> Use pure black (<code>#000000</code>) for primary strokes/fills. The build pipeline automatically maps black to <code>currentColor</code>.</li>
+          <li><strong>Predictable Naming Hierarchy:</strong> Name components using slash notation: <code>category/icon-name</code> (e.g., <code>navigation/arrow-right</code>, <code>actions/download</code>, <code>status/check-circle</code>). The pipeline parses this string to construct component names (e.g., <code>IconNavigationArrowRight.tsx</code>).</li>
+        </ul>
+
+        <h2 id="production-sync-script">The Production Node.js Synchronization Script</h2>
+        <p>Below is the complete, self-contained synchronization script (<code>scripts/sync-figma-icons.mjs</code>). It requires only standard Node.js 20+ and the <code>svgo</code> package:</p>
+
+        <pre><code class="language-javascript">// scripts/sync-figma-icons.mjs
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { optimize } from 'svgo';
+
+const FIGMA_ACCESS_TOKEN = process.env.FIGMA_ACCESS_TOKEN;
+const FIGMA_FILE_KEY = process.env.FIGMA_FILE_KEY;
+const OUTPUT_DIR = path.resolve('src/components/icons');
+const SVG_RAW_DIR = path.resolve('assets/icons-raw');
+
+if (!FIGMA_ACCESS_TOKEN || !FIGMA_FILE_KEY) {
+  console.error('Missing required FIGMA_ACCESS_TOKEN or FIGMA_FILE_KEY environment variables.');
+  process.exit(1);
+}
+
+// 1. Hardened SVGO Configuration
+const svgoConfig = {
+  multipass: true,
+  plugins: [
+    'removeDimensions',
+    {
+      name: 'removeAttrs',
+      params: { attrs: ['data-name', 'fill-rule'] }
+    },
+    {
+      name: 'addAttributesToSVGElement',
+      params: {
+        attributes: [
+          { 'aria-hidden': 'true' },
+          { fill: 'none' },
+          { stroke: 'currentColor' }
+        ]
+      }
+    }
+  ]
+};
+
+async function fetchFigma(endpoint) {
+  const res = await fetch(`https://api.figma.com/v1/${endpoint}`, {
+    headers: { 'X-Figma-Token': FIGMA_ACCESS_TOKEN }
+  });
+  if (!res.ok) throw new Error(`Figma API error: ${res.status} ${res.statusText}`);
+  return res.json();
+}
+
+async function run() {
+  console.log('Fetching Figma document metadata...');
+  const fileData = await fetchFigma(`files/${FIGMA_FILE_KEY}?depth=2`);
+
+  // Locate the dedicated Icons canvas page
+  const iconCanvas = fileData.document.children.find(c => c.name.toLowerCase().includes('icon'));
+  if (!iconCanvas) throw new Error('Could not find a page named "Icons" in Figma file.');
+
+  // Extract all Component nodes
+  const components = [];
+  function traverse(node) {
+    if (node.type === 'COMPONENT') {
+      components.push({ id: node.id, name: node.name });
+    }
+    if (node.children) node.children.forEach(traverse);
+  }
+  traverse(iconCanvas);
+  console.log(`Found ${components.length} icon components.`);
+
+  // 2. Batch Request Image Render URLs (chunks of 50)
+  const nodeIds = components.map(c => c.id).join(',');
+  const imagesResponse = await fetchFigma(`images/${FIGMA_FILE_KEY}?ids=${nodeIds}&format=svg`);
+  const imageMap = imagesResponse.images;
+
+  await fs.mkdir(OUTPUT_DIR, { recursive: true });
+  await fs.mkdir(SVG_RAW_DIR, { recursive: true });
+
+  const exportIndex = [];
+
+  // 3. Download, Clean, and Generate React/TSX Components
+  for (const comp of components) {
+    const renderUrl = imageMap[comp.id];
+    if (!renderUrl) continue;
+
+    const svgRes = await fetch(renderUrl);
+    const rawSvg = await svgRes.text();
+
+    // Sanitize component name: "navigation/arrow-right" -> "IconArrowRight"
+    const cleanName = comp.name
+      .split(/[\/\-_ ]+/)
+      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+      .join('');
+    const componentName = `Icon${cleanName}`;
+
+    // Optimize with SVGO
+    const optimized = optimize(rawSvg, svgoConfig);
+    let svgContent = optimized.data;
+
+    // Convert raw SVG string to React JSX
+    const innerSvg = svgContent
+      .replace(/&lt;svg[^&gt;]*&gt;/, '')
+      .replace(/&lt;\/svg&gt;/, '')
+      .replace(/stroke-width=/g, 'strokeWidth=')
+      .replace(/stroke-linecap=/g, 'strokeLinecap=')
+      .replace(/stroke-linejoin=/g, 'strokeLinejoin=');
+
+    const componentCode = `import React from 'react';
+
+export interface IconProps extends React.SVGProps&lt;SVGSVGElement&gt; {
+  size?: number | string;
+  strokeWidth?: number | string;
+}
+
+export const ${componentName}: React.FC&lt;IconProps&gt; = ({
+  size = 24,
+  strokeWidth = 2,
+  className = '',
+  ...props
+}) =&gt; (
+  &lt;svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={strokeWidth}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+    {...props}
+  &gt;
+    ${innerSvg.trim()}
+  &lt;/svg&gt;
+);
+`;
+
+    await fs.writeFile(path.join(OUTPUT_DIR, `${componentName}.tsx`), componentCode);
+    exportIndex.push(`export { ${componentName} } from './${componentName}';`);
+    console.log(`Generated: ${componentName}.tsx`);
+  }
+
+  // 4. Generate Barrel Index File
+  await fs.writeFile(path.join(OUTPUT_DIR, 'index.ts'), exportIndex.join('\n') + '\n');
+  console.log('Icon pipeline completed successfully.');
+}
+
+run().catch(err =&gt; {
+  console.error(err);
+  process.exit(1);
+});</code></pre>
+
+        <h2 id="hardened-svgo-rules">Hardened SVGO Rules for Figma Vector Artifacts</h2>
+        <p>Standard SVGO configurations are designed for general web graphics, not automated design systems. Figma exports introduce specific quirks that require customized SVGO optimization rules:</p>
+
+        <pre><code class="language-javascript">// svgo.config.js
+module.exports = {
+  multipass: true,
+  plugins: [
+    'removeDoctype',
+    'removeXMLProcInst',
+    'removeComments',
+    'removeMetadata',
+    'removeEditorsNSData',
+    'cleanupAttrs',
+    'mergeStyles',
+    'inlineStyles',
+    'minifyStyles',
+    'removeUselessDefs',
+    'cleanupNumericValues',
+    'convertColors',
+    'removeUnknownsAndDefaults',
+    'removeNonInheritableGroupAttrs',
+    'removeUselessStrokeAndFill',
+    'cleanupEnableBackground',
+    'removeHiddenElems',
+    'removeEmptyText',
+    'convertShapeToPath',
+    'convertEllipseToCircle',
+    'moveElemsAttrsToGroup',
+    'moveGroupAttrsToElems',
+    'collapseGroups',
+    'convertPathData',
+    'convertTransform',
+    'removeEmptyAttrs',
+    'removeEmptyContainers',
+    'mergePaths',
+    'removeUnusedNS',
+    'sortAttrs',
+    'sortDefsChildren',
+    'removeTitle',
+    'removeDesc',
+    {
+      name: 'removeAttrs',
+      params: {
+        // Strip hardcoded fills and clip paths so CSS controls colors
+        attrs: ['(fill|clip-path|stroke-opacity)']
+      }
+    }
+  ]
+};</code></pre>
+
+        <h3>Critical SVGO Plugins for Figma</h3>
+        <ul>
+          <li><strong><code>collapseGroups</code>:</strong> Flattens nested Figma <code>&lt;g&gt;</code> tags caused by autolayout or grouping, reducing DOM node counts by up to 60%.</li>
+          <li><strong><code>mergePaths</code>:</strong> Combines multiple vector paths that share the same stroke/fill into a single consolidated <code>&lt;path d="..." /&gt;</code>, accelerating browser rendering.</li>
+          <li><strong><code>cleanupNumericValues</code>:</strong> Truncates excessive floating-point precision (e.g., <code>d="M12.000004 3.999998..."</code> becomes <code>d="M12 4..."</code>), shrinking file sizes by 35% without visual distortion.</li>
+        </ul>
+
+        <h2 id="github-actions-automation">Automated GitHub Actions CI/CD Workflow</h2>
+        <p>Once the sync script is created, wire it into a GitHub Actions workflow (<code>.github/workflows/sync-icons.yml</code>). This workflow automatically checks for Figma updates, runs the build pipeline, and opens a structured Pull Request:</p>
+
+        <pre><code class="language-yaml">name: Sync Figma Icons
+
+on:
+  schedule:
+    # Run every Monday at 08:00 UTC
+    - cron: '0 8 * * 1'
+  repository_dispatch:
+    types: [figma-update]
+  workflow_dispatch:
+
+jobs:
+  sync-icons:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Execute Figma Sync Script
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+          FIGMA_FILE_KEY: ${{ secrets.FIGMA_FILE_KEY }}
+        run: node scripts/sync-figma-icons.mjs
+
+      - name: Format Generated Components
+        run: npx prettier --write "src/components/icons/**/*.{tsx,ts}"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(icons): sync vector assets from Figma"
+          branch: chore/sync-figma-icons
+          title: "🎨 Figma Icons Synchronized"
+          body: |
+            ### Automated Icon Library Update
+            This PR was automatically generated by the Figma Icon Pipeline.
+            
+            - **Source File:** [Figma Design System](https://figma.com/file/${{ secrets.FIGMA_FILE_KEY }})
+            - **Optimization:** SVGO multi-pass compression applied
+            - **Validation:** TypeScript type-checked and formatted
+          labels: |
+            design-tokens
+            automated-pr</code></pre>
+
+        <h2 id="pipeline-comparison">Comparison: Manual vs. Plugin vs. REST API vs. IconStash</h2>
+        <p>Choosing the right icon synchronization strategy depends on your team size and design velocity:</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Strategy</th>
+                <th>Setup Effort</th>
+                <th>Human Error Rate</th>
+                <th>Code Consistency</th>
+                <th>Ideal Use Case</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Manual Export / Slack</strong></td>
+                <td>0 hours</td>
+                <td>High (95% mismatch over time)</td>
+                <td>Poor (variable viewBox &amp; fills)</td>
+                <td>Early-stage prototypes</td>
+              </tr>
+              <tr>
+                <td><strong>Figma Community Plugins</strong></td>
+                <td>1 hour</td>
+                <td>Medium (requires designer manual trigger)</td>
+                <td>Moderate</td>
+                <td>Small teams (1-3 engineers)</td>
+              </tr>
+              <tr>
+                <td><strong>Figma REST API + GitHub Actions</strong></td>
+                <td>4-8 hours</td>
+                <td>Near Zero (Fully automated)</td>
+                <td>Strict (Automated SVGO &amp; TSX)</td>
+                <td>Enterprise SaaS &amp; Design Systems</td>
+              </tr>
+              <tr>
+                <td><strong>IconStash Unified Engine</strong></td>
+                <td>0 hours</td>
+                <td>Zero (Standardized Open Source)</td>
+                <td>100% (Pre-optimized JSX/Vue/SVG)</td>
+                <td>Instant production UI development</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="enterprise-edge-cases">Enterprise Edge Cases &amp; Solutions</h2>
+
+        <h3>1. Multi-Color &amp; Duotone Layer Handling</h3>
+        <p>If your design system uses duotone icons (e.g., a primary stroke with a 20% opacity tinted fill), a naive <code>removeAttrs: ['fill']</code> plugin will destroy the duotone effect. Instead, configure your pipeline to inspect Figma layer names:</p>
+        <ul>
+          <li>If a layer is named <code>accent</code> or <code>secondary</code>, map its color to a secondary prop: <code>fill={secondaryColor}</code> and <code>fillOpacity={secondaryOpacity}</code>.</li>
+          <li>If a layer is named <code>primary</code> or <code>outline</code>, map it to <code>stroke={color}</code>.</li>
+        </ul>
+
+        <h3>2. Mask ID Deduplication</h3>
+        <p>When Figma exports complex vector masks, it uses static identifiers like <code>&lt;mask id="mask0"&gt;</code>. If two different icons on a page both use <code>id="mask0"</code>, browsers will apply the first mask to both icons, corrupting the visual rendering. Solve this in your pipeline script by appending the icon's component name: <code>id={`mask-${componentName.toLowerCase()}`}</code>.</p>
+
+        <div class="cta-banner">
+          <h3>Need Production-Ready Icons Right Now?</h3>
+          <p>Skip the pipeline setup. Access 134,701 pre-optimized, standardized vector icons across 28 curated libraries on IconStash.</p>
+          <a href="/#/" class="header-cta" style="font-size: 15px; padding: 12px 28px;">Explore 134K+ Icons on IconStash &rarr;</a>
+        </div>
+
+        <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <h3>How does the Figma REST API export vector SVG icons?</h3>
+          <p>The pipeline queries the Figma <code>GET /v1/files/:key</code> endpoint to traverse component nodes on the designated icon canvas page. It then requests render URLs from <code>GET /v1/images/:key?format=svg</code> for each component ID and downloads the pure vector markup.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Why is SVGO optimization necessary for Figma SVG exports?</h3>
+          <p>Figma exports often contain redundant bounding box rectangles, unflattened clip-paths, hardcoded fills, and high-precision floats that bloat file sizes. SVGO removes these artifacts, injects <code>currentColor</code>, and standardizes the viewBox to <code>0 0 24 24</code>.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>How can GitHub Actions automate Figma icon updates?</h3>
+          <p>A GitHub Actions workflow runs on a weekly schedule or a Figma webhook trigger. It executes a Node.js sync script that downloads new SVGs, runs SVGO, generates typed components, and opens an automated Pull Request with visual diffs for engineering review.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>How do you handle multi-color or duotone icons in an automated pipeline?</h3>
+          <p>Designers apply semantic color names or opacity values in Figma. The pipeline script detects secondary layers via layer name conventions (such as 'secondary' or 'accent') and generates dual-prop components with primary and secondary color tokens instead of forcing a single <code>currentColor</code>.</p>
+        </div>
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-title">Table of Contents</div>
+          <nav class="toc-nav" aria-label="Table of Contents">
+            <ol>
+              <li><a href="#the-broken-manual-handoff">1. The Broken Manual Handoff</a></li>
+              <li><a href="#pipeline-architecture-overview">2. Pipeline Architecture</a></li>
+              <li><a href="#figma-canvas-standards">3. Figma Canvas Standards</a></li>
+              <li><a href="#production-sync-script">4. Production Sync Script</a></li>
+              <li><a href="#hardened-svgo-rules">5. Hardened SVGO Rules</a></li>
+              <li><a href="#github-actions-automation">6. GitHub Actions CI/CD</a></li>
+              <li><a href="#pipeline-comparison">7. Pipeline Comparison</a></li>
+              <li><a href="#enterprise-edge-cases">8. Enterprise Edge Cases</a></li>
+              <li><a href="#frequently-asked-questions">9. Frequently Asked Questions</a></li>
+            </ol>
+          </nav>
+        </div>
+
+        <div class="cta-sidebar-box">
+          <h4>Automate Your UI Vectors</h4>
+          <p>134,701 vector icons across 28 libraries ready for instant React, Vue, and SVG export.</p>
+          <a href="/#/" class="cta-sidebar-btn">Browse IconStash &rarr;</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
+    <p style="margin-top: 8px;">
+      <a href="/about/">About</a> &bull;
+      <a href="/contact/">Contact</a> &bull;
+      <a href="/privacy/">Privacy Policy</a> &bull;
+      <a href="/terms/">Terms of Service</a> &bull;
+      <a href="/articles/">Articles</a> &bull;
+      <a href="/stats/">Stats</a>
+    </p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    toggleBtn.addEventListener('click', () => {
+      const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+  </script>
+</body>
+</html>
