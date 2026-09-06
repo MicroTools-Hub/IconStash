@@ -281,7 +281,7 @@
     </nav>
   </header>
 
-  <div class="page-container">
+  <main class="page-container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/">Home</a>
       <span class="sep">/</span>
@@ -290,19 +290,18 @@
       <span>Build Custom Icon NPM Package</span>
     </nav>
 
-    <header class="article-hero">
-      <span class="tag">Design Systems Engineering</span>
-      <h1>How to Build a Custom SVG Icon Library &amp; NPM Package</h1>
-      <div class="article-meta">
-        <span><strong>Published:</strong> September 6, 2026</span>
-        <span>By <a href="/about/" rel="author">Jouni Flemming</a></span>
-        <span><strong>Reading Time:</strong> 15 min read</span>
-        <span><strong>Tooling:</strong> TypeScript &bull; tsup &bull; SVGO &bull; Changesets</span>
-      </div>
-    </header>
-
     <div class="article-layout">
-      <main class="article-main">
+      <article class="article-main">
+        <header class="article-hero">
+          <span class="tag">Design Systems Engineering</span>
+          <h1>How to Build a Custom SVG Icon Library &amp; NPM Package</h1>
+          <div class="article-meta">
+            <span><strong>Published:</strong> September 6, 2026</span>
+            <span>By <a href="/about/" rel="author">Jouni Flemming</a></span>
+            <span><strong>Reading Time:</strong> 15 min read</span>
+            <span><strong>Tooling:</strong> TypeScript &bull; tsup &bull; SVGO &bull; Changesets</span>
+          </div>
+        </header>
         <div class="featured-summary">
           <p><strong>The Production Architecture Blueprint:</strong> Distributing custom brand icons across multiple apps requires more than just copying raw SVG files. A modern corporate icon package must deliver:</p>
           <ul>
@@ -326,7 +325,14 @@
 
         <section id="project-scaffold">
           <h2>2. Repository Architecture &amp; Folder Structure</h2>
-          <p>The cleanest setup separates source SVG assets, code generation scripts, and compiled distribution output:</p>
+          <p>Initialize a new package and install the core build and optimization toolchain:</p>
+          <pre><code># 1. Initialize project
+mkdir acme-icons && cd acme-icons
+npm init -y
+
+# 2. Install TypeScript, bundler, SVGO & release tooling
+npm install -D typescript tsup svgo tsx fs-extra change-case @types/node @types/fs-extra @types/react react @changesets/cli</code></pre>
+          <p>The cleanest repository architecture separates source SVG assets, code generation scripts, and compiled distribution output:</p>
           <pre><code>acme-icons/
 ├── .github/workflows/release.yml
 ├── .changeset/
@@ -351,8 +357,8 @@
 
         <section id="automated-svgo-pipeline">
           <h2>3. Step 1: Automated SVGO Cleaning &amp; Normalization</h2>
-          <p>Raw SVGs from design tools contain extraneous metadata (Sketch tags, Illustrator IDs, Adobe namespaces) and hardcoded colors that break UI theming. Create a hardened <code>svgo.config.js</code>:</p>
-          <pre><code>module.exports = {
+          <p>Raw SVGs from design tools contain extraneous metadata (Sketch tags, Illustrator IDs, Adobe namespaces) and hardcoded colors that break UI theming. Create a hardened, modern ESM <code>svgo.config.js</code>:</p>
+          <pre><code>export default {
   multipass: true,
   plugins: [
     {
@@ -421,20 +427,25 @@ async function generateComponents() {
     const componentName = `${pascalCase(name)}Icon`;
     const svgContent = await fs.readFile(path.join(rawDir, file), 'utf8');
 
-    // Extract internal path elements from SVG
+    // Extract internal path elements from SVG and normalize kebab-case attributes for React JSX
     const innerSvg = svgContent
       .replace(/&lt;svg[^&gt;]*&gt;/, '')
       .replace(/&lt;\/svg&gt;/, '')
+      .replace(/stroke-width=/g, 'strokeWidth=')
+      .replace(/stroke-linecap=/g, 'strokeLinecap=')
+      .replace(/stroke-linejoin=/g, 'strokeLinejoin=')
+      .replace(/fill-rule=/g, 'fillRule=')
+      .replace(/clip-rule=/g, 'clipRule=')
+      .replace(/clip-path=/g, 'clipPath=')
       .trim();
 
-    const componentCode = `/*#__PURE__*/
-import React, { forwardRef } from 'react';
+    const componentCode = `import React, { forwardRef } from 'react';
 
 export interface IconProps extends React.SVGProps&lt;SVGSVGElement&gt; {
   size?: number | string;
 }
 
-export const ${componentName} = forwardRef&lt;SVGSVGElement, IconProps&gt;(
+export const ${componentName} = /*#__PURE__*/ forwardRef&lt;SVGSVGElement, IconProps&gt;(
   ({ size = 24, strokeWidth = 2, className, ...props }, ref) =&gt; {
     return (
       &lt;svg
@@ -667,7 +678,7 @@ jobs:
           <p>Explore 134,701 open-source vector icons across 28 curated libraries on IconStash. Fast, free, and licensed for commercial design systems under MIT and Apache 2.0.</p>
           <a href="/#/" class="header-cta" style="font-size: 15px; padding: 12px 28px;">Search All 134K+ Icons &rarr;</a>
         </div>
-      </main>
+      </article>
 
       <aside class="article-sidebar">
         <div class="sidebar-card">
@@ -694,7 +705,7 @@ jobs:
         </div>
       </aside>
     </div>
-  </div>
+  </main>
 
   <footer class="site-footer">
     <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>

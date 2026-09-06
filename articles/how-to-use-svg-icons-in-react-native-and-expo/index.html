@@ -281,7 +281,7 @@
     </nav>
   </header>
 
-  <div class="page-container">
+  <main class="page-container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/">Home</a>
       <span class="sep">/</span>
@@ -290,19 +290,18 @@
       <span>SVG Icons in React Native &amp; Expo</span>
     </nav>
 
-    <header class="article-hero">
-      <span class="tag">Mobile Architecture</span>
-      <h1>How to Use SVG Icons in React Native &amp; Expo (2026 Guide)</h1>
-      <div class="article-meta">
-        <span><strong>Published:</strong> September 6, 2026</span>
-        <span>By <a href="/about/" rel="author">Jouni Flemming</a></span>
-        <span><strong>Reading Time:</strong> 14 min read</span>
-        <span><strong>Compatibility:</strong> Expo SDK 51/52 &bull; RN 0.74+ (Fabric)</span>
-      </div>
-    </header>
-
     <div class="article-layout">
-      <main class="article-main">
+      <article class="article-main">
+        <header class="article-hero">
+          <span class="tag">Mobile Architecture</span>
+          <h1>How to Use SVG Icons in React Native &amp; Expo (2026 Guide)</h1>
+          <div class="article-meta">
+            <span><strong>Published:</strong> September 6, 2026</span>
+            <span>By <a href="/about/" rel="author">Jouni Flemming</a></span>
+            <span><strong>Reading Time:</strong> 14 min read</span>
+            <span><strong>Compatibility:</strong> Expo SDK 51/52 &bull; RN 0.74+ (Fabric)</span>
+          </div>
+        </header>
         <div class="featured-summary">
           <p><strong>The Executive Summary for Mobile Engineers:</strong> Web SVG code cannot be pasted into React Native without bridging through native modules. To achieve 60 FPS vector icons in production:</p>
           <ul>
@@ -545,16 +544,38 @@ export function createThemedIcon(IconComponent: React.ComponentType&lt;IconProps
           <h2>7. High-Performance Optimization in FlatList &amp; FlashList</h2>
           <p>When displaying feeds, contacts, or tables containing hundreds of rows with icons, unoptimized SVGs can cause bridge bottlenecks and frame drops. Apply these 3 mobile performance rules:</p>
 
-          <h3>1. Wrap Icons with React.memo</h3>
-          <p>Prevent re-evaluating SVG path strings during scroll events when row state changes:</p>
-          <pre><code>export const ProfileIcon = React.memo((props: IconProps) =&gt; {
+          <h3>1. Wrap Icons with React.memo &amp; Provide Explicit Stroke Props</h3>
+          <p>Prevent re-evaluating SVG path strings during scroll events when row state changes, and declare explicit stroke and fill rules:</p>
+          <pre><code>import React, { memo } from 'react';
+import Svg, { Path, Circle } from 'react-native-svg';
+import { IconProps } from './SearchIcon';
+
+export const ProfileIcon = memo(({
+  size = 24,
+  color = '#F2F2F2',
+  strokeWidth = 2,
+  ...props
+}: IconProps) => {
   return (
-    &lt;Svg width={24} height={24} viewBox="0 0 24 24" {...props}&gt;
+    &lt;Svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    &gt;
       &lt;Path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /&gt;
       &lt;Circle cx="12" cy="7" r="4" /&gt;
     &lt;/Svg&gt;
   );
-});</code></pre>
+});
+
+ProfileIcon.displayName = 'ProfileIcon';</code></pre>
+          <p><strong>Critical Mobile Rule:</strong> Because <code>react-native-svg</code> defaults <code>fill</code> to black (<code>#000000</code>) and React Native does not support CSS <code>currentColor</code>, always pass explicit <code>fill="none"</code> and <code>stroke={color}</code> props. Omitting these causes vector outline paths to fill as deformed solid black polygons.</p>
 
           <h3>2. Avoid Dynamic String Concatenation Inside Paths</h3>
           <p>Do not calculate complex Bézier curve strings inside component render cycles. Keep path strings static or compile them at build time.</p>
@@ -588,7 +609,7 @@ export function createThemedIcon(IconComponent: React.ComponentType&lt;IconProps
           <p>Search 134,701 open-source vector icons across 28 curated libraries on IconStash. Clean SVG code ready for instant mobile export.</p>
           <a href="/#/" class="header-cta" style="font-size: 15px; padding: 12px 28px;">Search All 134K+ Icons &rarr;</a>
         </div>
-      </main>
+      </article>
 
       <aside class="article-sidebar">
         <div class="sidebar-card">
@@ -614,7 +635,7 @@ export function createThemedIcon(IconComponent: React.ComponentType&lt;IconProps
         </div>
       </aside>
     </div>
-  </div>
+  </main>
 
   <footer class="site-footer">
     <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>

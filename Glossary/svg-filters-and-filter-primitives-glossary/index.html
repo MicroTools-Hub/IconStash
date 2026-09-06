@@ -66,7 +66,11 @@
       { "@type": "DefinedTerm", "name": "feColorMatrix", "description": "Applies a 4x5 linear transformation matrix to RGBA color channels, enabling custom duotones, tinting, and color space shifts." },
       { "@type": "DefinedTerm", "name": "feDropShadow", "description": "A high-performance integrated primitive that computes blur, offset, and color composite in a single hardware-accelerated pass." },
       { "@type": "DefinedTerm", "name": "feDisplacementMap", "description": "Distorts input pixels spatially based on the color values of a second map image, producing glass refraction and fluid ripples." },
-      { "@type": "DefinedTerm", "name": "feComposite", "description": "Combines two input images pixel-by-pixel using Porter-Duff compositing operators or an arithmetic polynomial formula." }
+      { "@type": "DefinedTerm", "name": "feComposite", "description": "Combines two input images pixel-by-pixel using Porter-Duff compositing operators or an arithmetic polynomial formula." },
+      { "@type": "DefinedTerm", "name": "feConvolveMatrix", "description": "Applies an NxM spatial convolution matrix kernel to input pixels for sharpening, embossing, edge detection, and custom blurs." },
+      { "@type": "DefinedTerm", "name": "feImage", "description": "Loads an external raster image or internal SVG graphic element into the filter pipeline graph as a reusable pixel input node." },
+      { "@type": "DefinedTerm", "name": "feComponentTransfer", "description": "Performs component-wise color remapping on Red, Green, Blue, and Alpha channels using discrete, table, linear, or gamma transfer functions." },
+      { "@type": "DefinedTerm", "name": "feTurbulence", "description": "Procedurally synthesizes Perlin fractal noise or turbulence directly on the GPU without external bitmap files." }
     ]
   },
   {
@@ -165,6 +169,10 @@
     .filter-search-box { margin: 24px 0 36px; }
     .filter-input { width: 100%; background: #121212; border: 1px solid #262626; color: #FFF; font-size: 15px; padding: 14px 18px; border-radius: 8px; outline: none; transition: border-color 150ms ease; font-family: inherit; }
     .filter-input:focus { border-color: #C1DD2D; }
+    .no-results-box { background: #141414; border: 1px dashed #333; border-radius: 8px; padding: 28px; text-align: center; color: #A3A3A3; margin: 24px 0; }
+    .no-results-box p { margin-bottom: 12px; color: #CCC; font-size: 15px; }
+    .reset-filter-btn { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 6px 14px; border-radius: 4px; border: none; cursor: pointer; transition: background 150ms ease; }
+    .reset-filter-btn:hover { background: #D2ED3E; }
 
     h2 { font-size: 24px; font-weight: 800; color: #FFF; letter-spacing: -0.02em; margin: 44px 0 20px; padding-top: 24px; border-top: 1px solid #1F1F1F; display: flex; align-items: center; justify-content: space-between; }
     .cat-badge { font-size: 12px; font-weight: 700; color: #C1DD2D; background: rgba(193,221,45,0.1); padding: 3px 10px; border-radius: 4px; text-transform: uppercase; }
@@ -253,6 +261,8 @@
     html[data-theme="light"] .featured-summary { background: #F4F4F5; border-color: #E4E4E7; border-left-color: #849E00; }
     html[data-theme="light"] .featured-summary p { color: #18181B; }
     html[data-theme="light"] .filter-input { background: #FFF; border-color: #E5E5E5; color: #0A0A0A; }
+    html[data-theme="light"] .no-results-box { background: #F4F4F5; border-color: #D4D4D8; color: #525252; }
+    html[data-theme="light"] .no-results-box p { color: #18181B; }
     html[data-theme="light"] .term-card { background: #FFF; border-color: #E5E5E5; }
     html[data-theme="light"] .term-title { color: #0A0A0A; }
     html[data-theme="light"] .term-tag { background: #F0F4D8; color: #5C6E00; }
@@ -293,33 +303,38 @@
     </nav>
   </header>
 
-  <div class="page-container">
+  <main class="page-container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/">Home</a>
       <span class="sep">/</span>
-      <a href="/Glossary/icon-svg-terminology/">Glossaries</a>
+      <a href="/Glossary/icon-svg-terminology/">Glossary</a>
       <span class="sep">/</span>
       <span>SVG Filter Effects &amp; Primitives</span>
     </nav>
 
-    <header class="article-hero">
-      <span class="tag">W3C Graphics Reference</span>
-      <h1>SVG Filter Effects &amp; Primitives Glossary</h1>
-      <div class="article-meta">
-        <span><strong>Published:</strong> September 6, 2026</span>
-        <span>By <a href="/about/" rel="author">Jouni Flemming</a></span>
-        <span><strong>Coverage:</strong> 35+ Filter Primitives &amp; Mathematical Shaders</span>
-      </div>
-    </header>
-
     <div class="article-layout">
-      <main class="article-main">
+      <article class="article-main">
+        <header class="article-hero">
+          <span class="tag">W3C Graphics Reference</span>
+          <h1>SVG Filter Effects &amp; Primitives Glossary (35+ Terms)</h1>
+          <div class="article-meta">
+            <span><strong>Published:</strong> September 6, 2026</span>
+            <span>By <a href="/about/" rel="author">Jouni Flemming</a></span>
+            <span><strong>Coverage:</strong> 35+ Filter Primitives &amp; Mathematical Shaders</span>
+          </div>
+        </header>
+
         <div class="featured-summary">
           <p><strong>The W3C SVG Filter Pipeline Explained:</strong> SVG filters execute hardware-accelerated raster pixel shaders inside the browser graphics engine. They take vector shapes or bitmap graphics, pass them through a directed acyclic graph (DAG) of filter primitives, and output transformed pixels without modifying the underlying vector path geometry.</p>
         </div>
 
         <div class="filter-search-box">
           <input type="text" id="termFilter" class="filter-input" placeholder="Filter 35+ SVG filter terms (e.g. feColorMatrix, feGaussianBlur, SourceAlpha, feDisplacementMap)...">
+        </div>
+
+        <div id="noResults" class="no-results-box" style="display: none;">
+          <p>No SVG filter primitives found matching "<span id="noResultsQuery"></span>".</p>
+          <button type="button" id="resetFilterBtn" class="reset-filter-btn">Reset Filter</button>
         </div>
 
         <!-- Category 1: Filter Container & Coordinates -->
@@ -416,6 +431,15 @@
               <span class="term-tag">in="FillPaint | StrokePaint"</span>
             </div>
             <p class="term-desc">Pseudo-inputs representing the fill or stroke paint server of the filtered element within the filter execution subregion.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feImage</span>
+              <span class="term-tag">&lt;feImage href="..." result="..."&gt;</span>
+            </div>
+            <p class="term-desc">Loads an external raster image (PNG, JPEG, WebP) or inline SVG graphic fragment directly into the filter graph pipeline. Output can be piped as a second input (<code>in2</code>) to displacement maps or blend nodes.</p>
+            <pre><code>&lt;feImage href="noise-texture.png" result="customTexture" /&gt;</code></pre>
           </div>
         </section>
 
@@ -544,6 +568,19 @@
             </div>
             <p class="term-desc">Allows per-channel mathematical remapping of R, G, B, and A using lookup tables, discrete thresholds, linear multipliers, or gamma curves via child elements: <code>&lt;feFuncR&gt;</code>, <code>&lt;feFuncG&gt;</code>, <code>&lt;feFuncB&gt;</code>, <code>&lt;feFuncA&gt;</code>.</p>
           </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feFuncR, feFuncG, feFuncB, feFuncA</span>
+              <span class="term-tag">type="identity|linear|gamma|table|discrete"</span>
+            </div>
+            <p class="term-desc">Individual channel transfer functions nested inside <code>&lt;feComponentTransfer&gt;</code>. Used to invert colors, adjust gamma curves, apply brightness offsets (<code>slope</code>, <code>intercept</code>), or create multi-level posterization effects.</p>
+            <pre><code>&lt;feComponentTransfer&gt;
+  &lt;feFuncR type="linear" slope="1.4" intercept="-0.1" /&gt;
+  &lt;feFuncG type="linear" slope="1.4" intercept="-0.1" /&gt;
+  &lt;feFuncB type="gamma" amplitude="1" exponent="0.8" /&gt;
+&lt;/feComponentTransfer&gt;</code></pre>
+          </div>
         </section>
 
         <!-- Category 5: Blending & Compositing -->
@@ -645,6 +682,23 @@
             </div>
             <p class="term-desc">Child elements placed inside lighting primitives defining light source geometry: infinite distant rays (<code>feDistantLight</code>), 3D point lights (<code>fePointLight</code>), or focused spotlights (<code>feSpotLight</code>).</p>
           </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">surfaceScale &amp; specularExponent</span>
+              <span class="term-tag">surfaceScale="..." specularExponent="..."</span>
+            </div>
+            <p class="term-desc">Core 3D lighting attributes: <code>surfaceScale</code> controls the height elevation of the surface normal map generated from alpha channels, while <code>specularExponent</code> controls the tightness and shine of Phong specular highlights (higher = glossy sheen).</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feConvolveMatrix</span>
+              <span class="term-tag">&lt;feConvolveMatrix order="3" kernelMatrix="..."&gt;</span>
+            </div>
+            <p class="term-desc">Applies an NxM spatial convolution matrix kernel to input pixels. Used to build edge detection (Sobel), sharpening, embossing, and custom directional blurs directly on vector graphics.</p>
+            <pre><code>&lt;feConvolveMatrix order="3" kernelMatrix="0 -1 0 -1 5 -1 0 -1 0" preserveAlpha="true" /&gt;</code></pre>
+          </div>
         </section>
 
         <!-- Performance Benchmark Table -->
@@ -743,7 +797,7 @@
           <p>Search 134,701 open-source vector icons across 28 curated libraries on IconStash. Clean, valid SVG paths ready for drop shadows, glows, and custom shaders.</p>
           <a href="/#/" class="header-cta" style="font-size: 15px; padding: 12px 28px;">Search All 134K+ Icons &rarr;</a>
         </div>
-      </main>
+      </article>
 
       <aside class="article-sidebar">
         <div class="sidebar-card">
@@ -769,7 +823,7 @@
         </div>
       </aside>
     </div>
-  </div>
+  </main>
 
   <footer class="site-footer">
     <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
@@ -794,16 +848,48 @@
       localStorage.setItem('theme', nextTheme);
     });
 
-    // Instant term filter
+    // Instant term filter with section awareness and no-results handling
     const filterInput = document.getElementById('termFilter');
-    const cards = document.querySelectorAll('.term-card');
-    filterInput.addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase().trim();
-      cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        card.style.display = text.includes(q) ? 'block' : 'none';
+    const sections = document.querySelectorAll('section[id^="cat-"]');
+    const noResults = document.getElementById('noResults');
+    const noResultsQuery = document.getElementById('noResultsQuery');
+    const resetFilterBtn = document.getElementById('resetFilterBtn');
+
+    function applyFilter(query) {
+      const q = query.toLowerCase().trim();
+      let totalVisible = 0;
+
+      sections.forEach(sec => {
+        const cards = sec.querySelectorAll('.term-card');
+        let secVisible = 0;
+        cards.forEach(card => {
+          const match = q === '' || card.textContent.toLowerCase().includes(q);
+          card.style.display = match ? 'block' : 'none';
+          if (match) secVisible++;
+        });
+        sec.style.display = (secVisible > 0 || q === '') ? 'block' : 'none';
+        totalVisible += secVisible;
       });
+
+      if (totalVisible === 0 && q !== '') {
+        noResults.style.display = 'block';
+        noResultsQuery.textContent = query;
+      } else {
+        noResults.style.display = 'none';
+      }
+    }
+
+    filterInput.addEventListener('input', (e) => {
+      applyFilter(e.target.value);
     });
+
+    if (resetFilterBtn) {
+      resetFilterBtn.addEventListener('click', () => {
+        filterInput.value = '';
+        applyFilter('');
+        filterInput.focus();
+      });
+    }
   </script>
 </body>
 </html>
