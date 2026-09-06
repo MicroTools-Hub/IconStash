@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Filter Effects &amp; Primitives Glossary (35+ Terms) | IconStash</title>
+  <meta name="description" content="Exhaustive technical glossary of 35+ SVG filter primitives: feGaussianBlur, feColorMatrix, feDropShadow, feDisplacementMap, lighting, and GPU shaders.">
+  <meta name="keywords" content="svg filter primitives glossary, feColorMatrix explained, svg feGaussianBlur, feDropShadow vs drop-shadow, feDisplacementMap svg math, svg filter subregion filterUnits, feMorphology erode dilate, feComposite arithmetic k1 k2 k3 k4">
+  <meta property="og:title" content="SVG Filter Effects &amp; Primitives Glossary (35+ Terms)">
+  <meta property="og:description" content="Exhaustive technical glossary of 35+ SVG filter primitives: feGaussianBlur, feColorMatrix, feDropShadow, feDisplacementMap, lighting, and GPU shaders.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/Glossary/svg-filters-and-filter-primitives-glossary/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SVG Filter Effects & Primitives Glossary">
+  <meta property="article:published_time" content="2026-09-06T00:00:00Z">
+  <meta property="article:modified_time" content="2026-09-06T00:00:00Z">
+  <meta property="article:author" content="Jouni Flemming">
+  <meta property="article:section" content="Glossary">
+  <meta property="article:tag" content="SVG">
+  <meta property="article:tag" content="Graphics Shaders">
+  <meta property="article:tag" content="Web Standards">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SVG Filter Effects &amp; Primitives Glossary (35+ Terms)">
+  <meta name="twitter:description" content="35+ mathematical definitions for SVG filter primitives, color matrices, lighting effects, displacement maps, and GPU rendering pipelines.">
+  <meta name="twitter:image" content="https://iconstash.io/og-default.png">
+  <link rel="canonical" href="https://iconstash.io/Glossary/svg-filters-and-filter-primitives-glossary/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "name": "SVG Filter Effects & Primitives Glossary",
+    "description": "Exhaustive technical glossary of 35+ SVG filter primitives: feGaussianBlur, feColorMatrix, feDropShadow, feDisplacementMap, lighting, and GPU shaders.",
+    "url": "https://iconstash.io/Glossary/svg-filters-and-filter-primitives-glossary/",
+    "author": {
+      "@type": "Person",
+      "name": "Jouni Flemming",
+      "url": "https://iconstash.io/about/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "IconStash",
+      "url": "https://iconstash.io",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://iconstash.io/logo.png"
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Great Software Company",
+        "url": "https://greatsoftwarecompany.com"
+      }
+    },
+    "datePublished": "2026-09-06",
+    "dateModified": "2026-09-06",
+    "hasDefinedTerm": [
+      { "@type": "DefinedTerm", "name": "<filter>", "description": "The root container element declaring a hardware-accelerated raster effect graph applied to SVG graphics or HTML elements via CSS." },
+      { "@type": "DefinedTerm", "name": "feGaussianBlur", "description": "Performs a Gaussian blur convolution across an input graphic using a normal distribution kernel defined by standard deviation." },
+      { "@type": "DefinedTerm", "name": "feColorMatrix", "description": "Applies a 4x5 linear transformation matrix to RGBA color channels, enabling custom duotones, tinting, and color space shifts." },
+      { "@type": "DefinedTerm", "name": "feDropShadow", "description": "A high-performance integrated primitive that computes blur, offset, and color composite in a single hardware-accelerated pass." },
+      { "@type": "DefinedTerm", "name": "feDisplacementMap", "description": "Distorts input pixels spatially based on the color values of a second map image, producing glass refraction and fluid ripples." },
+      { "@type": "DefinedTerm", "name": "feComposite", "description": "Combines two input images pixel-by-pixel using Porter-Duff compositing operators or an arithmetic polynomial formula." }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Glossary", "item": "https://iconstash.io/Glossary/icon-svg-terminology/" },
+      { "@type": "ListItem", "position": 3, "name": "SVG Filters & Filter Primitives Glossary", "item": "https://iconstash.io/Glossary/svg-filters-and-filter-primitives-glossary/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the performance difference between CSS drop-shadow and SVG feDropShadow?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CSS filter: drop-shadow() is internally mapped by browser rendering engines to an optimized feDropShadow primitive. SVG feDropShadow allows granular control over color-interpolation-filters, flood-opacity, and dx/dy subpixel offsets within the vector coordinate system."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do SVG filters clip shadows around icon boundaries?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "By default, an SVG <filter> subregion spans x='-10%' y='-10%' width='120%' height='120%' of the target element. Large blur radii (stdDeviation > 5) exceed this bounding box, causing sharp clipping edges. Expanding the filter region to x='-50%' y='-50%' width='200%' height='200%' resolves clipping."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between color-interpolation-filters='sRGB' and 'linearRGB'?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "linearRGB executes color math in a physically linear color space where light blends accurately without dark halos. sRGB applies a gamma transfer curve that can cause blurred colors to appear muddy or darker along high-contrast edges."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does feColorMatrix create duotone icon effects?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A 4x5 transformation matrix multiplies the input Red, Green, Blue, and Alpha channels by constant weights. By mapping luminance (grayscale values) to target highlight and shadow color vectors, feColorMatrix renders crisp duotone icons with zero external image dependencies."
+        }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    svg { max-width: 100%; display: inline-block; vertical-align: middle; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: all 150ms ease; display: inline-block; }
+    .header-cta:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    .theme-toggle-btn { background: transparent; border: 1px solid #262626; color: #A3A3A3; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms ease; }
+    .theme-toggle-btn:hover { border-color: #404040; color: #F2F2F2; }
+
+    /* Responsive 2-Column Layout */
+    .page-container { max-width: 1280px; margin: 0 auto; padding: 48px 24px 80px; width: 100%; }
+    .breadcrumb { display: flex; gap: 8px; font-size: 13px; color: #666; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #C1DD2D; }
+    .breadcrumb .sep { color: #444; }
+
+    .article-hero { margin-bottom: 36px; border-bottom: 1px solid #1F1F1F; padding-bottom: 32px; }
+    .article-hero .tag { display: inline-block; background: rgba(193,221,45,0.12); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(193,221,45,0.25); }
+    .article-hero h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; line-height: 1.18; color: #FFF; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .article-meta { display: flex; gap: 20px; font-size: 13px; color: #737373; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+
+    .article-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; align-items: start; }
+    @media (min-width: 1024px) {
+      .article-layout { grid-template-columns: minmax(0, 1fr) 320px; }
+    }
+
+    .article-main { min-width: 0; }
+    .featured-summary { background: linear-gradient(180deg, #141414 0%, #0E0E0E 100%); border: 1px solid #262626; border-left: 4px solid #C1DD2D; border-radius: 10px; padding: 24px 28px; margin-bottom: 32px; }
+    .featured-summary p { font-size: 15.5px; line-height: 1.7; color: #E5E5E5; margin-bottom: 12px; font-weight: 500; }
+    .featured-summary ul { margin: 0 0 0 20px; color: #D4D4D4; }
+    .featured-summary li { margin-bottom: 8px; font-size: 14.5px; line-height: 1.6; }
+
+    /* Search Box */
+    .filter-search-box { margin: 24px 0 36px; }
+    .filter-input { width: 100%; background: #121212; border: 1px solid #262626; color: #FFF; font-size: 15px; padding: 14px 18px; border-radius: 8px; outline: none; transition: border-color 150ms ease; font-family: inherit; }
+    .filter-input:focus { border-color: #C1DD2D; }
+
+    h2 { font-size: 24px; font-weight: 800; color: #FFF; letter-spacing: -0.02em; margin: 44px 0 20px; padding-top: 24px; border-top: 1px solid #1F1F1F; display: flex; align-items: center; justify-content: space-between; }
+    .cat-badge { font-size: 12px; font-weight: 700; color: #C1DD2D; background: rgba(193,221,45,0.1); padding: 3px 10px; border-radius: 4px; text-transform: uppercase; }
+    h3 { font-size: 19px; font-weight: 700; color: #E5E5E5; margin: 28px 0 12px; }
+    p { margin-bottom: 18px; color: #D4D4D4; font-size: 16px; line-height: 1.8; }
+    strong { color: #FFF; }
+    ul, ol { margin: 0 0 24px 28px; color: #D4D4D4; }
+    li { margin-bottom: 10px; line-height: 1.7; font-size: 15.5px; }
+
+    pre { background: #121212; border: 1px solid #222; border-radius: 8px; padding: 18px; overflow-x: auto; margin: 18px 0; font-family: "JetBrains Mono", monospace; font-size: 13.5px; line-height: 1.6; color: #E5E5E5; }
+    code { font-family: "JetBrains Mono", monospace; font-size: 0.9em; background: #1A1A1A; padding: 2px 6px; border-radius: 4px; color: #C1DD2D; }
+    p code, li code { word-break: break-word; }
+    pre code { background: transparent; padding: 0; color: inherit; word-break: normal; }
+
+    /* Glossary Term Cards */
+    .term-card { background: #121212; border: 1px solid #222; border-radius: 10px; padding: 22px 24px; margin-bottom: 16px; transition: border-color 150ms ease; }
+    .term-card:hover { border-color: #383838; }
+    .term-header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+    .term-title { font-size: 18px; font-weight: 700; color: #FFF; }
+    .term-tag { font-family: "JetBrains Mono", monospace; font-size: 13px; color: #C1DD2D; background: rgba(193,221,45,0.08); padding: 2px 8px; border-radius: 4px; }
+    .term-desc { font-size: 15px; color: #B3B3B3; line-height: 1.7; margin-bottom: 10px; }
+    .term-code { background: #0E0E0E; border: 1px solid #1E1E1E; border-radius: 6px; padding: 10px 14px; font-family: "JetBrains Mono", monospace; font-size: 13px; color: #A3A3A3; overflow-x: auto; }
+
+    /* Comparison Tables */
+    .table-wrap { overflow-x: auto; margin: 28px 0; border: 1px solid #222; border-radius: 8px; -webkit-overflow-scrolling: touch; }
+    table { width: 100%; min-width: 600px; border-collapse: collapse; font-size: 14.5px; text-align: left; }
+    th { background: #141414; color: #FFF; padding: 14px 16px; font-weight: 700; border-bottom: 2px solid #262626; white-space: nowrap; }
+    td { padding: 13px 16px; border-bottom: 1px solid #1E1E1E; color: #D4D4D4; }
+    tr:nth-child(even) td { background: #0E0E0E; }
+    tr:hover td { background: #161616; }
+
+    /* Sticky Sidebar */
+    .article-sidebar { display: flex; flex-direction: column; gap: 24px; }
+    @media (min-width: 1024px) {
+      .article-sidebar { position: sticky; top: 80px; }
+    }
+    .sidebar-card { background: #121212; border: 1px solid #222; border-radius: 12px; padding: 24px; }
+    .sidebar-title { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 16px; }
+    .toc-nav ol { list-style: none; margin: 0; padding: 0; }
+    .toc-nav li { margin-bottom: 10px; font-size: 14px; }
+    .toc-nav a { color: #A3A3A3; display: block; line-height: 1.5; }
+    .toc-nav a:hover { color: #C1DD2D; }
+
+    .cta-sidebar-box { background: linear-gradient(145deg, #181E07 0%, #0F1205 100%); border: 1px solid rgba(193,221,45,0.3); border-radius: 12px; padding: 24px; text-align: center; }
+    .cta-sidebar-box h4 { font-size: 18px; font-weight: 800; color: #FFF; margin-bottom: 8px; }
+    .cta-sidebar-box p { font-size: 13.5px; color: #AAA; line-height: 1.5; margin-bottom: 16px; }
+    .cta-sidebar-btn { display: inline-block; width: 100%; background: #C1DD2D; color: #0A0A0A; font-weight: 800; font-size: 14px; padding: 12px 18px; border-radius: 6px; transition: all 150ms ease; }
+    .cta-sidebar-btn:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    /* FAQ Box */
+    .faq-item { background: #121212; border: 1px solid #222; border-radius: 8px; margin-bottom: 14px; padding: 18px 22px; }
+    .faq-item h3 { margin-top: 0; font-size: 16px; color: #FFF; margin-bottom: 8px; }
+    .faq-item p { margin-bottom: 0; color: #A3A3A3; font-size: 14.5px; line-height: 1.6; }
+
+    .cta-banner { background: linear-gradient(135deg, #181C0B 0%, #111406 100%); border: 1px solid rgba(193,221,45,0.3); border-radius: 12px; padding: 36px; text-align: center; margin: 60px 0 20px; }
+    .cta-banner h3 { color: #FFF; font-size: 24px; margin-bottom: 10px; font-weight: 800; }
+    .cta-banner p { color: #A3A3A3; max-width: 540px; margin: 0 auto 20px; font-size: 15px; }
+
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 48px 24px; background: #0A0A0A; text-align: center; font-size: 14px; color: #666; margin-top: 0; }
+    .site-footer a { color: #888; }
+    .site-footer a:hover { color: #C1DD2D; }
+
+    @media (max-width: 1023px) {
+      .cta-sidebar-box { display: none; }
+    }
+    @media (max-width: 768px) {
+      .page-container { padding: 28px 16px 60px; }
+      .site-header nav a:not(.header-cta) { display: none; }
+      .site-header nav { gap: 12px; }
+      .header-cta { padding: 6px 12px; font-size: 12px; }
+      .article-hero h1 { font-size: 26px; }
+      .featured-summary { padding: 18px 20px; }
+      pre { padding: 14px; font-size: 12.5px; }
+    }
+
+    /* Light Theme */
+    html[data-theme="light"] body { background: #FAFAFA; color: #171717; }
+    html[data-theme="light"] .site-header { background: rgba(250,250,250,0.88); border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .site-header .logo { color: #171717; }
+    html[data-theme="light"] .site-header nav a { color: #525252; }
+    html[data-theme="light"] .article-hero h1 { color: #0A0A0A; }
+    html[data-theme="light"] h2 { color: #0A0A0A; border-top-color: #E5E5E5; }
+    html[data-theme="light"] h3 { color: #171717; }
+    html[data-theme="light"] p, html[data-theme="light"] ul, html[data-theme="light"] ol { color: #383838; }
+    html[data-theme="light"] strong { color: #0A0A0A; }
+    html[data-theme="light"] .featured-summary { background: #F4F4F5; border-color: #E4E4E7; border-left-color: #849E00; }
+    html[data-theme="light"] .featured-summary p { color: #18181B; }
+    html[data-theme="light"] .filter-input { background: #FFF; border-color: #E5E5E5; color: #0A0A0A; }
+    html[data-theme="light"] .term-card { background: #FFF; border-color: #E5E5E5; }
+    html[data-theme="light"] .term-title { color: #0A0A0A; }
+    html[data-theme="light"] .term-tag { background: #F0F4D8; color: #5C6E00; }
+    html[data-theme="light"] .term-desc { color: #525252; }
+    html[data-theme="light"] .term-code { background: #F4F4F5; border-color: #E4E4E7; color: #18181B; }
+    html[data-theme="light"] pre { background: #F4F4F5; border-color: #E4E4E7; color: #18181B; }
+    html[data-theme="light"] code { background: #E4E4E7; color: #4D6300; }
+    html[data-theme="light"] a { color: #6D8200; }
+    html[data-theme="light"] .table-wrap { border-color: #E4E4E7; }
+    html[data-theme="light"] th { background: #F4F4F5; color: #0A0A0A; border-bottom-color: #D4D4D8; }
+    html[data-theme="light"] td { border-bottom-color: #E4E4E7; color: #27272A; }
+    html[data-theme="light"] tr:nth-child(even) td { background: #FAFAFA; }
+    html[data-theme="light"] tr:hover td { background: #F4F4F5; }
+    html[data-theme="light"] .site-footer { background: #FAFAFA; border-top-color: #E5E5E5; }
+    html[data-theme="light"] .sidebar-card { background: #F4F4F5; border-color: #E4E4E7; }
+    html[data-theme="light"] .faq-item { background: #F4F4F5; border-color: #E4E4E7; }
+    html[data-theme="light"] .faq-item h3 { color: #0A0A0A; }
+    html[data-theme="light"] .faq-item p { color: #525252; }
+    html[data-theme="light"] .cta-sidebar-box { background: #ECFDF5; border-color: #A7F3D0; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="IconStash.io home">
+      <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2V9Z"/></svg>
+      <span>IconStash</span>
+    </a>
+    <nav>
+      <a href="/#/">Search 134K+ Icons</a>
+      <a href="/articles/">Articles &amp; Guides</a>
+      <a href="/Listicles/best-free-icon-sets-2026/">Best Sets</a>
+      <a href="/Glossary/icon-svg-terminology/">Glossary Hub</a>
+      <a href="/stats/">Statistics</a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="/#/" class="header-cta">Open App</a>
+    </nav>
+  </header>
+
+  <div class="page-container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/Glossary/icon-svg-terminology/">Glossaries</a>
+      <span class="sep">/</span>
+      <span>SVG Filter Effects &amp; Primitives</span>
+    </nav>
+
+    <header class="article-hero">
+      <span class="tag">W3C Graphics Reference</span>
+      <h1>SVG Filter Effects &amp; Primitives Glossary</h1>
+      <div class="article-meta">
+        <span><strong>Published:</strong> September 6, 2026</span>
+        <span>By <a href="/about/" rel="author">Jouni Flemming</a></span>
+        <span><strong>Coverage:</strong> 35+ Filter Primitives &amp; Mathematical Shaders</span>
+      </div>
+    </header>
+
+    <div class="article-layout">
+      <main class="article-main">
+        <div class="featured-summary">
+          <p><strong>The W3C SVG Filter Pipeline Explained:</strong> SVG filters execute hardware-accelerated raster pixel shaders inside the browser graphics engine. They take vector shapes or bitmap graphics, pass them through a directed acyclic graph (DAG) of filter primitives, and output transformed pixels without modifying the underlying vector path geometry.</p>
+        </div>
+
+        <div class="filter-search-box">
+          <input type="text" id="termFilter" class="filter-input" placeholder="Filter 35+ SVG filter terms (e.g. feColorMatrix, feGaussianBlur, SourceAlpha, feDisplacementMap)...">
+        </div>
+
+        <!-- Category 1: Filter Container & Coordinates -->
+        <section id="cat-container">
+          <h2>
+            <span>1. Filter Container &amp; Region Coordinates</span>
+            <span class="cat-badge">Core Setup</span>
+          </h2>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">&lt;filter&gt; Element</span>
+              <span class="term-tag">&lt;filter id="..."&gt;</span>
+            </div>
+            <p class="term-desc">The root SVG container that encapsulates one or more filter primitives. Referenced by elements via the CSS property <code>filter: url(#id)</code> or SVG attribute <code>filter="url(#id)"</code>.</p>
+            <pre><code>&lt;filter id="glow" x="-20%" y="-20%" width="140%" height="140%"&gt;...&lt;/filter&gt;</code></pre>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">filterUnits</span>
+              <span class="term-tag">filterUnits="userSpaceOnUse | objectBoundingBox"</span>
+            </div>
+            <p class="term-desc">Defines the coordinate system for the <code>x, y, width, height</code> boundaries of the filter. <code>objectBoundingBox</code> (default) uses fractions/percentages of the element's bounding box. <code>userSpaceOnUse</code> uses the current SVG viewBox coordinate system.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">primitiveUnits</span>
+              <span class="term-tag">primitiveUnits="userSpaceOnUse | objectBoundingBox"</span>
+            </div>
+            <p class="term-desc">Specifies the coordinate system for length attributes inside individual filter primitives (such as <code>stdDeviation</code>, <code>dx, dy</code>). Defaults to <code>userSpaceOnUse</code>.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">Filter Subregion (x, y, width, height)</span>
+              <span class="term-tag">x, y, width, height</span>
+            </div>
+            <p class="term-desc">The clipping rectangular boundary within which the filter executes. Defaults to <code>x="-10%" y="-10%" width="120%" height="120%"</code>. When applying wide blurs, expanding this region prevents harsh cutoffs.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">color-interpolation-filters</span>
+              <span class="term-tag">color-interpolation-filters="linearRGB | sRGB"</span>
+            </div>
+            <p class="term-desc">Determines the color space used for pixel calculations. <code>linearRGB</code> (SVG default) calculates color blending in a linear gamma space, producing realistic lighting and blur transitions. <code>sRGB</code> applies human perceptual gamma curves.</p>
+          </div>
+        </section>
+
+        <!-- Category 2: Pipeline Inputs & Source Nodes -->
+        <section id="cat-inputs">
+          <h2>
+            <span>2. Pipeline Inputs &amp; Source Nodes</span>
+            <span class="cat-badge">Image Sources</span>
+          </h2>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">in / in2 Attributes</span>
+              <span class="term-tag">in="..." in2="..."</span>
+            </div>
+            <p class="term-desc">Identifies the input graphic for a filter primitive. Can reference a standard source keyword or a named <code>result</code> identifier from an earlier primitive in the filter chain.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">result Attribute</span>
+              <span class="term-tag">result="namedNode"</span>
+            </div>
+            <p class="term-desc">Assigns a unique string name to the output pixel buffer of a primitive so subsequent primitives can read it as an <code>in</code> parameter.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">SourceGraphic</span>
+              <span class="term-tag">in="SourceGraphic"</span>
+            </div>
+            <p class="term-desc">The original unaltered target element with all its fills, strokes, and colors before any filtering.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">SourceAlpha</span>
+              <span class="term-tag">in="SourceAlpha"</span>
+            </div>
+            <p class="term-desc">Contains only the alpha channel (transparency silhouette) of the target element. All color channels are set to black (<code>rgb(0,0,0)</code>). Essential for generating drop shadows.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">FillPaint / StrokePaint</span>
+              <span class="term-tag">in="FillPaint | StrokePaint"</span>
+            </div>
+            <p class="term-desc">Pseudo-inputs representing the fill or stroke paint server of the filtered element within the filter execution subregion.</p>
+          </div>
+        </section>
+
+        <!-- Category 3: Blur, Offset & Shadow Primitives -->
+        <section id="cat-blur-shadow">
+          <h2>
+            <span>3. Blur, Offset &amp; Shadow Primitives</span>
+            <span class="cat-badge">Shadows &amp; Glows</span>
+          </h2>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feGaussianBlur</span>
+              <span class="term-tag">&lt;feGaussianBlur&gt;</span>
+            </div>
+            <p class="term-desc">Convolves input pixels using a Gaussian blur kernel. Controlled by <code>stdDeviation</code> (standard deviation in pixels).</p>
+            <pre><code>&lt;feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur" /&gt;</code></pre>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">stdDeviation</span>
+              <span class="term-tag">stdDeviation="x [y]"</span>
+            </div>
+            <p class="term-desc">The blur radius parameter. Can specify independent horizontal and vertical radii (e.g. <code>stdDeviation="8 2"</code> for directional motion blur).</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">edgeMode</span>
+              <span class="term-tag">edgeMode="none | duplicate | wrap"</span>
+            </div>
+            <p class="term-desc">Dictates how pixels outside the filter boundary are sampled during convolution. <code>none</code> extends transparency; <code>duplicate</code> clamps edges to boundary pixels.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feOffset</span>
+              <span class="term-tag">&lt;feOffset dx="..." dy="..."&gt;</span>
+            </div>
+            <p class="term-desc">Translates an image layer along the X and Y axes without altering its size. Used to position drop shadows.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feDropShadow</span>
+              <span class="term-tag">&lt;feDropShadow&gt;</span>
+            </div>
+            <p class="term-desc">An optimized composite primitive introduced in SVG 2 that performs blur, offset, color flooding, and merging in a single GPU pass.</p>
+            <pre><code>&lt;feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.3" /&gt;</code></pre>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feFlood</span>
+              <span class="term-tag">&lt;feFlood flood-color="..." flood-opacity="..."&gt;</span>
+            </div>
+            <p class="term-desc">Creates a solid rectangular plane of uniform color and opacity covering the entire filter subregion.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feTile</span>
+              <span class="term-tag">&lt;feTile&gt;</span>
+            </div>
+            <p class="term-desc">Tiles a smaller input graphic repeatedly across the filter subregion to create repeating vector backgrounds or patterns.</p>
+          </div>
+        </section>
+
+        <!-- Category 4: Color & Matrix Operations -->
+        <section id="cat-color-matrix">
+          <h2>
+            <span>4. Color &amp; Matrix Operations</span>
+            <span class="cat-badge">Color Grading</span>
+          </h2>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feColorMatrix</span>
+              <span class="term-tag">&lt;feColorMatrix type="..."&gt;</span>
+            </div>
+            <p class="term-desc">Transforms the RGBA color vectors of every pixel using a 4x5 affine matrix or preset algorithms (<code>matrix</code>, <code>saturate</code>, <code>hueRotate</code>, <code>luminanceToAlpha</code>).</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">Matrix Type (4x5 Transformation)</span>
+              <span class="term-tag">type="matrix" values="..."</span>
+            </div>
+            <p class="term-desc">A 20-value space-separated matrix where each row recalculates Red, Green, Blue, and Alpha: <code>[R_out = r1*R + r2*G + r3*B + r4*A + r5]</code>.</p>
+            <pre><code>&lt;feColorMatrix type="matrix" values="
+  0.33 0.33 0.33 0 0
+  0.33 0.33 0.33 0 0
+  0.33 0.33 0.33 0 0
+  0    0    0    1 0" /&gt;</code></pre>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">saturate</span>
+              <span class="term-tag">type="saturate" values="0..1"</span>
+            </div>
+            <p class="term-desc">Modulates color saturation. A value of <code>0</code> produces complete grayscale; <code>1</code> preserves original saturation; values &gt; <code>1</code> oversaturate colors.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">hueRotate</span>
+              <span class="term-tag">type="hueRotate" values="0..360"</span>
+            </div>
+            <p class="term-desc">Rotates all pixel hues around the RGB color wheel by a specified angle in degrees.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">luminanceToAlpha</span>
+              <span class="term-tag">type="luminanceToAlpha"</span>
+            </div>
+            <p class="term-desc">Calculates human perceived brightness (<code>0.2126*R + 0.7152*G + 0.0722*B</code>) and assigns the resulting value to the output alpha channel.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feComponentTransfer</span>
+              <span class="term-tag">&lt;feComponentTransfer&gt;</span>
+            </div>
+            <p class="term-desc">Allows per-channel mathematical remapping of R, G, B, and A using lookup tables, discrete thresholds, linear multipliers, or gamma curves via child elements: <code>&lt;feFuncR&gt;</code>, <code>&lt;feFuncG&gt;</code>, <code>&lt;feFuncB&gt;</code>, <code>&lt;feFuncA&gt;</code>.</p>
+          </div>
+        </section>
+
+        <!-- Category 5: Blending & Compositing -->
+        <section id="cat-compositing">
+          <h2>
+            <span>5. Blending &amp; Compositing Primitives</span>
+            <span class="cat-badge">Layer Operations</span>
+          </h2>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feBlend</span>
+              <span class="term-tag">&lt;feBlend mode="..."&gt;</span>
+            </div>
+            <p class="term-desc">Blends two images using standard Photoshop-style blend modes: <code>normal</code>, <code>multiply</code>, <code>screen</code>, <code>overlay</code>, <code>darken</code>, <code>lighten</code>, <code>color-dodge</code>, <code>color-burn</code>, <code>hard-light</code>, <code>soft-light</code>, <code>difference</code>, <code>exclusion</code>.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feComposite</span>
+              <span class="term-tag">&lt;feComposite operator="..."&gt;</span>
+            </div>
+            <p class="term-desc">Executes pixel-level Porter-Duff compositing operators between two input layers (<code>over</code>, <code>in</code>, <code>out</code>, <code>atop</code>, <code>xor</code>, <code>arithmetic</code>).</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">Arithmetic Operator (k1, k2, k3, k4)</span>
+              <span class="term-tag">operator="arithmetic" k1=".." k2=".." k3=".." k4=".."</span>
+            </div>
+            <p class="term-desc">Calculates output pixels using the polynomial equation: <code>pixel = k1*in1*in2 + k2*in1 + k3*in2 + k4</code>. Widely used for combining lighting maps with textures.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feMerge &amp; feMergeNode</span>
+              <span class="term-tag">&lt;feMerge&gt;</span>
+            </div>
+            <p class="term-desc">Layers multiple filter effect stages on top of one another from bottom to top using simple 'over' compositing.</p>
+            <pre><code>&lt;feMerge&gt;
+  &lt;feMergeNode in="shadowBlur" /&gt;
+  &lt;feMergeNode in="SourceGraphic" /&gt;
+&lt;/feMerge&gt;</code></pre>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feMorphology</span>
+              <span class="term-tag">&lt;feMorphology operator="erode|dilate" radius="..."&gt;</span>
+            </div>
+            <p class="term-desc">Expands (<code>dilate</code>) or contracts (<code>erode</code>) the boundaries of graphical shapes. Essential for creating stroke outlines or shrinking shadow footprints.</p>
+          </div>
+        </section>
+
+        <!-- Category 6: Distortion, Noise & Lighting -->
+        <section id="cat-distortion-lighting">
+          <h2>
+            <span>6. Distortion, Noise &amp; 3D Lighting</span>
+            <span class="cat-badge">Advanced Shaders</span>
+          </h2>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feDisplacementMap</span>
+              <span class="term-tag">&lt;feDisplacementMap scale="..."&gt;</span>
+            </div>
+            <p class="term-desc">Distorts the spatial coordinates of <code>in</code> based on the color values of <code>in2</code>. Used to produce frosted glass, heatwaves, and water ripples.</p>
+            <pre><code>&lt;feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="G" /&gt;</code></pre>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feTurbulence</span>
+              <span class="term-tag">&lt;feTurbulence type="fractalNoise|turbulence"&gt;</span>
+            </div>
+            <p class="term-desc">Generates procedural Perlin noise directly on the GPU without external image files. Controlled by <code>baseFrequency</code> and <code>numOctaves</code>.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feDiffuseLighting</span>
+              <span class="term-tag">&lt;feDiffuseLighting surfaceScale="..."&gt;</span>
+            </div>
+            <p class="term-desc">Calculates Lambertian diffuse reflection to render realistic 3D lighting textures on 2D vector icons using normal maps derived from alpha channels.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">feSpecularLighting</span>
+              <span class="term-tag">&lt;feSpecularLighting specularConstant="..." specularExponent="..."&gt;</span>
+            </div>
+            <p class="term-desc">Calculates Phong specular highlights, producing shiny metallic or plastic reflections across icon surfaces.</p>
+          </div>
+
+          <div class="term-card">
+            <div class="term-header">
+              <span class="term-title">Light Sources (feDistantLight, fePointLight, feSpotLight)</span>
+              <span class="term-tag">&lt;fePointLight x="..." y="..." z="..."&gt;</span>
+            </div>
+            <p class="term-desc">Child elements placed inside lighting primitives defining light source geometry: infinite distant rays (<code>feDistantLight</code>), 3D point lights (<code>fePointLight</code>), or focused spotlights (<code>feSpotLight</code>).</p>
+          </div>
+        </section>
+
+        <!-- Performance Benchmark Table -->
+        <section id="gpu-performance">
+          <h2>
+            <span>7. GPU Performance &amp; Rasterization Benchmark</span>
+            <span class="cat-badge">Hardware Cost</span>
+          </h2>
+          <p>Filters execute raster passes on the GPU or CPU compositor thread. Understand the hardware cost before applying filters to animated icons:</p>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Filter Primitive</th>
+                  <th>GPU Execution Cost</th>
+                  <th>Memory Overhead</th>
+                  <th>Animation (60 FPS) Suitability</th>
+                  <th>Primary Use Case</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>feColorMatrix</strong></td>
+                  <td>Ultra Low (1 fragment pass)</td>
+                  <td>Zero extra buffers</td>
+                  <td>Flawless 120 FPS</td>
+                  <td>Duotone tinting, dark mode color swap</td>
+                </tr>
+                <tr>
+                  <td><strong>feDropShadow</strong></td>
+                  <td>Low (Hardware optimized)</td>
+                  <td>1 intermediate surface</td>
+                  <td>60 FPS (Avoid animating dx/dy)</td>
+                  <td>UI drop shadows &amp; elevation</td>
+                </tr>
+                <tr>
+                  <td><strong>feGaussianBlur</strong></td>
+                  <td>Moderate (Two 1D convolutions)</td>
+                  <td>1 intermediate buffer</td>
+                  <td>Avoid animating stdDeviation</td>
+                  <td>Glows, depth-of-field, backdrop blur</td>
+                </tr>
+                <tr>
+                  <td><strong>feMorphology</strong></td>
+                  <td>Moderate</td>
+                  <td>1 buffer pass</td>
+                  <td>Good for static borders</td>
+                  <td>Icon stroke expansion / contraction</td>
+                </tr>
+                <tr>
+                  <td><strong>feDisplacementMap</strong></td>
+                  <td>High (Coordinate warp)</td>
+                  <td>2 input textures</td>
+                  <td>Heavy on mobile GPUs</td>
+                  <td>Glassmorphism refraction &amp; ripples</td>
+                </tr>
+                <tr>
+                  <td><strong>feTurbulence</strong></td>
+                  <td>High (Perlin noise math)</td>
+                  <td>Procedural generation buffer</td>
+                  <td>Pre-render static noise</td>
+                  <td>Grain textures, marble, smoke</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq-section">
+          <h2>
+            <span>8. Frequently Asked Questions</span>
+            <span class="cat-badge">Expert Advice</span>
+          </h2>
+          <div class="faq-item">
+            <h3>What is the performance difference between CSS drop-shadow and SVG feDropShadow?</h3>
+            <p>CSS filter: drop-shadow() is internally mapped by browser rendering engines to an optimized feDropShadow primitive. SVG feDropShadow allows granular control over color-interpolation-filters, flood-opacity, and dx/dy subpixel offsets within the vector coordinate system.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Why do SVG filters clip shadows around icon boundaries?</h3>
+            <p>By default, an SVG &lt;filter&gt; subregion spans x='-10%' y='-10%' width='120%' height='120%' of the target element. Large blur radii (stdDeviation > 5) exceed this bounding box, causing sharp clipping edges. Expanding the filter region to x='-50%' y='-50%' width='200%' height='200%' resolves clipping.</p>
+          </div>
+          <div class="faq-item">
+            <h3>What is the difference between color-interpolation-filters='sRGB' and 'linearRGB'?</h3>
+            <p>linearRGB executes color math in a physically linear color space where light blends accurately without dark halos. sRGB applies a gamma transfer curve that can cause blurred colors to appear muddy or darker along high-contrast edges.</p>
+          </div>
+          <div class="faq-item">
+            <h3>How does feColorMatrix create duotone icon effects?</h3>
+            <p>A 4x5 transformation matrix multiplies the input Red, Green, Blue, and Alpha channels by constant weights. By mapping luminance (grayscale values) to target highlight and shadow color vectors, feColorMatrix renders crisp duotone icons with zero external image dependencies.</p>
+          </div>
+        </section>
+
+        <div class="cta-banner">
+          <h3>Apply Filter Effects to 134K+ Free Icons</h3>
+          <p>Search 134,701 open-source vector icons across 28 curated libraries on IconStash. Clean, valid SVG paths ready for drop shadows, glows, and custom shaders.</p>
+          <a href="/#/" class="header-cta" style="font-size: 15px; padding: 12px 28px;">Search All 134K+ Icons &rarr;</a>
+        </div>
+      </main>
+
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-title">Categories</div>
+          <nav class="toc-nav">
+            <ol>
+              <li><a href="#cat-container">1. Filter Container &amp; Region</a></li>
+              <li><a href="#cat-inputs">2. Inputs &amp; Source Nodes</a></li>
+              <li><a href="#cat-blur-shadow">3. Blur, Offset &amp; Shadow</a></li>
+              <li><a href="#cat-color-matrix">4. Color &amp; Matrix Ops</a></li>
+              <li><a href="#cat-compositing">5. Blending &amp; Compositing</a></li>
+              <li><a href="#cat-distortion-lighting">6. Distortion &amp; Lighting</a></li>
+              <li><a href="#gpu-performance">7. GPU Benchmark</a></li>
+              <li><a href="#faq-section">8. FAQs</a></li>
+            </ol>
+          </nav>
+        </div>
+
+        <div class="cta-sidebar-box">
+          <h4>Explore 134K+ Icons</h4>
+          <p>Test SVG filters on real vector icons from Lucide, Tabler, Phosphor, and more on IconStash.</p>
+          <a href="/#/" class="cta-sidebar-btn">Open IconStash &rarr;</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
+    <p style="margin-top: 8px;">
+      <a href="/about/">About</a> &bull;
+      <a href="/contact/">Contact</a> &bull;
+      <a href="/privacy/">Privacy Policy</a> &bull;
+      <a href="/terms/">Terms of Service</a> &bull;
+      <a href="/articles/">Articles</a> &bull;
+      <a href="/stats/">Stats</a>
+    </p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    toggleBtn.addEventListener('click', () => {
+      const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+
+    // Instant term filter
+    const filterInput = document.getElementById('termFilter');
+    const cards = document.querySelectorAll('.term-card');
+    filterInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(q) ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

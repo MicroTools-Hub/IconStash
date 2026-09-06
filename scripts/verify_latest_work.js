@@ -14,29 +14,38 @@ function assert(condition, message) {
   }
 }
 
-console.log('=== VERIFYING 3 NEW ARTICLES & SITE INTEGRATION ===\n');
+console.log('=== VERIFYING 2 NEW ARTICLES, 1 GLOSSARY & SITE INTEGRATION ===\n');
 
-const articles = [
+const items = [
   {
-    slug: 'how-to-use-svg-icons-in-svelte-and-sveltekit-guide',
-    path: 'articles/how-to-use-svg-icons-in-svelte-and-sveltekit-guide/index.html'
+    type: 'article',
+    slug: 'how-to-use-svg-icons-in-react-native-and-expo',
+    path: 'articles/how-to-use-svg-icons-in-react-native-and-expo/index.html',
+    canonical: 'https://iconstash.io/articles/how-to-use-svg-icons-in-react-native-and-expo/',
+    schemaType: 'TechArticle'
   },
   {
-    slug: 'figma-to-code-svg-icon-pipeline-guide',
-    path: 'articles/figma-to-code-svg-icon-pipeline-guide/index.html'
+    type: 'article',
+    slug: 'how-to-build-custom-icon-library-npm-package-guide',
+    path: 'articles/how-to-build-custom-icon-library-npm-package-guide/index.html',
+    canonical: 'https://iconstash.io/articles/how-to-build-custom-icon-library-npm-package-guide/',
+    schemaType: 'TechArticle'
   },
   {
-    slug: 'best-tailwind-icon-libraries-2026',
-    path: 'articles/best-tailwind-icon-libraries-2026/index.html'
+    type: 'glossary',
+    slug: 'svg-filters-and-filter-primitives-glossary',
+    path: 'Glossary/svg-filters-and-filter-primitives-glossary/index.html',
+    canonical: 'https://iconstash.io/Glossary/svg-filters-and-filter-primitives-glossary/',
+    schemaType: 'DefinedTermSet'
   }
 ];
 
 const forbidden = ['jv16', 'winfindr', 'uninstalr'];
 
-for (const a of articles) {
-  console.log(`\nChecking article: ${a.slug}...`);
-  assert(fs.existsSync(a.path), `File exists: ${a.path}`);
-  const content = fs.readFileSync(a.path, 'utf8');
+for (const item of items) {
+  console.log(`\nChecking ${item.type}: ${item.slug}...`);
+  assert(fs.existsSync(item.path), `File exists: ${item.path}`);
+  const content = fs.readFileSync(item.path, 'utf8');
 
   // 1. Single H1
   const h1Matches = content.match(/<h1[\s>]/gi) || [];
@@ -47,8 +56,7 @@ for (const a of articles) {
   assert(descMatch && descMatch[1].length <= 155, `Meta description length (${descMatch ? descMatch[1].length : 0}) <= 155`);
 
   // 3. Canonical tag
-  const canonicalExpected = `https://iconstash.io/articles/${a.slug}/`;
-  assert(content.includes(`<link rel="canonical" href="${canonicalExpected}">`), `Canonical tag matches ${canonicalExpected}`);
+  assert(content.includes(`<link rel="canonical" href="${item.canonical}">`), `Canonical tag matches ${item.canonical}`);
 
   // 4. Visible author byline
   assert(content.includes('By <a href="/about/" rel="author">Jouni Flemming</a>'), `Visible author byline is present linking to /about/`);
@@ -66,7 +74,7 @@ for (const a of articles) {
 
   // 7. Rich content elements
   assert(content.includes('<pre><code') && content.includes('</code></pre>'), `Contains code blocks`);
-  assert(content.includes('<table') && content.includes('</table>'), `Contains comparison table`);
+  assert(content.includes('<table') && content.includes('</table>'), `Contains comparison/benchmark table`);
   assert(content.includes('.table-wrap') || content.includes('overflow-x: auto'), `Table has responsive overflow container`);
 
   // 8. JSON-LD validation
@@ -82,17 +90,22 @@ for (const a of articles) {
     }
 
     if (data) {
-      const articleSchema = data.find(d => d['@type'] === 'TechArticle' || d['@type'] === 'Article');
-      assert(!!articleSchema, `TechArticle / Article schema present`);
-      if (articleSchema) {
-        assert(articleSchema.description && articleSchema.description.length <= 155, `Schema description (${articleSchema.description.length}) <= 155 chars`);
-        assert(articleSchema.author && articleSchema.author.name === 'Jouni Flemming', `Schema author is Jouni Flemming`);
-        assert(articleSchema.author && articleSchema.author.url === 'https://iconstash.io/about/', `Schema author URL is https://iconstash.io/about/`);
-        assert(!JSON.stringify(articleSchema.author).includes('github.com'), `Schema author does not contain github.com`);
-        assert(articleSchema.publisher && articleSchema.publisher.name === 'IconStash', `Schema publisher is IconStash`);
-        assert(articleSchema.publisher && articleSchema.publisher.parentOrganization && articleSchema.publisher.parentOrganization.name === 'Great Software Company', `Schema parentOrganization is Great Software Company`);
-        assert(articleSchema.publisher.parentOrganization.url === 'https://greatsoftwarecompany.com', `Schema parentOrganization URL is https://greatsoftwarecompany.com`);
-        assert(articleSchema.mainEntityOfPage === canonicalExpected, `mainEntityOfPage matches canonical URL`);
+      const mainSchema = data.find(d => d['@type'] === item.schemaType);
+      assert(!!mainSchema, `${item.schemaType} schema present`);
+      if (mainSchema) {
+        assert(mainSchema.description && mainSchema.description.length <= 155, `Schema description (${mainSchema.description.length}) <= 155 chars`);
+        assert(mainSchema.author && mainSchema.author.name === 'Jouni Flemming', `Schema author is Jouni Flemming`);
+        assert(mainSchema.author && mainSchema.author.url === 'https://iconstash.io/about/', `Schema author URL is https://iconstash.io/about/`);
+        assert(!JSON.stringify(mainSchema.author).includes('github.com'), `Schema author does not contain github.com`);
+        assert(mainSchema.publisher && mainSchema.publisher.name === 'IconStash', `Schema publisher is IconStash`);
+        assert(mainSchema.publisher && mainSchema.publisher.parentOrganization && mainSchema.publisher.parentOrganization.name === 'Great Software Company', `Schema parentOrganization is Great Software Company`);
+        assert(mainSchema.publisher.parentOrganization.url === 'https://greatsoftwarecompany.com', `Schema parentOrganization URL is https://greatsoftwarecompany.com`);
+        if (mainSchema.mainEntityOfPage) {
+          assert(mainSchema.mainEntityOfPage === item.canonical, `mainEntityOfPage matches canonical URL`);
+        }
+        if (mainSchema.url) {
+          assert(mainSchema.url === item.canonical, `url matches canonical URL`);
+        }
       }
 
       const faqSchema = data.find(d => d['@type'] === 'FAQPage');
@@ -108,8 +121,8 @@ for (const a of articles) {
       assert(!!breadcrumbSchema, `BreadcrumbList schema present`);
       if (breadcrumbSchema) {
         assert(breadcrumbSchema.itemListElement && breadcrumbSchema.itemListElement.length === 3, `Breadcrumbs have 3 levels`);
-        for (const item of breadcrumbSchema.itemListElement) {
-          assert(!!item.item, `Breadcrumb position ${item.position} has full item URL: ${item.item}`);
+        for (const b of breadcrumbSchema.itemListElement) {
+          assert(!!b.item, `Breadcrumb position ${b.position} has full item URL: ${b.item}`);
         }
       }
     }
@@ -125,21 +138,6 @@ for (const a of articles) {
   assert(content.includes('min-width: 600px'), `Table has min-width: 600px to prevent narrow column squeezing`);
   assert(content.includes('nav a:not(.header-cta)'), `Mobile header nav preserves Open App CTA button`);
 
-  // Listicle-specific checks
-  if (a.slug === 'best-tailwind-icon-libraries-2026') {
-    assert(content.includes('.lib-card h3 { margin-top: 0; }'), `Listicle lib-card h3 has margin-top: 0 eliminating 58px dead space`);
-    const itemList = data && data.find(d => d['@type'] === 'ItemList');
-    assert(!!itemList, `ItemList schema present in listicle`);
-    if (itemList) {
-      assert(itemList.numberOfItems === 10, `ItemList has 10 items`);
-      assert(itemList.itemListElement && itemList.itemListElement.length === 10, `ItemList contains exactly 10 list item elements`);
-    }
-    for (let rank = 1; rank <= 10; rank++) {
-      const idMatch = content.match(new RegExp(`id="${rank}-[a-z-]+"`));
-      assert(!!idMatch, `Listicle has heading anchor id for library #${rank}`);
-    }
-  }
-
   // 10. Check all internal links resolve to real files or directories
   const linkRegex = /href="(\/[^"#?]*)"/g;
   let match;
@@ -153,18 +151,23 @@ for (const a of articles) {
   }
 }
 
-// 10. Site integration checks
+// 11. Site integration checks
 console.log('\nChecking site integration...');
 const articlesIndex = fs.readFileSync('articles/index.html', 'utf8');
 const articlesSitemap = fs.readFileSync('articles-sitemap.xml', 'utf8');
 const sitemapXml = fs.readFileSync('sitemap.xml', 'utf8');
 
-for (const a of articles) {
-  assert(articlesIndex.includes(`/articles/${a.slug}/`), `articles/index.html links to ${a.slug}`);
-  assert(articlesSitemap.includes(`https://iconstash.io/articles/${a.slug}/`), `articles-sitemap.xml includes ${a.slug}`);
+for (const item of items) {
+  if (item.type === 'article') {
+    assert(articlesIndex.includes(`/articles/${item.slug}/`), `articles/index.html links to ${item.slug}`);
+    assert(articlesSitemap.includes(`https://iconstash.io/articles/${item.slug}/`), `articles-sitemap.xml includes ${item.slug}`);
+  } else {
+    assert(articlesIndex.includes(`/Glossary/${item.slug}/`), `articles/index.html links to ${item.slug}`);
+    assert(articlesSitemap.includes(`https://iconstash.io/Glossary/${item.slug}/`), `articles-sitemap.xml includes ${item.slug}`);
+  }
 }
 
-assert(/<loc>https:\/\/iconstash\.io\/articles-sitemap\.xml<\/loc><lastmod>2026-09-0[56]<\/lastmod>/.test(sitemapXml), 'sitemap.xml has updated lastmod for articles-sitemap.xml');
+assert(sitemapXml.includes('<loc>https://iconstash.io/articles-sitemap.xml</loc><lastmod>2026-09-06</lastmod>'), 'sitemap.xml has updated lastmod 2026-09-06 for articles-sitemap.xml');
 
 console.log(`\n========================================`);
 console.log(`RESULTS: ${passed} PASSED, ${failed} FAILED`);

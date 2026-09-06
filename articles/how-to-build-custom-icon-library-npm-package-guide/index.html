@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a Custom SVG Icon Library &amp; NPM Package (2026 Blueprint) | IconStash</title>
+  <meta name="description" content="Build and publish a tree-shakeable SVG icon library npm package with TypeScript, tsup, SVGO automation, multi-framework exports, and GitHub Actions CI/CD.">
+  <meta name="keywords" content="build custom icon library npm, create react svg icon package, distribute icon library typescript, tree shakeable icon package tsup, package json exports subpath icons, automate icon pipeline github actions 2026">
+  <meta property="og:title" content="How to Build a Custom SVG Icon Library &amp; NPM Package: The 2026 Blueprint">
+  <meta property="og:description" content="Build and publish a tree-shakeable SVG icon library npm package with TypeScript, tsup, SVGO automation, multi-framework exports, and GitHub Actions CI/CD.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://iconstash.io/articles/how-to-build-custom-icon-library-npm-package-guide/">
+  <meta property="og:site_name" content="IconStash">
+  <meta property="og:image" content="https://iconstash.io/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="How to Build a Custom SVG Icon Library & NPM Package Complete Guide">
+  <meta property="article:published_time" content="2026-09-06T00:00:00Z">
+  <meta property="article:modified_time" content="2026-09-06T00:00:00Z">
+  <meta property="article:author" content="Jouni Flemming">
+  <meta property="article:section" content="Design Systems &amp; Tooling">
+  <meta property="article:tag" content="Design Systems">
+  <meta property="article:tag" content="NPM">
+  <meta property="article:tag" content="TypeScript">
+  <meta property="article:tag" content="React">
+  <meta property="article:tag" content="Build Tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to Build a Custom SVG Icon Library &amp; NPM Package: The 2026 Blueprint">
+  <meta name="twitter:description" content="Step-by-step engineering guide: SVGO automation, tsup compilation, tree-shaking validation, package.json subpaths, and automated CI/CD releases.">
+  <meta name="twitter:image" content="https://iconstash.io/og-default.png">
+  <link rel="canonical" href="https://iconstash.io/articles/how-to-build-custom-icon-library-npm-package-guide/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "How to Build a Custom SVG Icon Library & NPM Package: The 2026 Blueprint",
+    "description": "Build and publish a tree-shakeable SVG icon library npm package with TypeScript, tsup, SVGO automation, multi-framework exports, and GitHub Actions CI/CD.",
+    "author": {
+      "@type": "Person",
+      "name": "Jouni Flemming",
+      "url": "https://iconstash.io/about/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "IconStash",
+      "url": "https://iconstash.io",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://iconstash.io/logo.png"
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Great Software Company",
+        "url": "https://greatsoftwarecompany.com"
+      }
+    },
+    "datePublished": "2026-09-06",
+    "dateModified": "2026-09-06",
+    "image": "https://iconstash.io/og-default.png",
+    "mainEntityOfPage": "https://iconstash.io/articles/how-to-build-custom-icon-library-npm-package-guide/",
+    "isPartOf": { "@type": "WebSite", "@id": "https://iconstash.io/#website" },
+    "articleSection": "Design Systems & Tooling",
+    "about": [
+      { "@type": "Thing", "name": "npm", "sameAs": "https://en.wikipedia.org/wiki/Npm" },
+      { "@type": "Thing", "name": "Design system", "sameAs": "https://en.wikipedia.org/wiki/Design_system" },
+      { "@type": "Thing", "name": "TypeScript", "sameAs": "https://en.wikipedia.org/wiki/TypeScript" }
+    ],
+    "keywords": ["build custom icon library npm", "create react svg icon package", "distribute icon library typescript", "tree shakeable icon package tsup", "package json exports subpath icons"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "IconStash", "item": "https://iconstash.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://iconstash.io/articles/" },
+      { "@type": "ListItem", "position": 3, "name": "How to Build Custom Icon Library NPM Package", "item": "https://iconstash.io/articles/how-to-build-custom-icon-library-npm-package-guide/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do you guarantee 100% tree-shaking in an icon npm package?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To guarantee tree-shaking, add 'sideEffects: false' to package.json, output individual ES module (.mjs) files alongside barrel indexes, emit /*#__PURE__*/ annotations on component declarations, and configure modern package.json subpath exports."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why use tsup over Rollup or Webpack for building icon libraries?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "tsup is powered by esbuild and offers near-instant compilation (building 500+ icon components in under 1.5 seconds) while automatically generating TypeScript .d.ts declarations, dual ESM/CJS bundles, and sourcemaps with zero complex configuration."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What package.json configuration prevents barrel import bloat?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use conditional subpath exports in package.json (such as './icons/*' mapping directly to './dist/icons/*.mjs'). This allows consumers to import directly from '@company/icons/icons/User' or rely on bundler tree-shaking with zero risk of bundling the entire library."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you automate version releases with Changesets and GitHub Actions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use @changesets/cli in your repository. Developers include markdown change fragments in pull requests. On merge to main, a GitHub Actions workflow creates an automated 'Version Packages' PR that bumps semantic versions, updates CHANGELOG.md, and publishes to npm with provenance."
+        }
+      }
+    ]
+  }]
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: #0A0A0A; color: #F2F2F2; font: 400 17px/1.8 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: #C1DD2D; text-decoration: none; transition: color 150ms ease; }
+    a:hover { color: #D2ED3E; }
+    ::selection { background: rgba(193,221,45,0.25); color: #fff; }
+    svg { max-width: 100%; display: inline-block; vertical-align: middle; }
+
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid #1F1F1F; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #F2F2F2; }
+    .site-header .logo svg { width: 24px; height: 24px; color: #C1DD2D; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { color: #888; font-size: 14px; font-weight: 500; }
+    .site-header nav a:hover { color: #F2F2F2; }
+    .header-cta { background: #C1DD2D; color: #0A0A0A; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 6px; border: none; cursor: pointer; transition: all 150ms ease; display: inline-block; }
+    .header-cta:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    .theme-toggle-btn { background: transparent; border: 1px solid #262626; color: #A3A3A3; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 150ms ease; }
+    .theme-toggle-btn:hover { border-color: #404040; color: #F2F2F2; }
+
+    /* Responsive 2-Column Layout */
+    .page-container { max-width: 1280px; margin: 0 auto; padding: 48px 24px 80px; width: 100%; }
+    .breadcrumb { display: flex; gap: 8px; font-size: 13px; color: #666; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #C1DD2D; }
+    .breadcrumb .sep { color: #444; }
+
+    .article-hero { margin-bottom: 36px; border-bottom: 1px solid #1F1F1F; padding-bottom: 32px; }
+    .article-hero .tag { display: inline-block; background: rgba(193,221,45,0.12); color: #C1DD2D; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(193,221,45,0.25); }
+    .article-hero h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; line-height: 1.18; color: #FFF; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .article-meta { display: flex; gap: 20px; font-size: 13px; color: #737373; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+
+    .article-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; align-items: start; }
+    @media (min-width: 1024px) {
+      .article-layout { grid-template-columns: minmax(0, 1fr) 320px; }
+    }
+
+    .article-main { min-width: 0; }
+    .featured-summary { background: linear-gradient(180deg, #141414 0%, #0E0E0E 100%); border: 1px solid #262626; border-left: 4px solid #C1DD2D; border-radius: 10px; padding: 24px 28px; margin-bottom: 32px; }
+    .featured-summary p { font-size: 15.5px; line-height: 1.7; color: #E5E5E5; margin-bottom: 12px; font-weight: 500; }
+    .featured-summary ul { margin: 0 0 0 20px; color: #D4D4D4; }
+    .featured-summary li { margin-bottom: 8px; font-size: 14.5px; line-height: 1.6; }
+
+    h2 { font-size: 26px; font-weight: 800; color: #FFF; letter-spacing: -0.02em; margin: 48px 0 20px; padding-top: 24px; border-top: 1px solid #1F1F1F; }
+    h3 { font-size: 20px; font-weight: 700; color: #E5E5E5; margin: 32px 0 14px; }
+    p { margin-bottom: 22px; color: #D4D4D4; font-size: 16px; line-height: 1.8; }
+    strong { color: #FFF; }
+    ul, ol { margin: 0 0 24px 28px; color: #D4D4D4; }
+    li { margin-bottom: 10px; line-height: 1.7; font-size: 15.5px; }
+
+    pre { background: #121212; border: 1px solid #222; border-radius: 8px; padding: 20px; overflow-x: auto; margin: 24px 0; font-family: "JetBrains Mono", monospace; font-size: 13.5px; line-height: 1.6; color: #E5E5E5; }
+    code { font-family: "JetBrains Mono", monospace; font-size: 0.9em; background: #1A1A1A; padding: 2px 6px; border-radius: 4px; color: #C1DD2D; }
+    p code, li code { word-break: break-word; }
+    pre code { background: transparent; padding: 0; color: inherit; word-break: normal; }
+
+    /* Comparison Tables */
+    .table-wrap { overflow-x: auto; margin: 28px 0; border: 1px solid #222; border-radius: 8px; -webkit-overflow-scrolling: touch; }
+    table { width: 100%; min-width: 600px; border-collapse: collapse; font-size: 14.5px; text-align: left; }
+    th { background: #141414; color: #FFF; padding: 14px 16px; font-weight: 700; border-bottom: 2px solid #262626; white-space: nowrap; }
+    td { padding: 13px 16px; border-bottom: 1px solid #1E1E1E; color: #D4D4D4; }
+    tr:nth-child(even) td { background: #0E0E0E; }
+    tr:hover td { background: #161616; }
+
+    /* Callout Box */
+    .callout-box { background: #121212; border: 1px solid #222; border-left: 4px solid #C1DD2D; border-radius: 8px; padding: 20px 24px; margin: 28px 0; }
+    .callout-title { font-size: 15px; font-weight: 700; color: #FFF; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+
+    /* Sticky Sidebar */
+    .article-sidebar { display: flex; flex-direction: column; gap: 24px; }
+    @media (min-width: 1024px) {
+      .article-sidebar { position: sticky; top: 80px; }
+    }
+    .sidebar-card { background: #121212; border: 1px solid #222; border-radius: 12px; padding: 24px; }
+    .sidebar-title { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 16px; }
+    .toc-nav ol { list-style: none; margin: 0; padding: 0; }
+    .toc-nav li { margin-bottom: 10px; font-size: 14px; }
+    .toc-nav a { color: #A3A3A3; display: block; line-height: 1.5; }
+    .toc-nav a:hover { color: #C1DD2D; }
+
+    .cta-sidebar-box { background: linear-gradient(145deg, #181E07 0%, #0F1205 100%); border: 1px solid rgba(193,221,45,0.3); border-radius: 12px; padding: 24px; text-align: center; }
+    .cta-sidebar-box h4 { font-size: 18px; font-weight: 800; color: #FFF; margin-bottom: 8px; }
+    .cta-sidebar-box p { font-size: 13.5px; color: #AAA; line-height: 1.5; margin-bottom: 16px; }
+    .cta-sidebar-btn { display: inline-block; width: 100%; background: #C1DD2D; color: #0A0A0A; font-weight: 800; font-size: 14px; padding: 12px 18px; border-radius: 6px; transition: all 150ms ease; }
+    .cta-sidebar-btn:hover { background: #D2ED3E; transform: translateY(-1px); }
+
+    /* FAQ Box */
+    .faq-item { background: #121212; border: 1px solid #222; border-radius: 8px; margin-bottom: 14px; padding: 18px 22px; }
+    .faq-item h3 { margin-top: 0; font-size: 16px; color: #FFF; margin-bottom: 8px; }
+    .faq-item p { margin-bottom: 0; color: #A3A3A3; font-size: 14.5px; line-height: 1.6; }
+
+    .cta-banner { background: linear-gradient(135deg, #181C0B 0%, #111406 100%); border: 1px solid rgba(193,221,45,0.3); border-radius: 12px; padding: 36px; text-align: center; margin: 60px 0 20px; }
+    .cta-banner h3 { color: #FFF; font-size: 24px; margin-bottom: 10px; font-weight: 800; }
+    .cta-banner p { color: #A3A3A3; max-width: 540px; margin: 0 auto 20px; font-size: 15px; }
+
+    .site-footer { border-top: 1px solid #1F1F1F; padding: 48px 24px; background: #0A0A0A; text-align: center; font-size: 14px; color: #666; margin-top: 0; }
+    .site-footer a { color: #888; }
+    .site-footer a:hover { color: #C1DD2D; }
+
+    @media (max-width: 1023px) {
+      .cta-sidebar-box { display: none; }
+    }
+    @media (max-width: 768px) {
+      .page-container { padding: 28px 16px 60px; }
+      .site-header nav a:not(.header-cta) { display: none; }
+      .site-header nav { gap: 12px; }
+      .header-cta { padding: 6px 12px; font-size: 12px; }
+      .article-hero h1 { font-size: 26px; }
+      .featured-summary { padding: 18px 20px; }
+      pre { padding: 14px; font-size: 12.5px; }
+    }
+
+    /* Light Theme */
+    html[data-theme="light"] body { background: #FAFAFA; color: #171717; }
+    html[data-theme="light"] .site-header { background: rgba(250,250,250,0.88); border-bottom-color: #E5E5E5; }
+    html[data-theme="light"] .site-header .logo { color: #171717; }
+    html[data-theme="light"] .site-header nav a { color: #525252; }
+    html[data-theme="light"] .article-hero h1 { color: #0A0A0A; }
+    html[data-theme="light"] h2 { color: #0A0A0A; border-top-color: #E5E5E5; }
+    html[data-theme="light"] h3 { color: #171717; }
+    html[data-theme="light"] p, html[data-theme="light"] ul, html[data-theme="light"] ol { color: #383838; }
+    html[data-theme="light"] strong { color: #0A0A0A; }
+    html[data-theme="light"] .featured-summary { background: #F4F4F5; border-color: #E4E4E7; border-left-color: #849E00; }
+    html[data-theme="light"] .featured-summary p { color: #18181B; }
+    html[data-theme="light"] pre { background: #F4F4F5; border-color: #E4E4E7; color: #18181B; }
+    html[data-theme="light"] code { background: #E4E4E7; color: #4D6300; }
+    html[data-theme="light"] a { color: #6D8200; }
+    html[data-theme="light"] .table-wrap { border-color: #E4E4E7; }
+    html[data-theme="light"] th { background: #F4F4F5; color: #0A0A0A; border-bottom-color: #D4D4D8; }
+    html[data-theme="light"] td { border-bottom-color: #E4E4E7; color: #27272A; }
+    html[data-theme="light"] tr:nth-child(even) td { background: #FAFAFA; }
+    html[data-theme="light"] tr:hover td { background: #F4F4F5; }
+    html[data-theme="light"] .callout-box { background: #F4F4F5; border-color: #E4E4E7; border-left-color: #849E00; }
+    html[data-theme="light"] .callout-title { color: #0A0A0A; }
+    html[data-theme="light"] .site-footer { background: #FAFAFA; border-top-color: #E5E5E5; }
+    html[data-theme="light"] .sidebar-card { background: #F4F4F5; border-color: #E4E4E7; }
+    html[data-theme="light"] .faq-item { background: #F4F4F5; border-color: #E4E4E7; }
+    html[data-theme="light"] .faq-item h3 { color: #0A0A0A; }
+    html[data-theme="light"] .faq-item p { color: #525252; }
+    html[data-theme="light"] .cta-sidebar-box { background: #ECFDF5; border-color: #A7F3D0; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="IconStash.io home">
+      <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2V9Z"/></svg>
+      <span>IconStash</span>
+    </a>
+    <nav>
+      <a href="/#/">Search 134K+ Icons</a>
+      <a href="/articles/">Articles &amp; Guides</a>
+      <a href="/Listicles/best-free-icon-sets-2026/">Best Sets</a>
+      <a href="/Glossary/icon-svg-terminology/">Glossary</a>
+      <a href="/stats/">Statistics</a>
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="/#/" class="header-cta">Open App</a>
+    </nav>
+  </header>
+
+  <div class="page-container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/articles/">Articles</a>
+      <span class="sep">/</span>
+      <span>Build Custom Icon NPM Package</span>
+    </nav>
+
+    <header class="article-hero">
+      <span class="tag">Design Systems Engineering</span>
+      <h1>How to Build a Custom SVG Icon Library &amp; NPM Package</h1>
+      <div class="article-meta">
+        <span><strong>Published:</strong> September 6, 2026</span>
+        <span>By <a href="/about/" rel="author">Jouni Flemming</a></span>
+        <span><strong>Reading Time:</strong> 15 min read</span>
+        <span><strong>Tooling:</strong> TypeScript &bull; tsup &bull; SVGO &bull; Changesets</span>
+      </div>
+    </header>
+
+    <div class="article-layout">
+      <main class="article-main">
+        <div class="featured-summary">
+          <p><strong>The Production Architecture Blueprint:</strong> Distributing custom brand icons across multiple apps requires more than just copying raw SVG files. A modern corporate icon package must deliver:</p>
+          <ul>
+            <li><strong>Automated SVGO Processing:</strong> Deterministic viewBox normalization (e.g. <code>24x24</code>), stripping rogue designer fills, and converting strokes to <code>currentColor</code>.</li>
+            <li><strong>Multi-Framework Output:</strong> Generate pure React JSX components, Vue 3 SFCs, and raw optimized SVGs from a single SVG source folder.</li>
+            <li><strong>Zero-Overhead Bundling:</strong> Compile with <code>tsup</code> to produce dual ESM (<code>.mjs</code>) and CJS (<code>.cjs</code>) builds with strict <code>.d.ts</code> TypeScript types in under 2 seconds.</li>
+            <li><strong>Guaranteed Tree-Shaking:</strong> Set <code>"sideEffects": false</code> and modern <code>package.json</code> subpath exports so consumers import only what they render.</li>
+          </ul>
+        </div>
+
+        <section id="why-custom-icon-packages">
+          <h2>1. Why Teams Need a Dedicated Icon NPM Package</h2>
+          <p>As organizations grow beyond a single web app, icon management quickly deteriorates. Teams copy and paste SVG strings between GitHub repositories, resulting in inconsistent stroke weights, conflicting viewBox boundaries, and bloated production bundles.</p>
+          <p>By publishing a dedicated package (such as <code>@acme/icons</code>) through npm or an internal GitHub Packages registry, you establish a <strong>single source of truth</strong> for design systems:</p>
+          <ul>
+            <li>Designers update vector icons in Figma or curate them from <a href="/#/">IconStash's 134,701 open-source icons</a>.</li>
+            <li>A GitHub Actions workflow cleans, validates, and compiles icons into typed components.</li>
+            <li>Frontend apps in Next.js, Vite, or React Native update their <code>package.json</code> dependency and immediately inherit brand-consistent iconography.</li>
+          </ul>
+        </section>
+
+        <section id="project-scaffold">
+          <h2>2. Repository Architecture &amp; Folder Structure</h2>
+          <p>The cleanest setup separates source SVG assets, code generation scripts, and compiled distribution output:</p>
+          <pre><code>acme-icons/
+├── .github/workflows/release.yml
+├── .changeset/
+├── raw-svg/                # Input SVG files from designers or IconStash
+│   ├── arrow-right.svg
+│   ├── check.svg
+│   └── user.svg
+├── scripts/
+│   ├── optimize.ts         # SVGO cleaning script
+│   └── generate.ts         # TSX component generator
+├── src/                    # Auto-generated source files
+│   ├── index.ts
+│   └── icons/
+│       ├── ArrowRight.tsx
+│       ├── Check.tsx
+│       └── User.tsx
+├── package.json
+├── svgo.config.js
+├── tsconfig.json
+└── tsup.config.ts</code></pre>
+        </section>
+
+        <section id="automated-svgo-pipeline">
+          <h2>3. Step 1: Automated SVGO Cleaning &amp; Normalization</h2>
+          <p>Raw SVGs from design tools contain extraneous metadata (Sketch tags, Illustrator IDs, Adobe namespaces) and hardcoded colors that break UI theming. Create a hardened <code>svgo.config.js</code>:</p>
+          <pre><code>module.exports = {
+  multipass: true,
+  plugins: [
+    {
+      name: 'preset-default',
+      params: {
+        overrides: {
+          removeViewBox: false, // MANDATORY: Preserves responsive scaling
+          cleanupIds: true,
+        },
+      },
+    },
+    'removeDimensions', // Strips hardcoded width/height so CSS controls size
+    {
+      name: 'addAttributesToSVGElement',
+      params: {
+        attributes: [
+          { fill: 'none' },
+          { stroke: 'currentColor' },
+          { 'aria-hidden': 'true' },
+        ],
+      },
+    },
+  ],
+};</code></pre>
+          <p>Next, write <code>scripts/optimize.ts</code> to clean all incoming vectors:</p>
+          <pre><code>import fs from 'fs-extra';
+import path from 'path';
+import { optimize } from 'svgo';
+import config from '../svgo.config.js';
+
+async function runOptimization() {
+  const rawDir = path.resolve('raw-svg');
+  const files = await fs.readdir(rawDir);
+
+  for (const file of files) {
+    if (!file.endsWith('.svg')) continue;
+    const filePath = path.join(rawDir, file);
+    const content = await fs.readFile(filePath, 'utf8');
+    const result = optimize(content, { path: filePath, ...config });
+    await fs.writeFile(filePath, result.data, 'utf8');
+  }
+  console.log(`Successfully normalized ${files.length} SVG icons.`);
+}
+
+runOptimization();</code></pre>
+        </section>
+
+        <section id="component-generator">
+          <h2>4. Step 2: Automated Component Generation (React &amp; TypeScript)</h2>
+          <p>Rather than manually writing React components for each icon, use an automated template generator in <code>scripts/generate.ts</code>:</p>
+          <pre><code>import fs from 'fs-extra';
+import path from 'path';
+import { pascalCase } from 'change-case';
+
+async function generateComponents() {
+  const rawDir = path.resolve('raw-svg');
+  const srcDir = path.resolve('src/icons');
+  await fs.ensureDir(srcDir);
+
+  const files = await fs.readdir(rawDir);
+  const exports: string[] = [];
+
+  for (const file of files) {
+    if (!file.endsWith('.svg')) continue;
+    const name = path.basename(file, '.svg');
+    const componentName = `${pascalCase(name)}Icon`;
+    const svgContent = await fs.readFile(path.join(rawDir, file), 'utf8');
+
+    // Extract internal path elements from SVG
+    const innerSvg = svgContent
+      .replace(/&lt;svg[^&gt;]*&gt;/, '')
+      .replace(/&lt;\/svg&gt;/, '')
+      .trim();
+
+    const componentCode = `/*#__PURE__*/
+import React, { forwardRef } from 'react';
+
+export interface IconProps extends React.SVGProps&lt;SVGSVGElement&gt; {
+  size?: number | string;
+}
+
+export const ${componentName} = forwardRef&lt;SVGSVGElement, IconProps&gt;(
+  ({ size = 24, strokeWidth = 2, className, ...props }, ref) =&gt; {
+    return (
+      &lt;svg
+        ref={ref}
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        aria-hidden="true"
+        {...props}
+      &gt;
+        ${innerSvg}
+      &lt;/svg&gt;
+    );
+  }
+);
+
+${componentName}.displayName = '${componentName}';
+`;
+
+    await fs.writeFile(path.join(srcDir, `${componentName}.tsx`), componentCode);
+    exports.push(`export * from './icons/${componentName}';`);
+  }
+
+  // Generate barrel index
+  await fs.writeFile(path.resolve('src/index.ts'), exports.join('\n') + '\n');
+  console.log(`Generated ${exports.length} typed TSX icon components.`);
+}
+
+generateComponents();</code></pre>
+        </section>
+
+        <section id="compilation-tsup">
+          <h2>5. Step 3: Fast Compilation with tsup (ESM + CJS + DTS)</h2>
+          <p>Using standard <code>tsc</code> or heavy Webpack configurations produces slow builds. In 2026, <strong>tsup</strong> (powered by esbuild) is the gold standard. Create <code>tsup.config.ts</code>:</p>
+          <pre><code>import { defineConfig } from 'tsup';
+
+export default defineConfig({
+  entry: ['src/index.ts', 'src/icons/*.tsx'],
+  format: ['esm', 'cjs'],
+  dts: true,
+  splitting: true,
+  sourcemap: true,
+  clean: true,
+  treeshake: true,
+  minify: false, // Let consumer bundler handle minification for cleaner debugging
+  outDir: 'dist',
+  external: ['react'],
+});</code></pre>
+          <p>Running <code>npx tsup</code> compiles your entire library into individual ES modules and CommonJS fallbacks in under 2 seconds.</p>
+        </section>
+
+        <section id="package-json-exports">
+          <h2>6. Step 4: Configuring package.json Subpath Exports &amp; sideEffects</h2>
+          <p>The single most critical step in creating a commercial icon library is configuring <code>package.json</code> exports so bundlers (Vite, Next.js, Rollup, Webpack 5) can eliminate unused icons.</p>
+          <pre><code>{
+  "name": "@acme/icons",
+  "version": "1.0.0",
+  "description": "Acme corporate design system vector icons",
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./icons/*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.js",
+      "require": "./dist/icons/*.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "raw-svg"
+  ],
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
+  "scripts": {
+    "build:svg": "tsx scripts/optimize.ts",
+    "build:generate": "tsx scripts/generate.ts",
+    "build:bundle": "tsup",
+    "build": "npm run build:svg &amp;&amp; npm run build:generate &amp;&amp; npm run build:bundle",
+    "prepublishOnly": "npm run build"
+  }
+}</code></pre>
+          <div class="callout-box">
+            <div class="callout-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C1DD2D" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Why "sideEffects": false is Mandatory
+            </div>
+            <p style="margin-bottom: 0;">Without <code>"sideEffects": false</code>, bundlers must assume that importing <code>import { CheckIcon } from '@acme/icons'</code> executes global state mutations in unreferenced icon files. Adding <code>"sideEffects": false</code> tells Webpack and Vite to strip all other 499 icons from the client bundle.</p>
+          </div>
+        </section>
+
+        <section id="benchmarking-table">
+          <h2>7. Architecture Comparison: Barrel vs Subpaths vs Web Fonts</h2>
+          <p>Compare the bundling efficiency of different icon package distribution strategies:</p>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Architecture</th>
+                  <th>Client Bundle (1 Icon)</th>
+                  <th>Tree-Shaking Safety</th>
+                  <th>TypeScript Autocomplete</th>
+                  <th>Dual CJS/ESM Support</th>
+                  <th>Maintenance Overhead</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Modern Subpaths + tsup (This Blueprint)</strong></td>
+                  <td>~0.4 KB</td>
+                  <td>100% Guaranteed</td>
+                  <td>Instant &amp; Strict</td>
+                  <td>Native (Automatic)</td>
+                  <td>Low (Fully Scripted)</td>
+                </tr>
+                <tr>
+                  <td><strong>Monolithic Barrel (Single index.js)</strong></td>
+                  <td>~120 KB to 500 KB</td>
+                  <td>Fragile (Breaks on CJS)</td>
+                  <td>High memory lag</td>
+                  <td>Often broken</td>
+                  <td>Low</td>
+                </tr>
+                <tr>
+                  <td><strong>Icon Fonts (TTF / WOFF2 Package)</strong></td>
+                  <td>~1.2 MB to 3 MB</td>
+                  <td>0% (Ships all glyphs)</td>
+                  <td>String literals only</td>
+                  <td>N/A</td>
+                  <td>High (Font generation)</td>
+                </tr>
+                <tr>
+                  <td><strong>Unplugin-Icons Virtual Module</strong></td>
+                  <td>~0.4 KB</td>
+                  <td>100% Compiler-level</td>
+                  <td>Good (Virtual types)</td>
+                  <td>Vite/Webpack only</td>
+                  <td>Requires bundler plugin</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="changesets-ci-cd">
+          <h2>8. Automated CI/CD Publishing with Changesets &amp; GitHub Actions</h2>
+          <p>To eliminate manual npm version conflicts, use <strong>@changesets/cli</strong>. When developers submit a PR modifying icons, they run <code>npx changeset</code> to record a semver intent (patch, minor, or major).</p>
+
+          <h3>GitHub Actions Workflow (.github/workflows/release.yml)</h3>
+          <pre><code>name: Release Icon Package
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release to NPM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Package
+        run: npm run build
+
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: npx changeset publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}</code></pre>
+          <p>When merged, this workflow automatically opens a <strong>Version Packages PR</strong> that updates <code>package.json</code> and <code>CHANGELOG.md</code>. Merging that PR publishes the updated icon package to npm with provenance signing.</p>
+        </section>
+
+        <section id="faq-section">
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq-item">
+            <h3>How do you guarantee 100% tree-shaking in an icon npm package?</h3>
+            <p>To guarantee tree-shaking, add 'sideEffects: false' to package.json, output individual ES module (.mjs) files alongside barrel indexes, emit /*#__PURE__*/ annotations on component declarations, and configure modern package.json subpath exports.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Why use tsup over Rollup or Webpack for building icon libraries?</h3>
+            <p>tsup is powered by esbuild and offers near-instant compilation (building 500+ icon components in under 1.5 seconds) while automatically generating TypeScript .d.ts declarations, dual ESM/CJS bundles, and sourcemaps with zero complex configuration.</p>
+          </div>
+          <div class="faq-item">
+            <h3>What package.json configuration prevents barrel import bloat?</h3>
+            <p>Use conditional subpath exports in package.json (such as './icons/*' mapping directly to './dist/icons/*.mjs'). This allows consumers to import directly from '@company/icons/icons/User' or rely on bundler tree-shaking with zero risk of bundling the entire library.</p>
+          </div>
+          <div class="faq-item">
+            <h3>How do you automate version releases with Changesets and GitHub Actions?</h3>
+            <p>Use @changesets/cli in your repository. Developers include markdown change fragments in pull requests. On merge to main, a GitHub Actions workflow creates an automated 'Version Packages' PR that bumps semantic versions, updates CHANGELOG.md, and publishes to npm with provenance.</p>
+          </div>
+        </section>
+
+        <div class="cta-banner">
+          <h3>Source 134K+ Icons for Your Design System</h3>
+          <p>Explore 134,701 open-source vector icons across 28 curated libraries on IconStash. Fast, free, and licensed for commercial design systems under MIT and Apache 2.0.</p>
+          <a href="/#/" class="header-cta" style="font-size: 15px; padding: 12px 28px;">Search All 134K+ Icons &rarr;</a>
+        </div>
+      </main>
+
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-title">Table of Contents</div>
+          <nav class="toc-nav">
+            <ol>
+              <li><a href="#why-custom-icon-packages">1. Why Build an Icon Package?</a></li>
+              <li><a href="#project-scaffold">2. Repository Scaffold</a></li>
+              <li><a href="#automated-svgo-pipeline">3. SVGO Normalization</a></li>
+              <li><a href="#component-generator">4. Component Generation</a></li>
+              <li><a href="#compilation-tsup">5. Fast tsup Compilation</a></li>
+              <li><a href="#package-json-exports">6. Subpath Exports &amp; sideEffects</a></li>
+              <li><a href="#benchmarking-table">7. Bundling Benchmarks</a></li>
+              <li><a href="#changesets-ci-cd">8. Changesets CI/CD</a></li>
+              <li><a href="#faq-section">9. Frequently Asked Questions</a></li>
+            </ol>
+          </nav>
+        </div>
+
+        <div class="cta-sidebar-box">
+          <h4>Design System Ready</h4>
+          <p>Download consistent SVGs from Lucide, Tabler, Phosphor, and more to bootstrap your internal icon package.</p>
+          <a href="/#/" class="cta-sidebar-btn">Explore 134K+ Icons &rarr;</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="/">IconStash</a>. Open-source icon search engine unifying 28 icon sets &amp; 134,701 vector icons.</p>
+    <p style="margin-top: 8px;">
+      <a href="/about/">About</a> &bull;
+      <a href="/contact/">Contact</a> &bull;
+      <a href="/privacy/">Privacy Policy</a> &bull;
+      <a href="/terms/">Terms of Service</a> &bull;
+      <a href="/articles/">Articles</a> &bull;
+      <a href="/stats/">Stats</a>
+    </p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    toggleBtn.addEventListener('click', () => {
+      const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    });
+  </script>
+</body>
+</html>
